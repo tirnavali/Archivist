@@ -35,6 +35,12 @@
   </div>
 
   <div>
+    <%= form.label :subject_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :subject_id, Subject.all, :id, :to_s, prompt: true %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
