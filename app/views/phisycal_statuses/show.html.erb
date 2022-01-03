@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @phisycal_status %>
+
+<div>
+  <%= link_to "Edit this phisycal status", edit_phisycal_status_path(@phisycal_status) %> |
+  <%= link_to "Back to phisycal statuses", phisycal_statuses_path %>
+
+  <%= button_to "Destroy this phisycal status", @phisycal_status, method: :delete %>
+</div>

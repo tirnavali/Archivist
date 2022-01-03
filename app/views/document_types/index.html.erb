@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Document types</h1>
+
+<div id="document_types">
+  <% @document_types.each do |document_type| %>
+    <%= render document_type %>
+    <p>
+      <%= link_to "Show this document type", document_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New document type", new_document_type_path %>

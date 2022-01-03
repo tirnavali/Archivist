@@ -41,6 +41,20 @@
   </div>
 
   <div>
+    <%= form.label :phisycal_status_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :phisycal_status_id, PhisycalStatus.all, :id, :to_s, prompt: true %>
+    <%= link_to "PhisycalStatus", controller: "phisycal_statuses", action: "new" %>
+  </div>
+
+  <div>
+    <%= form.label :document_type_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :document_type_id, DocumentType.all, :id, :to_s, prompt: true %>
+    <%= link_to "DocumentType", controller: "document_types", action: "new" %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

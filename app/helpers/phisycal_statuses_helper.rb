@@ -1,0 +1,2 @@
+module PhisycalStatusesHelper
+end
