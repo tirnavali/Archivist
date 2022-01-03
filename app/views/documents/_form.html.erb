@@ -29,6 +29,12 @@
   </div>
 
   <div>
+    <%= form.label :organization_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :organization_id, Organization.all, :id, :to_s, prompt: true %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

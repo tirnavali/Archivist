@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_150540) do
+ActiveRecord::Schema.define(version: 2022_01_03_152107) do
 
   create_table "documents", force: :cascade do |t|
     t.text "summary"
@@ -18,11 +18,19 @@ ActiveRecord::Schema.define(version: 2022_01_03_150540) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "language_id"
+    t.integer "organization_id"
     t.index ["language_id"], name: "index_documents_on_language_id"
+    t.index ["organization_id"], name: "index_documents_on_organization_id"
     t.index ["pub_type_id"], name: "index_documents_on_pub_type_id"
   end
 
   create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -35,5 +43,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_150540) do
   end
 
   add_foreign_key "documents", "languages"
+  add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "pub_types"
 end
