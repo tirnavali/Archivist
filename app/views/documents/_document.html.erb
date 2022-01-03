@@ -1,0 +1,19 @@
+<div id="<%= dom_id document %>">
+  <p>
+    <strong>Summary:</strong>
+    <%= document.summary %>
+  </p>
+
+  <p>
+    <strong>Pub type:</strong>
+    <%= "#{document.pub_type_id} - #{document.pub_type.name}" %>
+  </p>
+
+  <p>
+    <strong>Language:</strong>
+    <% if document.language_id %>
+      <%= "#{ document.language_id} - #{document.language.name}" %>
+    <% end %>
+  </p>
+
+</div>
