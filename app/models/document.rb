@@ -5,4 +5,5 @@ class Document < ApplicationRecord
   belongs_to :subject
   belongs_to :phisycal_status
   belongs_to :document_type
+  belongs_to :toponym
 end

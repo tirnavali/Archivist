@@ -55,6 +55,14 @@
   </div>
 
   <div>
+    <%= form.label :toponym_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :toponym_id, Toponym.all, :id, :to_s, prompt: true %>
+    <%= link_to "Toponym", controller: "toponyms", action: "new" %>
+  </div>
+  
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

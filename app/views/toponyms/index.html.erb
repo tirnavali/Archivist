@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Toponyms</h1>
+
+<div id="toponyms">
+  <% @toponyms.each do |toponym| %>
+    <%= render toponym %>
+    <p>
+      <%= link_to "Show this toponym", toponym %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New toponym", new_toponym_path %>

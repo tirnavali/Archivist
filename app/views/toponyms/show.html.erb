@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @toponym %>
+
+<div>
+  <%= link_to "Edit this toponym", edit_toponym_path(@toponym) %> |
+  <%= link_to "Back to toponyms", toponyms_path %>
+
+  <%= button_to "Destroy this toponym", @toponym, method: :delete %>
+</div>
