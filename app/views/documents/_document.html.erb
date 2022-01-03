@@ -29,5 +29,25 @@
       <%= "#{ document.subject_id} - #{document.subject.name}" %>
     <% end %>
   </p>
+  
+  <p>
+    <strong>DocumentType:</strong>
+    <% if document.document_type_id %>
+      <%= "#{ document.document_type_id} - #{document.document_type.name}" %>
+    <% end %>
+  </p>
 
+  <p>
+    <strong>Toponym:</strong>
+    <% if document.toponym_id %>
+      <%= document.toponym.name %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Privacy:</strong>
+    <% if document.toponym_id %>
+      <%= document.privacy.name %>
+    <% end %>
+  </p>
 </div>

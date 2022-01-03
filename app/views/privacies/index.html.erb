@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Privacies</h1>
+
+<div id="privacies">
+  <% @privacies.each do |privacy| %>
+    <%= render privacy %>
+    <p>
+      <%= link_to "Show this privacy", privacy %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New privacy", new_privacy_path %>

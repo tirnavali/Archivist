@@ -61,6 +61,12 @@
     <%= link_to "Toponym", controller: "toponyms", action: "new" %>
   </div>
   
+  <div>
+    <%= form.label :privacy_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :privacy_id, Privacy.all, :id, :to_s, prompt: true %>
+    <%= link_to "Privacy", controller: "privacies", action: "new" %>
+  </div>
 
   <div>
     <%= form.submit %>
