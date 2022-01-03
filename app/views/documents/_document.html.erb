@@ -1,7 +1,7 @@
 <div id="<%= dom_id document %>">
   <p>
     <strong>Summary:</strong>
-    <%= document.summary %>
+    <%= document.summary[..30]+"..." %>
   </p>
 
   <p>
@@ -46,7 +46,7 @@
 
   <p>
     <strong>Privacy:</strong>
-    <% if document.toponym_id %>
+    <% if document.privacy_id %>
       <%= document.privacy.name %>
     <% end %>
   </p>
