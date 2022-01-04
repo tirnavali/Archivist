@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @special_number %>
+
+<div>
+  <%= link_to "Edit this special number", edit_special_number_path(@special_number) %> |
+  <%= link_to "Back to special numbers", special_numbers_path %>
+
+  <%= button_to "Destroy this special number", @special_number, method: :delete %>
+</div>

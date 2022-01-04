@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :special_numbers
+  resources :special_number_names
   resources :people
   resources :privacies
   resources :toponyms

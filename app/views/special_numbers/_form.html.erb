@@ -1,0 +1,30 @@
+<%= form_with(model: special_number) do |form| %>
+  <% if special_number.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(special_number.errors.count, "error") %> prohibited this special_number from being saved:</h2>
+
+      <ul>
+        <% special_number.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.number_field :number %>
+  </div>
+
+  
+  <div>
+    <%= form.label :special_number_name_id, style: "display: block" %>
+  
+    <%= form.collection_select :special_number_name_id, SpecialNumberName.all, :id, :to_s, prompt: true %>
+    <%= link_to "Add", controller: "special_number_names", action: "new" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
