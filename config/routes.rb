@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :people
   resources :privacies
   resources :toponyms
   resources :document_types

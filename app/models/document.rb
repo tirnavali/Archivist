@@ -7,5 +7,6 @@ class Document < ApplicationRecord
   belongs_to :document_type
   belongs_to :toponym
   belongs_to :privacy
-
+  belongs_to :person
+  
 end

@@ -69,6 +69,13 @@
   </div>
 
   <div>
+    <%= form.label :person_id, style: "display: block" %>
+    <%#= form.text_field :pub_type_id %>
+    <%= form.collection_select :person_id, Person.all, :id, :to_s, prompt: true %>
+    <%= link_to "Person", controller: "people", action: "new" %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

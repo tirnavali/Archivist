@@ -67,6 +67,6 @@ class DocumentsController < ApplicationController
     def document_params
       params.require(:document).permit(:summary, :pub_type_id, :language_id,
          :organization_id, :subject_id, :phisycal_status_id, :document_type_id, 
-         :toponym_id, :privacy_id)
+         :toponym_id, :privacy_id, :person_id)
     end
 end
