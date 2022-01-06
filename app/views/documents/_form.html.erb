@@ -12,8 +12,38 @@
   <% end %>
 
   <div>
+    <%= form.label :organization_code, style: "display: block" %>
+    <%= form.text_field :organization_code %>
+  </div>
+
+  <div>
+    <%= form.label :box, style: "display: block" %>
+    <%= form.number_field :box %>
+  </div>
+
+  <div>
+    <%= form.label :order, style: "display: block" %>
+    <%= form.number_field :order %>
+  </div>
+
+  <div>
     <%= form.label :summary, style: "display: block" %>
-    <%= form.text_area :summary %>
+    <%= form.text_area :summary%>
+  </div>
+
+  <div>
+    <%= form.label :page_count, style: "display: block" %>
+    <%= form.number_field :page_count %>
+  </div>
+
+  <div>
+    <%= form.label :starting_date, style: "display: block" %>
+    <%= form.date_field :starting_date %>
+  </div>
+
+  <div>
+    <%= form.label :ending_date, style: "display: block" %>
+    <%= form.date_field :ending_date %>
   </div>
 
   <div>
@@ -73,6 +103,11 @@
     <%#= form.text_field :pub_type_id %>
     <%= form.collection_select :person_id, Person.all, :id, :to_s, prompt: true %>
     <%= link_to "Person", controller: "people", action: "new" %>
+  </div>
+
+  <div>
+    <%= form.label :explaination, style: "display: block" %>
+    <%= form.text_area :explaination %>
   </div>
 
   <div>
