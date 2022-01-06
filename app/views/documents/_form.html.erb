@@ -37,7 +37,7 @@
   <div>
     <%= form.label :subject_id, style: "display: block" %>
     <%#= form.text_field :pub_type_id %>
-    <%= form.collection_check_boxes :subject_ids, Subject.all, :id, :to_s, prompt: true %>
+    <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true},  {multiple: true, size: 10} %>
   </div>
 
   <div>
