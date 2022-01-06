@@ -25,8 +25,8 @@
 
   <p>
     <strong>Subject:</strong>
-    <% if document.subject_id %>
-      <%= "#{ document.subject_id} - #{document.subject.name}" %>
+    <% if document.subject_ids %>
+      <%= "#{ document.subject_ids} - #{document.subjects.each{|sub| sub.name }}" %>
     <% end %>
   </p>
   

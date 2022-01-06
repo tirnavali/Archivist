@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_172551) do
+ActiveRecord::Schema.define(version: 2022_01_06_174854) do
 
   create_table "document_types", force: :cascade do |t|
     t.string "name"
@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 2022_01_04_172551) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "language_id"
     t.integer "organization_id"
-    t.integer "subject_id"
     t.integer "document_type_id"
     t.integer "phisycal_status_id"
     t.integer "toponym_id"
     t.integer "privacy_id"
     t.integer "person_id"
+    t.integer "special_number_id"
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["language_id"], name: "index_documents_on_language_id"
     t.index ["organization_id"], name: "index_documents_on_organization_id"
@@ -38,8 +38,13 @@ ActiveRecord::Schema.define(version: 2022_01_04_172551) do
     t.index ["phisycal_status_id"], name: "index_documents_on_phisycal_status_id"
     t.index ["privacy_id"], name: "index_documents_on_privacy_id"
     t.index ["pub_type_id"], name: "index_documents_on_pub_type_id"
-    t.index ["subject_id"], name: "index_documents_on_subject_id"
+    t.index ["special_number_id"], name: "index_documents_on_special_number_id"
     t.index ["toponym_id"], name: "index_documents_on_toponym_id"
+  end
+
+  create_table "documents_subjects", id: false, force: :cascade do |t|
+    t.integer "document_id", null: false
+    t.integer "subject_id", null: false
   end
 
   create_table "languages", force: :cascade do |t|
@@ -111,7 +116,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_172551) do
   add_foreign_key "documents", "phisycal_statuses"
   add_foreign_key "documents", "privacies"
   add_foreign_key "documents", "pub_types"
-  add_foreign_key "documents", "subjects"
+  add_foreign_key "documents", "special_numbers"
   add_foreign_key "documents", "toponyms"
   add_foreign_key "special_numbers", "special_number_names"
 end
