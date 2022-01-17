@@ -11,8 +11,41 @@
   </head>
 
   <body>
-    <div class="ui container">
-    <%= yield %>
+  <div class="ui grid">
+  
+  <div class="ui vertical menu three wide column">
+    <%= link_to "Home", root_path, class: "teal item"%>
+    <%= link_to "Documents", documents_url, class: "teal item"%>
+    <a class="active teal item">
+      Inbox
+      <div class="ui teal left pointing label">1</div>
+    </a>
+    <a class="item">
+      Spam
+      <div class="ui label">51</div>
+    </a>
+    <a class="item">
+      Updates
+      <div class="ui label">1</div>
+    </a>
+  <div class="item">
+    <div class="ui transparent icon input">
+      <input type="text" placeholder="Search mail...">
+      <i class="search icon"></i>
     </div>
+  </div>
+</div>
+
+  
+
+
+
+
+
+    
+      <div class="ui container nine wide column">
+        <%= yield %>
+      </div>
+    </div> <!--ui grid-->
   </body>
 </html>
