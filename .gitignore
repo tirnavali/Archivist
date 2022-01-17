@@ -33,3 +33,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore semantic css file
+/app/assets/stylesheets/semantic.css

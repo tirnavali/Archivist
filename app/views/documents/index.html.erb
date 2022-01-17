@@ -6,7 +6,7 @@
   <% @documents.each do |document| %>
     <%= render document %>
     <p>
-      <%= link_to "Show this document", document %>
+      <%= link_to "Show this document", document, class: "ui primary button"%>
     </p>
   <% end %>
 </div>
