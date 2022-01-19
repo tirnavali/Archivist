@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Documents</h1>
+<h1>Documents <a href="#" ><i class="large plus icon"></i>
+</a></h1>
 
 <div id="documents">
   <table class="ui celled padded table">
@@ -11,6 +12,7 @@
       <th>Folder</th>
       <th>Order</th>
       <th>Summary</th>
+      <th>Action</th>
     </tr></thead>
     <tbody>
       <% @documents.each do |document| %>
