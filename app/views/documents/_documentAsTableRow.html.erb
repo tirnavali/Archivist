@@ -1,9 +1,9 @@
 <tr>
   <td>
-    <h2 class="ui right aligned"><%= link_to "#{document.id}", document, class: "ui primary button"%></h2>
+    <div class="ui right aligned"><%= link_to "#{document.id}", document %></div>
   </td>
   <td>
-    <h2 class="ui right aligned"><%= document.organization_code%></h2>
+    <div class="ui right aligned"><%= document.organization_code%></div>
   </td>
   <td class="right aligned">
     <%=document.box%>
@@ -17,11 +17,25 @@
   </td>
   <td><%= document.summary%></td>
   <td>
-  
-    <span><i class="column large edit icon"></i></span>
-    <span><i class="column large folder open icon "></i></span>
-    <span><i class="column large remove icon "></i></span>   
+    <span>
+      <%= link_to  document do %>
+        <i class="large folder open icon "></i>
+      <% end %>
+    </span>
+    <span>
+      <%= link_to  edit_document_path document.id do %>
+        <i class="large orange edit icon "></i>
+      <% end %>
+    </span>
+    <span>    
+        <%= link_to document ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+          <i class="red large remove icon "></i>
+        <% end %>
+    </span>
+
     
+  
+      
   
   </td>
 </tr>

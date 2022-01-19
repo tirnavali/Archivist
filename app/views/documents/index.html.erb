@@ -1,8 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Documents <a href="#" ><i class="large plus icon"></i>
-</a></h1>
+<h1>Documents</h1>
+<div class="">
 
+<%= link_to "Add New document", new_document_path, class: "ui green button"%>
+
+</div>
+</br>
 <div id="documents">
   <table class="ui celled padded table">
     <thead>
@@ -21,7 +25,7 @@
       <% end %>
     </tbody>
     <tfoot>
-      <tr><th colspan="5">
+      <tr><th colspan="7">
         <div class="ui right floated pagination menu">
           <a class="icon item">
             <i class="left chevron icon"></i>
