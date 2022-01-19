@@ -1,0 +1,20 @@
+<tr>
+  <td>
+    <h2 class="ui right aligned"><%= link_to "#{document.id}", document, class: "ui primary button"%></h2>
+  </td>
+  <td>
+    <h2 class="ui right aligned"><%= document.organization_code%></h2>
+  </td>
+  <td class="right aligned">
+    <%=document.box%>
+  </td>
+  <td>
+    <div class="right aligned" data-rating="3" data-max-rating="3">
+    <%=document.folder%></div>
+  </td>
+  <td class="right aligned">
+    <%=document.order%>
+  </td>
+  <td><%= document.summary%></td>
+</tr>
+    

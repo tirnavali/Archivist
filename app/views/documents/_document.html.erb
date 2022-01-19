@@ -1,53 +1,55 @@
-<div id="<%= dom_id document %>">
-  <p>
-    <strong>Summary:</strong>
-    <%= document.summary[..30]+"..." %>
-  </p>
+<div class="ui card" >
+  <div id="<%= dom_id document %>">
+    <p>
+      <strong>Summary:</strong>
+      <%= document.summary[..30]+"..." %>
+    </p>
 
-  <p>
-    <strong>Pub type:</strong>
-    <%= "#{document.pub_type_id} - #{document.pub_type.name}" %>
-  </p>
+    <p>
+      <strong>Pub type:</strong>
+      <%= "#{document.pub_type_id} - #{document.pub_type.name}" %>
+    </p>
 
-  <p>
-    <strong>Language:</strong>
-    <% if document.language_id %>
-      <%= "#{ document.language_id} - #{document.language.name}" %>
-    <% end %>
-  </p>
+    <p>
+      <strong>Language:</strong>
+      <% if document.language_id %>
+        <%= "#{ document.language_id} - #{document.language.name}" %>
+      <% end %>
+    </p>
 
-  <p>
-    <strong>Organization:</strong>
-    <% if document.organization_id %>
-      <%= "#{ document.organization_id} - #{document.organization.name}" %>
-    <% end %>
-  </p>
+    <p>
+      <strong>Organization:</strong>
+      <% if document.organization_id %>
+        <%= "#{ document.organization_id} - #{document.organization.name}" %>
+      <% end %>
+    </p>
 
-  <p>
-    <strong>Subject:</strong>
-    <% if document.subject_ids %>
-      <%= "#{ document.subject_ids} - #{document.subjects.each{|sub| sub.name }}" %>
-    <% end %>
-  </p>
-  
-  <p>
-    <strong>DocumentType:</strong>
-    <% if document.document_type_id %>
-      <%= "#{ document.document_type_id} - #{document.document_type.name}" %>
-    <% end %>
-  </p>
+    <p>
+      <strong>Subject:</strong>
+      <% if document.subject_ids %>
+        <%= "#{ document.subject_ids} - #{document.subjects.each{|sub| sub.name }}" %>
+      <% end %>
+    </p>
 
-  <p>
-    <strong>Toponym:</strong>
-    <% if document.toponym_id %>
-      <%= document.toponym.name %>
-    <% end %>
-  </p>
+    <p>
+      <strong>DocumentType:</strong>
+      <% if document.document_type_id %>
+        <%= "#{ document.document_type_id} - #{document.document_type.name}" %>
+      <% end %>
+    </p>
 
-  <p>
-    <strong>Privacy:</strong>
-    <% if document.privacy_id %>
-      <%= document.privacy.name %>
-    <% end %>
-  </p>
-</div>
+    <p>
+      <strong>Toponym:</strong>
+      <% if document.toponym_id %>
+        <%= document.toponym.name %>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Privacy:</strong>
+      <% if document.privacy_id %>
+        <%= document.privacy.name %>
+      <% end %>
+    </p>
+  </div>
+</div>  
