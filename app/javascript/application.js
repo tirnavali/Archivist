@@ -4,8 +4,10 @@ import "controllers"
 import "jquery"
 import "semantic-ui"
 
-document.addEventListener("turbo:load", function(event){ $('.ui.dropdown').dropdown(); }, false)
-// $('.ui.dropdown')
-//   .dropdown()
-// ;
+document.addEventListener("turbo:load", function(event){ 
+    $('.ui.dropdown').dropdown(); }, false)
+
+document.addEventListener("turbo:render", function(event){ 
+    $('.ui.basic.modal').modal('show'); }, false)
+
 
