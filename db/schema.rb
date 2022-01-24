@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_201050) do
+ActiveRecord::Schema.define(version: 2022_01_24_175140) do
 
   create_table "document_types", force: :cascade do |t|
     t.string "name"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2022_01_06_201050) do
     t.text "explaination"
     t.date "starting_date"
     t.date "ending_date"
+    t.integer "first_special_number"
+    t.integer "second_special_number"
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["language_id"], name: "index_documents_on_language_id"
     t.index ["organization_id"], name: "index_documents_on_organization_id"
