@@ -65,6 +65,6 @@ class SpecialNumbersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def special_number_params
-      params.require(:special_number).permit(:number, :special_number_name_id)
+      params.require(:special_number).permit(:name)
     end
 end

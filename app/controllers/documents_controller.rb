@@ -70,7 +70,7 @@ class DocumentsController < ApplicationController
          :pub_type_id, :language_id,
          :explaination,
          :special_number_id,
-         :first_specail_number,
+         :first_special_number,
          :second_special_number,
          :organization_id, :phisycal_status_id, :document_type_id, 
          :toponym_id, :privacy_id, :person_id, subject_ids:[], )

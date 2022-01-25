@@ -12,17 +12,11 @@
   <% end %>
 
   <div>
-    <%= form.label :number, style: "display: block" %>
-    <%= form.number_field :number %>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
   </div>
 
   
-  <div>
-    <%= form.label :special_number_name_id, style: "display: block" %>
-  
-    <%= form.collection_select :special_number_name_id, SpecialNumberName.all, :id, :to_s, prompt: true %>
-    <%= link_to "Add", controller: "special_number_names", action: "new" %>
-  </div>
 
   <div>
     <%= form.submit %>

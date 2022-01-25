@@ -4,8 +4,11 @@ import "controllers"
 import "jquery"
 import "semantic-ui"
 
-document.addEventListener("turbo:load", function(event){ 
-    $('.ui.dropdown').dropdown(); }, false)
+// document.addEventListener("turbo:load", function(event){ 
+//    $('.ui.dropdown').dropdown();
+//    console.log("APPLication loaded"); }, false)
+
+
 
 document.addEventListener("turbo:frame-render", function(event){ 
     $('.ui.basic.modal').modal('show'); }, false)

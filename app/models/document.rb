@@ -9,5 +9,7 @@ class Document < ApplicationRecord
   belongs_to :person
   belongs_to :special_number
   has_and_belongs_to_many :subjects
-  
+
+  validates :summary, presence: true
+  validates :starting_date, comparison: { less_than: :ending_date }
 end
