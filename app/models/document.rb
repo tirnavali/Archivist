@@ -3,7 +3,7 @@ class Document < ApplicationRecord
   has_and_belongs_to_many :languages
   belongs_to :organization  
   belongs_to :phisycal_status
-  belongs_to :document_type
+  has_and_belongs_to_many :document_types
   belongs_to :toponym
   belongs_to :privacy
   belongs_to :person

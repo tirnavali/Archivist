@@ -99,7 +99,7 @@
 
     <div class="field">
       <%= form.label :document_type_id, style: "display: block" %>
-      <%= form.collection_select :document_type_id, DocumentType.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+      <%= form.collection_select :document_type_ids, DocumentType.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
       <div class="">
         <%= link_to "Add ", new_document_type_path, class: "tiny ui positive button" %>
       </div>

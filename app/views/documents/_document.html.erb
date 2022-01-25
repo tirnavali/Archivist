@@ -38,9 +38,13 @@
 
     <p>
       <strong>DocumentType:</strong>
-      <% if document.document_type_id %>
-        <%= "#{ document.document_type_id} - #{document.document_type.name}" %>
-      <% end %>
+      
+
+      <% document.document_types.each{|document_type| %>
+        <span class="ui orange tag label">
+        <%= document_type[:name] %>
+        </span>
+      <% } %>  
     </p>
 
     <p>
