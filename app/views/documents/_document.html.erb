@@ -32,8 +32,7 @@
         <span class="ui teal tag label">
         <%= subject[:name] %>
         </span>
-      <% } %>
-      
+      <% } %>      
     </p>
 
     <p>
@@ -49,9 +48,11 @@
 
     <p>
       <strong>Toponym:</strong>
-      <% if document.toponym_id %>
-        <%= document.toponym.name %>
-      <% end %>
+      <% document.toponyms.each{|toponym| %>
+        <span class="ui orange tag label">
+        <%= toponym[:name] %>
+        </span>
+      <% } %>
     </p>
 
     <p>
