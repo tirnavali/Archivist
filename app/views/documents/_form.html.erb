@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="fields">
+  <div class="four fields">
     <div class="field">
       <%= form.label :organization_code, style: "display: block" %>
       <%= form.text_field :organization_code %>
@@ -45,6 +45,23 @@
     <div class="field">
       <%= form.label :page_count, style: "display: block" %>
       <%= form.number_field :page_count %>
+    </div>
+  
+  </div>
+    <div class="three fields">
+    <div class="field">
+      <%= form.label :special_number_id, style: "display: block" %>      
+      <%= form.collection_select :special_number_id, SpecialNumber.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_special_number, style: "display: block" %>
+      <%= form.number_field :first_special_number %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_special_number, style: "display: block" %>
+      <%= form.number_field :first_special_number %>
     </div>
   
   </div>

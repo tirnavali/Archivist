@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_175140) do
+ActiveRecord::Schema.define(version: 2022_01_25_092301) do
 
   create_table "document_types", force: :cascade do |t|
     t.string "name"
@@ -100,11 +100,9 @@ ActiveRecord::Schema.define(version: 2022_01_24_175140) do
   end
 
   create_table "special_numbers", force: :cascade do |t|
-    t.integer "number"
-    t.integer "special_number_name_id", null: false
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["special_number_name_id"], name: "index_special_numbers_on_special_number_name_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -128,5 +126,4 @@ ActiveRecord::Schema.define(version: 2022_01_24_175140) do
   add_foreign_key "documents", "pub_types"
   add_foreign_key "documents", "special_numbers"
   add_foreign_key "documents", "toponyms"
-  add_foreign_key "special_numbers", "special_number_names"
 end

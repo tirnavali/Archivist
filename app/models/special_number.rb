@@ -1,3 +1,5 @@
 class SpecialNumber < ApplicationRecord
-  belongs_to :special_number_name
+  def to_s
+    return self.name
+  end
 end
