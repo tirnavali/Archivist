@@ -114,17 +114,12 @@
   
   </div>
 
-  
-
-
-
   <div class="field">
     <%= form.label :subject_id, style: "display: block" %>
     <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, 
     {class: "ui fluid multiple search selection dropdown", multiple: "", size: 10} %>
     <div data-controller="dropdown"></div>
   </div>
-
 
   <div class="three fields">
     <div class="field">
