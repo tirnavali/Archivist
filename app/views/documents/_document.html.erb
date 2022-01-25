@@ -13,7 +13,7 @@
     <p>
       <strong>Languages:</strong>      
       <% document.languages.each{|language| %>
-        <span class="ui teal tag label">
+        <span class="ui teal  label">
         <%= language[:name] %>
         </span>
       <% } %>      
@@ -36,20 +36,18 @@
     </p>
 
     <p>
-      <strong>DocumentType:</strong>
-      
-
+      <strong>DocumentTypes:</strong>
       <% document.document_types.each{|document_type| %>
-        <span class="ui orange tag label">
+        <span class="ui orange  label">
         <%= document_type[:name] %>
         </span>
       <% } %>  
     </p>
 
     <p>
-      <strong>Toponym:</strong>
+      <strong>Toponyms:</strong>
       <% document.toponyms.each{|toponym| %>
-        <span class="ui orange tag label">
+        <span class="ui orange  label">
         <%= toponym[:name] %>
         </span>
       <% } %>
@@ -57,9 +55,11 @@
 
     <p>
       <strong>Privacy:</strong>
-      <% if document.privacy_id %>
-        <%= document.privacy.name %>
-      <% end %>
+      <% document.privacies.each{|privacy| %>
+        <span class="ui red label">
+        <%= privacy[:name] %>
+        </span>
+      <% } %>
     </p>
   </div>
 </div>  

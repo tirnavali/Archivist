@@ -5,7 +5,7 @@ class Document < ApplicationRecord
   belongs_to :phisycal_status
   has_and_belongs_to_many :document_types
   has_and_belongs_to_many :toponyms
-  belongs_to :privacy
+  has_and_belongs_to_many :privacies
   belongs_to :person
   belongs_to :special_number
   has_and_belongs_to_many :subjects
