@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_092301) do
+ActiveRecord::Schema.define(version: 2022_01_25_135750) do
 
   create_table "document_types", force: :cascade do |t|
     t.string "name"
@@ -50,6 +50,11 @@ ActiveRecord::Schema.define(version: 2022_01_25_092301) do
     t.index ["pub_type_id"], name: "index_documents_on_pub_type_id"
     t.index ["special_number_id"], name: "index_documents_on_special_number_id"
     t.index ["toponym_id"], name: "index_documents_on_toponym_id"
+  end
+
+  create_table "documents_languages", id: false, force: :cascade do |t|
+    t.integer "document_id", null: false
+    t.integer "language_id", null: false
   end
 
   create_table "documents_subjects", id: false, force: :cascade do |t|

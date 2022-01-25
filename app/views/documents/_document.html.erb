@@ -1,4 +1,4 @@
-<div class="ui card" >
+<div class="" >
   <div id="<%= dom_id document %>">
     <p>
       <strong>Summary:</strong>
@@ -11,10 +11,12 @@
     </p>
 
     <p>
-      <strong>Language:</strong>
-      <% if document.language_id %>
-        <%= "#{ document.language_id} - #{document.language.name}" %>
-      <% end %>
+      <strong>Languages:</strong>      
+      <% document.languages.each{|language| %>
+        <span class="ui teal tag label">
+        <%= language[:name] %>
+        </span>
+      <% } %>      
     </p>
 
     <p>
@@ -26,9 +28,12 @@
 
     <p>
       <strong>Subject:</strong>
-      <% if document.subject_ids %>
-        <%= "#{ document.subject_ids} - #{document.subjects.each{|sub| sub.name }}" %>
-      <% end %>
+      <% document.subjects.each{|subject| %>
+        <span class="ui teal tag label">
+        <%= subject[:name] %>
+        </span>
+      <% } %>
+      
     </p>
 
     <p>

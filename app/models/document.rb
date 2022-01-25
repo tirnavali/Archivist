@@ -1,6 +1,6 @@
 class Document < ApplicationRecord
   belongs_to :pub_type
-  belongs_to :language
+  has_and_belongs_to_many :languages
   belongs_to :organization  
   belongs_to :phisycal_status
   belongs_to :document_type

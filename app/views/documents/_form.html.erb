@@ -80,8 +80,9 @@
 
     <div class="field">
       <%= form.label :language_id, style: "display: block" %>      
-      <%= form.collection_select :language_id, Language.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+      <%= form.collection_select :language_ids, Language.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
     </div>
+
 
     <div class="field">
       <%= form.label :organization_id, style: "display: block" %>      
