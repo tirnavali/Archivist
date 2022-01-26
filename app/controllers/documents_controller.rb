@@ -73,7 +73,7 @@ class DocumentsController < ApplicationController
          :first_special_number,
          :second_special_number,
          :organization_id, :phisycal_status_id, 
-         :person_id, 
+         person_ids:[], 
          subject_ids:[], 
          language_ids:[], 
          document_type_ids:[],

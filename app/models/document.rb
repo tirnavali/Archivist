@@ -6,7 +6,7 @@ class Document < ApplicationRecord
   has_and_belongs_to_many :document_types
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :privacies
-  belongs_to :person
+  has_and_belongs_to_many :people
   belongs_to :special_number
   has_and_belongs_to_many :subjects
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
