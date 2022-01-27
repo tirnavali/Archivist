@@ -1,0 +1,40 @@
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{user.id}", user %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= user.email%></div>
+  </td>
+  <td class="ui aligned">
+    <%=user.role%>
+  </td>
+
+  <td>
+    <div class="center aligned ui label" data-rating="3" data-max-rating="3">
+    <%=user.current_sign_in_at%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label"><%=user.last_sign_in_at %></div>
+  </td>
+
+  <td class="right aligned" ><%= user.sign_in_count%></td>
+  <td>
+    <span>
+      <%= link_to  user do %>
+        <i class="large folder open icon "></i>
+      <% end %>
+    </span>
+    <span>
+      <%= link_to  edit_document_path user.id do %>
+        <i class="large orange edit icon "></i>
+      <% end %>
+    </span>
+    <span>    
+        <%= link_to user ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+          <i class="red large remove icon "></i>
+        <% end %>
+    </span>
+  
+  </td>
+</tr>
