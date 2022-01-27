@@ -11,6 +11,32 @@
   </head>
 
   <body>
+
+  <!--Menu -->
+    <div class="ui small menu">
+      <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
+      <a class="item">
+        Messages
+      </a>
+      <div class="right menu">
+        <div class="ui dropdown item">
+          Language <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item">English</a>
+            <a class="item">Russian</a>
+            <a class="item">Spanish</a>
+          </div>
+        </div>
+        <div class="item">
+        <% if current_user.nil? %>
+          <%= link_to "Sign In", new_user_session_path, class: "ui primary button" %>
+        <% else %>
+          <%= link_to "Sign Out", destroy_user_session_path, data: {"turbo-method": :delete}, class: "ui primary button" %>
+        <% end %>
+          </div>
+      </div>
+    </div>
+  <!--Menu -->
   <div class="ui grid">
   
   <div class="ui vertical menu three wide column">
@@ -78,10 +104,13 @@
 
     
       <div class="ui container nine wide column">
+      <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
         <%= yield %>
 
         <%= turbo_frame_tag "modal" %>
       </div>
     </div> <!--ui grid-->
+    
   </body>
 </html>
