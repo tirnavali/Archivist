@@ -9,6 +9,7 @@ class Document < ApplicationRecord
   has_and_belongs_to_many :people
   belongs_to :special_number
   has_and_belongs_to_many :subjects
+  has_many_attached :images
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
   validates :organization_code, :box, :order, :summary, :starting_date ,presence: true 
   

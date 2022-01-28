@@ -78,6 +78,7 @@ class DocumentsController < ApplicationController
          language_ids:[], 
          document_type_ids:[],
          toponym_ids:[],
-         privacy_ids:[],  )
+         privacy_ids:[],
+         images: []  )
     end
 end

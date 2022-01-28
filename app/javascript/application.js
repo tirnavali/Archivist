@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
 import "semantic-ui"
+import "@rails/activestorage"
+ActiveStorage.start()
 
 // document.addEventListener("turbo:load", function(event){ 
 //    $('.ui.dropdown').dropdown();
