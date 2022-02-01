@@ -62,20 +62,20 @@
       <% } %>
     </p>
 
-<ul>
+<div class="ui tiny images">
   <% document.images.each do |file| %>
-    <li>
+    
       <% if file.representable? %>
         <%#= image_tag file.representation(resize_to_limit: [500, 500]) %>
-        <%= link_to image_tag(file.variant(resize_to_limit: [300, 300])), file %>
+        <%= link_to image_tag(file.variant(resize_to_limit: [300, 300]), class:"ui rounded image"), file %>
 
       <% else %>
         <%= link_to rails_blob_path(file, disposition: "attachment") do %>
-          <%= image_tag "placeholder.png", alt: "Download file"  %>
+          <%= image_tag "https://via.placeholder.com/150", alt: "Download file"  %>
         <% end %>
       <% end %>
-    </li>
+    
   <% end %>
-</ul>
+</div>
   </div>
 </div>  
