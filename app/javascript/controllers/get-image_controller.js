@@ -5,9 +5,12 @@ export default class extends Controller {
 
 
   inf(event){
+    let stage = $("#stage")[0];
     event.preventDefault();
-    console.log("Hello console");
-    console.log(event.params)
+    //console.log("Hello console");
+    console.log(event.params.file);
+    console.log(stage);
+    $("#stage")[0].src=event.params.file
   }
 
   convert(event) {

@@ -73,9 +73,9 @@
      <% document.images.each_with_index do |file,i| %>
       <% if file.representable? %>
         <tr data-controller="get-image" >
-          <td data-label="Name"><a href="#" class="ui column label" data-scene-target="loadPicture" data-get-image-file-param="<%= file %>" data-action="get-image#inf"><%=i+1%> </a></td>
+          <td data-label="Name"><a href="#" class="ui column label" data-scene-target="loadPicture" data-get-image-file-param="<%=url_for file.variant(saver:{quality: 05}, rotate: 0 ) %>" data-action="get-image#inf"><%=i+1%> </a></td>
           <td data-label="Age"><%= link_to "Aç", file, "data-action": "get-image#inf", "data-get-image-file-param": file %></td>
-          <td class="ui one wide column " data-label="Job"><%= link_to image_tag(file.variant(resize_to_limit: [100, 100]), class:"ui rounded image"), file %></td>
+          <td class="ui one wide column " data-label="Job"><%#= link_to image_tag(file.variant(resize_to_limit: [100, 100]), class:"ui rounded image"), file %></td>
         </tr> 
         <% else %>
           <%= link_to rails_blob_path(file, disposition: "attachment") do %>
@@ -85,8 +85,8 @@
       <% end %>   
     </tbody>
   </table>
-  <div data-controller="scene" class="six wide column">
-    <img src="http://placehold.jp/800x1100.png" />
+  <div data-controller="scene" class="twelve wide column">
+    <img class="ui fluid image" id ="stage" src="http://placehold.jp/800x1100.png" />
     
   </div>
 </div>
