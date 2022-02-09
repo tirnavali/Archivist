@@ -142,12 +142,28 @@
       <%= form.label :explaination, style: "display: block" %>
       <%= form.text_area :explaination %>
     </div>
+    <p>Hello world</p>
+    
 
   </div>
 
   <%= form.file_field :images, multiple: true, direct_upload: true %>
+
     <div class="ui form">
       <%= form.submit class: "ui primary button" %>
+      
     </div>
+    <% if @document.images.exists? %>
+      <div class="ui tiny images">
+        <%= @document.images.each do |image| %>
+          
+          <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+            <%= image_tag(image.variant(:thumb), class: "ui tiny image" )  %>
+            <%#= image_tag "placeholder.png", alt: "Download file", class: "download icon" %>
+            
+          <% end %>
+        <% end %>
+      </div>
+      <% end %>
   
 <% end %>
