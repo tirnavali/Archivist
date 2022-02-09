@@ -146,6 +146,12 @@
   </div>
 
   <%= form.file_field :images, multiple: true, direct_upload: true %>
+  <% document.images.each do |attach| %>
+    <%= form.hidden_field :images, value: attach.signed_id, multiple: true %>
+    <%= image_tag attach.variant(:thumb) if attach.variable? %>
+  <% end %>
+
+
     <div class="ui form">
       <%= form.submit class: "ui primary button" %>
     </div>
