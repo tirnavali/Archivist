@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :document_types
   resources :phisycal_statuses
   resources :subjects
-  resources :documents
+  resources :documents do
+    member do
+      delete :delete_image_attachment
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
