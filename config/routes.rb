@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :phisycal_statuses
   resources :subjects
   resources :documents do
+    get 'delete_image_attachment', on: :member
     member do
       delete :delete_image_attachment
     end

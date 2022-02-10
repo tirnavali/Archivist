@@ -10,11 +10,7 @@ class Document < ApplicationRecord
   belongs_to :special_number
   has_and_belongs_to_many :subjects
   has_many_attached :images do |attachable|
-<<<<<<< HEAD
-    attachable.variant :thumb, resize_to_limit: [100,100]    
-=======
     attachable.variant :thumb, resize_to_limit: [100, 100]
->>>>>>> 9c3d0ba77b6dc652e28e2832c3ecdf173f7dd623
   end
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
   validates :organization_code, :box, :order, :summary, :starting_date ,presence: true 
