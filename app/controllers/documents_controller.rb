@@ -1,6 +1,11 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[ show edit update destroy ]
+  before_action :set_document, only: %i[ show edit update destroy]
 
+  def delete_image_attachment
+    @image = ActiveStorage::Blob.find_signed(params[:id])
+    @image.purge
+    redirect_to documents_url
+  end
   # GET /documents or /documents.json
   def index
     @documents = Document.all

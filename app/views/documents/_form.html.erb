@@ -148,6 +148,22 @@
   </div>
 
   <%= form.file_field :images, multiple: true, direct_upload: true %>
+<<<<<<< HEAD
+=======
+  
+  <% document.images.each do |attach| %>
+    <%= form.hidden_field :images, value: attach.signed_id, multiple: true %>
+    <table>
+    <tr><td>
+      <%= image_tag attach.variant(:thumb) if attach.variable? %>
+    </td></tr>
+    <tr><td>
+      <%= link_to 'X', delete_image_attachment_document_path(attach.signed_id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    </td></tr>
+    </table>
+  <% end %>
+
+>>>>>>> 9c3d0ba77b6dc652e28e2832c3ecdf173f7dd623
 
     <div class="ui form">
       <%= form.submit class: "ui primary button" %>
