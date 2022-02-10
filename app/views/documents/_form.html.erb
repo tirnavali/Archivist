@@ -142,8 +142,7 @@
       <%= form.label :explaination, style: "display: block" %>
       <%= form.text_area :explaination %>
     </div>
-    <p>Hello world</p>
-    
+
 
   </div>
 
@@ -159,8 +158,8 @@
             <div class="image"><%= image_tag attach.variant(:thumb).processed if attach.variable? %></div>
           <% end %>
           <div class="header">Image name: <%=attach.filename%></div> 
-          <div class="ui bottom attached button">
-            <%= link_to 'Sil', delete_image_attachment_document_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "header"%>
+          <div class="">
+            <%= link_to 'Sil', delete_image_attachment_document_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ui bottom attached button"%>
           </div>
         </div>
       </div>   
