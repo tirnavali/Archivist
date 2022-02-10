@@ -148,35 +148,27 @@
   </div>
 
   <%= form.file_field :images, multiple: true, direct_upload: true %>
-  
-  <% document.images.each do |attach| %>
-    <%= form.hidden_field :images, value: attach.signed_id, multiple: true %>
-    <table>
-    <tr><td>
-      <%= image_tag attach.variant(:thumb) if attach.variable? %>
-    </td></tr>
-    <tr><td>
-      <%= link_to 'X', delete_image_attachment_document_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-    </td></tr>
-    </table>
+  <% if @document.images.exists? %>
+    <div class="ui seven column stackable grid">
+    <% document.images.each do |attach| %>
+      <%= form.hidden_field :images, value: attach.signed_id, multiple: true %>
+      
+      <div class="ui column fluid card">
+        <div class="content">
+          <%= link_to rails_blob_path(attach, disposition: "attachment"), class: "ui center aligned" do %>
+            <div class="image"><%= image_tag attach.variant(:thumb).processed if attach.variable? %></div>
+          <% end %>
+          <div class="header">Image name: <%=attach.filename%></div> 
+          <div class="ui bottom attached button">
+            <%= link_to 'Sil', delete_image_attachment_document_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "header"%>
+          </div>
+        </div>
+      </div>   
+    <% end %>
+    </div>
   <% end %>
-
 
     <div class="ui form">
       <%= form.submit class: "ui primary button" %>
-      
-    </div>
-    <% if @document.images.exists? %>
-      <div class="ui tiny images">
-        <%= @document.images.each do |image| %>
-          
-          <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-            <%= image_tag(image.variant(:thumb), class: "ui tiny image" )  %>
-            <%#= image_tag "placeholder.png", alt: "Download file", class: "download icon" %>
-            
-          <% end %>
-        <% end %>
-      </div>
-      <% end %>
-  
+    </div>  
 <% end %>
