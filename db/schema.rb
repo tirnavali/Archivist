@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_171554) do
+ActiveRecord::Schema.define(version: 2022_02_11_145344) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -110,6 +110,14 @@ ActiveRecord::Schema.define(version: 2022_01_28_171554) do
     t.integer "toponym_id", null: false
   end
 
+  create_table "fonds", force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "index_fonds_on_parent_id"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -201,4 +209,5 @@ ActiveRecord::Schema.define(version: 2022_01_28_171554) do
   add_foreign_key "documents", "pub_types"
   add_foreign_key "documents", "special_numbers"
   add_foreign_key "documents", "toponyms"
+  add_foreign_key "fonds", "fonds", column: "parent_id"
 end

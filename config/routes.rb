@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       delete :delete_image_attachment
     end
   end
+  resources :fonds
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

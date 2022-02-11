@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @fond %>
+
+<div>
+  <%= link_to "Edit this fond", edit_fond_path(@fond) %> |
+  <%= link_to "Back to fonds", fonds_path %>
+
+  <%= button_to "Destroy this fond", @fond, method: :delete %>
+</div>

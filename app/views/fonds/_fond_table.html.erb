@@ -1,0 +1,43 @@
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{fond.id}", fond %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= fond.name%></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= fond.parent%></div>
+  </td>
+  <td class="ui aligned">
+    <%=fond.children_to_s%>
+  </td>
+
+  <td>
+    <div class="center aligned ui label" data-rating="3" data-max-rating="3">
+    <%=fond.children.count%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label"></div>
+  </td>
+
+  <td class="right aligned" ></td>
+  <td>
+    <span>
+      <%= link_to  fond do %>
+        <i class="large folder open icon "></i>
+      <% end %>
+    </span>
+    <span>
+      <%= link_to  edit_fond_path fond.id do %>
+        <i class="large orange edit icon "></i>
+      <% end %>
+    </span>
+    <span>    
+        <%= link_to fond ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+          <i class="red large remove icon "></i>
+        <% end %>
+    </span>
+  
+  </td>
+</tr>
