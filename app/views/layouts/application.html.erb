@@ -46,6 +46,11 @@
     <%= "user".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= User.all.size %></div>
     <% end %>
+
+    <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
+    <%= "fond".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%= Fond.all.size %></div>
+    <% end %>
     
     <%= link_to (privacies_url) , class: is_page_active?(privacies_url) do %>
     <%= "privacy".pluralize.titleize %>
