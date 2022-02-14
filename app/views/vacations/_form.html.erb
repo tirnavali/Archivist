@@ -24,8 +24,9 @@
   <div>
     <%= form.label :user_id, style: "display: block" %>
     <%#= form.collection_select :user_id %>
-    <%= form.collection_select :user_id, User.order(:name), :id, :fullname, {prompt: true}, {class: "ui fluid  search selection dropdown"} %>
-      
+    <% if current_user && current_user.superadmin?%>
+      <%= form.collection_select :user_id, User.order(:name), :id, :fullname, {prompt: true}, {class: "ui fluid  search selection dropdown"} %>
+    <% end %> 
   </div>
 
   <div>

@@ -1,14 +1,23 @@
-class VacationsController < ApplicationController
+class VacationsController < ApplicationController 
+  before_action :authenticate_user! #, except: %i[ show index]
   before_action :set_vacation, only: %i[ show edit update destroy ]
+  
 
   # GET /vacations or /vacations.json
   def index
-    @vacations = Vacation.all
+    #Eğer super admin ise tüm vacation listesini görsün
+    if current_user && current_user.superadmin?
+      @vacations = Vacation.order(:starting_date)
+    elsif current_user
+      @vacations = Vacation.user_vacations(current_user)
+    else
+      @vacations = Vacation.order(:starting_date)
+    end
+
   end
 
   # GET /vacations/1 or /vacations/1.json
-  def show
-    puts "Current user : #{current_user.email}"
+  def show    
   end
 
   # GET /vacations/new
@@ -69,6 +78,11 @@ class VacationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_vacation
       @vacation = Vacation.find(params[:id])
+    end
+
+    def set_vacation_related_current_user
+      @vacation = Vacation.find(params[:id])
+      #@vacation = Vacation.where('id == ? ', params[:id])
     end
 
     # Only allow a list of trusted parameters through.
