@@ -1,4 +1,4 @@
-<%= form_with(model: vacation) do |form| %>
+<%= form_with(model: vacation, class: "ui form") do |form| %>
   <% if vacation.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(vacation.errors.count, "error") %> prohibited this vacation from being saved:</h2>
@@ -25,9 +25,12 @@
     <%= form.label :user_id, style: "display: block" %>
     <%#= form.collection_select :user_id %>
     <% if current_user && current_user.superadmin?%>
-      <%= form.collection_select :user_id, User.order(:name), :id, :fullname, {prompt: true}, {class: "ui fluid  search selection dropdown"} %>
+      <%= form.collection_select :user_id, User.order(:name), :id, :fullname, {prompt: true},
+       { class: "ui fluid  search selection dropdown"} %>
     <% end %> 
   </div>
+
+  
 
   <div>
     <%= form.label :starting_date, style: "display: block" %>
@@ -42,4 +45,6 @@
   <div>
     <%= form.submit %>
   </div>
+
+  <div data-controller="dropdown"></div>
 <% end %>

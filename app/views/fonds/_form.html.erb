@@ -1,4 +1,4 @@
-<%= form_with(model: fond) do |form| %>
+<%= form_with(model: fond, class: "ui form") do |form| %>
   <% if fond.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(fond.errors.count, "error") %> prohibited this fond from being saved:</h2>
@@ -26,4 +26,6 @@
   <div>
     <%= form.submit %>
   </div>
+
+  <div data-controller="dropdown"></div>
 <% end %>

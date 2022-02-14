@@ -2,6 +2,8 @@
 
 <h1>Vacations</h1>
 
+<%= link_to "New vacation", new_vacation_path, class: "ui green button segment"%>
+
 <div id="vacations">
   <% @vacations.each do |vacation| %>
     <%= render vacation %>
@@ -11,4 +13,3 @@
   <% end %>
 </div>
 
-<%= link_to "New vacation", new_vacation_path %>
