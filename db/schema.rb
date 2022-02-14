@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_11_173709) do
+ActiveRecord::Schema.define(version: 2022_02_14_091550) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -199,6 +199,16 @@ ActiveRecord::Schema.define(version: 2022_02_11_173709) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vacations", force: :cascade do |t|
+    t.string "explanation"
+    t.integer "user_id", null: false
+    t.datetime "starting_date", precision: 6
+    t.datetime "ending_date", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_vacations_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "documents", "document_types"
@@ -211,4 +221,5 @@ ActiveRecord::Schema.define(version: 2022_02_11_173709) do
   add_foreign_key "documents", "special_numbers"
   add_foreign_key "documents", "toponyms"
   add_foreign_key "fonds", "fonds", column: "parent_id"
+  add_foreign_key "vacations", "users"
 end
