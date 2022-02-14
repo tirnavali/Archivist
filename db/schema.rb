@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_091550) do
+ActiveRecord::Schema.define(version: 2022_02_14_163337) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,7 +74,9 @@ ActiveRecord::Schema.define(version: 2022_02_14_091550) do
     t.date "ending_date"
     t.integer "first_special_number"
     t.integer "second_special_number"
+    t.integer "fond_id", null: false
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
+    t.index ["fond_id"], name: "index_documents_on_fond_id"
     t.index ["language_id"], name: "index_documents_on_language_id"
     t.index ["organization_id"], name: "index_documents_on_organization_id"
     t.index ["person_id"], name: "index_documents_on_person_id"
@@ -212,6 +214,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_091550) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "documents", "document_types"
+  add_foreign_key "documents", "fonds"
   add_foreign_key "documents", "languages"
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "people"

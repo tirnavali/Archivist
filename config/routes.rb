@@ -1,6 +1,13 @@
 Rails.application.routes.draw do  
   resources :vacations
-  resources :fonds
+  resources :fonds do
+    resources :documents do
+      get 'delete_image_attachment', on: :member
+      member do
+        delete :delete_image_attachment
+      end
+    end
+  end
   devise_for :users, controllers: {
         sessions: 'users/sessions'
       }
@@ -19,7 +26,6 @@ Rails.application.routes.draw do
       delete :delete_image_attachment
     end
   end
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

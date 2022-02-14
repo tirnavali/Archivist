@@ -1,4 +1,5 @@
 class Document < ApplicationRecord
+  belongs_to :fond
   belongs_to :pub_type
   has_and_belongs_to_many :languages
   belongs_to :organization  

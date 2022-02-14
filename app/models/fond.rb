@@ -2,8 +2,10 @@ class Fond < ApplicationRecord
   before_create :assign_depth
   before_save   :assign_depth
 
+  
   belongs_to :parent, class_name: "Fond", optional: true
   has_many :children, class_name: "Fond", foreign_key: "parent_id"
+  has_many :documents
 
   def to_s
     self.name
