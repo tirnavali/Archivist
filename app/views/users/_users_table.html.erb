@@ -12,17 +12,21 @@
     <%=user.role%>
   </td>
 
-  <td>
-    <div class="center aligned ui label" data-rating="3" data-max-rating="3">
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
     <%=user.current_sign_in_at%></div>
   </td>
 
   <td class="right aligned ">
-    <div class="ui label"><%=user.last_sign_in_at %></div>
+    <div class="ui label">
+      <%=user.last_sign_in_at %>
+    </div>
   </td>
 
-  <td class="right aligned" ><%= user.sign_in_count%></td>
-  <td>
+  <td class="right aligned" >
+    <%= user.sign_in_count%>
+  </td>
+  <td class="collapsing">
     <span>
       <%= link_to  user do %>
         <i class="large folder open icon "></i>

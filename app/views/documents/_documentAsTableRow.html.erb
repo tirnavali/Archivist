@@ -1,6 +1,12 @@
 <tr>
-  <td>
-    <div class="ui right aligned"><%= link_to "#{document.id}", document %></div>
+ 
+  <td class="collapsing">
+    <div class="ui right aligned">
+      <%= link_to document do %>
+      <%= document.id %>
+        <i class="folder open icon "></i>
+      <% end %>
+    </div>
   </td>
   <td>
     <div class="ui right aligned"><%= link_to document.fond, fond_path(document.fond) %></div>
@@ -21,8 +27,12 @@
   <td class="right aligned">
     <%=document.images.count%>
   </td>
-  <td><%= document.summary%></td>
   <td>
+  <div class="left aligned">
+    <%= document.summary[..200]%>
+    </div>
+  </td>
+  <td class="collapsing">
     <span>
       <%= link_to  document do %>
         <i class="large folder open icon "></i>

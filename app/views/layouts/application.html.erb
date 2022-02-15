@@ -14,7 +14,9 @@
 
   <!--Menu -->
     <div class="ui small menu">
-      <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
+      <%= link_to root_path, class: is_page_active?(root_path) do%>
+      <i class="big home icon"></i>
+      <% end %>
       <a class="item">
         Messages
       </a>
@@ -34,7 +36,7 @@
         <% else %>
           <div class="ui dropdown item">
             <%= link_to vacations_url do %>
-             Vacation <i class="plus icon"></i>
+             Vacation <i class="calendar alternate icon"></i>
             <% end %>             
           </div>
           <div class="item">
