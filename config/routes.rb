@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   resources :document_types
   resources :phisycal_statuses
   resources :subjects
-  resources :documents do
+  resources :documents, except: [:new, :create]  do
+       
     get 'delete_image_attachment', on: :member
     member do
       delete :delete_image_attachment

@@ -3,6 +3,7 @@
 <%= render @fond %>
 
 <div>
+  <%= link_to "Add New Document", new_fond_document_path(@fond.id) %> |
   <%= link_to "Edit this fond", edit_fond_path(@fond) %> |
   <%= link_to "Back to fonds", fonds_path %>
 

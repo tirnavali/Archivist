@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= form.label :fond_id, style: "display: block" %>
+    <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "ui fluid search selection dropdown"} %>
+    </div>
   <div class="four fields">
     <div class="field">
       <%= form.label :organization_code, style: "display: block" %>

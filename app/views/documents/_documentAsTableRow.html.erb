@@ -3,6 +3,9 @@
     <div class="ui right aligned"><%= link_to "#{document.id}", document %></div>
   </td>
   <td>
+    <div class="ui right aligned"><%= link_to document.fond, fond_path(document.fond) %></div>
+  </td>
+  <td>
     <div class="ui right aligned"><%= document.organization_code%></div>
   </td>
   <td class="right aligned">

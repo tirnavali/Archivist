@@ -22,6 +22,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @document.fond_id = params[:fond_id]
   end
 
   # GET /documents/1/edit
@@ -80,7 +81,9 @@ class DocumentsController < ApplicationController
          :special_number_id,
          :first_special_number,
          :second_special_number,
-         :organization_id, :phisycal_status_id, 
+         :organization_id, 
+         :phisycal_status_id,
+         :fond_id, 
          person_ids:[], 
          subject_ids:[], 
          language_ids:[], 

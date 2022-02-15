@@ -1,6 +1,11 @@
 <tr>
   <td>
-    <div class="ui right aligned"><%= link_to "#{fond.id}", fond %></div>
+    <div class="ui right aligned">
+        <%= link_to fond do %>
+        <%= fond.id %>
+          <i class="folder open icon "></i>
+        <% end %>
+      </div>
   </td>
   <td>
     <div class="ui aligned"><%= fond.name%></div>
