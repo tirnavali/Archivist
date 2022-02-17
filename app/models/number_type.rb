@@ -1,0 +1,2 @@
+class NumberType < ApplicationRecord
+end

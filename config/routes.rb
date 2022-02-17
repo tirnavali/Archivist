@@ -1,7 +1,7 @@
 Rails.application.routes.draw do  
   resources :vacations
   resources :fonds do
-    resources :documents do
+    resources :documents,  shallow: true do
       get 'delete_image_attachment', on: :member
       member do
         delete :delete_image_attachment

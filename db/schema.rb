@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_163337) do
+ActiveRecord::Schema.define(version: 2022_02_17_170652) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,22 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "document_model_fields", force: :cascade do |t|
+    t.string "name"
+    t.string "field_type"
+    t.boolean "required"
+    t.integer "document_model_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_model_id"], name: "index_document_model_fields_on_document_model_id"
+  end
+
+  create_table "document_models", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "document_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -63,7 +79,6 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
     t.integer "toponym_id"
     t.integer "privacy_id"
     t.integer "person_id"
-    t.integer "special_number_id"
     t.string "organization_code"
     t.integer "box"
     t.integer "folder"
@@ -72,8 +87,6 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
     t.text "explaination"
     t.date "starting_date"
     t.date "ending_date"
-    t.integer "first_special_number"
-    t.integer "second_special_number"
     t.integer "fond_id", null: false
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["fond_id"], name: "index_documents_on_fond_id"
@@ -83,7 +96,6 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
     t.index ["phisycal_status_id"], name: "index_documents_on_phisycal_status_id"
     t.index ["privacy_id"], name: "index_documents_on_privacy_id"
     t.index ["pub_type_id"], name: "index_documents_on_pub_type_id"
-    t.index ["special_number_id"], name: "index_documents_on_special_number_id"
     t.index ["toponym_id"], name: "index_documents_on_toponym_id"
   end
 
@@ -127,6 +139,12 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "number_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -164,9 +182,13 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
   end
 
   create_table "special_numbers", force: :cascade do |t|
-    t.string "name"
+    t.string "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "number_type_id", null: false
+    t.integer "document_id", null: false
+    t.index ["document_id"], name: "index_special_numbers_on_document_id"
+    t.index ["number_type_id"], name: "index_special_numbers_on_number_type_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -213,6 +235,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "document_model_fields", "document_models"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "fonds"
   add_foreign_key "documents", "languages"
@@ -221,8 +244,9 @@ ActiveRecord::Schema.define(version: 2022_02_14_163337) do
   add_foreign_key "documents", "phisycal_statuses"
   add_foreign_key "documents", "privacies"
   add_foreign_key "documents", "pub_types"
-  add_foreign_key "documents", "special_numbers"
   add_foreign_key "documents", "toponyms"
   add_foreign_key "fonds", "fonds", column: "parent_id"
+  add_foreign_key "special_numbers", "documents"
+  add_foreign_key "special_numbers", "number_types"
   add_foreign_key "vacations", "users"
 end
