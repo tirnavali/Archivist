@@ -13,7 +13,26 @@
   <div class="field">
     <%= form.label :fond_id, style: "display: block" %>
     <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "ui fluid search selection dropdown"} %>
-    </div>
+  </div>
+  <div class="fields segment">
+    
+
+    <%= form.fields_for :special_numbers, @document.special_numbers do |special_number_fields| %>
+      <div class="field">
+        <%= special_number_fields.label :value %>
+        <%= special_number_fields.text_field :value %>
+        <%#= form.collection_select(:personel_id, Personel.all, :id, :name_with_initial, {}, {class: "form-control form-control-sm"}) %>
+      </div>
+      <div class="field">
+        <%= special_number_fields.label :number_type %>
+        <%= special_number_fields.collection_select :number_type_id, NumberType.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"}  %>
+      </div>
+      
+    
+      <%#= render 'special_numbers/spe'%>
+    <% end %>
+  </div>
+  
   <div class="four fields">
     <div class="field">
       <%= form.label :organization_code, style: "display: block" %>

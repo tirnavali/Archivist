@@ -21,6 +21,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @document.special_numbers.build
     @document.fond_id = params[:fond_id] if params[:fond_id]
   end
 
@@ -86,6 +87,13 @@ class DocumentsController < ApplicationController
          document_type_ids:[],
          toponym_ids:[],
          privacy_ids:[],
-         images: []  )
+         images: [],
+         special_numbers_attributes: [
+           :id,
+           :number_type_id,
+           :value,
+           :_destroy,
+           :document_id,       
+         ]  )
     end
 end
