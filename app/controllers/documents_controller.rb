@@ -15,14 +15,13 @@ class DocumentsController < ApplicationController
   end
 
   # GET /documents/1 or /documents/1.json
-  def show
-        
+  def show        
   end
 
   # GET /documents/new
   def new
     @document = Document.new
-    @document.fond_id = params[:fond_id]
+    @document.fond_id = params[:fond_id] if params[:fond_id]
   end
 
   # GET /documents/1/edit

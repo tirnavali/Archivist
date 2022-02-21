@@ -1,7 +1,7 @@
 Rails.application.routes.draw do  
   resources :vacations
   resources :fonds do
-    resources :documents,  shallow: true do
+    resources :documents  do
       get 'delete_image_attachment', on: :member
       member do
         delete :delete_image_attachment
@@ -20,13 +20,19 @@ Rails.application.routes.draw do
   resources :document_types
   resources :phisycal_statuses
   resources :subjects
-  resources :documents, except: [:new, :create]  do
-       
+  resources :documents do
     get 'delete_image_attachment', on: :member
-    member do
-      delete :delete_image_attachment
-    end
+      member do
+        delete :delete_image_attachment
+      end
   end
+  # resources :documents, except: [:new, :create]  do
+       
+  #   get 'delete_image_attachment', on: :member
+  #   member do
+  #     delete :delete_image_attachment
+  #   end
+  # end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
