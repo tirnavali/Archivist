@@ -19,9 +19,9 @@
   <div class="field">
   <%= link_to_add_nested(form, :special_numbers, '#special-number-items', link_classes:"ui button") %>
   </div>
+    <div class=" ui inverted segment">
+  <div id='special-number-items' class="">
     
-  <div id='special-number-items' class="ui inverted segment fields">
-    <div class="two fields">
       <%= form.fields_for :special_numbers do |special_number_f|%>
         <%= render 'special_number_fields', form: special_number_f %>        
       <% end %>
@@ -50,7 +50,7 @@
     </div>
   </div>
   
-  <div class="three fields">
+  <div class="two fields">
     <div class="field">
       <%= form.label :starting_date, style: "display: block" %>
       <%= form.date_field :starting_date %>
@@ -61,29 +61,10 @@
       <%= form.date_field :ending_date %>
     </div>
 
-    <div class="field">
-      <%= form.label :page_count, style: "display: block" %>
-      <%= form.number_field :page_count %>
-    </div>
+
   
   </div>
-    <div class="three fields">
-    <div class="field">
-      <%= form.label :special_number_id, style: "display: block" %>      
-      <%#= form.collection_select :special_number_id, SpecialNumber.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
-    </div>
-
-    <div class="field">
-      <%= form.label :first_special_number, style: "display: block" %>
-      <%#= form.number_field :first_special_number %>
-    </div>
-
-    <div class="field">
-      <%= form.label :second_special_number, style: "display: block" %>
-      <%#= form.number_field :second_special_number %>
-    </div>
-  
-  </div>
+    
 
   <div class="field">
     <%= form.label :summary, style: "display: block" %>
