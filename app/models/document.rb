@@ -17,5 +17,5 @@ class Document < ApplicationRecord
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
   validates :organization_code, :box, :order, :summary, :starting_date ,presence: true 
   
-  accepts_nested_attributes_for :special_numbers
+  accepts_nested_attributes_for :special_numbers, reject_if: :all_blank, allow_destroy: true
 end

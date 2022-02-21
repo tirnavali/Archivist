@@ -1,0 +1,16 @@
+<div class="wrapper-div">
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.text_field :value %>
+  
+  
+    <%= form.label :number_type %>
+    <%= form.collection_select :number_type_id, NumberType.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+    
+  </div> 
+  
+  <%#= link_to_remove_nested(form, fields_wrapper_selector: '.wrapper-div') %> <!-- adds a link to add more items -->
+  <%= link_to_remove_nested(form, link_text: "Remove", link_classes: 'ui button red') %>
+</div>
+
+

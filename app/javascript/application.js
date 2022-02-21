@@ -4,6 +4,7 @@ import "controllers"
 import "jquery"
 import "semantic-ui"
 import "@rails/activestorage";
+import "vanilla-nested"
 // ActiveStorage.start()
 
 // document.addEventListener("turbo:load", function(event){ 
