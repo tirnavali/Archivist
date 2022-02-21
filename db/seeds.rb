@@ -38,3 +38,5 @@
 # toponyms = %w{Ankara İstanbul Kastamonu Sivas Isparta El-Cezire Suriye Irak İzmir}
 # toponyms.each {|toponym| Toponym.create! name: toponym}
 
+# number_types = ["Esas No", "Karar No", "Kanun No", "Kadük No", "Dosya No", "Arşiv No", "Yasama Yılı", "Birleşim No", "Tefsir No", "Toplantı No", "Kanunlar Dergisi Cilt"]
+# number_types.each {|nt| NumberType.create! name: nt}
