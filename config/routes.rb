@@ -1,4 +1,5 @@
 Rails.application.routes.draw do  
+  resources :number_types
   resources :vacations
   resources :fonds do
     resources :documents  do
