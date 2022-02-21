@@ -3,10 +3,10 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
 import "semantic-ui"
-import "@rails/activestorage";
+import * as ActiveStorage from "@rails/activestorage";
 import "vanilla-nested"
 
-// ActiveStorage.start()
+ActiveStorage.start()
 
 // document.addEventListener("turbo:load", function(event){ 
 //    $('.ui.dropdown').dropdown();

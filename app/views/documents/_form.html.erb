@@ -117,9 +117,12 @@
 
   <div class="field">
     <%= form.label :subject_id, style: "display: block" %>
-    <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, 
+    <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: "", size: 10}%>
+    
+    <%#= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, 
     {data: {controller: "dropdown"}, class: "ui fluid multiple search selection dropdown", multiple: "", size: 10} %>    
   </div>
+  <div data-controller="dropdown"></div>
 
   <div class="three fields">
     <div class="field">
@@ -166,6 +169,8 @@
     <% end %>
     </div>
   <% end %>
+
+  <div data-controller="direct-upload"></div>
 
     <div class="ui form">
       <%= form.submit class: "ui primary button" %>
