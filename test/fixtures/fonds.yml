@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  Fond: one
+  parent: 1
 
 two:
   name: MyString
-  Fond: two
+  parent: two

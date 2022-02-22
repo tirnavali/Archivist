@@ -3,7 +3,9 @@
 one:
   summary: MyText
   pub_type: one
+  fond_id: 1
 
 two:
   summary: MyText
   pub_type: two
+  fond_id: 1
