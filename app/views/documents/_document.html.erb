@@ -115,7 +115,7 @@
   <% end %>
   
 
-  <div data-controller="scene" class="twelve wide column">
+  <div data-controller="" class="twelve wide column">
     <!-- Load first image -->
     <div class="ui raised segment">
       <%= document.images.each_with_index do |file, index| %>
@@ -135,7 +135,7 @@
     </div>
     <%# if document.images.first.representable? %>
     
-    <img class="ui fluid image" id ="stage" src=" <%#= url_for document.images.first.representation(thumbnail: 200)%><%#= url_for document.images.first.variant(saver:{quality: 05}, rotate: 0 ) %>"  />
+    <img class="ui fluid image" id ="" src=" <%#= url_for document.images.first.representation(thumbnail: 200)%><%#= url_for document.images.first.variant(saver:{quality: 05}, rotate: 0 ) %>"  />
     <%# end %>
     <!-- Load first image #END -->
   </div>
