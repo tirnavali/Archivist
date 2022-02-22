@@ -1,1 +1,1 @@
-Rack::Utils.multipart_part_limit = 200
+Rack::Utils.multipart_part_limit = 128

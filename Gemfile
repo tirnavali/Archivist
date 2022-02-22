@@ -29,6 +29,10 @@ gem "jbuilder"
 
 #gem 'active_storage_validations', '~> 0.9.6'
 
+#for pdf view
+gem "gtk3"
+gem "poppler"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

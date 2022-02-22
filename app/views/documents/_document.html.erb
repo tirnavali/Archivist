@@ -1,10 +1,31 @@
-<div class="" >
+<div class="ui piled segment" >
   <div id="<%= dom_id document %>">
-
-
-    <p>
+    <div class="ui red segment">
+      <p>
+        <strong>Fond:</strong> <%=document.fond.name %>      
+      </p>
+      <p><strong>Organization Number:</strong> <%=document.organization_code %></p>
+      <p>
+        <strong>Box: </strong>   <%= document.box %> /
+        <% if document.folder%>
+        <strong>Folder: </strong><%= document.folder %> /
+        <% end %>
+        <strong>Order: </strong>   <%= document.order %>
+      </p>
+      <p>
+        <strong>Starting Date: </strong>  <span class="ui label"> <%= document.starting_date %> </span>
+        <% if document.ending_date %>
+        <strong>Ending Date: </strong>  <span class="ui label"> <%= document.ending_date %> </span>
+        <% end %>
+      </p>
+      <p>
+        <strong>Total of Attachments:</strong> <%=document.images.count %>      
+      </p>
+      
+    </div>
+    <p class="ui secondary segment">
       <strong>Summary:</strong>
-      <%= document.summary[..30]+"..." %>
+      <%= document.summary %>
     </p>
 
     <p>
@@ -65,6 +86,7 @@
     </p>
 <!-- Image viewer -->
 <div class="ui grid ">
+  <% while false %>
   <table id="table_id" class="display ui celled table three wide column">
     <thead>
       <tr><th>Name</th>
@@ -75,11 +97,14 @@
      <% document.images.each_with_index do |file,i| %>
       <% if file.representable? %>
         <tr data-controller="get-image" >
-          <td data-label="Name"><a href="#" class="ui column label" data-scene-target="loadPicture" data-get-image-file-param="<%=url_for file.variant(saver:{quality: 05}, rotate: 0 ) %>" data-action="get-image#inf"><%=i+1%> </a></td>
+          <td data-label="Name"><a href="#" class="ui column label" data-scene-target="loadPicture" 
+          data-get-image-file-param="<%#=url_for file.variant(saver:{quality: 05}, rotate: 0 ) %> <%#= url_for file.representation(thumbnail: [200, nil])%>"
+          data-action="get-image#inf"><%=i+1%> </a></td>
           <td data-label="Age"><%= link_to "Aç", file, "data-action": "get-image#inf", "data-get-image-file-param": file %></td>
           <td class="ui one wide column " data-label="Job"><%#= link_to image_tag(file.variant(resize_to_limit: [100, 100]), class:"ui rounded image"), file %></td>
         </tr> 
         <% else %>
+        
           <%= link_to rails_blob_path(file, disposition: "attachment") do %>
             <%= image_tag "https://via.placeholder.com/150", alt: "Download file"  %>
           <% end %> 
@@ -87,13 +112,34 @@
       <% end %>   
     </tbody>
   </table>
+  <% end %>
+  
+
   <div data-controller="scene" class="twelve wide column">
     <!-- Load first image -->
-    <img class="ui fluid image" id ="stage" src="<%= url_for document.images.first.variant(saver:{quality: 05}, rotate: 0 ) %>"  />
+    <div class="ui raised segment">
+      <%= document.images.each_with_index do |file, index| %>
+      <div class=" ui secondary segment">
+         <div class="ui tiny image" ><%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %> </div>
+      
+        <div class="middle aligned content">
+          <span class="header">File name: </span>
+          <%= link_to rails_blob_path(file, disposition: "attachment"), class: "ui center aligned" do %>
+          
+            <%= file.filename %> <span class="ui button">Kaydet <i class="save icon"></i></span>
+          <% end %>
+          <p class="ui button"><%= link_to  file , target: :_blank do %>Yeni sekmede aç <i class="folder open  icon"></i><% end %></p> 
+        </div>
+      </div>
+        <% end %>
+    </div>
+    <%# if document.images.first.representable? %>
+    
+    <img class="ui fluid image" id ="stage" src=" <%#= url_for document.images.first.representation(thumbnail: 200)%><%#= url_for document.images.first.variant(saver:{quality: 05}, rotate: 0 ) %>"  />
+    <%# end %>
     <!-- Load first image #END -->
   </div>
 </div>
 <!-- Image viewer #END-->
   </div>
 </div>  
-  <div data-controller="data-table"></div>
