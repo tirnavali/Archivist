@@ -1,5 +1,7 @@
 <div class="" >
   <div id="<%= dom_id document %>">
+
+
     <p>
       <strong>Summary:</strong>
       <%= document.summary[..30]+"..." %>
@@ -61,9 +63,9 @@
         </span>
       <% } %>
     </p>
-<!-- Image viewer start-->
+<!-- Image viewer -->
 <div class="ui grid ">
-  <table class="ui celled table three wide column">
+  <table id="table_id" class="display ui celled table three wide column">
     <thead>
       <tr><th>Name</th>
       <th>Age</th>
@@ -86,10 +88,12 @@
     </tbody>
   </table>
   <div data-controller="scene" class="twelve wide column">
-    <img class="ui fluid image" id ="stage" src="http://placehold.jp/800x1100.png" />
-    
+    <!-- Load first image -->
+    <img class="ui fluid image" id ="stage" src="<%= url_for document.images.first.variant(saver:{quality: 05}, rotate: 0 ) %>"  />
+    <!-- Load first image #END -->
   </div>
 </div>
-<!-- Image viewer end -->
+<!-- Image viewer #END-->
   </div>
 </div>  
+  <div data-controller="data-table"></div>
