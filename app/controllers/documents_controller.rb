@@ -37,7 +37,7 @@ class DocumentsController < ApplicationController
       if @document.save
         format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
         format.json { render :show, status: :created, location: @document }
-      else
+      else @document.special_numbers.build
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end

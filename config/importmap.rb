@@ -1,7 +1,7 @@
 # Pin npm packages by running ./bin/importmap
 
 pin "application", preload: true
-pin "vanilla-nested", to: "https://cdn.jsdelivr.net/npm/vanilla-nested@1.5.1/app/assets/javascripts/vanilla_nested.min.js", preload: true
+pin "vanilla-nested", to: "https://cdn.jsdelivr.net/npm/vanilla-nested@1.6/app/assets/javascripts/vanilla_nested.min.js", preload: true
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
