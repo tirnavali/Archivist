@@ -1,3 +1,5 @@
+<% @users.each do |user| %>
+
 <tr>
   <td>
     <div class="ui right aligned"><%= link_to "#{user.id}", user %></div>
@@ -45,3 +47,4 @@
   
   </td>
 </tr>
+<% end %>

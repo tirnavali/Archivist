@@ -16,9 +16,9 @@
       <th>Action</th>
     </tr></thead>
     <tbody>
-      <% @users.each do |user| %>
-        <%= render partial: "users_table", locals: {user: user} %>
-      <% end %>
+      
+        <%= render partial: "users_table", locals: {users: @users} %>
+      
     </tbody>
     <tfoot>
       <tr><th colspan="8">

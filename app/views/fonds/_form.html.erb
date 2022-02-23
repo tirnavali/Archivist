@@ -19,7 +19,7 @@
   <div>
     <%= form.label :parent, style: "display: block" %>
     <%#= form.text_field :Fond_id %>
-    <%= form.collection_select :parent_id, Fond.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+    <%= form.collection_select :parent_id, Fond.order(:name), :id, :to_s, {prompt: true}, {include_blank: 'none', class: "ui fluid selection dropdown"} %>
   </div>
 
 

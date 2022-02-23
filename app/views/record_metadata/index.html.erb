@@ -18,9 +18,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @record_metadata.each do |record_metadatum| %>
-        <%= render partial: "record_metadatum_table", locals: {record_metadatum: record_metadatum} %>
-      <% end %>    
+      
+        <%= render partial: "record_metadatum_table" %>
+        
     </tbody>
     <tfoot>
       <tr>

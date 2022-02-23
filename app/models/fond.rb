@@ -7,6 +7,8 @@ class Fond < ApplicationRecord
   has_many :children, class_name: "Fond", foreign_key: "parent_id"
   has_many :documents
 
+  validates :name, uniqueness: true
+
   def to_s
     self.name
   end

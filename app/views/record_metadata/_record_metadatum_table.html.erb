@@ -1,3 +1,4 @@
+<% @record_metadata.each do |record_metadatum| %>
 <tr>
    <td class="collapsing">
     <div class="ui right aligned">
@@ -8,20 +9,20 @@
     </div>
   </td>
   <td>
-    <div class="ui right aligned"><%#= link_to record_metadatum.fond, fond_path(record_metadatum.fond) %></div>
+    <div class="ui right aligned"><%= link_to record_metadatum.fond, fond_path(record_metadatum.fond) %></div>
   </td>
   <td>
-    <div class="ui right aligned"><%#= record_metadatum.organization_code%></div>
+    <div class="ui right aligned"><%= record_metadatum.organization_code%></div>
   </td>
   <td class="right aligned">
-    <%#=record_metadatum.box%>
+    <%=record_metadatum.box%>
   </td>
   <td>
     <div class="right aligned" data-rating="3" data-max-rating="3">
-    <%#=record_metadatum.folder%></div>
+    <%=record_metadatum.folder%></div>
   </td>
   <td class="right aligned">
-    <%#=record_metadatum.order%>
+    <%=record_metadatum.order%>
   </td>
   <td class="right aligned">
     <% if record_metadatum.record_attachment %> <%= record_metadatum.record_attachment.images.count%> <% end %>
@@ -49,4 +50,4 @@
     </span>
   </td>
 </tr>
-    
+<% end %>   
