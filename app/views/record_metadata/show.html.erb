@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @record_metadatum %>
+
+<div>
+  <%= link_to "Edit this record metadatum", edit_record_metadatum_path(@record_metadatum) %> |
+  <%= link_to "Back to record metadata", record_metadata_path %>
+
+  <%= button_to "Destroy this record metadatum", @record_metadatum, method: :delete %>
+</div>

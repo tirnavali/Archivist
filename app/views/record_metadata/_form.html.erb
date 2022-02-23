@@ -1,0 +1,22 @@
+<%= form_with(model: record_metadatum) do |form| %>
+  <% if record_metadatum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(record_metadatum.errors.count, "error") %> prohibited this record_metadatum from being saved:</h2>
+
+      <ul>
+        <% record_metadatum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :summary, style: "display: block" %>
+    <%= form.text_area :summary %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

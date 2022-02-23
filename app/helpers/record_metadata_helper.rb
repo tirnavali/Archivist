@@ -1,0 +1,2 @@
+module RecordMetadataHelper
+end

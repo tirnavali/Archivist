@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_17_170652) do
+ActiveRecord::Schema.define(version: 2022_02_23_113608) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,9 +35,25 @@ ActiveRecord::Schema.define(version: 2022_02_17_170652) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "document_model_fields", force: :cascade do |t|
+    t.string "name"
+    t.string "field_type"
+    t.boolean "required"
+    t.integer "document_model_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_model_id"], name: "index_document_model_fields_on_document_model_id"
+  end
+
+  create_table "document_models", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "document_types", force: :cascade do |t|
@@ -159,6 +175,20 @@ ActiveRecord::Schema.define(version: 2022_02_17_170652) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "record_attachments", force: :cascade do |t|
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "record_metadatum_id", null: false
+    t.index ["record_metadatum_id"], name: "index_record_attachments_on_record_metadatum_id"
+  end
+
+  create_table "record_metadata", force: :cascade do |t|
+    t.text "summary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "special_number_names", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -219,6 +249,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_170652) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "document_model_fields", "document_models"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "fonds"
   add_foreign_key "documents", "languages"
@@ -229,6 +260,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_170652) do
   add_foreign_key "documents", "pub_types"
   add_foreign_key "documents", "toponyms"
   add_foreign_key "fonds", "fonds", column: "parent_id"
+  add_foreign_key "record_attachments", "record_metadata"
   add_foreign_key "special_numbers", "documents"
   add_foreign_key "special_numbers", "number_types"
   add_foreign_key "vacations", "users"
