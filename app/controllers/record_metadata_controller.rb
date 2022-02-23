@@ -69,6 +69,30 @@ class RecordMetadataController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def record_metadatum_params
-      params.require(:record_metadatum).permit(:summary)
+      params.require(:record_metadatum).permit(
+        :fond_id, 
+        :organization_code, 
+        :box, 
+        :order,
+        :folder, 
+        :summary, 
+        :starting_date, 
+        :ending_date, 
+        :privacy_id,
+        :organization_id, 
+        :phisycal_status_id,
+        :explaination,         
+        subject_ids:[], 
+        language_ids:[], 
+        person_ids:[], 
+        toponym_ids:[],
+        document_type_ids:[],
+        special_numbers_attributes: [
+          :id,
+          :number_type_id,
+          :value,
+          :_destroy,
+          :document_id,       
+         ])
     end
 end

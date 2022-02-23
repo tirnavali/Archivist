@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_194922) do
+ActiveRecord::Schema.define(version: 2022_02_23_210056) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_194922) do
     t.integer "document_type_id", null: false
   end
 
-  create_table "document_types_record_metadatum", id: false, force: :cascade do |t|
+  create_table "document_types_record_metadata", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "document_type_id", null: false
   end
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_194922) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "languages_record_metadatum", id: false, force: :cascade do |t|
+  create_table "languages_record_metadata", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "language_id", null: false
   end
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_194922) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "people_record_metadatum", id: false, force: :cascade do |t|
+  create_table "people_record_metadata", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "person_id", null: false
   end
@@ -204,12 +204,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_194922) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "fond_id", null: false
     t.integer "organization_id", null: false
-    t.integer "document_type_id", null: false
     t.integer "phisycal_status_id", null: false
-    t.integer "toponym_id"
     t.integer "privacy_id", null: false
-    t.integer "person_id"
-    t.integer "language_id", null: false
     t.string "organization_code"
     t.integer "box"
     t.integer "folder"
@@ -217,22 +213,18 @@ ActiveRecord::Schema.define(version: 2022_02_23_194922) do
     t.date "starting_date"
     t.date "ending_date"
     t.text "explaination"
-    t.index ["document_type_id"], name: "index_record_metadata_on_document_type_id"
     t.index ["fond_id"], name: "index_record_metadata_on_fond_id"
-    t.index ["language_id"], name: "index_record_metadata_on_language_id"
     t.index ["organization_id"], name: "index_record_metadata_on_organization_id"
-    t.index ["person_id"], name: "index_record_metadata_on_person_id"
     t.index ["phisycal_status_id"], name: "index_record_metadata_on_phisycal_status_id"
     t.index ["privacy_id"], name: "index_record_metadata_on_privacy_id"
-    t.index ["toponym_id"], name: "index_record_metadata_on_toponym_id"
   end
 
-  create_table "record_metadatum_subjects", id: false, force: :cascade do |t|
+  create_table "record_metadata_subjects", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "subject_id", null: false
   end
 
-  create_table "record_metadatum_toponyms", id: false, force: :cascade do |t|
+  create_table "record_metadata_toponyms", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "toponym_id", null: false
   end
@@ -309,14 +301,10 @@ ActiveRecord::Schema.define(version: 2022_02_23_194922) do
   add_foreign_key "documents", "toponyms"
   add_foreign_key "fonds", "fonds", column: "parent_id"
   add_foreign_key "record_attachments", "record_metadata"
-  add_foreign_key "record_metadata", "document_types"
   add_foreign_key "record_metadata", "fonds"
-  add_foreign_key "record_metadata", "languages"
   add_foreign_key "record_metadata", "organizations"
-  add_foreign_key "record_metadata", "people"
   add_foreign_key "record_metadata", "phisycal_statuses"
   add_foreign_key "record_metadata", "privacies"
-  add_foreign_key "record_metadata", "toponyms"
   add_foreign_key "special_numbers", "documents"
   add_foreign_key "special_numbers", "number_types"
   add_foreign_key "vacations", "users"

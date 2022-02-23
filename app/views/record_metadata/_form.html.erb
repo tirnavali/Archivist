@@ -35,44 +35,37 @@
       <%= form.label :order, style: "display: block" %>
       <%= form.number_field :order %>
     </div>
-
   <div>
     <%= form.label :summary, style: "display: block" %>
     <%= form.text_area :summary %>
   </div>
-
   <div class="field">
-      <%= form.label :starting_date, style: "display: block" %>
-      <%= form.date_field :starting_date %>
-    </div>
-
-    <div class="field">
-      <%= form.label :ending_date, style: "display: block" %>
-      <%= form.date_field :ending_date %>
-    </div>
-
-    <div class="field">
-      <%= form.label :subject_id, style: "display: block" %>
-      <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: "", size: 10}%>  
-    </div>
-
-    <div class="field">
-      <%= form.label :language_id, style: "display: block" %>      
-      <%= form.collection_select :language_ids, Language.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
-    </div>
-
-
-    <div class="field">
-      <%= form.label :organization_id, style: "display: block" %>      
-      <%= form.collection_select :organization_id, Organization.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
-    </div>
-    <div class="field">
-      <%= form.label :toponym_id, style: "display: block" %>
-      <%= form.collection_select :toponym_ids, Toponym.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
-      <div class="">
-        <%= link_to "Add ", new_toponym_path, class: "tiny ui positive button" %>
-      </div>
-    </div>
+    <%= form.label :starting_date, style: "display: block" %>
+    <%= form.date_field :starting_date %>
+  </div>
+  <div class="field">
+    <%= form.label :ending_date, style: "display: block" %>
+    <%= form.date_field :ending_date %>
+  </div>
+  <div class="field">
+    <%= form.label :subject_id, style: "display: block" %>
+    <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: "", size: 10}%>  
+  </div>
+  <div class="field">
+    <%= form.label :language_id, style: "display: block" %>      
+    <%= form.collection_select :language_ids, Language.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
+  </div>
+  <div class="field">
+    <%= form.label :organization_id, style: "display: block" %>      
+    <%= form.collection_select :organization_id, Organization.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+  </div>
+  <div class="field">
+    <%= form.label :toponym_id, style: "display: block" %>
+    <%= form.collection_select :toponym_ids, Toponym.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>    
+    <div class="">
+      <%= link_to "Add ", new_toponym_path, class: "tiny ui positive button" %>      
+    </div>    
+  </div>
     <div class="field">
       <%= form.label :person_id, style: "display: block" %>
       <%= form.collection_select :person_ids, Person.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>      
@@ -86,7 +79,7 @@
     </div>
     <div class="field">
       <%= form.label :privacy_id, style: "display: block" %>
-      <%= form.collection_select :privacy_ids, Privacy.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>      
+      <%= form.collection_select :privacy_id, Privacy.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>      
     </div>
     <div class="field">
       <%= form.label :phisycal_status_id, style: "display: block" %>
@@ -96,7 +89,6 @@
       <%= form.label :explaination, style: "display: block" %>
       <%= form.text_area :explaination %>
     </div>
-
   <div>
     <%= form.submit %>
   </div>
