@@ -2,13 +2,32 @@
 
 <h1>Privacies</h1>
 
-<div id="privacies">
-  <% @privacies.each do |privacy| %>
-    <%= render privacy %>
-    <p>
-      <%= link_to "Show this privacy", privacy %>
-    </p>
-  <% end %>
-</div>
+<%= link_to t("new_privacy"), new_privacy_path, class: "ui button green segment" %>
 
-<%= link_to "New privacy", new_privacy_path %>
+
+<div id="privacies">
+<table class="ui celled padded very compact table">  
+   <thead>
+    <tr><th class="single line">Id</th>
+    <th><%= t :name %></th>    
+    <th><%= t :created_at%></th>
+    <th><%= t :updated_at%></th>
+    
+    <th><%= t :action%></th>
+   </tr></thead>
+  <tbody>  
+    <%= render "privacies_table", class:"ui right floated pagination menu" %>
+  </tbody>
+    <tfoot>
+    
+      <tr><th colspan="8">
+        <div class="segment">
+        <%= paginate @privacies %>                
+        </div>
+      </th>
+    </tr></tfoot>
+  </table>
+    <p>
+      <%#= link_to "Show this privacy", privacy %>
+    </p>
+</div>

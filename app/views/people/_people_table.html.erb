@@ -1,0 +1,43 @@
+<% @people.each do |person| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{person.id}", person %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= person.name%> </div>
+  </td>
+  
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=person.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label">
+      <%=person.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+
+ 
+  <td class="collapsing">
+    <span>
+      <%= link_to  person do %>
+        <i class="large folder open icon "></i>
+      <% end %>
+    </span>
+    <span>
+      <%= link_to  edit_person_path person.id do %>
+        <i class="large orange edit icon "></i>
+      <% end %>
+    </span>
+    <span>    
+        <%= link_to person ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+          <i class="red large remove icon "></i>
+        <% end %>
+    </span>
+  
+  </td>
+</tr>
+<% end %>

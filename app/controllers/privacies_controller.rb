@@ -3,7 +3,7 @@ class PrivaciesController < ApplicationController
 
   # GET /privacies or /privacies.json
   def index
-    @privacies = Privacy.all
+    @privacies = Privacy.order(:name).page params[:page]
   end
 
   # GET /privacies/1 or /privacies/1.json

@@ -2,13 +2,31 @@
 
 <h1>People</h1>
 
-<div id="people">
-  <% @people.each do |person| %>
-    <%= render person %>
-    <p>
-      <%= link_to "Show this person", person %>
-    </p>
-  <% end %>
-</div>
+<%= link_to t("new_person"), new_person_path, class: "ui button green segment" %>
 
-<%= link_to "New person", new_person_path %>
+<div id="people">
+
+<div class="segment">
+        <%= paginate @people %>                
+</div>
+  <table class="ui celled padded very compact table">  
+   <thead>
+    <tr><th class="single line">Id</th>
+    <th><%= t :name %></th>    
+    <th><%= t :created_at%></th>
+    <th><%= t :updated_at%></th>
+    
+    <th><%= t :action%></th>
+   </tr></thead>
+  <tbody>  
+    <%= render "people_table", class:"ui right floated pagination menu" %>
+  </tbody>
+    <tfoot>  
+      <tr><th colspan="8">
+        <div class="segment">
+        <%= paginate @people %>                
+        </div>
+      </th>
+    </tr></tfoot>
+  </table>
+</div>

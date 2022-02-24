@@ -85,8 +85,13 @@
     <% end %>
 
     <%= link_to (toponyms_url), class: is_page_active?(toponyms_path) do %>
-    <%= "toponym".pluralize.titleize %>
+    <%= t :toponyms %>
       <div class="ui teal left pointing label"><%= Toponym.all.size %></div>
+    <% end %>
+
+    <%= link_to (organizations_url), class: is_page_active?(organizations_url) do %>
+    <%= t :organizations %>
+      <div class="ui teal left pointing label"><%= Organization.all.size %></div>
     <% end %>
 
     <%= link_to (document_types_url), class: is_page_active?(document_types_url) do %>
