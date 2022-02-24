@@ -1,5 +1,5 @@
 class PhisycalStatus < ApplicationRecord
-  has_many :metadata
+  has_many :record_metadata, dependent: :nullify
   def to_s
     return self.name
   end    
