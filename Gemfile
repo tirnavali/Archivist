@@ -33,7 +33,7 @@ gem "jbuilder"
 gem "gtk3"
 gem "poppler"
 
-gem "will_paginate"
+gem "kaminari"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

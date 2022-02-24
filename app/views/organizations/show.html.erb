@@ -6,5 +6,5 @@
   <%= link_to "Edit this organization", edit_organization_path(@organization) %> |
   <%= link_to "Back to organizations", organizations_path %>
 
-  <%= button_to "Destroy this organization", @organization, method: :delete %>
+  <%= button_to t("destroy"), @organization, method: :delete %>
 </div>

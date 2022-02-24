@@ -3,7 +3,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations or /organizations.json
   def index
-    @organizations = Organization.all
+    @organizations = Organization.order(:name).page params[:page]
   end
 
   # GET /organizations/1 or /organizations/1.json
