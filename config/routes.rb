@@ -1,4 +1,5 @@
 Rails.application.routes.draw do  
+  resources :organizations
   resources :record_metadata
   resources :record_attachments do
     get 'delete_image_attachment', on: :member

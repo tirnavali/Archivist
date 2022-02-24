@@ -9,7 +9,7 @@ class RecordMetadatum < ApplicationRecord
   has_and_belongs_to_many :document_types
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :people
-  has_many :special_numbers
+  has_many :special_numbers#, dependent: :destroy
   
   
   
