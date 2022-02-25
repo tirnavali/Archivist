@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
+  include Administration
   before_action :set_user, only: %i[ show edit update destroy ]
+  #before_action :require_admin, only: %i[  update destroy ]
   
   def index
     @users = User.all
+  end
+
+  def edit
+    if @user.id != current_user.id && !current_user.superadmin?
+      redirect_to root_path, alert: "You are not authorized to do that action" 
+    end
   end
 
   def new
@@ -48,6 +56,7 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
 
   def user_params
     params.require(:user).permit(:email, :password, :role, :password_confirmation, :name, :surname)

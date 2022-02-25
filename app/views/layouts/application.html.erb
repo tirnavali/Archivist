@@ -35,6 +35,9 @@
         <% if current_user.nil? %>
           <%= link_to "Sign In", new_user_session_path, class: "ui primary button" %>
         <% else %>
+          <div class="item">
+            <%= link_to  current_user.email, user_path(current_user) %>
+          </div>
           <div class="ui dropdown item">
             <%= link_to vacations_url do %>
              Vacation <i class="calendar alternate icon"></i>
