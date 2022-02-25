@@ -1,5 +1,7 @@
 class FondsController < ApplicationController
+  include Administration
   before_action :set_fond, only: %i[ show edit update destroy ]
+  before_action :require_admin, only: %i[edit update destroy ]
 
   # GET /fonds or /fonds.json
   def index
