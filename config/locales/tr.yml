@@ -23,6 +23,7 @@ tr:
   editing_organization: "Kuruluş Kaydını Düzenle"
   save: "Kaydet"
   name: "Ad"
+  destroy: "Bu Kaydı Sil"
   created_at: "Oluşturulma Tarihi"
   updated_at: "Güncellenme Tarihi"
   action: "Eylem"
