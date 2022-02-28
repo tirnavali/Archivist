@@ -36,7 +36,9 @@
           <%= link_to "Sign In", new_user_session_path, class: "ui primary button" %>
         <% else %>
           <div class="item">
-            <%= link_to  current_user.email, user_path(current_user) %>
+            <%=current_user.email %>
+            
+            <%#= link_to  current_user.email, user_path(current_user) %>
           </div>
           <div class="ui dropdown item">
             <%= link_to vacations_url do %>
@@ -55,11 +57,11 @@
   
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
-    
-    <%= link_to (users_url) , class: is_page_active?(users_url) do %>
-    <%= "user".pluralize.titleize %>
-      <div class="ui teal left pointing label"><%= User.all.size %></div>
-    <% end %>
+    asdf
+    <%#= link_to (users_url) , class: is_page_active?(users_url) do %>
+    <%#= "user".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%#= User.all.size %></div>
+    <%# end %>
 
     <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
     <%= "fond".pluralize.titleize %>

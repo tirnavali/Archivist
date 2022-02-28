@@ -17,10 +17,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  devise_for :users, controllers: {
-        sessions: 'users/sessions'
-      }
-  resources :users
   resources :special_numbers
   resources :special_number_names
   resources :people
@@ -35,16 +31,7 @@ Rails.application.routes.draw do
         delete :delete_image_attachment
       end
   end
-  # resources :documents, except: [:new, :create]  do
-       
-  #   get 'delete_image_attachment', on: :member
-  #   member do
-  #     delete :delete_image_attachment
-  #   end
-  # end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
+  devise_for :users
   root to: "home#index"
-  
+
 end
