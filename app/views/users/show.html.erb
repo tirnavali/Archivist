@@ -1,0 +1,15 @@
+<h1><%=@user.fullname %></h1>
+
+<h3> Email: <%= @user.email %></h2>
+<h3>Role: <span class="ui red label"><%= @user.role%></span></h3>
+<p> <b>Joined at:</b> <%= @user.created_at%></p>
+<p> <b>Sign in count:</b> <%= @user.sign_in_count%></p>
+<p> <b>Last sign in at:</b> <%= @user.last_sign_in_at%></p>
+<p> <b>Current sign in IP:</b> <%= @user.current_sign_in_ip%></p>
+<p> <b>Last sign in IP:</b> <%= @user.last_sign_in_ip%></p>
+
+
+<%= link_to @user ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+  Delete <i class="red large remove icon "></i>
+<% end %>
+    
