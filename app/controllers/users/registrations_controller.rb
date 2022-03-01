@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    puts "bi bor byapma"
+    super
   end
 
   # GET /resource/edit

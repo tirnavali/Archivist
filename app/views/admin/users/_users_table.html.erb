@@ -2,7 +2,7 @@
 
 <tr>
   <td>
-    <div class="ui right aligned"><%= link_to "#{user.id}", user %></div>
+    <div class="ui right aligned"><%= link_to "#{user.id}", admin_user_url(user.id) %></div>
   </td>
   <td>
     <div class="ui aligned"><%#= user.name%> <%#= user.surname%></div>
@@ -30,22 +30,22 @@
   </td>
   <td class="collapsing">
     <span>
-      <%= link_to  user do %>
+      <%= link_to  admin_user_url user.id do %>
         <i class="large folder open icon "></i>
       <% end %>
     </span>
     <span>
-      <%= link_to  edit_user_path user.id do %>
+      <%= link_to  edit_admin_user_url user.id do %>
         <i class="large orange edit icon "></i>
       <% end %>
     </span>
     <span>
-      <%= link_to  edit_user_password_path user.id do %>
+      <%#= link_to  edit_admin_user_password_path user.id do %>
         <i class="large red edit icon "></i>
-      <% end %>
+      <%# end %>
     </span>
     <span>    
-      <%= link_to user ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+      <%= link_to admin_user_path(user.id) ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
       <i class="red large remove icon "></i>
       <% end %>
     </span>

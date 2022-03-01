@@ -42,5 +42,5 @@
 # number_types.each {|nt| NumberType.create! name: nt}
 
 # 25.times do |u|
-#     User.create(email: "user#{u}@gmail.com", password: "123456")
+#     User.create(email: "user#{u*2}@gmail.com", password: "123456")
 # end

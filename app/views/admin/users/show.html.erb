@@ -9,7 +9,7 @@
 <p> <b>Last sign in IP:</b> <%= @user.last_sign_in_ip%></p>
 
 
-<%= link_to @user ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+<%= link_to admin_user_path(@user.id) ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
   Delete <i class="red large remove icon "></i>
 <% end %>
     

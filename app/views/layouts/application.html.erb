@@ -58,7 +58,7 @@
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
     asdf
-    <%= link_to (users_url) , class: is_page_active?(users_url) do %>
+    <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
     <%= "user".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= User.all.size %></div>
     <% end %>
