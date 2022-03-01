@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include Administration
   before_action :set_user, only: %i[ show edit update destroy ]
-  #before_action :require_admin, only: %i[  update destroy ]
+  before_action :require_admin, only: %i[ edit destroy ]
   
   def index
     @users = User.all

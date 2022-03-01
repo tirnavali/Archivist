@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :trackable
 
   has_many :vacations, dependent: :destroy
   enum role: [:user, :superadmin, :admin, :manager, :chief, :moderator]
@@ -12,6 +12,6 @@ class User < ApplicationRecord
   end
 
   def fullname
-    "#{self.name} #{self.surname} "
+    self.email
   end
 end

@@ -5,7 +5,7 @@
     <div class="ui right aligned"><%= link_to "#{user.id}", user %></div>
   </td>
   <td>
-    <div class="ui aligned"><%= user.name%> <%= user.surname%></div>
+    <div class="ui aligned"><%#= user.name%> <%#= user.surname%></div>
   </td>
   <td>
     <div class="ui aligned"><%= user.email%></div>
@@ -35,7 +35,7 @@
       <% end %>
     </span>
     <span>
-      <%= link_to  edit_user_registration_path user.id do %>
+      <%= link_to  edit_user_path user.id do %>
         <i class="large orange edit icon "></i>
       <% end %>
     </span>

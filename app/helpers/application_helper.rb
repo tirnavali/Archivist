@@ -7,4 +7,9 @@ module ApplicationHelper
         end
     end
 
+    def user_superadmin?
+      current_user.superadmin?
+    end
+
+
 end
