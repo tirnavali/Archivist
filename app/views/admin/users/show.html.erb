@@ -7,6 +7,7 @@
 <p> <b>Last sign in at:</b> <%= @user.last_sign_in_at%></p>
 <p> <b>Current sign in IP:</b> <%= @user.current_sign_in_ip%></p>
 <p> <b>Last sign in IP:</b> <%= @user.last_sign_in_ip%></p>
+<p> <b>Locked at:</b> <%= @user.locked_at%></p>
 
 
 <%= link_to admin_user_path(@user.id) ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      

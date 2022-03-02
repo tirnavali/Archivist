@@ -54,7 +54,7 @@
     </div>
   <!--Menu -->
   <div class="ui grid">
-  
+  <% if current_user %>
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
     asdf
@@ -83,7 +83,6 @@
       <div class="ui teal left pointing label"><%= Privacy.all.size %></div>
     <% end %>
     
-
     <%= link_to (people_url), class: is_page_active?(people_url) do %>
     <%= "person".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= Person.all.size %></div>
@@ -113,17 +112,7 @@
     <%= "subject".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= Subject.all.size %></div>
     <% end %>
-    
-    
-    
-    <a class="item">
-      Spam
-      <div class="ui label">51</div>
-    </a>
-    <a class="item">
-      Updates
-      <div class="ui label">1</div>
-    </a>
+ 
   <div class="item">
     <div class="ui transparent icon input">
       <input type="text" placeholder="Search mail...">
@@ -131,28 +120,17 @@
     </div>
   </div>
 </div>
-
-  
-
-
-
-
-
-    
+    <% end %>
       <div class="ui container twelve wide column">
-      <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+      <% if notice %><p class="ui error message"><%= notice %></p><% end %>
+      <% if alert %><p class="ui error message"><%= alert %></p><% end %>
         <%= yield %>
-
         <%= turbo_frame_tag "modal" %>
         <%# console %>
       </div>
     </div> <!--ui grid-->
+
     <script src="https://cdn.jsdelivr.net/npm/vanilla-nested@1.5.1/app/assets/javascripts/vanilla_nested.min.js"></script>
-
-   
-  
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
-
   </body>
 </html>
