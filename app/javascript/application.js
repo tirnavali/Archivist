@@ -18,4 +18,6 @@ document.addEventListener("turbo:frame-render", function(event){
 
 document.addEventListener("turbo:render", function(event){ 
     $(".error.message").fadeOut(3000, "swing");
+    //$("#error explanation").fadeOut(7000, "swing");
+
  }, false)

@@ -1,4 +1,6 @@
+
 <% if resource.errors.any? %>
+<div class="ui error message">
   <div id="error_explanation">
     <h2>
       <%= I18n.t("errors.messages.not_saved",
@@ -12,4 +14,6 @@
       <% end %>
     </ul>
   </div>
+  </div>
 <% end %>
+

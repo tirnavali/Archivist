@@ -14,9 +14,13 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
 
   # protected
 

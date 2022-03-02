@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  include Administration
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   
   prepend_before_action :require_no_authentication, only: [ :cancel]
   prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy]
   prepend_before_action :set_minimum_password_length, only: [:new, :edit]
-  prepend_before_action :require_admin, only: [:edit]
-
+  
   # GET /resource/sign_up
   # def new
   #   super
@@ -26,9 +24,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # PUT /resource
-  def update
-    puts "deneme"
-  end
+  # def update
+  #   super
+  # end
 
   # DELETE /resource
   # def destroy
