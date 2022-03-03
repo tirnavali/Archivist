@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :vacations, dependent: :destroy
   enum role: [:user, :superadmin, :admin, :manager, :chief, :moderator]
-
+  
+  
   def to_s
     self.email
   end

@@ -1,14 +1,28 @@
 <p style="color: green"><%= notice %></p>
+<div id="phisycal_statuses">
 
 <h1>Phisycal statuses</h1>
 
-<div id="phisycal_statuses">
-  <% @phisycal_statuses.each do |phisycal_status| %>
-    <%= render phisycal_status %>
-    <p>
-      <%= link_to "Show this phisycal status", phisycal_status %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to "New phisycal status", new_phisycal_status_path %>
+<table class="ui celled padded very compact table">  
+    <thead>
+      <tr><th class="single line">Id</th>
+      <th><%= t :name %></th>    
+      <th><%= t :created_at%></th>
+      <th><%= t :updated_at%></th>
+      
+      <th><%= t :action%></th>
+    </tr></thead>
+    <tbody>  
+      <%= render "phisycal_statuses_table", class:"ui right floated pagination menu" %>
+    </tbody>
+      <tfoot>
+      
+        <tr><th colspan="8">
+          <div class="segment">
+          <%= paginate @phisycal_statuses %>                
+          </div>
+        </th>
+      </tr></tfoot>
+   </table>
+</div> 

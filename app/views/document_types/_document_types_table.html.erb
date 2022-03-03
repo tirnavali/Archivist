@@ -1,0 +1,43 @@
+<% @document_types.each do |document_type| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{document_type.id}", document_type %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= document_type.name%> </div>
+  </td>
+  
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=document_type.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label">
+      <%=document_type.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+
+ 
+  <td class="collapsing">
+    <span>
+      <%= link_to  document_type do %>
+        <i class="large folder open icon "></i>
+      <% end %>
+    </span>
+    <span>
+      <%= link_to  edit_document_type_path document_type.id do %>
+        <i class="large orange edit icon "></i>
+      <% end %>
+    </span>
+    <span>    
+        <%= link_to document_type ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+          <i class="red large remove icon "></i>
+        <% end %>
+    </span>
+  
+  </td>
+</tr>
+<% end %>

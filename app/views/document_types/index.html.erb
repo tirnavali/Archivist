@@ -2,13 +2,28 @@
 
 <h1>Document types</h1>
 
-<div id="document_types">
-  <% @document_types.each do |document_type| %>
-    <%= render document_type %>
-    <p>
-      <%= link_to "Show this document type", document_type %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to "New document type", new_document_type_path %>
+<div id="document_types">
+
+<table class="ui celled padded very compact table">  
+    <thead>
+      <tr><th class="single line">Id</th>
+      <th><%= t :name %></th>    
+      <th><%= t :created_at%></th>
+      <th><%= t :updated_at%></th>
+      
+      <th><%= t :action%></th>
+    </tr></thead>
+    <tbody>  
+      <%= render "document_types_table", class:"ui right floated pagination menu" %>
+    </tbody>
+      <tfoot>
+      
+        <tr><th colspan="8">
+          <div class="segment">
+          <%= paginate @document_types %>                
+          </div>
+        </th>
+      </tr></tfoot>
+   </table>
+</div>

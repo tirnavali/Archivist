@@ -1,0 +1,43 @@
+<% @phisycal_statuses.each do |phisycal_status| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{phisycal_status.id}", phisycal_status %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= phisycal_status.name%> </div>
+  </td>
+  
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=phisycal_status.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label">
+      <%=phisycal_status.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+
+ 
+  <td class="collapsing">
+    <span>
+      <%= link_to  phisycal_status do %>
+        <i class="large folder open icon "></i>
+      <% end %>
+    </span>
+    <span>
+      <%= link_to  edit_phisycal_status_path phisycal_status.id do %>
+        <i class="large orange edit icon "></i>
+      <% end %>
+    </span>
+    <span>    
+        <%= link_to phisycal_status ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+          <i class="red large remove icon "></i>
+        <% end %>
+    </span>
+  
+  </td>
+</tr>
+<% end %>
