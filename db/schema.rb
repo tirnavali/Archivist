@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_143948) do
+ActiveRecord::Schema.define(version: 2022_03_03_193201) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_143948) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "depth"
+    t.text "explanation"
     t.index ["parent_id"], name: "index_fonds_on_parent_id"
   end
 
