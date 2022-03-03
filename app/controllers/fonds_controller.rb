@@ -67,6 +67,6 @@ class FondsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def fond_params
-      params.require(:fond).permit(:name, :parent_id)
+      params.require(:fond).permit(:name, :parent_id, :explanation)
     end
 end
