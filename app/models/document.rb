@@ -9,7 +9,7 @@ class Document < ApplicationRecord
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :privacies
   has_and_belongs_to_many :people
-  has_many :special_numbers
+  #has_many :special_numbers
   has_and_belongs_to_many :subjects
   has_many_attached :images do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
@@ -17,7 +17,7 @@ class Document < ApplicationRecord
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
   validates :organization_code, :box, :order, :summary, :starting_date ,presence: true 
   
-  accepts_nested_attributes_for :special_numbers, limit: 3, reject_if: :all_blank, allow_destroy: true
-  validates_associated :special_numbers
-  validates_presence_of :special_numbers
+  #accepts_nested_attributes_for :special_numbers, limit: 3, reject_if: :all_blank, allow_destroy: true
+  #validates_associated :special_numbers
+  #validates_presence_of :special_numbers
 end

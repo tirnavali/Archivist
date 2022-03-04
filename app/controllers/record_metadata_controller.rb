@@ -13,6 +13,7 @@ class RecordMetadataController < ApplicationController
   # GET /record_metadata/new
   def new
     @record_metadatum = RecordMetadatum.new
+    @record_metadatum.special_numbers.build
   end
 
   # GET /record_metadata/1/edit
@@ -92,7 +93,7 @@ class RecordMetadataController < ApplicationController
           :number_type_id,
           :value,
           :_destroy,
-          :document_id,       
+          :record_metadatum_id,       
          ])
     end
 end

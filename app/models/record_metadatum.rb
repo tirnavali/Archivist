@@ -9,8 +9,7 @@ class RecordMetadatum < ApplicationRecord
   has_and_belongs_to_many :document_types
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :people
-  has_many :special_numbers#, dependent: :destroy
-  
+  has_many :special_numbers #, dependent: :destroy
   
   
   validates_presence_of :box, :order, numericality: true
@@ -19,7 +18,9 @@ class RecordMetadatum < ApplicationRecord
   validates_length_of :explaination, in: 0..300
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
   validates_presence_of :subjects, :languages, :document_types
+  validates_presence_of :special_numbers
   
+  accepts_nested_attributes_for :special_numbers, limit: 3, reject_if: :all_blank, allow_destroy: true
   
 
   def to_s

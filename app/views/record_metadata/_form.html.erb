@@ -1,4 +1,4 @@
-<%= form_with(model: record_metadatum) do |form| %>
+<%= form_with(model: record_metadatum, class: "ui form")  do |form| %>
   <% if record_metadatum.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(record_metadatum.errors.count, "error") %> prohibited this record_metadatum from being saved:</h2>
@@ -15,6 +15,18 @@
   <div class="field">
     <%= form.label :fond_id, style: "display: block" %>
     <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "ui fluid search selection dropdown"} %>
+  </div>
+   
+  <div class="field">
+    <%= link_to_add_nested(form, :special_numbers, '#special-number-items', link_classes:"ui button") %>
+  </div>
+
+  <div class=" ui inverted segment">
+    <div id='special-number-items' class="">
+      <%= form.fields_for :special_numbers do |special_number_f|%>
+        <%= render 'special_number_fields', form: special_number_f %>        
+      <% end %>
+    </div>
   </div>
 
   <div class="field">
@@ -55,10 +67,14 @@
     <%= form.label :language_id, style: "display: block" %>      
     <%= form.collection_select :language_ids, Language.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
   </div>
-  <div class="field">
+  
+  <div class="field" data-controller="organizations">
     <%= form.label :organization_id, style: "display: block" %>      
-    <%= form.collection_select :organization_id, Organization.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
+    <%= form.collection_select :organization_id, Organization.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown", data: {action: "input->organizations#search"}} %>
+    <%= button_tag "Search Organization" ,{data: {action: "organization#search"} }  %>
   </div>
+  
+ 
   <div class="field">
     <%= form.label :toponym_id, style: "display: block" %>
     <%= form.collection_select :toponym_ids, Toponym.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>    

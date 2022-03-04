@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_193201) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_04_141130) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
-    t.datetime "created_at", precision: 6, null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -30,36 +29,20 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "document_model_fields", force: :cascade do |t|
-    t.string "name"
-    t.string "field_type"
-    t.boolean "required"
-    t.integer "document_model_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["document_model_id"], name: "index_document_model_fields_on_document_model_id"
-  end
-
-  create_table "document_models", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "document_types", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "document_types_documents", id: false, force: :cascade do |t|
@@ -75,8 +58,8 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
   create_table "documents", force: :cascade do |t|
     t.text "summary"
     t.integer "pub_type_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "language_id"
     t.integer "organization_id"
     t.integer "document_type_id"
@@ -132,8 +115,8 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
   create_table "fonds", force: :cascade do |t|
     t.string "name"
     t.integer "parent_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "depth"
     t.text "explanation"
     t.index ["parent_id"], name: "index_fonds_on_parent_id"
@@ -141,8 +124,8 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "languages_record_metadata", id: false, force: :cascade do |t|
@@ -152,20 +135,20 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
 
   create_table "number_types", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people_record_metadata", id: false, force: :cascade do |t|
@@ -175,34 +158,34 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
 
   create_table "phisycal_statuses", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "privacies", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pub_types", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "record_attachments", force: :cascade do |t|
     t.boolean "completed"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "record_metadatum_id", null: false
     t.index ["record_metadatum_id"], name: "index_record_attachments_on_record_metadatum_id"
   end
 
   create_table "record_metadata", force: :cascade do |t|
     t.text "summary"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "fond_id"
     t.integer "organization_id"
     t.integer "phisycal_status_id"
@@ -232,51 +215,49 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
 
   create_table "special_number_names", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "special_numbers", force: :cascade do |t|
     t.string "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "number_type_id", null: false
-    t.integer "document_id", null: false
-    t.index ["document_id"], name: "index_special_numbers_on_document_id"
+    t.integer "record_metadatum_id", null: false
     t.index ["number_type_id"], name: "index_special_numbers_on_number_type_id"
+    t.index ["record_metadatum_id"], name: "index_special_numbers_on_record_metadatum_id"
   end
 
   create_table "subjects", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "toponyms", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: 6
-    t.datetime "last_sign_in_at", precision: 6
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "role", default: 0
-    t.string "name"
-    t.string "surname"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at", precision: 6
+    t.datetime "locked_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -285,16 +266,15 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
   create_table "vacations", force: :cascade do |t|
     t.string "explanation"
     t.integer "user_id", null: false
-    t.datetime "starting_date", precision: 6
-    t.datetime "ending_date", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "starting_date"
+    t.datetime "ending_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_vacations_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "document_model_fields", "document_models"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "fonds"
   add_foreign_key "documents", "languages"
@@ -310,7 +290,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_193201) do
   add_foreign_key "record_metadata", "organizations"
   add_foreign_key "record_metadata", "phisycal_statuses"
   add_foreign_key "record_metadata", "privacies"
-  add_foreign_key "special_numbers", "documents"
   add_foreign_key "special_numbers", "number_types"
+  add_foreign_key "special_numbers", "record_metadata"
   add_foreign_key "vacations", "users"
 end
