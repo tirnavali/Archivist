@@ -11,10 +11,11 @@
     </div>
   <% end %>
   <div data-controller="dropdown"></div>
+  <div data-controller="record-metadatum"></div>
 
   <div class="field">
     <%= form.label :fond_id, style: "display: block" %>
-    <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "ui fluid search selection dropdown"} %>
+    <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "select2"} %>
   </div>
    
   <div class="field">
