@@ -1,0 +1,1 @@
+json.array! @people, partial: "people/search_person", as: :person

@@ -1,7 +1,13 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
 
-  # GET /people or /people.json
+  # GET http://localhost:3000/people/search.json?
+  def search
+    @people = Person.where("name like ?", "%#{params[:term]}%")
+    puts "search size #{@people.size}"
+   end
+
+   # GET /people or /people.json
   def index
     @people = Person.order(:name).page params[:page]
   end

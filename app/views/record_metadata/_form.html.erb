@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= form.label :fond_id, style: "display: block" %>
-    <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "select2"} %>
+    <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "select2 basic"} %>
   </div>
    
   <div class="field">
@@ -85,7 +85,7 @@
   </div>
     <div class="field">
       <%= form.label :person_id, style: "display: block" %>
-      <%= form.collection_select :person_ids, Person.order(:name), :id, :to_s, {prompt: true}, {class: "js-example-basic-multiple", multiple: "multiple"} %>      
+      <%= form.collection_select :person_ids, {}, :id, :to_s, {prompt: true}, {class: "select2 multiple", multiple: "multiple"} %>      
       <div class="">
         <%= link_to "Add ", new_person_path, class: "tiny ui positive button" %>
       </div>

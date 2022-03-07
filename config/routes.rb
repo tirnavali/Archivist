@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   end
   resources :special_numbers
   resources :special_number_names
-  resources :people
+  resources :people do
+    collection do
+      get :search
+    end
+  end
   resources :privacies
   resources :toponyms
   resources :document_types
