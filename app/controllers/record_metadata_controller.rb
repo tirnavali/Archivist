@@ -1,11 +1,19 @@
 class RecordMetadataController < ApplicationController
   before_action :set_record_metadatum, only: %i[ show edit update destroy ]
 
+
+
   # GET /record_metadata or /record_metadata.json
   def index
-    @record_metadata = RecordMetadatum.all
+    #@record_metadata = RecordMetadatum.all
+    @q = RecordMetadatum.ransack(params[:q])
+    @record_metadata = @q.result.page params[:page]
   end
 
+  def search
+    index
+    render :index, status: :unprocessable_entity
+  end
   # GET /record_metadata/1 or /record_metadata/1.json
   def show
   end
@@ -61,6 +69,8 @@ class RecordMetadataController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

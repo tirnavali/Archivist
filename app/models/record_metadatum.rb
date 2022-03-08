@@ -17,8 +17,9 @@ class RecordMetadatum < ApplicationRecord
   validates_length_of :summary, in: 10..300
   validates_length_of :explaination, in: 0..300
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true
-  validates_presence_of :subjects, :languages, :document_types
+  validates_presence_of :subjects, :document_types
   validates_presence_of :special_numbers
+  validates_presence_of :languages
   
   accepts_nested_attributes_for :special_numbers, limit: 3, reject_if: :all_blank, allow_destroy: true
   

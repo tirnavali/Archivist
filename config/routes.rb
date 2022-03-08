@@ -1,6 +1,10 @@
 Rails.application.routes.draw do  
   resources :organizations
-  resources :record_metadata
+  resources :record_metadata do
+    collection do
+      match 'search' => 'record_metadata#search', via: [:get, :post], as: :search
+    end
+  end
   resources :record_attachments do
     get 'delete_image_attachment', on: :member
       member do

@@ -1,6 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Record metadata</h1>
+<%= search_form_for(
+  @q,
+  url: search_record_metadata_path,
+  html: { method: :post }
+) do |f|%>
+
+  <%= f.label :summary_cont %>
+  <%= f.search_field :summary_cont %>
+
+  <%= f.submit %>
+<% end %>
+
 <%= link_to "New record metadatum", new_record_metadatum_path, class: "ui green button segment"%>
 <div id="record_metadata">
   <table class="ui celled padded very compact table">
