@@ -23,8 +23,8 @@ class RecordMetadatum < ApplicationRecord
   
   accepts_nested_attributes_for :special_numbers, limit: 3, reject_if: :all_blank, allow_destroy: true
   
-
   def to_s
     "id: #{self.id} summary: #{self.summary}"
   end
+
 end
