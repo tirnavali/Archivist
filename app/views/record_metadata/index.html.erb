@@ -7,8 +7,17 @@
   html: { method: :post }
 ) do |f|%>
 
-  <%= f.label :summary_cont %>
-  <%= f.search_field :summary_cont %>
+  <%= f.condition_fields do |c| %>
+    <div class="field">
+      <%= c.attribute_fields do |a| %>
+        <%=a.attribute_select associations: [:fond, :subjects, :organization] %>
+      <% end %>
+      <%= c.predicate_select %>
+      <%= c.value_fields do |v| %>
+        <%= v.text_field :value%>
+      <% end %>
+    </div>
+  <% end %>
 
   <%= f.submit %>
 <% end %>

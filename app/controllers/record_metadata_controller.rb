@@ -1,13 +1,12 @@
 class RecordMetadataController < ApplicationController
   before_action :set_record_metadatum, only: %i[ show edit update destroy ]
 
-
-
   # GET /record_metadata or /record_metadata.json
   def index
     #@record_metadata = RecordMetadatum.all
     @q = RecordMetadatum.ransack(params[:q])
     @record_metadata = @q.result.page params[:page]
+    @q.build_condition
   end
 
   def search
