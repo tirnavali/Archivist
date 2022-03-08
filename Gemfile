@@ -32,6 +32,7 @@ gem "jbuilder"
 #for pdf view
 gem "gtk3"
 gem "poppler"
+gem "ransack"
 
 gem "kaminari"
 

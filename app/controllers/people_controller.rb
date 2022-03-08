@@ -9,7 +9,9 @@ class PeopleController < ApplicationController
 
    # GET /people or /people.json
   def index
-    @people = Person.order(:name).page params[:page]
+    #@people = Person.order(:name).page params[:page]
+    @q = Person.ransack(params[:q])
+    @people = @q.result.page params[:page]
   end
 
   # GET /people/1 or /people/1.json

@@ -237,6 +237,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ransack (2.5.0)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     red-colors (0.3.0)
       matrix
     regexp_parser (2.2.1)
@@ -307,6 +311,7 @@ DEPENDENCIES
   poppler
   puma (~> 5.0)
   rails (~> 7.0.0)
+  ransack
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
