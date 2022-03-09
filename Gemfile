@@ -35,6 +35,7 @@ gem "poppler"
 gem "ransack"
 
 gem "kaminari"
+gem "cocoon"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

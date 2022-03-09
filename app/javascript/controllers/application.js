@@ -1,4 +1,5 @@
 import { Application } from "@hotwired/stimulus"
+import "cocoon"
 
 const application = Application.start()
 
