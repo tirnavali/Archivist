@@ -1,5 +1,6 @@
 import "jquery";
-import "select2"
+import "select2";
+import "cocoon";
 
 import { Controller } from "@hotwired/stimulus"
 

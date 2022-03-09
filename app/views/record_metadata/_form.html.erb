@@ -19,14 +19,18 @@
   </div>
    
   <div class="field">
-    <%= link_to_add_nested(form, :special_numbers, '#special-number-items', link_classes:"ui button") %>
+    <%#= link_to_add_nested(form, :special_numbers, '#special_number_items', link_classes:"ui button") %>
   </div>
 
   <div class=" ui inverted segment">
-    <div id='special-number-items' class="">
+    <div id='special_number_items' class="">
       <%= form.fields_for :special_numbers do |special_number_f|%>
-        <%= render 'special_number_fields', form: special_number_f %>        
+        <%= render 'special_number_fields', :form => special_number_f %>    
+
       <% end %>
+      <div class="field">
+        <%= link_to_add_association 'Add Number', form, :special_numbers, form_name: 'form', class:"ui primary button"%>
+      </div>
     </div>
   </div>
 
