@@ -28,9 +28,13 @@
       <% end %>
     </span>
     <span>
-      <%= link_to  edit_person_path person.id do %>
+    <%= turbo_frame_tag person do %>
+    <%= link_to "Edit this person", edit_person_path(person.id) %> |
+
+      <%#= link_to  edit_person_path(@person) do %>
         <i class="large orange edit icon "></i>
-      <% end %>
+      <%# end %>
+    <% end %>
     </span>
     <span>    
         <%= link_to person ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      

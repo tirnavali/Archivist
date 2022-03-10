@@ -21,6 +21,7 @@ class RecordMetadataController < ApplicationController
   def new
     @record_metadatum = RecordMetadatum.new
     @record_metadatum.special_numbers.build
+    @person = Person.new
   end
 
   # GET /record_metadata/1/edit

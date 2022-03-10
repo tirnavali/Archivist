@@ -18,3 +18,8 @@
  body {
      background-color: rgb(253, 242, 228);
  }
+
+ turbo-frame {
+     display: block;
+     border: 1px solid blue;
+ }
