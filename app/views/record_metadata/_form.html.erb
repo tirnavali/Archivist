@@ -26,7 +26,6 @@
     <div id='special_number_items' class="">
       <%= form.fields_for :special_numbers do |special_number_f|%>
         <%= render 'special_number_fields', :form => special_number_f %>    
-
       <% end %>
       <div class="field">
         <%= link_to_add_association 'Add Number', form, :special_numbers, form_name: 'form', class:"ui primary button"%>
