@@ -6,7 +6,7 @@
   url: search_record_metadata_path,
   html: { method: :post }
 ) do |f|%>
-<fieldset class="fields">
+<fieldset class="ui segment fields">
   <%= f.condition_fields do |c| %>
   <div class="field">
       <%= c.attribute_fields do |a| %>
@@ -19,9 +19,9 @@
       <a id="remove-field" class="ui tiny red button" data-controller="search" data-action="search#remove"> Remove</a>
     </div>
   <% end %>
-  <a id="add-field" class="ui tiny button" data-controller="search" data-action="search#add"> Add new field</a>
 </fieldset>
-  <%= f.submit %>
+  <a id="add-field" class="ui tiny button" data-controller="search" data-action="search#add"> Add new field</a>
+  <%= f.submit class: "ui tiny primary button"%>
 <% end %>
 
 <%= link_to "New record metadatum", new_record_metadatum_path, class: "ui green button segment"%>
