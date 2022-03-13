@@ -2,36 +2,34 @@ import { Controller } from "@hotwired/stimulus"
 
 
 export default class extends Controller {
-    initialize(){
-        window.counter = 0
-    }
    
   connect() {
-    console.log("search connected.");
+    var search_form = $("fieldset");
+    var search_field = $("fieldset .field").eq(0)
+    var new_search_field = search_field.clone()
+    //First search form is saved for init again after remove all fields
+    search_form.data("init_form", new_search_field);
   }
 
   add(){
-    console.log("add clicked.");
     const time = new Date().getTime();
-    
-    let id = $("select").first().attr("id")
-    let name = $("select").first().attr("id")
-    id = id.replace(/\d+/g, time)
-    name = name.replace(/\d+/g, time)
-    $("select").first().attr("id", id)
-    $("select").first().attr("name", name)
-    
+    var search_form = $("fieldset");
+    var search_field = $("fieldset .field").eq(0)
+    if(search_field.length == 0) {
+      console.log("null")
+      search_field = search_form.data("init_form")}
+    var new_search_field = search_field.clone()
 
+    new_search_field.children().map(function(){
+      return $(this).prop("name", $(this).prop("name").replace(/\d+/g, time))
+      .attr("id", $(this).attr("id").replace(/\d+/g, time))
+      ;
+    })
 
-    $("select").last().attr("id").rep
-    $("fieldset input").first()
-
-    
-   
+    search_form.append(new_search_field)  
   }
 
-  remove(){
-      console.log("remove clicked.");
-      $("#remove-field").closest(".field").remove()
+  remove(e){
+    $(e.target).parent().remove();   
   }
 }

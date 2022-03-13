@@ -93,11 +93,6 @@
         <%= link_to "Add ", new_person_path, class: "tiny ui positive button" %>
       </div>
     </div>
-    <div class="ui inverted segment">
-    <%= turbo_frame_tag @person do %>
-       <% render "person_form", person: @person %>
-    <% end %>
-    </div>
 
     <div class="field">
       <%= form.label :document_type_id, style: "display: block" %>
