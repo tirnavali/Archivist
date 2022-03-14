@@ -4,13 +4,13 @@
 <%= search_form_for(
   @q,
   url: search_record_metadata_path,
-  html: { method: :post }
+  html: { method: :post}
 ) do |f|%>
-  <%= f.combinator_select %>
 <fieldset class="ui segment fields">
+  <%= f.combinator_select %>
 <%= f.grouping_fields do |g|%>
       <%= g.condition_fields do |c| %>
-      <div class="field">
+      <div class="field ">
       <%= c.attribute_fields do |a| %>
         <%=a.attribute_select associations: [:fond, :subjects, :organization] %>
       <% end %>
@@ -18,7 +18,9 @@
       <%= c.value_fields do |v| %>
         <%= v.text_field :value%>
       <% end %>      
-      <a id="remove-field" class="ui tiny red button" data-controller="search" data-action="search#remove"> Remove</a>
+      <a  id="remove-field" class="ui red tiny label" data-controller="search" data-action="search#remove"> 
+        Remove
+      </a>
     </div>
   <% end %>
 <% end %>
