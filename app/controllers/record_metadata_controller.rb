@@ -5,8 +5,9 @@ class RecordMetadataController < ApplicationController
   def index
     #@record_metadata = RecordMetadatum.all
     @q = RecordMetadatum.ransack(params[:q])
+    @q.build_grouping.build_condition
+    
     @record_metadata = @q.result.page params[:page]
-    @q.build_condition
   end
 
   def search

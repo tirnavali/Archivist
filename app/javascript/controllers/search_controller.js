@@ -9,6 +9,10 @@ export default class extends Controller {
     var new_search_field = search_field.clone()
     //First search form is saved for init again after remove all fields
     search_form.data("init_form", new_search_field);
+    
+  }
+  initialize(){
+
   }
 
   add(){
