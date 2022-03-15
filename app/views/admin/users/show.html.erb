@@ -8,8 +8,8 @@
 <p> <b>Current sign in IP:</b> <%= @user.current_sign_in_ip%></p>
 <p> <b>Last sign in IP:</b> <%= @user.last_sign_in_ip%></p>
 <p> <b>Locked at:</b> <%= @user.locked_at%></p>
-
-
+<p><%=link_to "Show user activity", activities_admin_user_path(@user) %>
+</p>
 <%= link_to admin_user_path(@user.id) ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
   Delete <i class="red large remove icon "></i>
 <% end %>

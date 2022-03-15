@@ -1,4 +1,5 @@
 class RecordMetadatum < ApplicationRecord
+  audited
   has_one :record_attachment
   belongs_to :fond
   belongs_to :organization  

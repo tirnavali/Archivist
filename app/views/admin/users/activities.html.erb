@@ -1,0 +1,26 @@
+<%=tag.h1 "#{@user} all activities" %>
+
+<div>
+  Total create action today: <%= @audits.user_activities(@user).create_actions.today.count %>
+  Total update action today: <%= @audits.user_activities(@user).update_actions.today.count %>
+</div>
+
+<table class="ui small table">
+  <thead>
+    <th>Action</th>
+    <th>DataModel</th>
+    <th>Created At </th>
+  </thead>
+  <tbody>
+    
+  <%# @user.audits.each do |audit| %>
+  <% @audits.user_activities(@user).each do |audit| %>
+
+  <tr>
+      <td><%=tag.span audit.action, class:"ui " %></td>
+      <td><%=tag.span audit.auditable_type, class:"ui " %></td>
+      <td><%=tag.span audit.created_at, class:"ui " %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

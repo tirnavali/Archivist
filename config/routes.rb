@@ -40,8 +40,13 @@ Rails.application.routes.draw do
       end
   end
   devise_for :users
+  
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        get :activities
+      end
+    end
     #resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] 
   end
   root to: "home#index"

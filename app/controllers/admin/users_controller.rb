@@ -1,7 +1,15 @@
 class Admin::UsersController < ApplicationController
   include Administration
-  before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_admin, only: %i[new create edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy activities ]
+  before_action :require_admin, only: %i[new create edit update destroy]
+
+  def activities  
+    if @user.id != current_user.id && !current_user.superadmin?
+      redirect_to root_path, alert: "You are not authorized to do that action" 
+    else
+      @audits = Audit.all
+    end
+  end
   
   def index
     @users = User.all

@@ -3,5 +3,10 @@
     <strong>Summary:</strong>
     <%= record_metadatum.summary %>
   </p>
+  <p>
+    <strong>Last edition:</strong>
+    <span class="ui yellow tiny label"><%=  record_metadatum.audits.last.action %>d</span> by
+    <%=  record_metadatum.audits.last.user.to_s %>
+  </p>
 
 </div>

@@ -6,6 +6,12 @@ class User < ApplicationRecord
 
   has_many :vacations, dependent: :destroy
   enum role: [:user, :superadmin, :admin, :manager, :chief, :moderator]
+  has_many :audits
+  
+  scope :deneme, -> { where('audits.action is ?', "update") }
+
+  #@user.audits.where("action is ?", "update")
+
   
   
   def to_s
