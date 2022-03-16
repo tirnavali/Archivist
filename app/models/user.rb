@@ -8,8 +8,8 @@ class User < ApplicationRecord
   enum role: [:user, :superadmin, :admin, :manager, :chief, :moderator]
   has_many :audits
   
-  scope :deneme, -> { where('audits.action is ?', "update") }
-
+  # scope :update_actions, -> { joins(:audits).where('audits.action is = ?', 'update') }
+  # scope :find_user, -> (id) { where('id = ?', id)}
   #@user.audits.where("action is ?", "update")
 
   
