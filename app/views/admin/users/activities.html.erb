@@ -1,7 +1,8 @@
 <%=tag.h1 "#{@user} all activities" %>
 
 <div>
-  Total create action today: <%= @audits.user_activities(@user).create_actions.today.count %>
+  Total actions today: <%= @audits.user_activities(@user).count %>
+  Total create action today: <%= @audits.user_activities(@user).where("action = ?", "create").today.size %>
   Total update action today: <%= @audits.user_activities(@user).update_actions.today.count %>
 </div>
 
@@ -23,3 +24,4 @@
   <% end %>
   </tbody>
 </table>
+<%= console %>

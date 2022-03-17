@@ -1,4 +1,5 @@
 class PhisycalStatus < ApplicationRecord
+  audited
   has_many :record_metadata, dependent: :nullify
 
   validates :name, uniqueness: true

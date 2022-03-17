@@ -1,4 +1,5 @@
 class Fond < ApplicationRecord
+  audited
   before_create :assign_depth
   before_save   :assign_depth
 
