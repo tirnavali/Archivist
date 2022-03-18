@@ -1,29 +1,6 @@
-<%= turbo_frame_tag "modal" do%>
-<div class="ui basic modal">
-<div class="content">
-    <p>Your inbox is getting full, would you like us to enable automatic archiving of old messages?</p>
-  
   <h1>Editing privacy</h1>
-
   <%= render "form", privacy: @privacy %>
-
-  <br>
-  </div>
-  <div class="actions">
-    <div class="ui red basic cancel inverted button">
-      <i class="remove icon"></i>
-      No
-    </div>
-    <div class="ui green ok inverted button">
-      <i class="checkmark icon"></i>
-      Yes
-    </div>
-  </div>
-</div>
-
-
   <div>
     <%= link_to "Show this privacy", @privacy %> |
     <%= link_to "Back to privacies", privacies_path %>
   </div>
-<% end %>

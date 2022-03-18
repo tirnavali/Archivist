@@ -1,9 +1,32 @@
-<%=tag.h1 "#{@user} all activities" %>
-
-<div>
-  Total actions today: <%= @audits.user_activities(@user).count %>
-  Total create action today: <%= @audits.user_activities(@user).where("action = ?", "create").today.size %>
-  Total update action today: <%= @audits.user_activities(@user).update_actions.today.count %>
+<%=tag.h1 class:"ui horizontal divider header " do %>
+  <i class="user icon"></i>
+  <%=@user %> all activities
+<% end %>
+<div class="ui statistics centered grid">
+  <div class="statistic">
+    <div class="label">
+      All Actions
+    </div>
+    <div class="value">
+      <%= @audits.user_activities(@user).count %>
+    </div>
+  </div>
+  <div class="green statistic">
+    <div class="label">
+      Created Today
+    </div>
+    <div class="value">
+       <%= @audits.user_activities(@user).where("action = ?", "create").today.size %>
+    </div>
+  </div>
+  <div class="yellow statistic">
+    <div class="label">
+      Updated Today
+    </div>
+    <div class="value">
+      <%= @audits.user_activities(@user).update_actions.today.count %>
+    </div>
+  </div>
 </div>
 
 <table class="ui small table">
@@ -19,9 +42,8 @@
   <tr>
       <td><%=tag.span audit.action, class:"ui " %></td>
       <td><%=tag.span audit.auditable_type, class:"ui " %></td>
-      <td><%=tag.span audit.created_at, class:"ui " %></td>
+      <td><%=tag.span l(audit.created_at, format: :short), class: "ui label" %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
-<%= console %>

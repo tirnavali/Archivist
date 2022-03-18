@@ -1,12 +1,35 @@
 <div id="<%= dom_id record_metadatum %>">
+  <div class="ui card">
+    <div class="image">
+      <img src="/images/avatar2/large/kristy.png">
+    </div>
+    <div class="content">
+      <a class="header">Kristy</a>
+      <div class="meta">
+        <span class="date">Joined in 2013</span>
+      </div>
+      <div class="description">
+        Kristy is an art director living in New York.
+      </div>
+    </div>
+    <div class="extra content">
+      <a>
+        <i class="user icon"></i>
+        22 Friends
+      </a>
+    </div>
+  </div>
+
+
+
   <p>
     <strong>Summary:</strong>
     <%= record_metadatum.summary %>
   </p>
   <p>
     <strong>Last edition:</strong>
-    <span class="ui yellow tiny label"><%=  record_metadatum.audits.last.action %>d</span> by
-    <%=  record_metadatum.audits.last.user.to_s %>
+    <span class="ui yellow tiny label"><%#=  record_metadatum.audits.last.action %>d</span> by
+    <%#=  record_metadatum.audits.last.user.to_s %>
   </p>
 
 </div>

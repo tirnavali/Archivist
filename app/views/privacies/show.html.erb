@@ -3,7 +3,8 @@
 <%= render @privacy %>
 
 <div>
-  <%= link_to "Edit this privacy", edit_privacy_path(@privacy), data: { turbo_frame: "modal"} %> |
+  <%#= link_to "Edit this privacy", edit_privacy_path(@privacy), data: { turbo_frame: "modal"} %> |
+  <%= link_to "Edit this privacy", edit_privacy_path(@privacy) %> |
   <%= link_to "Back to privacies", privacies_path %>
 
   <%= button_to "Destroy this privacy", @privacy, method: :delete %>
