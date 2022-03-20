@@ -7,7 +7,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   
   connect() {    
-    console.log("select2 is here");
     let select_multiple = $('#record_metadatum_person_ids');
 
     $('.select.required.select2.basic').select2();
@@ -23,12 +22,10 @@ export default class extends Controller {
             var query = {
               term: params.term            
             }
-            console.log(query);
             // Query parameters will be ?search=[term]&page=[page]
             return query;
           },
           processResults: function (response) {
-            console.log(response);
             // Transforms the top-level key of the response object from 'items' to 'results'
             return { results: response};
           },
