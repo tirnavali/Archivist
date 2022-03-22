@@ -1,5 +1,8 @@
 class RecordMetadataController < ApplicationController
   before_action :set_record_metadatum, only: %i[ show edit update destroy ]
+  before_action do
+    ActiveStorage::Current.host = request.base_url
+  end
 
   # GET /record_metadata or /record_metadata.json
   def index

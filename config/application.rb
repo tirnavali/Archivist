@@ -17,6 +17,7 @@ module Archivist
     # in config/environments, which are processed later.
     #
     config.time_zone = "Istanbul"
+    config.active_storage.service = :local
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

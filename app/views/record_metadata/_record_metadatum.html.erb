@@ -1,106 +1,60 @@
 <div id="<%= dom_id record_metadatum %>" class=" ui ">
-<% record_metadatum.special_numbers.each do |no| %>
-  <p><%= no.number_type%> - <%= no.value %></p>
-<% end %> 
-Box: <%=record_metadatum.box%>
-Order: <%=record_metadatum.order%>
-Folder: <%=record_metadatum.folder%>
-<p>Org Code: <%=record_metadatum.organization_code%></p>
-<h4 class="ui horizontal divider header">Subjects</h4>
+  <% record_metadatum.special_numbers.each do |no| %>
+    <p><%= no.number_type%> - <%= no.value %></p>
+  <% end %> 
+  Box: <%=record_metadatum.box%>
+  Order: <%=record_metadatum.order%>
+  Folder: <%=record_metadatum.folder%>
+  <p>Org Code: <%=record_metadatum.organization_code%></p>
+  <h4 class="ui horizontal divider header">Subjects</h4>
 
-<% record_metadatum.subjects.each do |subject| %>
-  <span class="ui red tag label"><%= subject.name%></span>
-<% end %> 
+  <% record_metadatum.subjects.each do |subject| %>
+    <span class="ui red tag label"><%= subject.name%></span>
+  <% end %> 
 
 
-<h4 class="ui horizontal divider header">Summary</h4>
-<%= record_metadatum.summary %>
+  <h4 class="ui horizontal divider header">Summary</h4>
+  <%= record_metadatum.summary %>
 
-  <p>
-    <%= record_metadatum.explaination %>
-  <p>
+    <p>
+      <%= record_metadatum.explaination %>
+    <p>
 
-    <strong>Last edition:</strong>
-    <span class="ui yellow tiny label"><%#=  record_metadatum.audits.last.action %>d</span> by
-    <%#=  record_metadatum.audits.last.user.to_s %>
-  </p>
-  <div class="ui items">
-    <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
-      <div class="item">
-        <div class="ui small image">
-          <%= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
-        </div>
-        <div class="content">
-          <%= link_to rails_blob_path(file, disposition: "attachment"), class: "ui center aligned" do %>
-            <%= file.filename %> <span class="ui button">Kaydet <i class="save icon"></i></span>
-          <% end %>
-          <%= link_to  file , target: :_blank do %>Yeni sekmede aç <i class="folder open  icon"></i><% end %>
-          <div class="header">Arrowhead Valley Camp</div>
-          <div class="meta">
-            <span class="price">$1200</span>
-            <span class="stay">1 Month</span>
-          </div>
-          <div class="description">
-            <p></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="ui grid ">
-  <% while false %>
-  <table id="table_id" class="display ui celled table three wide column">
-    <thead>
-      <tr><th>Name</th>
-      <th>Age</th>
-      <th>Pul</th>
-    </tr></thead>
-    <tbody>
-     <% record_metadatum.images.each_with_index do |file,i| %>
-      <% if file.representable? %>
-        <tr data-controller="get-image" >
-          <td data-label="Name"><a href="#" class="ui column label" data-scene-target="loadPicture" 
-          data-get-image-file-param="<%#=url_for file.variant(saver:{quality: 05}, rotate: 0 ) %> <%#= url_for file.representation(thumbnail: [200, nil])%>"
-          data-action="get-image#inf"><%=i+1%> </a></td>
-          <td data-label="Age"><%= link_to "Aç", file, "data-action": "get-image#inf", "data-get-image-file-param": file %></td>
-          <td class="ui one wide column " data-label="Job"><%#= link_to image_tag(file.variant(resize_to_limit: [100, 100]), class:"ui rounded image"), file %></td>
-        </tr> 
-        <% else %>
-        
-          <%= link_to rails_blob_path(file, disposition: "attachment") do %>
-            <%= image_tag "https://via.placeholder.com/150", alt: "Download file"  %>
-          <% end %> 
-        <% end %>
-      <% end %>   
-    </tbody>
-  </table>
-  <% end %>
-  
-
-  <div data-controller="" class="twelve wide column">
-    <!-- Load first image -->
-    <div class="ui raised segment">
+      <strong>Last edition:</strong>
+      <span class="ui yellow tiny label"><%#=  record_metadatum.audits.last.action %>d</span> by
+      <%#=  record_metadatum.audits.last.user.to_s %>
+    </p>
+    <div class="ui items">
       <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
-      <div class=" ui secondary segment">
-         <div class="ui tiny image" ><%= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %> </div>
-      
-        <div class="middle aligned content">
-          <span class="header">File name: </span>
-          <%= link_to rails_blob_path(file, disposition: "attachment"), class: "ui center aligned" do %>
-            <%= file.filename %> <span class="ui button">Kaydet <i class="save icon"></i></span>
-          <% end %>
-          <p class="ui button"><%= link_to  file , target: :_blank do %>Yeni sekmede aç <i class="folder open  icon"></i><% end %></p> 
+        <div class="item">
+          <div class="ui small image">
+            <%= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
+          </div>
+          <div class="content">
+            <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
+              <%= file.filename %> <span class="ui button">Kaydet <i class="save icon"></i></span>
+            <% end %>
+            <%= link_to  file , target: :_blank do %>Yeni sekmede aç <i class="folder open  icon"></i><% end %>
+            <div class="meta">
+              <span class="price">$1200</span>
+              <span class="stay">1 Month</span>
+            </div>
+            <div class="description">
+              <div class="extra">
+                <i class="green check icon"></i>
+                <% watermark= "deneme"%>
+                <%= file.metadata %>
+                <a href="
+                <%= 
+                #otuz saniye içinde açılmaz ise bağlantı kayboluyor.
+                file.url(expires_in: 30 ,disposition: :inline)%>
+                
+                ">Aç</a>
+                121 Votes <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-        <% end %>
+      <% end %>
     </div>
-    <%# if document.images.first.representable? %>
-    
-    <img class="ui fluid image" id ="" src=" <%#= url_for document.images.first.representation(thumbnail: 200)%><%#= url_for document.images.first.variant(saver:{quality: 05}, rotate: 0 ) %>"  />
-    <%# end %>
-    <!-- Load first image #END -->
-  </div>
-</div>
-
 </div>
