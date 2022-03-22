@@ -29,6 +29,7 @@
         <div class="item">
           <div class="ui small image">
             <%= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
+           <%= ImageProcessing::Vips.valid_image?(file.url) %>
           </div>
           <div class="content">
             <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
@@ -44,10 +45,16 @@
                 <i class="green check icon"></i>
                 <% watermark= "deneme"%>
                 <%= file.metadata %>
+
+                <%  unless true %>
+                  <%# make it false for iframe view %>
+                  <iframe src=<%= file.url(expires_in: 30 ,disposition: :inline) %> width="600" height="750" style="border: none;"></iframe>
+                <% end %>
+
                 <a href="
                 <%= 
                 #otuz saniye içinde açılmaz ise bağlantı kayboluyor.
-                file.url(expires_in: 30 ,disposition: :inline)%>
+                file.url(expires_in: 30 ,disposition: :inline) %>
                 
                 ">Aç</a>
                 121 Votes <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>

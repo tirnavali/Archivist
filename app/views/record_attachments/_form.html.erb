@@ -23,7 +23,6 @@
         <div class="ui seven column stackable grid">
         <% record_attachment.images.each do |attach| %>
           <%= form.hidden_field :images, value: attach.signed_id, multiple: true %>
-          
           <div class="ui column fluid card">
             <div class="content">
               <%= link_to rails_blob_path(attach, disposition: "attachment"), class: "ui center aligned" do %>
