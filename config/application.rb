@@ -18,6 +18,8 @@ module Archivist
     #
     config.time_zone = "Istanbul"
     config.active_storage.service = :local
+    #config.cache_store = :memory_store, { size: 64.megabytes }
+
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

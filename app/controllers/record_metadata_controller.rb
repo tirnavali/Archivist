@@ -19,6 +19,8 @@ class RecordMetadataController < ApplicationController
   end
   # GET /record_metadata/1 or /record_metadata/1.json
   def show
+    @image = @record_metadatum.record_attachment.images.first
+    #@image = @image.representation("quality": 10).processed.download
   end
 
   # GET /record_metadata/new
