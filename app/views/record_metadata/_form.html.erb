@@ -2,18 +2,17 @@
 <div data-controller="record-metadatum"></div>
 
 <%= simple_form_for @record_metadatum do |f| %>
-<div class="field">
   <%= f.association :fond, input_html: { class: "select2 basic"}%>
-  </div>
   <%= f.input :organization_code%>
   <%= f.input :box%>
   <%= f.input :folder%>
   <%= f.input :order%>
+  <div>
   <%= f.simple_fields_for :special_numbers do |special_number_form| %>
     <%= render 'special_number_fields', :form => special_number_form  %>
-     <%= link_to_add_association 'Add Number', f, :special_numbers, form_name: 'form', class:"ui primary button"%>
   <% end %>
-
+     <%= link_to_add_association 'Add Number', f, :special_numbers, form_name: 'form', class:"ui primary button"%>
+  </div>
   <%= f.input :summary %>
   <%= f.input :explaination %>
   <%= f.input :starting_date, as: :date, html5: true  %>

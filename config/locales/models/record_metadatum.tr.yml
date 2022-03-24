@@ -22,5 +22,6 @@ tr:
       required: "gerekli"
       blank: "boş olamaz"
       too_short: "çok kısa"
+      too_long: "çok uzun"
     
       
