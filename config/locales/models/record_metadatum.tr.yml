@@ -1,0 +1,26 @@
+tr:
+  attributes:
+    starting_date: "başlangıç tarihi"
+    ending_date: "bitiş tarihi"
+    box: "kutu"
+    folder: "dosya"
+    order: "sıra"
+    fond: "fon"
+    required: "gerekli"
+    organization_code: "rumuz"
+    languages: "diller"
+    subjects: "konular"
+    summary: "özet"
+    explaination: "açıklama"
+    toponyms: "yer adları"
+    organization: "kurum"
+    document_types: "belge türleri"
+    privacy: "gizlilik türü"
+    phisycal_status: "fiziksel durum"
+  errors:
+    messages:
+      required: "gerekli"
+      blank: "boş olamaz"
+      too_short: "çok kısa"
+    
+      

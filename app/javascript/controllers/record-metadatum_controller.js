@@ -10,10 +10,10 @@ export default class extends Controller {
     console.log("select2 is here");
     let select_multiple = $('#record_metadatum_person_ids');
 
-    $('.select2.basic').select2();
+    $('.select.required.select2.basic').select2();
     $(document).ready(function(){
-      $('.select2.multiple').select2({
-        width: 300,
+      $('.select.optional .select2.multiple').select2({
+        width: 500,
         minimumInputLength: 3,
         ajax: {
           url: "http://localhost:3000/people/search",

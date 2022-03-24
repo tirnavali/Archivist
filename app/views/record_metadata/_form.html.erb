@@ -1,140 +1,35 @@
-<%= form_with(model: record_metadatum, class: "ui form")  do |form| %>
-  <% if record_metadatum.errors.any? %>
-    <div style="" class="ui  message">
-      <h2 class="header"><%= pluralize(record_metadatum.errors.count, "error") %> prohibited this record_metadatum from being saved:</h2>
+<div data-controller="dropdown"></div>
+<div data-controller="record-metadatum"></div>
 
-      <ul>
-        <% record_metadatum.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= simple_form_for @record_metadatum do |f| %>
+<div class="field">
+  <%= f.association :fond, input_html: { class: "select2 basic"}%>
+  </div>
+  <%= f.input :organization_code%>
+  <%= f.input :box%>
+  <%= f.input :folder%>
+  <%= f.input :order%>
+  <%= f.simple_fields_for :special_numbers do |special_number_form| %>
+    <%= render 'special_number_fields', :form => special_number_form  %>
+     <%= link_to_add_association 'Add Number', f, :special_numbers, form_name: 'form', class:"ui primary button"%>
   <% end %>
-  <div data-controller="dropdown"></div>
-  <div data-controller="record-metadatum"></div>
 
-  <div class="field">
-    <%= form.label :fond_id, style: "display: block" %>
-    <%= form.collection_select :fond_id, Fond.all, :id, :to_s,{prompt: true}, {class: "select2 basic"} %>
-  </div>
-   
-  <h4 class="ui dividing header">Record Access Information</h4>
-  <div class="four fields">
-    
-    <div class="field">
-      <%= form.label :organization_code, style: "display: block" %>
-      <%= form.text_field :organization_code %>      
-    </div> 
-    
-    <div class="field">
-      <%= form.label :box, style: "display: block" %>
-      <%= form.number_field :box, {class: "ui input"} %>
-    </div>
-    
-    <div class="field">
-      <%= form.label :folder, style: "display: block" %>
-      <%= form.number_field :folder, {class: "ui input"} %>
-    </div>
+  <%= f.input :summary %>
+  <%= f.input :explaination %>
+  <%= f.input :starting_date, as: :date, html5: true  %>
+  <%= f.input :ending_date, as: :date, html5: true  %>
+  <%= f.association :subjects, input_html: { class: "ui fluid multiple search selection dropdown" } %>
+  <%= f.association :people, input_html: { class: "select2 multiple", multiple: "multiple" } %>
+  <%= f.association :languages, as: :check_boxes, input_html: { class: "" } %>
+  <%= f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown" } %>
+  <%= f.association :toponyms, input_html: { class: "ui fluid multiple search selection dropdown" } %>
+  <%= f.association :document_types, as: :check_boxes, input_html: { class: "" } %>
+  <%= f.association :privacy, as: :radio_buttons, input_html: { class: "" } %>
+  <%= f.association :phisycal_status, as: :radio_buttons, input_html: { class: "ui radio " } %>
 
-    <div class="field">
-      <%= form.label :order, style: "display: block" %>
-      <%= form.number_field :order %>
-    </div>
-  </div>
-
-  <div class=" ui inverted segment">
-    <div id='special_number_items' class="">
-      <%= form.fields_for :special_numbers do |special_number_f|%>
-        <%= render 'special_number_fields', :form => special_number_f %>    
-      <% end %>
-      <div class="field">
-        <%= link_to_add_association 'Add Number', form, :special_numbers, form_name: 'form', class:"ui primary button"%>
-      </div>
-    </div>
-  </div>
-
-  <h4 class="ui dividing header">Record Access Information</h4>
-
-  <div class="two fields">
-  
-    <div class="field">
-      <%= form.label :summary, style: "display: block" %>
-      <%= form.text_area :summary, rows: 5 %>
-    </div>
-  
-    <div class="field">
-      <%= form.label :explaination, style: "display: block" %>
-      <%= form.text_area :explaination , rows: 5%>
-    </div>
-  
-  </div>
-
-  <div class="two fields">
-
-    <div class="field">
-      <%= form.label :starting_date, style: "display: block" %>
-      <%= form.date_field :starting_date %>
-    </div>
-  
-    <div class="field">
-      <%= form.label :ending_date, style: "display: block" %>
-      <%= form.date_field :ending_date %>
-    </div>
-  
-  </div>
-
-    
-  <h4 class="ui dividing header">Descriptive Information</h4>
-  <div class="four fields">
-    <div class="field">
-      <%= form.label :subject_id, style: "display: block" %>
-      <%= form.collection_select :subject_ids, Subject.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: "", size: 10}%>  
-    </div>
-    
-    <div class="field">
-      <%= form.label :language_id, style: "display: block" %>      
-      <%= form.collection_select :language_ids, Language.order( :name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
-    </div>
-  
-    <div class="field" data-controller="organizations">
-      <%= form.label :organization_id, style: "display: block" %>      
-      <%= form.collection_select :organization_id, Organization.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown", data: {action: "input->organizations#search"}} %>
-      <%= button_tag "Search Organization" ,{data: {action: "organization#search"} }  %>
-    </div>
-
-    <div class="field">
-      <%= form.label :toponym_id, style: "display: block" %>
-      <%= form.collection_select :toponym_ids, Toponym.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>    
-      <%= link_to "Add ", new_toponym_path, class: "tiny ui positive button" %>      
-    </div>    
-
-  </div>
-
-  <div class="four fields">
-    
-    <div class="field">
-      <%= form.label :person_id, style: "display: block" %>
-      <%= form.collection_select :person_ids, Person.limit(10), :id, :to_s, {prompt: true}, {class: "select2 multiple", multiple: "multiple"} %>      
-      <%= link_to "Add ", new_person_path, class: "tiny ui positive button" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :document_type_id, style: "display: block" %>
-      <%= form.collection_select :document_type_ids, DocumentType.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid multiple search selection dropdown", multiple: ""} %>
-    </div>
-
-    <div class="field">
-      <%= form.label :privacy_id, style: "display: block" %>
-      <%= form.collection_select :privacy_id, Privacy.order(:name), :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>      
-    </div>
-  
-    <div class="field">
-      <%= form.label :phisycal_status_id, style: "display: block" %>
-      <%= form.collection_select :phisycal_status_id, PhisycalStatus.all, :id, :to_s, {prompt: true}, {class: "ui fluid search selection dropdown"} %>
-    </div>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= f.button :submit %>
 <% end %>
+
+
+
+
