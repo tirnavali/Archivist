@@ -4,6 +4,9 @@ tr:
     formats:
       short: "%d/%m/%Y %H:%M"
       long: "%d/%m/%Y %H:%M:%S"
+  date:
+    formats:
+      short: "%d/%m/%Y"
   
   views:
     pagination:
@@ -12,6 +15,10 @@ tr:
       previous: "&lsaquo; Önceki"
       next: "Sonraki &rsaquo;"
       truncate: "&hellip;"
+    record_metadata:
+      this_record_contains_of: "bu belgenin içerdiği"
+
+    
   helpers:
     page_entries_info:
       one_page:

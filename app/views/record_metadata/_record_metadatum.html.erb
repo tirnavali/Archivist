@@ -1,37 +1,87 @@
 <div id="<%= dom_id record_metadatum %>" class=" ui ">
-  <% record_metadatum.special_numbers.each do |no| %>
-    <p><%= no.number_type%> - <%= no.value %></p>
-  <% end %> 
-  Box: <%=record_metadatum.box%>
-  Order: <%=record_metadatum.order%>
-  Folder: <%=record_metadatum.folder%>
-  <p>Org Code: <%=record_metadatum.organization_code%></p>
-  <h4 class="ui horizontal divider header">Subjects</h4>
+  <p>
+    <strong><%= t('this_record_is_in').humanize %>, <%= t('fond').titleize %>: </strong> <%= record_metadatum.fond.name %>      
+  </p>
+  <p class = "">
+    <% special_nums_metadata = record_metadatum.special_numbers.map { |no| "#{no.number_type} - #{no.value} " }%>
+    <%= special_nums_metadata.join("/ ")%> 
+  </p>
+  <p>
+    <strong><%= t('box').titleize%>: </strong>   <%= record_metadatum.box %> /
+    <% if record_metadatum.folder%>
+      <strong><%=t('folder').titleize %>: </strong><%= record_metadatum.folder %> /
+    <% end %>
+      <strong><%= t('order').titleize%>: </strong>   <%= record_metadatum.order %>
+  </p>
+
+  <p><strong><%= t('organization_code').titleize%>:</strong> <%=record_metadatum.organization_code%></p>
+  <p class="ui">
+    <strong><%= t('starting_date').titleize%>: </strong> 
+    <%=l record_metadatum.starting_date, format: :short %> -
+    <strong><%= t('ending_date').titleize%>: </strong> 
+
+    <%=l(record_metadatum.ending_date, format: :short) if record_metadatum.ending_date %>
+  </p>
+
+  <p>
+    <strong><%=  t('organization').titleize %>:</strong>
+      <%= record_metadatum.organization.name %>
+  </p>
+
+  <p>
+    <%= t('this_record_contains_of').humanize  %>
+    <strong><%=t('languages').titleize %>:</strong>      
+    <% record_metadatum.languages.each{|language| %>
+      <span class="ui tiny teal label">
+      <%= language[:name] %>
+      </span>
+    <% } %>      
+  </p>
+
+  <p>
+    <strong><%=t('document_types').titleize %>:</strong>  
+    <% record_metadatum.document_types.each do |document_type| %>
+      <span class="ui orange tiny label">
+      <%= document_type.name %>
+      </span>
+    <% end %>  
+  </p>
+
+  <p>
+    <strong><%=t('privacy').titleize %>:</strong> 
+    <%= record_metadatum.privacy.name if record_metadatum.privacy %>
+  </p>
+
+  <h4 class="ui horizontal divider header"><%= t('subjects').humanize %></h4>
 
   <% record_metadatum.subjects.each do |subject| %>
     <span class="ui red tag label"><%= subject.name%></span>
-  <% end %> 
+  <% end %>
 
+  <h4 class="ui horizontal divider header"><%= t('toponyms').titleize %></h4> 
+  <p>
+      <% record_metadatum.toponyms.each do|toponym| %>
+        <span class="ui orange  label">
+        <%= toponym[:name] %>
+        </span>
+      <% end %>
+    </p>
 
-  <h4 class="ui horizontal divider header">Summary</h4>
+  <h4 class="ui horizontal divider header"><%= t('summary').capitalize %></h4>
   <%= record_metadatum.summary %>
-            <%= link_to rails_blob_path(@image, disposition: "attachment"), class: "header" do %>
-              <%= @image.filename %> <span class="ui button">Kaydet <i class="save icon"></i></span>
-            <% end %>
             <%# =image_tag @image.representation()%>
             <%#= image_tag @image.representation(resize_to_limit: [500, 500]).processed if @image.previewable? %>
             <%#= image_tag @image.variant(resize_to_limit: [500, 500], colourspace: "b-w", rotate: -90, gaussblur: 2).processed if @image.variable? %>
-            
-            <% target = Vips::Target.new_to_file('app/assets/images/watermarking/k3.jpg') %>
-            <% water = Vips::Image.text('sercan').jpegsave_target(target) %>
-            <%= image_tag "watermarking/k2.jpg" %>
-            <%= image_tag @image.variant(resize_to_limit: [800, 800],  composite: [overlay: ImageProcessing::Vips::Image.load_image("app/assets/images/watermarking/k2.jpg"), gravity: "south-east"] ).processed if @image.variable? %>
+            <%# target = Vips::Target.new_to_file('app/assets/images/watermarking/k3.jpg') %>
+            <%# water = Vips::Image.text('sercan').jpegsave_target(target) %>
+            <%#= image_tag "watermarking/k2.jpg" %>
+            <%#= image_tag @image.variant(resize_to_limit: [800, 800],  composite: [overlay: ImageProcessing::Vips::Image.load_image("app/assets/images/watermarking/k2.jpg"), gravity: "south-east"] ).processed if @image.variable? %>
 
-
+<h4 class="ui horizontal divider header"><%= t('explaination').capitalize %></h4>
     <p>
       <%= record_metadatum.explaination %>
+    </p>
     <p>
-
       <strong>Last edition:</strong>
       <span class="ui yellow tiny label"><%#=  record_metadatum.audits.last.action %>d</span> by
       <%#=  record_metadatum.audits.last.user.to_s %>
@@ -40,7 +90,7 @@
       <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
         <div class="item">
           <div class="ui small image">
-            <%= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
+            <%#= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
           </div>
           <div class="content">
@@ -57,19 +107,19 @@
             <div class="description">
               <div class="extra">
                 <i class="green check icon"></i>
-                <% watermark= "deneme"%>
-                <%= file.metadata %>
-
-                <%  unless true %>
+                <%  unless false %>
                   <%# make it false for iframe view %>
                   <iframe src=<%= file.url(expires_in: 30 ,disposition: :inline) %> width="600" height="750" style="border: none;"></iframe>
                 <% end %>
+                <b><%= file.metadata %></b>
+                <b><%#= file.preview(:size) %></b>
+
+
 
                 <a href="
                 <%= 
                 #otuz saniye içinde açılmaz ise bağlantı kayboluyor.
                 file.url(expires_in: 30 ,disposition: :inline) %>
-                
                 ">Aç</a>
                 121 Votes <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
               </div>
