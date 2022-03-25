@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class RecordMetadataTest < ApplicationSystemTestCase
   setup do
+    login_as users(:admin)
     @record_metadatum = record_metadata(:one)
   end
 

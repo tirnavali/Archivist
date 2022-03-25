@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class SpecialNumbersTest < ApplicationSystemTestCase
   setup do
+    login_as users(:admin)
     @special_number = special_numbers(:one)
   end
 

@@ -1,17 +1,17 @@
 admin:
   email: tran.ce.co@gmail.com
-  encrypted_password: 2dgfopskdfopg9034smıos095
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 1
 
 standartuser:
   email: standard_user@yahoo.com
-  encrypted_password: 2dgfopskdfopg9034smıos095ghfj
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 0
 
 standartuser2:
   email: standard2_user@yahoo.com
-  encrypted_password: 2dgfopskdfopg9034smıos095876
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 0

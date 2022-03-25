@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class RecordAttachmentsTest < ApplicationSystemTestCase
   setup do
+    login_as users(:admin)
     @record_attachment = record_attachments(:one)
   end
 
