@@ -17,7 +17,11 @@
     font-family: 'Icons';
     
     src: url("./assets/fonts/outline-icons.eot");
-    src: url("./assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("./assets/fonts/icons.woff2") format('woff2'), url("./assets/fonts/icons.woff") format('woff'), url("./assets/fonts/icons.ttf") format('truetype'), url("./assets/fonts/icons.svg#icons") format('svg');
+    src: url("./assets/fonts/icons.eot?#iefix") format('embedded-opentype'), 
+    url("./assets/fonts/icons.woff2") format('woff2'), 
+    url("./assets/fonts/icons.woff") format('woff'), 
+    url("./assets/fonts/icons.ttf") format('truetype'), 
+    url("./assets/fonts/icons.svg#icons") format('svg');
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -4068,7 +4072,11 @@
   @font-face {
     font-family: 'outline-icons';
     src: url("./assets/fonts/outline-icons.eot");
-    src: url("./assets/fonts/outline-icons.eot?#iefix") format('embedded-opentype'), url("./assets/fonts/outline-icons.woff2") format('woff2'), url("./assets/fonts/outline-icons.woff") format('woff'), url("./assets/fonts/outline-icons.ttf") format('truetype'), url("./assets/fonts/outline-icons.svg#icons") format('svg');
+    src: url("./assets/fonts/outline-icons.eot?#iefix") format('embedded-opentype'), 
+         url("./assets/fonts/outline-icons.woff2") format('woff2'), 
+         url("./assets/fonts/outline-icons.woff") format('woff'), 
+         url("./assets/fonts/outline-icons.ttf") format('truetype'), 
+         url("./assets/fonts/outline-icons.svg#icons") format('svg');
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -4454,7 +4462,11 @@
   @font-face {
     font-family: 'brand-icons';
     src: url("./assets/fonts/brand-icons.eot");
-    src: url("./assets/fonts/brand-icons.eot?#iefix") format('embedded-opentype'), url("./assets/fonts/brand-icons.woff2") format('woff2'), url("./assets/fonts/brand-icons.woff") format('woff'), url("./assets/fonts/brand-icons.ttf") format('truetype'), url("./assets/fonts/brand-icons.svg#icons") format('svg');
+    src: url("./assets/fonts/brand-icons.eot?#iefix") format('embedded-opentype'), 
+    url("./assets/fonts/brand-icons.woff2") format('woff2'), 
+    url("./assets/fonts/brand-icons.woff") format('woff'), 
+    url("./assets/fonts/brand-icons.ttf") format('truetype'), 
+    url("./assets/fonts/brand-icons.svg#icons") format('svg');
     font-style: normal;
     font-weight: normal;
     font-variant: normal;

@@ -1,0 +1,17 @@
+admin:
+  email: tran.ce.co@gmail.com
+  encrypted_password: 2dgfopskdfopg9034smıos095
+  sign_in_count: 0
+  role: 1
+
+standartuser:
+  email: standard_user@yahoo.com
+  encrypted_password: 2dgfopskdfopg9034smıos095ghfj
+  sign_in_count: 0
+  role: 0
+
+standartuser2:
+  email: standard2_user@yahoo.com
+  encrypted_password: 2dgfopskdfopg9034smıos095876
+  sign_in_count: 0
+  role: 0

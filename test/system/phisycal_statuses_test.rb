@@ -2,7 +2,16 @@ require "application_system_test_case"
 
 class PhisycalStatusesTest < ApplicationSystemTestCase
   setup do
-    @phisycal_status = phisycal_statuses(:one)
+    @phisycal_status = phisycal_statuses(:first)
+
+    visit new_user_session_path
+    assert_selector "h2", text: "Log-in to your account"
+
+    fill_in "Email", with: "tran.ce.co@gmail.com"
+    fill_in "Password", with: "123456"
+    click_on "Log in"
+    assert_selector "h1", text: "Home page"
+    
   end
 
   test "visiting the index" do

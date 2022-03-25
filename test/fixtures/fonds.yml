@@ -1,0 +1,12 @@
+first:
+  name: Türkiye Büyük Millet Meclisi
+  explanation: some explanation
+  parent: 
+second:
+  name: Kanunlar Kararlar Fonu
+  explanation: some explanation
+  parent: first
+third:
+  name: Türkiye Büyük Millet Meclisi
+  explanation: some explanation
+  parent: first

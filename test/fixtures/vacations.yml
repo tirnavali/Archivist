@@ -1,0 +1,17 @@
+first:
+  explanation: First quote
+  user: admin
+  starting_date: 12-02-2022
+  ending_date: 13-02-2022
+
+second:
+  explanation: First quote
+  user: admin
+  starting_date: 12-02-2022
+  ending_date: 13-02-2022
+
+third:
+  explanation: First quote
+  user: admin
+  starting_date: 12-02-2022
+  ending_date: 13-02-2022
