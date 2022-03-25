@@ -15,20 +15,21 @@ class OrganizationsTest < ApplicationSystemTestCase
     visit organizations_url
     click_on I18n.t("new_organization")
 
-    click_on I18n.t("create")
+    click_on I18n.t("save")
 
     assert_text "Organization was successfully created"
-    click_on I18n.t("Back")
+    click_on I18n.t("back_to_organizations")
   end
 
   test "should update Organization" do
     visit organization_url(@organization)
     click_on I18n.t("edit_this_organization"), match: :first
 
-    click_on I18n.t("update_this_organization")
+    click_on I18n.t("save")
 
     assert_text "Organization was successfully updated"
-    click_on "Back"
+    click_on I18n.t("back_to_organizations")
+
   end
 
   test "should destroy Organization" do
