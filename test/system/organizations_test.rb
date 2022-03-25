@@ -8,24 +8,24 @@ class OrganizationsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit organizations_url
-    assert_selector "h1", text: "Organizations"
+    assert_selector "h1", text: I18n.t("organizations")
   end
 
   test "should create organization" do
     visit organizations_url
-    click_on "New organization"
+    click_on I18n.t("new_organization")
 
-    click_on "Create Organization"
+    click_on I18n.t("create")
 
     assert_text "Organization was successfully created"
-    click_on "Back"
+    click_on I18n.t("Back")
   end
 
   test "should update Organization" do
     visit organization_url(@organization)
-    click_on "Edit this organization", match: :first
+    click_on I18n.t("edit_this_organization"), match: :first
 
-    click_on "Update Organization"
+    click_on I18n.t("update_this_organization")
 
     assert_text "Organization was successfully updated"
     click_on "Back"
@@ -33,7 +33,7 @@ class OrganizationsTest < ApplicationSystemTestCase
 
   test "should destroy Organization" do
     visit organization_url(@organization)
-    click_on "Destroy this organization", match: :first
+    click_on I18n.t("destroy"), match: :first
 
     assert_text "Organization was successfully destroyed"
   end

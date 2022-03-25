@@ -5,7 +5,6 @@ class VacationsTest < ApplicationSystemTestCase
     login_as users(:admin)
     @vacation = vacations(:first)
 
-
   end
 
   test "visiting the vacations index" do

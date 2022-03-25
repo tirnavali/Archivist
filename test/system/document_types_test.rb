@@ -3,7 +3,7 @@ require "application_system_test_case"
 class DocumentTypesTest < ApplicationSystemTestCase
   setup do
     login_as users(:admin)
-    @document_type = document_types(:one)
+    @document_type = document_types(:first)
   end
 
   test "visiting the index" do

@@ -1,0 +1,8 @@
+tr:
+  organizations: "Kuruluşlar"
+  organization: "Kuruluş"
+  new_organization: "Yeni kuruluş ekle"
+  edit_this_organization: "Kuruluş kaydını düzenle"
+  update_this_organization: "Kuruluş kaydını güncelle"
+  back_to_organizations: "Kuruluşlara geri dön"
+  create_organization: "Kuruluşu oluştur"
