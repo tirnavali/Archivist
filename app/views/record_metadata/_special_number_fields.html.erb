@@ -1,11 +1,13 @@
-<div class="nested-fields">
-  <div class="ui stackable">
-    <div class="six fields">
-      <%= form.text_field :value, class:"field" %>
-      <%= form.collection_select :number_type_id, NumberType.all, :id, :to_s, {prompt: true},  {data: {controller: "dropdown"}, class: "ui search selection dropdown label",  size: 10}%>  
-      <%#= link_to_remove_nested(form, fields_wrapper_selector: '.wrapper-div', link_text: "Remove", link_classes: 'ui button red') %>         
-      <%= link_to_remove_association "Remove", form, class: "ui button red"%>
-    </div>
-  </div> 
+<div class="three fields">
+  <div class="field">
+     <%= form.text_field :value%>
+  </div>
+  <div class="field">
+    <%= form.collection_select :number_type_id, NumberType.all, :id, :to_s, {prompt: true},  {data: {controller: "dropdown"}, class: "ui search selection dropdown label",  size: 10}%>  
+  </div>
+   <div class="field">
+     <%#= link_to_remove_nested(form, fields_wrapper_selector: '.wrapper-div', link_text: "Remove", link_classes: 'ui button red') %>         
+     <%= link_to_remove_association "Remove", form, { wrapper_class: 'fields',  class: "negative ui button" }%>
+   </div>
 </div>
 

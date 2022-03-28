@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Record metadata</h1>
+<h1><%= t('record_metadata') %></h1>
 <%= search_form_for(
   @q,
   url: search_record_metadata_path,
@@ -29,7 +29,7 @@
   <%= f.submit class: "ui tiny primary button"%>
 <% end %>
 
-<%= link_to "New record metadatum", new_record_metadatum_path, class: "ui green button segment"%>
+<%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui green button segment"%>
 <div id="record_metadata">
   <table class="ui celled padded very compact table">
     <thead>

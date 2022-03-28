@@ -1,22 +1,37 @@
 <div data-controller="dropdown"></div>
 <div data-controller="record-metadatum"></div>
 
-<%= simple_form_for @record_metadatum do |f| %>
-  <%= f.association :fond, input_html: { class: "select2 basic"}%>
-  <%= f.input :organization_code%>
-  <%= f.input :box%>
-  <%= f.input :folder%>
-  <%= f.input :order%>
-  <div>
-  <%= f.simple_fields_for :special_numbers do |special_number_form| %>
-    <%= render 'special_number_fields', :form => special_number_form  %>
-  <% end %>
-     <%= link_to_add_association 'Add Number', f, :special_numbers, form_name: 'form', class:"ui primary button"%>
+<%= simple_form_for @record_metadatum, html: {class:" ui form"} do |f| %>
+  <h4 class="ui dividing header"><%=t('access_identifiers').titleize %></h4>
+  <div class="field">
+    <%= f.association :fond, input_html: { class: "select2 basic"}%>
   </div>
-  <%= f.input :summary %>
-  <%= f.input :explaination %>
-  <%= f.input :starting_date, as: :date, html5: true  %>
-  <%= f.input :ending_date, as: :date, html5: true  %>
+  <div class="four fields">
+    <div class="field"><%= f.input :organization_code%></div>
+    <div class="field"><%= f.input :box%>              </div>
+    <div class="field"><%= f.input :folder%>           </div>
+    <div class="field"><%= f.input :order%>            </div>
+  </div>
+  <h4 class="ui dividing header"><%=t('special_access_numbers').titleize %></h4>
+  <div>
+    <%= f.simple_fields_for :special_numbers do |special_number_form| %>
+      <%= render 'special_number_fields', :form => special_number_form  %>
+    <% end %>
+    <%= link_to_add_association 'Add Number', f, :special_numbers, form_name: 'form', class:"ui primary button"%>
+  </div>
+  <h4 class="ui dividing header"><%= t('detailed_information').titleize %></h4>
+  <div class="two fields">
+    <div class="field"><%= f.input :summary %>      </div>
+    <div class="field"><%= f.input :explaination %> </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <%= f.input :starting_date, as: :date, html5: true  %>
+    </div>
+    <div class="field">
+      <%= f.input :ending_date, as: :date, html5: true  %>
+    </div>
+  </div>
   <%= f.association :subjects, input_html: { class: "ui fluid multiple search selection dropdown" } %>
   <%= f.association :people, input_html: { class: "select2 multiple", multiple: "multiple" } %>
   <%= f.association :languages, as: :check_boxes, input_html: { class: "" } %>
@@ -28,7 +43,3 @@
 
   <%= f.button :submit %>
 <% end %>
-
-
-
-
