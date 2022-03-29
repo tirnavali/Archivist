@@ -17,7 +17,7 @@
     <%= f.simple_fields_for :special_numbers do |special_number_form| %>
       <%= render 'special_number_fields', :form => special_number_form  %>
     <% end %>
-    <%= link_to_add_association 'Add Number', f, :special_numbers, form_name: 'form', class:"ui primary button"%>
+    <%= link_to_add_association t('add_number'), f, :special_numbers, form_name: 'form', class:"ui primary button"%>
   </div>
   <h4 class="ui dividing header"><%= t('detailed_information').titleize %></h4>
   <div class="two fields">
@@ -34,12 +34,24 @@
   </div>
   <%= f.association :subjects, input_html: { class: "ui fluid multiple search selection dropdown" } %>
   <%= f.association :people, input_html: { class: "select2 multiple", multiple: "multiple" } %>
-  <%= f.association :languages, as: :check_boxes, input_html: { class: "" } %>
   <%= f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown" } %>
   <%= f.association :toponyms, input_html: { class: "ui fluid multiple search selection dropdown" } %>
-  <%= f.association :document_types, as: :check_boxes, input_html: { class: "" } %>
-  <%= f.association :privacy, as: :radio_buttons, input_html: { class: "" } %>
-  <%= f.association :phisycal_status, as: :radio_buttons, input_html: { class: "ui radio " } %>
+
+  <div class=" grouped fields" data-controller="checkbox">
+    <div class="field">
+      <%= f.association :languages, as: :check_boxes, input_html: { class: "" } %>
+    </div>
+    <div class=" field">
+        <%= f.association :document_types, as: :check_boxes, input_html: { class: "hidden" } %>
+    </div>
+    <div class="field">
+        <%= f.association :privacy, as: :radio_buttons, input_html: { class: "hidden" } %>
+    </div>
+    <div class="field">
+        <%= f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " } %>
+    </div>
+  </div>    
+
 
   <%= f.button :submit %>
 <% end %>
