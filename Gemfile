@@ -38,6 +38,7 @@ gem "kaminari"
 gem "cocoon"
 gem "audited", "~> 5.0"
 gem 'simple_form'
+gem 'haml'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

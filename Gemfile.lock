@@ -139,6 +139,9 @@ GEM
       gdk_pixbuf2 (= 3.5.1)
       gio2 (= 3.5.1)
       pango (= 3.5.1)
+    haml (5.2.2)
+      temple (>= 0.8.0)
+      tilt
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -282,7 +285,9 @@ GEM
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     strscan (3.0.1)
+    temple (0.8.2)
     thor (1.2.1)
+    tilt (2.0.10)
     timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
@@ -320,6 +325,7 @@ DEPENDENCIES
   debug
   devise!
   gtk3
+  haml
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

@@ -12,7 +12,7 @@ export default class extends Controller {
     $('.select.required.select2.basic').select2();
     $(document).ready(function(){
       $('.select.optional .select2.multiple').select2({
-        width: 500,
+        //width: 500,
         minimumInputLength: 3,
         ajax: {
           url: "http://localhost:3000/people/search",
