@@ -38,7 +38,7 @@
   .field
     = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
   .field
-    = f.association :toponyms, input_html: { class: "ui fluid multiple search selection dropdown"}
+    = f.association :toponyms, input_html: { class: "", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select"}
   %div.grouped.fields{"data-controller": "checkbox"}
     .field 
       = f.association :languages, as: :check_boxes, input_html: { class: ""}

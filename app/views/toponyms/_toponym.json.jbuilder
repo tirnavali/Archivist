@@ -1,2 +1,3 @@
-json.extract! toponym, :id, :name, :created_at, :updated_at
+json.id toponym.id
+json.text toponym.name
 json.url toponym_url(toponym, format: :json)

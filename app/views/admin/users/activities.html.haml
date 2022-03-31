@@ -1,0 +1,37 @@
+%h1.ui.horizontal.divider.header
+  %i.user.icon
+  = @user 
+  all activities 
+.ui.statistics.centered.grid 
+  .statistic 
+    .label 
+      All Actions 
+    .value 
+      = @audits.user_activities(@user).count
+  .green.statistic 
+    .label 
+      Created Today
+    .value 
+      = @audits.user_activities(@user).where("action = ?", "create").today.size
+  .yellow.statistic 
+    .label 
+      Updated Today
+    .value 
+      = @audits.user_activities(@user).update_actions.today.count
+%table.ui.small.table
+  %thead
+    %th Action
+    %th DataModel
+    %th Deneme
+    %th Created At 
+  %tbody
+    - @audits.user_activities(@user).each do |audit|
+      %tr
+        %td
+          %span.ui=audit.action
+        %td
+          %span.ui=audit.auditable_type
+        %td
+          %span.ui=audit.audited_changes
+        %td
+          %span.ui.label=l(audit.created_at, format: :short)

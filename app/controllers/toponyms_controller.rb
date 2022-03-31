@@ -3,7 +3,8 @@ class ToponymsController < ApplicationController
 
   # GET /toponyms or /toponyms.json
   def index
-    @toponyms = Toponym.order(:name).page params[:page]
+    @q = Toponym.ransack(params[:term])
+    @toponyms = @q.result.page params[:page]
   end
 
   # GET /toponyms/1 or /toponyms/1.json
