@@ -1,3 +1,1 @@
-<%= turbo_stream.replace "new_person" do %>
-  <%= render "form" %>
-<% end %>
+<%= turbo_stream.update Person.new, "" %>

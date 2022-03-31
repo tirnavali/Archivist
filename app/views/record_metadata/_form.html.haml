@@ -33,8 +33,12 @@
       = f.input :ending_date, as: :date, html5: true 
   .field
     = f.association :subjects, input_html: { class: "", id: "multiple-subjects", "data-controller": "subjects-multiple-select"}
-  .field
-    = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
+  .fields
+    .four.wide.field 
+      = turbo_frame_tag "new_person" do
+        %i.ui.plus.icon= link_to "Add", new_person_path 
+    .twelve.wide.field
+      = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
   .field
     = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
   .field
