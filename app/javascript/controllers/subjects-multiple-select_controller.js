@@ -1,29 +1,28 @@
 import "jquery";
 import "select2";
-import "cocoon";
 
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   
   connect() {    
-   
-    $('.select.required.select2.basic');
     $(document).ready(function(){
-      $('.select.optional .select2.multiple').select2({
+      $('#multiple-subjects').select2({
         //width: 500,
-        minimumInputLength: 3,
+        minimumInputLength: 2,
         ajax: {
-          url: "http://localhost:3000/people/search",
+          url: "http://localhost:3000/subjects",
           dataType: "json",       
           delay: 250,        
           data: function (params) {
-            //console.log(params);
-            var query = {
-              term: params.term            
+            var q = {
+              term:{name_cont: params.term},
+              //commit:"Ara"
+                  
             }
             // Query parameters will be ?search=[term]&page=[page]
-            return query;
+            
+            return q;
           },
           processResults: function (response) {
             //console.log(response);

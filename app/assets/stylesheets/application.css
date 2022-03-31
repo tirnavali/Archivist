@@ -17,7 +17,7 @@
 
  body {
      /* background-color: rgb(253, 242, 228); */
-     background-color: rgb(242, 235, 228);
+     background-color: rgb(240, 238, 236);
  }
 
  turbo-frame {
@@ -25,3 +25,7 @@
      border: 1px solid blue;
  }
 
+.ui.small.menu {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 9%, rgba(0,181,173,1) 87%, rgba(0,181,173,1) 100%);
+}

@@ -6,6 +6,7 @@ import "semantic-ui"
 import * as ActiveStorage from "@rails/activestorage";
 import "vanilla-nested"
 
+
 ActiveStorage.start()
 // document.addEventListener("turbo:load", function(event){ 
 //    $('.ui.dropdown').dropdown();

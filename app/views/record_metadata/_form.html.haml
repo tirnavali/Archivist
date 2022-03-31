@@ -4,7 +4,8 @@
 = simple_form_for @record_metadatum, html: {class:" ui form"} do |f|
   %h4.ui.dividing.header= t('access_identifiers').titleize
   .field
-    = f.association :fond, input_html: { class: "select2 basic"}
+    = f.association :fond, input_html: { class: "ui fluid search selection dropdown"}
+  %div.grouped.fields{"data-controller": "checkbox"}
   .four.fields
     .field
       = f.input :organization_code
@@ -31,7 +32,7 @@
     .field 
       = f.input :ending_date, as: :date, html5: true 
   .field
-    = f.association :subjects, input_html: { class: "ui fluid multiple search selection dropdown" }
+    = f.association :subjects, input_html: { class: "", id: "multiple-subjects", "data-controller": "subjects-multiple-select"}
   .field
     = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
   .field
