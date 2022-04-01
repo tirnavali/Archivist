@@ -18,10 +18,8 @@ export default class extends Controller {
             var q = {
               term:{name_cont: params.term},
               //commit:"Ara"
-                  
             }
             // Query parameters will be ?search=[term]&page=[page]
-            
             return q;
           },
           processResults: function (response) {

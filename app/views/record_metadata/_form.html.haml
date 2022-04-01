@@ -35,8 +35,10 @@
     = f.association :subjects, input_html: { class: "", id: "multiple-subjects", "data-controller": "subjects-multiple-select"}
   .fields
     .four.wide.field 
-      = turbo_frame_tag "new_person" do
-        %i.ui.plus.icon= link_to "Add", new_person_path 
+      /= turbo_frame_tag "new_person" do
+      = notice
+      %i.ui.plus.icon= link_to "Add", new_person_path, data: { turbo_frame: dom_id(Person.new) } 
+      = turbo_frame_tag "new_person"
     .twelve.wide.field
       = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
   .field
@@ -53,3 +55,4 @@
     .field 
       = f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " }
   = f.button :submit
+= console

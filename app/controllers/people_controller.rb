@@ -33,6 +33,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
+        flash[:notice] = "Person was successfully created."
         format.turbo_stream
         format.html { redirect_to person_url(@person), notice: "Person was successfully created." }
         format.json { render :show, status: :created, location: @person }
