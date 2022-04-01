@@ -124,8 +124,8 @@
 </div>
     <% end %>
       <div class="ui container twelve wide column">
-      <% if notice %><p class="ui error message"><%= notice %></p><% end %>
-      <% if alert %><p class="ui error message"><%= alert %></p><% end %>
+
+      <%= render "layouts/shared/notice", locals: {notice: notice, alert: alert} %> 
         <%= yield %>
         <%= turbo_frame_tag "modal" %>
         <%# console %>
