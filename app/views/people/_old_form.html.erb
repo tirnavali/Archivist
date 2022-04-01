@@ -10,16 +10,18 @@
       </ul>
     </div>
   <% end %>
+  <div class="inline fields">
+    <div class="field">
+      <%= form.label :name, style: "display: block", autofocus: true  %>
+      <%= form.text_field :name %>
+    </div>
 
-  <div>
-    <%= form.label :name, style: "display: block", autofocus: true  %>
-    <%= form.text_field :name %>
+    <div class="field">
+      <%= form.submit %>
+    </div>
+      <%= link_to "Cancel", people_path %>
   </div>
 
-  <div>
-    <%= form.submit %>
-    <%= link_to "Cancel", people_path %>
-  </div>
 <% end %>
 
 

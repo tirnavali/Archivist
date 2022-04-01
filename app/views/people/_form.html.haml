@@ -1,0 +1,17 @@
+= form_with(model: @person, class:"")  do |form|
+  - if @person.errors.any?
+    .ui.red.message 
+      %h2= "#{pluralize(@person.errors.count, "error")} prohibited this person from being saved:"
+      %ul
+        - @person.errors.each do |error|
+          %li
+            = error.full_message
+  .inline.fields
+    .field
+      = form.label :name, style: "display: block", autofocus: true 
+    .field
+      = form.text_field :name
+    .field 
+      = form.submit class: "ui small green button"
+    .field 
+      = link_to "Cancel", people_path, class: "ui small red button"
