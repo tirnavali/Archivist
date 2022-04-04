@@ -1,5 +1,5 @@
 <%= turbo_stream.update Toponym.new, "" %>
 <%= turbo_stream.replace "flash_messages" do %>
-    <%= render "people/flash" %>
+    <%= render "flash" %>
 <% end %>
 <%#= turbo_stream.prepend "flash_messages", partial: "flash" %>

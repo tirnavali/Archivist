@@ -1,7 +1,7 @@
 %div{"data-controller": "dropdown"}
 %div{"data-controller": "record-metadatum"}
 
-= simple_form_for @record_metadatum, html: {class:" ui form"} do |f|
+= simple_form_for @record_metadatum, html: {class:""} do |f|
   %h4.ui.dividing.header= t('access_identifiers').titleize
   .field
     = f.association :fond, input_html: { class: "ui fluid search selection dropdown"}
@@ -44,9 +44,10 @@
     = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
   .field
     = f.association :toponyms, input_html: { class: "", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select"}
-  .field 
-    = turbo_frame_tag "new_toponym"
     %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 
+  .field
+    = turbo_frame_tag "flash_messages"
+    = turbo_frame_tag "new_toponym"
   %div.grouped.fields{"data-controller": "checkbox"}
     .field 
       = f.association :languages, as: :check_boxes, input_html: { class: ""}
