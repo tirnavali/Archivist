@@ -33,6 +33,7 @@
       = f.input :ending_date, as: :date, html5: true 
   .field
     = f.association :subjects, input_html: { class: "", id: "multiple-subjects", "data-controller": "subjects-multiple-select"}
+    %i.ui.plus.icon= link_to t("add"), new_subject_path, data: { turbo_frame: dom_id(Person.new) } 
   .field
     = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
     %i.ui.plus.icon= link_to t("add"), new_person_path, data: { turbo_frame: dom_id(Person.new) } 
@@ -43,6 +44,9 @@
     = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
   .field
     = f.association :toponyms, input_html: { class: "", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select"}
+  .field 
+    = turbo_frame_tag "new_toponym"
+    %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 
   %div.grouped.fields{"data-controller": "checkbox"}
     .field 
       = f.association :languages, as: :check_boxes, input_html: { class: ""}

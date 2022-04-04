@@ -26,6 +26,8 @@ class ToponymsController < ApplicationController
 
     respond_to do |format|
       if @toponym.save
+        flash[:info] = "Toponym was successfully created."
+        format.turbo_stream
         format.html { redirect_to toponym_url(@toponym), notice: "Toponym was successfully created." }
         format.json { render :show, status: :created, location: @toponym }
       else

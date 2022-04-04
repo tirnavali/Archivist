@@ -1,0 +1,6 @@
+%h1 New person
+= turbo_frame_tag "new_person"  do
+  = render "form", person: @person 
+  %br
+%div
+  = link_to "Back to people", people_path(@person)
