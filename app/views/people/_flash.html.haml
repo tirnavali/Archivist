@@ -1,4 +1,4 @@
 - if flash[:info]
-  .ui.compact.positive.message
-    %p
+  .ui.compact.positive.message{data: {controller: "removals", action: "animationend->removals#remove"} }
+    %div
       = flash[:info]

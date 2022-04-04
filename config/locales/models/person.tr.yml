@@ -1,0 +1,9 @@
+tr:
+  activerecord:
+    models:
+      person:
+        one: "Kişi"
+        other: "Kişiler"
+    attributes:
+      person:
+        name: "Ad"

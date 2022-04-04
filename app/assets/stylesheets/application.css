@@ -20,10 +20,10 @@
      background-color: rgb(240, 238, 236);
  }
 
- turbo-frame {
+ /* turbo-frame {
      display: block;
      border: 1px solid blue;
- }
+ } */
 
 .ui.small.menu {
     background: rgb(2,0,36);

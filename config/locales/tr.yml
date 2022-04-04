@@ -17,6 +17,11 @@ tr:
       truncate: "&hellip;"
     record_metadata:
       this_record_contains_of: "bu belgenin içerdiği"
+  
+  errors:
+    messages:
+      taken: "Bu %{attribute} daha önce kayıt edilmiş."
+
 
     
   helpers:
@@ -35,6 +40,7 @@ tr:
   created_at: "Oluşturulma Tarihi"
   updated_at: "Güncellenme Tarihi"
   action: "Eylem"
+  add: "Ekle"
 
   ransack:
     search: "ara"
