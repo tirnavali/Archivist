@@ -35,10 +35,10 @@
       .field 
         = f.input :ending_date, as: :date, html5: true 
   .field
-    = f.association :subjects, input_html: { class: "select2 multiple", id: "multiple-subjects", "data-controller": "subjects-multiple-select", style: "width: 100%"}
+    = f.association :subjects, collection: Subject.find(@record_metadatum.subject_ids), input_html: { class: "select2 multiple", id: "multiple-subjects", "data-controller": "subjects-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_subject_path, data: { turbo_frame: dom_id(Person.new) } 
   .field
-    = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
+    = f.association :people, collection: Person.find(@record_metadatum.person_ids), input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
     %i.ui.plus.icon= link_to t("add"), new_person_path, data: { turbo_frame: dom_id(Person.new) } 
   .ui.form.field
     = turbo_frame_tag "flash_messages"
@@ -46,7 +46,7 @@
   .field
     = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
   .field
-    = f.association :toponyms, input_html: { class: "select2 multiple", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
+    = f.association :toponyms, collection: Toponym.find(@record_metadatum.toponym_ids), input_html: { class: "select2 multiple", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 
   .ui.form.field
     = turbo_frame_tag "flash_messages"
@@ -66,4 +66,3 @@
         .grouped.fields{"data-controller": "checkbox"}
           = f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " }
   = f.button :submit, class: "ui green button"
-
