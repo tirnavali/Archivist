@@ -24,5 +24,9 @@ tr:
       blank: "boş olamaz"
       too_short: "çok kısa"
       too_long: "çok uzun"
-    
+  activerecord:
+    models:
+      record_metadatum:
+        one: "Belge üstverisi"
+        other: "Belge üstverileri"
       

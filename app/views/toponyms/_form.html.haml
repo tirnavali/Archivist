@@ -10,7 +10,7 @@
     .field
       = form.label t(:name), style: "display: block", autofocus: true 
     .five.wide.field
-      = form.text_field :name
+      = form.text_field :name, {"data-controller": "focus"}
     .field 
       = form.submit class: "ui green button"
     .field 

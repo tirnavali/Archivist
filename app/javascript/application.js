@@ -13,11 +13,9 @@ ActiveStorage.start()
 //    console.log("APPLication loaded"); }, false)
 
 document.addEventListener("turbo:frame-render", function(event){ 
-    console.log("turbo:frame-render is working application.js");
+    //console.log("turbo:frame-render is working application.js");
     $('.ui.basic.modal').modal('show'); }, false)
-
 document.addEventListener("turbo:render", function(event){ 
     $(".error.message").fadeOut(3000, "swing");
     //$("#error explanation").fadeOut(7000, "swing");
-
  }, false)
