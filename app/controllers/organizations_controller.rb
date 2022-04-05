@@ -3,7 +3,8 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations or /organizations.json
   def index
-    @organizations = Organization.order(:name).page params[:page]
+    @q = Organization.ransack(params[:term])
+    @organizations = @q.result.page params[:page]
   end
 
   # GET /organizations/1 or /organizations/1.json

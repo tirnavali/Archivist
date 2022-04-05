@@ -7,11 +7,14 @@ export default class extends Controller {
   
   connect() {    
     $(document).ready(function(){
-      $('#multiple-toponyms').select2({
+      $('#organizations-dropdown').select2({
         //width: 500,
-        minimumInputLength: 2,
+        placeholder: "Kurum seçiniz",
+        allowClear: true,
+        minimumResultsForSearch: 20,
+        minimumInputLength: 3,
         ajax: {
-          url: "http://localhost:3000/toponyms",
+          url: "http://localhost:3000/organizations",
           dataType: "json",       
           delay: 250,        
           data: function (params) {
@@ -20,6 +23,8 @@ export default class extends Controller {
               //commit:"Ara"
             }
             // Query parameters will be ?search=[term]&page=[page]
+            //  organizations.json?term[name_cont]=some&[page]=2
+            // /organizations.json?term[name_cont]
             return q;
           },
           processResults: function (response) {

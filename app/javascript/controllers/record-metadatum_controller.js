@@ -8,7 +8,7 @@ export default class extends Controller {
   
   connect() {    
    
-    $('.select.required.select2.basic');
+    $('.select.required.select2.basic').select2();
     $(document).ready(function(){
       $('.select.optional .select2.multiple').select2({
         //width: 500,

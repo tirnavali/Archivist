@@ -4,7 +4,7 @@
 = simple_form_for @record_metadatum, html: {class:""} do |f|
   %h4.ui.dividing.header= t('access_identifiers').titleize
   .field
-    = f.association :fond, input_html: { class: "ui fluid search selection dropdown"}
+    = f.association :fond, input_html: { class: "select2 basic"}
   %div.grouped.fields{"data-controller": "checkbox"}
   .ui.form
     .four.fields
@@ -44,7 +44,7 @@
     = turbo_frame_tag "flash_messages"
     = turbo_frame_tag "new_person"
   .field
-    = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
+    = f.association :organization, input_html: { class: "select2 basic", id: "organizations-dropdown", "data-controller": "organizations-multiple-select", style: "width: 100%"}
   .field
     = f.association :toponyms, collection: Toponym.find(@record_metadatum.toponym_ids), input_html: { class: "select2 multiple", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 

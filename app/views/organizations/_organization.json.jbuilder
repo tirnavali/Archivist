@@ -1,2 +1,3 @@
-json.extract! organization, :id, :created_at, :updated_at
+json.id organization.id
+json.text organization.name
 json.url organization_url(organization, format: :json)
