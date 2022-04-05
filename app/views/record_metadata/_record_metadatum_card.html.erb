@@ -1,17 +1,15 @@
 <div id="<%= dom_id metadatum %>" class=" item">
             <div class="image">
-              <% file = metadatum.record_attachment.images.first %>
-              <%= image_tag file.preview(resize_to_limit: [50, 50]).processed if file.previewable? %>
+              <% if metadatum.record_attachment %>
+                <% file = metadatum.record_attachment.images.first %>
+                <%= image_tag file.preview(resize_to_limit: [50, 50]).processed if file.previewable? %>
+              <% end %>
             </div>
             <div class="content">
                 <a class="header"><%=metadatum.summary%></a>
                 <div class="meta">
                     <span class="ui black label"><%= t('fond').titleize %>: </strong> <%= metadatum.fond.name %> </span>
-                    
-                    
-                    
                 </div>
-
                 <div class="description">
                   <p>
                     <% special_nums_metadata = metadatum.special_numbers.map { |no| "#{no.number_type} - #{no.value} " }%>

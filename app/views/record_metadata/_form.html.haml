@@ -6,55 +6,64 @@
   .field
     = f.association :fond, input_html: { class: "ui fluid search selection dropdown"}
   %div.grouped.fields{"data-controller": "checkbox"}
-  .four.fields
-    .field
-      = f.input :organization_code
-    .field 
-      = f.input :box
-    .field 
-      = f.input :folder
-    .field 
-      = f.input :order
+  .ui.form
+    .four.fields
+      .field
+        = f.input :organization_code
+      .field 
+        = f.input :box
+      .field 
+        = f.input :folder
+      .field 
+        = f.input :order
   %h4.ui.dividing.header= t('special_access_numbers').titleize
-  %div
-    = f.simple_fields_for :special_numbers do |special_number_form|
-      = render 'special_number_fields', :form => special_number_form
-    = link_to_add_association  t('add_number'), f, :special_numbers, form_name: 'form', class:"ui primary button"
+  .ui.form
+    %div
+      = f.simple_fields_for :special_numbers do |special_number_form|
+        = render 'special_number_fields', :form => special_number_form
+      = link_to_add_association  t('add_number'), f, :special_numbers, form_name: 'form', class:"ui primary button"
   %h4.ui.dividing.header= t('detailed_information').titleize
-  .two.fields
-    .field
-      = f.input :summary
-    .field
-      = f.input :explaination
-  .two.fields 
-    .field
-      = f.input :starting_date, as: :date, html5: true
-    .field 
-      = f.input :ending_date, as: :date, html5: true 
+  .ui.form
+    .two.fields
+      .field
+        = f.input :summary
+      .field
+        = f.input :explaination
+    .two.fields 
+      .field
+        = f.input :starting_date, as: :date, html5: true
+      .field 
+        = f.input :ending_date, as: :date, html5: true 
   .field
-    = f.association :subjects, input_html: { class: "", id: "multiple-subjects", "data-controller": "subjects-multiple-select"}
+    = f.association :subjects, input_html: { class: "select2 multiple", id: "multiple-subjects", "data-controller": "subjects-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_subject_path, data: { turbo_frame: dom_id(Person.new) } 
   .field
     = f.association :people, input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
     %i.ui.plus.icon= link_to t("add"), new_person_path, data: { turbo_frame: dom_id(Person.new) } 
-  .field
+  .ui.form.field
     = turbo_frame_tag "flash_messages"
     = turbo_frame_tag "new_person"
   .field
     = f.association :organization, input_html: { class: "ui fluid multiple search selection dropdown"}
   .field
-    = f.association :toponyms, input_html: { class: "", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select"}
+    = f.association :toponyms, input_html: { class: "select2 multiple", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 
-  .field
+  .ui.form.field
     = turbo_frame_tag "flash_messages"
     = turbo_frame_tag "new_toponym"
-  %div.grouped.fields{"data-controller": "checkbox"}
-    .field 
-      = f.association :languages, as: :check_boxes, input_html: { class: ""}
-    .field 
-      = f.association :document_types, as: :check_boxes, input_html: { class: "hidden" } 
-    .field 
-      = f.association :privacy, as: :radio_buttons, input_html: { class: "hidden" }
-    .field 
-      = f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " }
-  = f.button :submit
+  .ui.form
+    .four.fields
+      .field
+        .grouped.fields{"data-controller": "checkbox"}
+          = f.association :languages, as: :check_boxes, input_html: { class: "ui"}
+      .field
+        .grouped.fields{"data-controller": "checkbox"}
+          = f.association :document_types, as: :check_boxes, input_html: { class: "hidden" } 
+      .field
+        .grouped.fields{"data-controller": "checkbox"}
+          = f.association :privacy, as: :radio_buttons, input_html: { class: "hidden" }
+      .field
+        .grouped.fields{"data-controller": "checkbox"}
+          = f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " }
+  = f.button :submit, class: "ui green button"
+

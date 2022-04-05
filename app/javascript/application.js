@@ -4,7 +4,7 @@ import "controllers"
 import "jquery"
 import "semantic-ui"
 import * as ActiveStorage from "@rails/activestorage";
-import "vanilla-nested"
+//import "vanilla-nested"
 
 
 ActiveStorage.start()
