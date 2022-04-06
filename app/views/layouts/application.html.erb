@@ -65,22 +65,21 @@
     <% end %>
 
     <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
-    <%= "fond".pluralize.titleize %>
+    <%= t("fond").titleize %>
       <div class="ui teal left pointing label"><%= Fond.all.size %></div>
     <% end %>
     
-    <%= link_to (documents_url) , class: is_page_active?(documents_url) do %>
-    <%= "document".pluralize.titleize %>
-      <div class="ui teal left pointing label"><%= Document.all.size %></div>
-    <% end %>
+    <%#= link_to (documents_url) , class: is_page_active?(documents_url) do %>
+    <%#= "document".pluralize.titleize %>
+    <%# end %>
 
     <%= link_to (record_metadata_url) , class: is_page_active?(record_metadata_url) do %>
-    <%= "record".pluralize.titleize %>
+    <%= t("record_metadata").titleize %>
       <div class="ui teal left pointing label"><%= RecordMetadatum.all.size %></div>
     <% end %>
   
     <%= link_to (privacies_url) , class: is_page_active?(privacies_url) do %>
-    <%= "privacy".pluralize.titleize %>
+    <%= t("privacy").titleize %>
       <div class="ui teal left pointing label"><%= Privacy.all.size %></div>
     <% end %>
     
