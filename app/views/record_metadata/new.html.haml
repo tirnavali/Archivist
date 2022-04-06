@@ -1,0 +1,7 @@
+- content_for :head do
+  %meta{:content => "reload", :name => "turbo-visit-control"}/
+%h1= t('new_record_metadatum')
+= render "form", record_metadatum: @record_metadatum
+%br/
+%div
+  = link_to t("back_to_record_metadata"), record_metadata_path
