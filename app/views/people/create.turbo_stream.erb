@@ -1,5 +1,5 @@
 <%= turbo_stream.update Person.new, "" %>
-<%= turbo_stream.replace "flash_messages" do %>
+<%= turbo_stream.prepend "person_flash_messages" do %>
     <%= render "flash" %>
 <% end %>
 <%#= turbo_stream.prepend "flash_messages", partial: "flash" %>

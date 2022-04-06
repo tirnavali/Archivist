@@ -1,6 +1,6 @@
 %h1 New toponym
 = turbo_frame_tag "new_toponym"  do
-  = render "form", person: @toponym 
+  = render "form", toponym: @toponym 
   %br
 %div
   = link_to "Back to toponyms", toponyms_path(@toponym)

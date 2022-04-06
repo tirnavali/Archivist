@@ -1,11 +1,11 @@
 %div{"data-controller": "dropdown"}
-%div{"data-controller": "record-metadatum"}
+%div{}
 
 = simple_form_for @record_metadatum, html: {class:""} do |f|
   %h4.ui.dividing.header= t('access_identifiers').titleize
   .field
-    = f.association :fond, input_html: { class: "select2 basic"}
-  %div.grouped.fields{"data-controller": "checkbox"}
+    = f.association :fond, input_html: { class: "select2 basic", id: "fond-metadatum-dropdown", style: "width: 100%", "data-controller": "fond-metadatum"}
+  %div.grouped.fields
   .ui.form
     .four.fields
       .field
@@ -35,21 +35,21 @@
       .field 
         = f.input :ending_date, as: :date, html5: true 
   .field
-    = f.association :subjects, collection: Subject.find(@record_metadatum.subject_ids), input_html: { class: "select2 multiple", id: "multiple-subjects", "data-controller": "subjects-multiple-select", style: "width: 100%"}
-    %i.ui.plus.icon= link_to t("add"), new_subject_path, data: { turbo_frame: dom_id(Person.new) } 
+    = f.association :subjects, collection: Subject.find(@record_metadatum.subject_ids), input_html: { class: "", id: "multiple-subjects", "data-controller": "subjects-multiple-select", style: "width: 100%"}
+    %i.ui.plus.icon= link_to t("add"), new_subject_path, data: { turbo_frame: dom_id(Subject.new) } 
   .field
-    = f.association :people, collection: Person.find(@record_metadatum.person_ids), input_html: { class: "select2 multiple ", multiple: "multiple", style: "width: 100%" }
+    = f.association :people, collection: Person.find(@record_metadatum.person_ids), input_html: { class: " ", multiple: "multiple", id: "multiple-people", "data-controller": "people-metadatum", style: "width: 100%" }
     %i.ui.plus.icon= link_to t("add"), new_person_path, data: { turbo_frame: dom_id(Person.new) } 
   .ui.form.field
-    = turbo_frame_tag "flash_messages"
+    = turbo_frame_tag "person_flash_messages"
     = turbo_frame_tag "new_person"
   .field
     = f.association :organization, input_html: { class: "select2 basic", id: "organizations-dropdown", "data-controller": "organizations-multiple-select", style: "width: 100%"}
   .field
-    = f.association :toponyms, collection: Toponym.find(@record_metadatum.toponym_ids), input_html: { class: "select2 multiple", id: "multiple-toponyms", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
+    = f.association :toponyms, collection: Toponym.find(@record_metadatum.toponym_ids), input_html: { class: "", id: "multiple-toponyms", multiple: "multiple", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 
   .ui.form.field
-    = turbo_frame_tag "flash_messages"
+    = turbo_frame_tag "toponym_flash_messages"
     = turbo_frame_tag "new_toponym"
   .ui.form
     .four.fields

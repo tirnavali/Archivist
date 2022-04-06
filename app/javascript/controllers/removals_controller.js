@@ -3,7 +3,9 @@ import "jquery"
 // Connects to data-controller="removals"
 export default class extends Controller {
   connect() {
-    console.log("it works")
-    $(this.element).fadeOut(5000, "swing")
+    //console.log("it works");
+    $(this.element).fadeOut(5000, function(){
+      $(this).remove();
+    })
   }
 }
