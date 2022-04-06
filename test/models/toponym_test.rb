@@ -19,6 +19,13 @@ class ToponymTest < ActiveSupport::TestCase
     assert_not t.save
   end
 
+  test "toponym name can not start and end with extra white spaces" do
+    p = Toponym.new
+    p.name ="   türkiye  --  ankara  --  nallıhan  "
+    p.save
+    assert_equal("türkiye -- ankara -- nallıhan", p.name)
+  end
+
   test "toponym name must be bigger than 2 chars" do
     t = Toponym.new
     t.name= "de"
@@ -36,5 +43,12 @@ class ToponymTest < ActiveSupport::TestCase
     t = Toponym.new
     t.name= %q(8vnnrHyIExJUNhMVj4kta5VEG3ncJn-tp1WvRJPGUPP1oxf11UlbLKXSlQVnOr77-R4uQwZ9VIHxUt5x1Gh72hc5ikV1lkRlzQ)
     assert t.save
+  end
+
+  test "Toponym name must be unique and case sensetive" do
+    t1= Toponym.new(name: "Paris")
+    t1.save
+    t2= Toponym.new(name: "paris")
+    assert_not t2.save
   end
 end

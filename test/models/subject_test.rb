@@ -39,9 +39,16 @@ class SubjectTest < ActiveSupport::TestCase
   end
 
   test "subject name must be unique" do
-    t1= Subject.new(name: "Çok gizli")
+    t1= Subject.new(name: "türkler ve moğollar")
     t1.save
-    t2= Subject.new(name: "Çok gizli")
+    t2= Subject.new(name: "türkler ve moğollar")
+    assert_not t2.save
+  end
+
+  test "Subject name must be unique and case sensetive" do
+    t1= Subject.new(name: "türkler ve moğollar")
+    t1.save
+    t2= Subject.new(name: "Türkler Ve moğollar")
     assert_not t2.save
   end
 end

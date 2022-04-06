@@ -44,4 +44,11 @@ class PhisycalStatusTest < ActiveSupport::TestCase
     t2= PhisycalStatus.new(name: "Çok gizli")
     assert_not t2.save
   end
+
+  test "phisycal status name must be unique and case sensetive" do
+    t1= PhisycalStatus.new(name: "Kamusal Gizli")
+    t1.save
+    t2= PhisycalStatus.new(name: "kamusal gizli")
+    assert_not t2.save
+  end
 end

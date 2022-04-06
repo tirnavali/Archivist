@@ -44,4 +44,11 @@ class PrivacyTest < ActiveSupport::TestCase
     t2= Privacy.new(name: "Çok gizli")
     assert_not t2.save
   end
+
+  test "Privacy name must be unique and case sensetive" do
+    t1= Privacy.new(name: "Kamusal Gizli")
+    t1.save
+    t2= Privacy.new(name: "kamusal gizli")
+    assert_not t2.save
+  end
 end

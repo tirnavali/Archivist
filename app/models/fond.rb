@@ -1,5 +1,6 @@
 class Fond < ApplicationRecord
   audited
+  before_validation :clean_white_spaces
   before_create :assign_depth
   before_save   :assign_depth
 
@@ -9,7 +10,9 @@ class Fond < ApplicationRecord
   has_many :documents
   has_many :metadata
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { case_sensitive: false }
+  validates_presence_of :name
+  validates_length_of :name, in: 3..100
 
   def to_s
     self.name
@@ -25,5 +28,8 @@ class Fond < ApplicationRecord
     def assign_depth
       self.depth = (self.parent.present? ? parent.depth + 1 : 0)
     end
-  
+    
+    def clean_white_spaces
+      self.name.squish!
+    end
 end
