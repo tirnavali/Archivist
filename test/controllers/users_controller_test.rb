@@ -27,6 +27,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "user cannot delete user" do 
+  end
 
   test "superuser can get edit user page" do
     sign_in @superadmin
