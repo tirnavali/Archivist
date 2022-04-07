@@ -3,7 +3,10 @@ import "select2";
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {    
+  connect() {   
+    $(document).on("turbo:before-cache", function(){ 
+      $('#multiple-people').select2('destroy');
+    }); 
     $(document).ready(function(){
       $('#multiple-people').select2({
         //width: 500,

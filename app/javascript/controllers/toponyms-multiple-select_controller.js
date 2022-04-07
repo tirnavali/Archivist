@@ -5,7 +5,10 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   
-  connect() {    
+  connect() { 
+    $(document).on("turbo:before-cache", function(){ 
+      $('#multiple-toponyms').select2('destroy');
+    });    
     $(document).ready(function(){
       $('#multiple-toponyms').select2({
         //width: 500,

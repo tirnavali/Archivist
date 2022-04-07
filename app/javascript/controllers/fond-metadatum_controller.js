@@ -5,18 +5,17 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   
-  connect() {    
+  connect() {  
+    $(document).on("turbo:before-cache", function(){ 
+      $('#fond-metadatum-dropdown').select2('destroy');
+    })
+
+   $('#fond-metadatum-dropdown').select2(
+    {
+      placeholder: "Fon seçiniz",
+      allowClear: true,
+    }
+  );
    
-    $('#fond-metadatum-dropdown').select2(
-      {
-        placeholder: "Fon seçiniz",
-        allowClear: true,
-        
-      }
-    );
-    // This code is bugy and not working needs to fix
-    // $(document).on('select2:open', ()=>{
-    //   $(".select2-search__field")[0]
-    // })
   }
 }

@@ -42,6 +42,7 @@ class RecordMetadataController < ApplicationController
         format.html { redirect_to new_record_attachment_url(record_metadatum_id: @record_metadatum.id), notice: "Record metadatum was successfully created." }
         format.json { render :show, status: :created, location: @record_metadatum }
       else
+        @record_metadatum.special_numbers.build
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @record_metadatum.errors, status: :unprocessable_entity }
       end
