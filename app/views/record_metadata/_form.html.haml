@@ -18,7 +18,7 @@
         = f.input :order
   %h4.ui.dividing.header= t('special_access_numbers').titleize
   .ui.form
-    %div
+    %div{"data-controller": "cocoon"}
       = f.simple_fields_for :special_numbers do |special_number_form|
         = render 'special_number_fields', :form => special_number_form
       = link_to_add_association  t('add_number'), f, :special_numbers, form_name: 'form', class:"ui primary button"
