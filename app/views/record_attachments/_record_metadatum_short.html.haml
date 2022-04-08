@@ -1,0 +1,34 @@
+.ui.red.segment
+  %h3.ui.dividing.header Bu kayıda ilişkin üstveriler
+  %p
+    %strong Id: 
+    = metadatum.id
+  %p
+    %strong Fond:
+    = metadatum.fond.name
+  %p
+    %strong Organization Number:
+    = metadatum.organization_code
+  %p
+    %strong Box:
+    = metadatum.box
+    \/
+    - if metadatum.folder
+      %strong Folder:
+      = metadatum.folder
+      \/
+    %strong Order:
+    = metadatum.order
+  %p
+    %strong Starting Date:
+    %span
+      = metadatum.starting_date
+    - if metadatum.ending_date
+      %strong Ending Date:
+      = metadatum.ending_date
+  %h3= t('summary')
+  %p.ui.secondary.segment
+    /%strong= t('Summary')
+    = metadatum.summary
+  %p
+    = link_to t("edit_record_metadatum"), edit_record_metadatum_path(metadatum), {class: "ui yellow tiny button"}

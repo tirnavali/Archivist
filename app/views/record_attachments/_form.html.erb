@@ -1,4 +1,4 @@
-<%= form_with(model: record_attachment) do |form| %>
+<%= form_with(model: record_attachment, class: "ui form") do |form| %>
   <% if record_attachment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(record_attachment.errors.count, "error") %> prohibited this record_attachment from being saved:</h2>
@@ -11,14 +11,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :record_metadatum, style: "display: block" %>
-    <%= record_attachment.record_metadatum %>
-  </div>
+ 
   
     <%=form.hidden_field :record_metadatum_id, value: record_attachment.record_metadatum.id%>
-
+    <div class="ui input">
     <%= form.file_field :images, multiple: true, direct_upload: true %>
+    </div>
       <% if @record_attachment.images.exists? %>
         <div class="ui seven column stackable grid">
         <% record_attachment.images.each do |attach| %>

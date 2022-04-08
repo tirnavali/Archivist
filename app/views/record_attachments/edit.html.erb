@@ -1,4 +1,6 @@
 <h1>Editing record attachment</h1>
+<%= record_navigation(@record_attachment.id)%>
+<%= render "record_metadatum_short", metadatum: @record_attachment.record_metadatum %>
 
 <%= render "form", record_attachment: @record_attachment %>
 

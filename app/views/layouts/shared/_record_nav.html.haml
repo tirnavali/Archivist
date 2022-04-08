@@ -1,0 +1,26 @@
+.ui.steps
+  -if current_page?(controller: 'record_metadata', action: 'new') || current_page?(controller: 'record_metadata', action: 'edit')
+    .active.step
+      %i.edit.icon
+      .content
+        .title Üstveriler
+        .description Belge tanımlayıcılarını girin
+  -else
+    .completed.step
+      %i.edit.icon
+      .content
+        .title Üstveriler
+        .description Belge tanımlayıcılarını girin
+    
+  -if current_page?(controller: 'record_attachments', action: 'new') || current_page?(edit_record_attachment_path(record_attachment_id))
+    .active.step
+      %i.attach.icon
+      .content
+        .title Dosya
+        .description Belge görüntülerini ekleyin
+  -else
+    .disabled.step
+      %i.attach.icon
+      .content
+        .title Dosya
+        .description Belge görüntülerini ekleyin
