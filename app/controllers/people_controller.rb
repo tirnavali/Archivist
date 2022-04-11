@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
+  skip_before_action  :authenticate_user!, only: %i[index]
 
   # GET http://localhost:3000/people/search.json?
   def search

@@ -14,7 +14,7 @@ export default class extends Controller {
         //width: 500,
         minimumInputLength: 2,
         ajax: {
-          url: "http://localhost:3000/toponyms",
+          url: "http://localhost:3000/toponyms.json",
           dataType: "json",       
           delay: 250,        
           data: function (params) {

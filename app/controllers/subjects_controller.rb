@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: %i[ show edit update destroy ]
+  skip_before_action  :authenticate_user!, only: %i[index]
 
   # GET /subjects or /subjects.json
   def index

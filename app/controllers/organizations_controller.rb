@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[ show edit update destroy ]
+  skip_before_action  :authenticate_user!, only: %i[index]
 
   # GET /organizations or /organizations.json
   def index

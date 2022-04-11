@@ -18,9 +18,9 @@ export default class extends Controller {
         minimumResultsForSearch: 20,
         minimumInputLength: 3,
         ajax: {
-          url: "http://localhost:3000/organizations",
+          url: "http://localhost:3000/organizations.json",
           dataType: "json",       
-          delay: 250,        
+          delay: 250,
           data: function (params) {
             var q = {
               term:{name_cont: params.term},

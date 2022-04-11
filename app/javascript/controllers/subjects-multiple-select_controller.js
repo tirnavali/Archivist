@@ -13,19 +13,22 @@ export default class extends Controller {
         //width: 500,
         minimumInputLength: 2,
         ajax: {
-          url: "http://localhost:3000/subjects",
-          dataType: "json",       
-          delay: 250,        
+          url: "http://localhost:3000/subjects.json",
+          dataType: "json",          
+          delay: 250,
+          crossDomain: true,
+          type: 'GET',
           data: function (params) {
             var q = {
               term:{name_cont: params.term},
               //commit:"Ara"
             }
+            console.log(q)
             // Query parameters will be ?search=[term]&page=[page]
             return q;
           },
           processResults: function (response) {
-            //console.log(response);
+            console.log("response is : " + response);
             // Transforms the top-level key of the response object from 'items' to 'results'
             return { results: response};
           },

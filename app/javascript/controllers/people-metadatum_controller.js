@@ -12,7 +12,7 @@ export default class extends Controller {
         //width: 500,
         minimumInputLength: 3,
         ajax: {
-          url: "http://localhost:3000/people/search",
+          url: "http://localhost:3000/people/search.json",
           dataType: "json",       
           delay: 250,        
           data: function (params) {
