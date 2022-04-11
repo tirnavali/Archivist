@@ -17,24 +17,6 @@
       <%=toponym.updated_at.strftime("%d.%m.%Y %H.%M")  %>
     </div>
   </td>
-
-  <td class="collapsing">
-    <span>
-      <%= link_to  toponym do %>
-        <i class="large folder open icon "></i>
-      <% end %>
-    </span>
-    <span>
-      <%= link_to  edit_toponym_path toponym.id do %>
-        <i class="large orange edit icon "></i>
-      <% end %>
-    </span>
-    <span>    
-        <%= link_to toponym,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
-          <i class="red large remove icon "></i>
-        <% end %>
-    </span>
-  </td>
-
+  <%= render "layouts/shared/actions", resource: toponym %>
 </tr>
 <% end %>

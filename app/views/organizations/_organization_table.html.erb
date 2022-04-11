@@ -20,24 +20,6 @@
     </div>
   </td>
 
- 
-  <td class="collapsing">
-    <span>
-      <%= link_to  organization do %>
-        <i class="large folder open icon "></i>
-      <% end %>
-    </span>
-    <span>
-      <%= link_to  edit_organization_path organization.id do %>
-        <i class="large orange edit icon "></i>
-      <% end %>
-    </span>
-    <span>    
-        <%= link_to organization ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
-          <i class="red large remove icon "></i>
-        <% end %>
-    </span>
-  
-  </td>
+  <%= render "layouts/shared/actions", resource: organization %>
 </tr>
 <% end %>

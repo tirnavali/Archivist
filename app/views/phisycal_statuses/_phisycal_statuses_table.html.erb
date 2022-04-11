@@ -19,25 +19,7 @@
       <%=phisycal_status.updated_at.strftime("%d.%m.%Y %H.%M")  %>
     </div>
   </td>
+  <%= render "layouts/shared/actions", resource: phisycal_status %>
 
- 
-  <td class="collapsing">
-    <span>
-      <%= link_to  phisycal_status do %>
-        <i class="large folder open icon "></i>
-      <% end %>
-    </span>
-    <span>
-      <%= link_to  edit_phisycal_status_path phisycal_status.id do %>
-        <i class="large orange edit icon "></i>
-      <% end %>
-    </span>
-    <span>    
-        <%= link_to phisycal_status ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
-          <i class="red large remove icon "></i>
-        <% end %>
-    </span>
-  
-  </td>
 </tr>
 <% end %>
