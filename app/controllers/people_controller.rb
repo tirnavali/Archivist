@@ -1,11 +1,11 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
-  skip_before_action  :authenticate_user!, only: %i[index]
+  skip_before_action  :authenticate_user!, only: %i[search]
 
   # GET http://localhost:3000/people/search.json?
   def search
     @people = Person.where("name like ?", "%#{params[:term]}%")
-    puts "search size #{@people.size}"
+    #puts "search size #{@people.size}"
    end
 
    # GET /people or /people.json
