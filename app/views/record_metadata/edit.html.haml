@@ -1,5 +1,5 @@
 %h1= t('edit_record_metadatum')
-= record_navigation
+= record_navigation(metadatum_id: @record_metadatum.id )
 = render "form", record_metadatum: @record_metadatum
 %br/
 %div

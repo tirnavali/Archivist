@@ -11,7 +11,7 @@ module ApplicationHelper
     current_user.superadmin?
   end
 
-  def record_navigation (attachment_id=0)
-    render "layouts/shared/record_nav", record_attachment_id: attachment_id
+  def record_navigation(attachment_id: 0, metadatum_id: 0)
+    render "layouts/shared/record_nav", {record_attachment_id: attachment_id, record_metadatum_id: metadatum_id }
   end
 end

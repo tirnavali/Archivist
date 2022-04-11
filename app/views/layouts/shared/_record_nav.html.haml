@@ -1,5 +1,5 @@
 .ui.steps
-  -if current_page?(controller: 'record_metadata', action: 'new') || current_page?(controller: 'record_metadata', action: 'edit') 
+  -if current_page?(controller: 'record_metadata', action: 'new') || current_page?(edit_record_metadatum_path(record_metadatum_id)) 
     .active.step
       %i.edit.icon
       .content
