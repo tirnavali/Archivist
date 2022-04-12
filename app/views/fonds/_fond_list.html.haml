@@ -1,0 +1,9 @@
+.ui.divided.list
+- @fonds.each do |fond| 
+  .item
+    %i.folder.icon
+    .content
+      .header= fond.name
+      .description=fond.explanation
+      - unless fond.children.size.nil?
+        = render "fond_list"   

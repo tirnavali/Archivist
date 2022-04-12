@@ -22,8 +22,6 @@ tr:
     messages:
       taken: "Bu %{attribute} daha önce kayıt edilmiş."
 
-
-    
   helpers:
     page_entries_info:
       one_page:

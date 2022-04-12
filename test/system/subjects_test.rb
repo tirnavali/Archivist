@@ -3,7 +3,7 @@ require "application_system_test_case"
 class SubjectsTest < ApplicationSystemTestCase
   setup do
     login_as users(:admin)
-    @subject = subjects(:first)
+    @subject = subjects(:second)
   end
 
   test "visiting the index" do
@@ -16,7 +16,7 @@ class SubjectsTest < ApplicationSystemTestCase
     click_on "New subject"
 
     fill_in "Name", with: @subject.name
-    click_on "Create Subject"
+    click_on I18n.t("save")
 
     assert_text "Subject was successfully created"
     click_on "Back"

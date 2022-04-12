@@ -1,0 +1,17 @@
+first:
+  organization_code: KNN-123
+  box              : 13234
+  folder           : 2
+  order            : 3
+  summary: qazwsxedcrfvtgb
+  explaination: qazwsxedcrfvt
+  starting_date: 12-02-2018
+  ending_date: 12-02-2019
+  fond: first
+  organization: first
+  privacy: first
+  subjects: first, second, third
+  toponyms: first, second, third
+  people: first, second, third
+  languages: first, second, third
+  document_types: first, second, third
