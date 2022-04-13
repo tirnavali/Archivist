@@ -34,29 +34,37 @@ class RecordMetadataTest < ApplicationSystemTestCase
     fill_in "record_metadatum_starting_date", with: @record_metadatum.starting_date
     fill_in "record_metadatum_ending_date", with: @record_metadatum.ending_date
 
-    # find(".record_metadatum_subjects").find(".select2-search__field").fill_in  with: @subject.name
-    # first('li.select2-results__option[role="option"]', text: @subject.name).click
+    find(".record_metadatum_subjects").find(".select2-search__field").fill_in  with: @subject.name
+    first('li.select2-results__option[role="option"]', text: @subject.name).click
 
-    # find(".record_metadatum_subjects").find(".select2-search__field").fill_in  with: @record_metadatum.subjects.second.name
-    # first('li.select2-results__option[role="option"]', text:  @record_metadatum.subjects.second.name).click
+    find(".record_metadatum_subjects").find(".select2-search__field").fill_in  with: @record_metadatum.subjects.second.name
+    first('li.select2-results__option[role="option"]', text:  @record_metadatum.subjects.second.name).click
 
-    # find(".record_metadatum_people").find(".select2-search__field").fill_in  with: @person.name
-    # first('li.select2-results__option[role="option"]', wait:10, text: @person.name).click
+    find(".record_metadatum_people").find(".select2-search__field").fill_in  with: @person.name
+    first('li.select2-results__option[role="option"]', wait:10, text: @person.name).click
 
-    # find(".record_metadatum_people").find(".select2-search__field").fill_in  with: @record_metadatum.people.second.name
-    # first('li.select2-results__option[role="option"]', wait:10, text: @record_metadatum.people.second.name).click
+    find(".record_metadatum_people").find(".select2-search__field").fill_in  with: @record_metadatum.people.second.name
+    first('li.select2-results__option[role="option"]', wait:10, text: @record_metadatum.people.second.name).click
 
-    # find(".record_metadatum_toponyms").find(".select2-search__field").fill_in  with: @toponym.name 
-    # first('li.select2-results__option[role="option"]', text: @toponym.name).click
+    find(".record_metadatum_toponyms").find(".select2-search__field").fill_in  with: @toponym.name 
+    first('li.select2-results__option[role="option"]', text: @toponym.name).click
 
-    # find(".record_metadatum_toponyms").find(".select2-search__field").fill_in  with: @record_metadatum.toponyms.second.name 
-    # first('li.select2-results__option[role="option"]', text: @record_metadatum.toponyms.second.name).click
+    find(".record_metadatum_toponyms").find(".select2-search__field").fill_in  with: @record_metadatum.toponyms.second.name 
+    first('li.select2-results__option[role="option"]', text: @record_metadatum.toponyms.second.name).click
 
     find(".record_metadatum_organization").click
     first('input.select2-search__field[aria-controls="select2-organizations-dropdown-results"]', maximum: 10).fill_in with: @record_metadatum.organization.name
     first('li.select2-results__option[role="option"]', text: @record_metadatum.organization.name).click
 
-    #find(".record_metadatum_privacy")
+    check("record_metadatum_language_ids_#{@record_metadatum.languages.first.id}",allow_label_click: true)
+    check("record_metadatum_document_type_ids_#{@record_metadatum.document_types.first.id}",allow_label_click: true)
+    choose("record_metadatum_privacy_id_#{@record_metadatum.privacy.id}",allow_label_click: true)
+    choose("record_metadatum_phisycal_status_id_#{@record_metadatum.phisycal_status.id}",allow_label_click: true)
+
+
+    # :xpath, ile seçmek için
+    # first(:xpath, '//*[@id="new_record_metadatum"]/div[12]/div/div[3]/div/div/div[1]/label', visible: false).click()
+   
 
 
 
