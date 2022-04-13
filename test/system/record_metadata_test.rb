@@ -34,6 +34,10 @@ class RecordMetadataTest < ApplicationSystemTestCase
     fill_in "record_metadatum_starting_date", with: @record_metadatum.starting_date
     fill_in "record_metadatum_ending_date", with: @record_metadatum.ending_date
 
+    first(:xpath,'//*[@id="new_record_metadatum"]/div[4]/div/div/div[2]/div/input').click
+    first('div', text: "Esas No").click
+    fill_in "record_metadatum[special_numbers_attributes][0][value]", with: "Test Value"
+
     find(".record_metadatum_subjects").find(".select2-search__field").fill_in  with: @subject.name
     first('li.select2-results__option[role="option"]', text: @subject.name).click
 
@@ -65,14 +69,6 @@ class RecordMetadataTest < ApplicationSystemTestCase
     # :xpath, ile seçmek için
     # first(:xpath, '//*[@id="new_record_metadatum"]/div[12]/div/div[3]/div/div/div[1]/label', visible: false).click()
    
-
-
-
-
-
-
-
-
 
 
 
