@@ -9,6 +9,7 @@ class RecordMetadataTest < ApplicationSystemTestCase
     @subject = @record_metadatum.subjects.first
     @toponym = @record_metadatum.toponyms.first
     @person = people(:first)
+    @number_type_first = number_types(:first)
   end
 
   test "visiting the index" do
@@ -35,8 +36,18 @@ class RecordMetadataTest < ApplicationSystemTestCase
     fill_in "record_metadatum_ending_date", with: @record_metadatum.ending_date
 
     first(:xpath,'//*[@id="new_record_metadatum"]/div[4]/div/div/div[2]/div/input').click
-    first('div', text: "Esas No").click
+    # ikinci sıradaki özel no seçildi
+    first(:xpath, '//*[@id="new_record_metadatum"]/div[4]/div/div/div[2]/div/div[2]/div[2]').click
     fill_in "record_metadatum[special_numbers_attributes][0][value]", with: "Test Value"
+
+    click_link "Numara ekle"
+    
+    first(:xpath,'//*[@id="new_record_metadatum"]/div[4]/div[1]/div[2]/div/input').click
+    # birinci sıradaki özel no seçildi
+    first('div', text: @number_type_first.name).click
+    first(:xpath, '//*[@id="new_record_metadatum"]/div[4]/div[1]/div[1]/input').fill_in with: "Test Value 2"
+
+
 
     find(".record_metadatum_subjects").find(".select2-search__field").fill_in  with: @subject.name
     first('li.select2-results__option[role="option"]', text: @subject.name).click
@@ -65,16 +76,14 @@ class RecordMetadataTest < ApplicationSystemTestCase
     choose("record_metadatum_privacy_id_#{@record_metadatum.privacy.id}",allow_label_click: true)
     choose("record_metadatum_phisycal_status_id_#{@record_metadatum.phisycal_status.id}",allow_label_click: true)
 
-
     # :xpath, ile seçmek için
     # first(:xpath, '//*[@id="new_record_metadatum"]/div[12]/div/div[3]/div/div/div[1]/label', visible: false).click()
-   
-
-
 
     click_on I18n.t("save")
 
     assert_text "Record metadatum was successfully created"
+    assert_text "Bu kayıda ilişkin üstveriler"
+    assert_text "New record attachment"
   end
 
   # test "should update Record metadatum" do

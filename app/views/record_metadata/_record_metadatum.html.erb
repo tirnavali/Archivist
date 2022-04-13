@@ -109,7 +109,7 @@
                 <i class="green check icon"></i>
                 <%  unless false %>
                   <%# make it false for iframe view %>
-                  <iframe src=<%= file.url(expires_in: 30 ,disposition: :inline) %> width="600" height="750" style="border: none;"></iframe>
+                  <iframe src="<%= file.url expires_in: 30 ,disposition: :inline %>" width="600" height="750" style="border: none;"></iframe>
                 <% end %>
                 <b><%= file.metadata %></b>
                 <b><%#= file.preview(:size) %></b>
@@ -119,7 +119,7 @@
                 <a href="
                 <%= 
                 #otuz saniye içinde açılmaz ise bağlantı kayboluyor.
-                file.url(expires_in: 30 ,disposition: :inline) %>
+                file.url expires_in: 30 ,disposition: :inline %>
                 ">Aç</a>
                 121 Votes <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
               </div>
