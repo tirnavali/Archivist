@@ -7,6 +7,7 @@ tr:
   date:
     formats:
       short: "%d/%m/%Y"
+  dates: "Tarihler"
   
   views:
     pagination:
