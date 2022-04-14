@@ -2,9 +2,18 @@
 
 <%= render @record_metadatum %>
 
-<div>
-  <%= link_to "Edit this record metadatum", edit_record_metadatum_path(@record_metadatum) %> |
-  <%= link_to "Back to record metadata", record_metadata_path %>
 
-  <%= button_to "Destroy this record metadatum", @record_metadatum, method: :delete %>
+<div class="ui buttons">
+   
 </div>
+
+  <div class="row">
+    <div class="four wide column"></div>
+    <div class="seven wide centered column">
+      <div class="ui buttons">
+      <%= link_to t("edit"), edit_record_metadatum_path(@record_metadatum), class: "ui green basic button" %> 
+      <%= link_to t("back"), record_metadata_path, class: "ui blue basic button" %>
+      <%= button_to t("destroy"), @record_metadatum, method: :delete, class: "ui red basic button" %>
+      </div>
+    </div>
+  </div>

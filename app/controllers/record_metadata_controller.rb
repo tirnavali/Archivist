@@ -1,7 +1,10 @@
 class RecordMetadataController < ApplicationController
-  before_action :set_record_metadatum, only: %i[ show edit update destroy ]
+  before_action :set_record_metadatum, only: %i[ show edit update destroy audit]
   before_action do
     #ActiveStorage::Current.url_options = {protocol: request.protocol, host: request.host, port: request.port}
+  end
+
+  def audit
   end
 
   # GET /record_metadata or /record_metadata.json
@@ -20,7 +23,7 @@ class RecordMetadataController < ApplicationController
   # GET /record_metadata/1 or /record_metadata/1.json
   def show
     unless @record_metadatum.record_attachment.nil?
-    @image =  @record_metadatum.record_attachment.images.first
+      @image =  @record_metadatum.record_attachment.images.first
     end
     #@image = @image.representation("quality": 10).processed.download
   end
