@@ -30,11 +30,7 @@
 <% end %>
 
 <%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui green button segment"%>
-<div class="ui divided items">
-  <% @record_metadata.each do |metadatum| %>
-    <%= render partial: "record_metadatum_card", locals:{ metadatum: metadatum } %>
-  <% end %>
-</div>
+
 <div id="record_metadata">
   <table class="ui celled padded very compact table">
     <thead>

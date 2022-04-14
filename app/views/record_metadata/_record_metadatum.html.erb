@@ -79,10 +79,12 @@
         <td><%= t('explaination').titleize %></td>
         <td> <%= record_metadatum.explaination %></td>
       </tr>
+      <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.images.nil?  %>
       <tr>
         <td><%= t('file_name').titleize %></td>
         <td> <%= record_metadatum.record_attachment.images.first.filename %></td>
       </tr>
+      <% end %>
     </tbody>
   </table>
             <%# =image_tag @image.representation()%>
@@ -92,51 +94,55 @@
             <%# water = Vips::Image.text('sercan').jpegsave_target(target) %>
             <%#= image_tag "watermarking/k2.jpg" %>
             <%#= image_tag @image.variant(resize_to_limit: [800, 800],  composite: [overlay: ImageProcessing::Vips::Image.load_image("app/assets/images/watermarking/k2.jpg"), gravity: "south-east"] ).processed if @image.variable? %>
-<h4 class="ui horizontal divider header"> Info</h4>
-<div class="ui feed">
-  <div class="event">
-    <div class="label">
-      <i class="pencil icon"></i>
-    </div>
-    <div class="content">
-      <div class="summary">
-        <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
-        <div class="date"><%=l  record_metadatum.audits.last.created_at, format: :long%></div>
-        <a><%= t('more') %><i class="external alternate icon"></i></a>
+  <% unless record_metadatum.audits.empty? %>
+    <h4 class="ui horizontal divider header"> Info</h4>
+    <div class="ui feed">
+      <div class="event">
+        <div class="label">
+          <i class="pencil icon"></i>
+        </div>
+        <div class="content">
+          <div class="summary">
+            <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
+            <div class="date"><%=l  record_metadatum.audits.last.created_at, format: :long%></div>
+            <a><%= t('more') %><i class="external alternate icon"></i></a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  <% end %>
 </div> <!-- column -->
   
     <div class="ten wide column">
-    <h4 class="ui horizontal divider header">
-  <i class="file pdf icon"></i>
-    <%= t('record_attachment') %>
-  </h4>
-    <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
-      <%  unless false %>
-        <%# make it false for iframe view %>
-        <iframe  src="<%= file.url expires_in: 30 ,disposition: :inline %>" width="100%" height="750" style="border: none;"></iframe>
-      <% end %>
-      <div class="item">
-        <div class="ui small image">
-          <%#= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
-          <%#= ImageProcessing::Vips.valid_image?(file.url) %>
-        </div>
-        <div class="content">
-          <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
-            <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
-          <% end %>
-            <%= link_to  file , target: :_blank, class: "ui orange button" do %><i class="folder open  icon"></i>Yeni sekmede aç<% end %>
-            <div class="meta">
-            </div>
-            <div class="description">
-               <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
+    <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.images.nil?  %>
+      <h4 class="ui horizontal divider header">
+        <i class="file pdf icon"></i>
+        <%= t('record_attachment') %>
+      </h4>
+      <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
+        <%  unless false %>
+          <%# make it false for iframe view %>
+          <iframe  src="<%= file.url expires_in: 30 ,disposition: :inline %>" width="100%" height="750" style="border: none;"></iframe>
+        <% end %>
+        <div class="item">
+          <div class="ui small image">
+            <%#= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
+            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
+          </div>
+          <div class="content">
+            <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
+              <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
+            <% end %>
+              <%= link_to  file , target: :_blank, class: "ui orange button" do %><i class="folder open  icon"></i>Yeni sekmede aç<% end %>
+              <div class="meta">
+              </div>
+              <div class="description">
+                <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
+      </div>
       <% end %>
-    </div>
 </div>
