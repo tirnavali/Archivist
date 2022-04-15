@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
-  audited
+  has_associated_audits
   before_validation :clean_white_spaces
   has_many :record_metadata, dependent: :nullify
 

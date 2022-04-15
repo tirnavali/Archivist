@@ -1,0 +1,23 @@
+%h1 Auidts 
+%table.ui.striped.table
+  %thead
+    %tr
+      %th version
+      %th auditable_type
+      %th action
+      %th audited_changes
+      %th created_at
+  %tbody
+  - @record_metadatum.audits.descending.each do |audit|
+    %tr
+      %td=audit.version
+      %td=audit.auditable_type
+      %td=audit.action
+      %td=audit.audited_changes
+      %td= l audit.created_at, format: :long
+      %td
+        - audit.audited_changes.each do |key, value|
+          %p
+            =key
+            ="#{value[0]} / #{value[1]}"
+            

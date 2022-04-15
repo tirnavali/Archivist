@@ -5,8 +5,10 @@ class RecordMetadataController < ApplicationController
   end
 
   def audit
+    unless @record_metadatum.audits.empty?
+      @audits =Audit.sort_model_audits @record_metadatum
+    end
   end
-
   # GET /record_metadata or /record_metadata.json
   def index
     #@record_metadata = RecordMetadatum.all
