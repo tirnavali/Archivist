@@ -24,7 +24,12 @@
           <div class="ui column fluid card">
             <div class="content">
               <%= link_to rails_blob_path(attach, disposition: "attachment"), class: "ui center aligned" do %>
+                <% begin %>
                 <div class="image"><%= image_tag attach.representation(resize_to_limit: [150, 150]).processed if attach.representable? %></div>
+                <% rescue Seahorse::Client::NetworkingError %>
+                  <% puts "Seahorse::Client::NetworkingError " %>
+                  <i class="big red exclamation triangle icon"></i>
+                <% end %>
               <% end %>
               <div class="header">File name: <%=attach.filename%></div> 
               <div class="">

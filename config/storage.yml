@@ -34,3 +34,12 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+minio:
+  service: S3
+  access_key_id: simple
+  secret_access_key: "12345678"
+  region: turkey
+  bucket: archivist
+  endpoint: "http://127.0.0.1:9000"
+  force_path_style: true
