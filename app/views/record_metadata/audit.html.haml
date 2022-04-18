@@ -7,6 +7,7 @@
       %th action
       %th audited_changes
       %th created_at
+      %th activity
   %tbody
   - @record_metadatum.audits.descending.each do |audit|
     %tr
@@ -19,5 +20,6 @@
         - audit.audited_changes.each do |key, value|
           %p
             =key
-            ="#{value[0]} / #{value[1]}"
+            - unless value
+              ="#{value[0]} / #{value[1]}"
             

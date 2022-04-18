@@ -1,0 +1,44 @@
+= notice
+= alert
+- if current_user
+  %h1 Fonlarda ve belgelerde arayın...
+  %h2 Son eklenen belgeler
+  .ui.yellow.message
+    %i.star.icon
+    To make the entire content of an item link, check out the link variation below
+  .ui.link.items
+    - @record_metadata.each do |metadata|
+    
+      .item
+        - unless metadata.record_attachment.images.empty?
+          - file = metadata.record_attachment.images.first
+          %a.ui.tiny.image
+            = image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable?
+        .content
+          %a.header="#{metadata.fond} fonu"
+          .description
+            %p=metadata.summary[..200]...
+            Stevie Feliciano is a
+            %a library scientist
+          .extra 
+            Eklenme tarihi 
+            = metadata.created_at 
+            =link_to "aç", metadata, class: "ui tiny primary floated button"
+  %p
+    %a daha fazla
+- else
+  %h2 Log In
+  = form_with(model: @user, url: new_user_session_path(@user), class: "form ui") do |f|
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email"
+    .field
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      = f.password_field :password, autocomplete: "new-password"
+    .actions
+      = f.submit "Sign In", class: "ui primary button"
