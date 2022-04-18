@@ -8,7 +8,6 @@
     To make the entire content of an item link, check out the link variation below
   .ui.link.items
     - @record_metadata.each do |metadata|
-    
       .item
         - unless metadata.record_attachment.images.empty?
           - file = metadata.record_attachment.images.first
@@ -18,14 +17,12 @@
           %a.header="#{metadata.fond} fonu"
           .description
             %p=metadata.summary[..200]...
-            Stevie Feliciano is a
-            %a library scientist
           .extra 
             Eklenme tarihi 
             = metadata.created_at 
             =link_to "aç", metadata, class: "ui tiny primary floated button"
   %p
-    %a daha fazla
+    = link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button"
 - else
   %h2 Log In
   = form_with(model: @user, url: new_user_session_path(@user), class: "form ui") do |f|
