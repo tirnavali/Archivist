@@ -12,9 +12,9 @@
       <%= g.condition_fields do |c| %>
       <div class="field ">
       <%= c.attribute_fields do |a| %>
-        <%=a.attribute_select associations: [:fond, :subjects, :organization] %>
+        <%=a.attribute_select associations: [:fond, :subjects, :organization, :people] %>
       <% end %>
-      <%= c.predicate_select %>
+      <%= c.predicate_select only: %i(cont not_cont eq not_eq blank null)%>
       <%= c.value_fields do |v| %>
         <%= v.text_field :value%>
       <% end %>      
