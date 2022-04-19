@@ -25,5 +25,7 @@ module Archivist
     #config.cache_store = :memory_store, { size: 64.megabytes }
 
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.active_record.async_query_executor= :global_thread_pool
   end
 end

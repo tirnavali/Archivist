@@ -1,17 +1,32 @@
 <div id="<%= dom_id fond %>">
-  <p>
-    <strong>Name:</strong>
-    <%= fond.name %>
-  </p>
+  
+    <div class="ui secondary red segment">
+      <h1 class="custom parent fond name"><%=t('parent_fond')%>:
+      <% if fond.parent %>
+        <%=link_to fond.parent, fond_path(fond.parent) %>
+      <% else %>
+        <%= t("has_no_parent") %>
+      <% end %>
+      </h1>
+    </div>
+  
+  <div class="ui yellow segment">
+    <h2 class=""><%=t('name')%>:
+      <%= fond.name %>
+    </h2>
+    <p class=""><%=t('explanation')%>:
+      <%= fond.explanation %>
+    </p>
+    <h3 class="custom children fond name"><%=t('children')%>:
+      <% if fond.children.empty? %>
+        <ul><%=t('has_no_children')%></ul>
+      <% end %>
+      <% fond.children.each do |child| %>
+        <ul><%=link_to child.name, fond_path(child) %></ul>
+      <% end %>
+    </h3>
+  </div >
+  
 
-  <p>
-    <strong>Parent:</strong>
-    <%= fond.parent.to_s %>
-  </p>
-  <p>
-    <strong>Children:</strong>
-    <%= fond.children_to_s %>
-  </p>
 
-</div>
 

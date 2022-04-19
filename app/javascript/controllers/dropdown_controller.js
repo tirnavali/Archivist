@@ -5,6 +5,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {   
-    $('.ui.dropdown').dropdown();    
+    $('.ui.dropdown').dropdown(
+      {clearable: true}
+    );    
   }
 }

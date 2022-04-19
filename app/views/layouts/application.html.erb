@@ -95,7 +95,7 @@
 
     <%= link_to (organizations_url), class: is_page_active?(organizations_url) do %>
     <%= t :organizations %>
-      <div class="ui teal left pointing label"><%= Organization.all.size %></div>
+      <div class="ui teal left pointing label"><%= Organization.all.load_async.size%></div>
     <% end %>
 
     <%= link_to (document_types_url), class: is_page_active?(document_types_url) do %>

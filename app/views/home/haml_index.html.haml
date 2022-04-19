@@ -6,20 +6,29 @@
   .ui.yellow.message
     %i.star.icon
     To make the entire content of an item link, check out the link variation below
-  .ui.link.items
+  .ui.items
     - @record_metadata.each do |metadata|
       .item
-        - unless metadata.record_attachment.images.empty?
+        - if !metadata.record_attachment.nil? |&& !metadata.record_attachment.images.empty?
           - file = metadata.record_attachment.images.first
           %a.ui.tiny.image
-            = image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable?
+            - begin
+              = image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable?
+            - rescue => e
+              .ui.placeholder
+                .image
+
         .content
           %a.header="#{metadata.fond} fonu"
           .description
             %p=metadata.summary[..200]...
+            %p 
+              Konular: 
+              - metadata.subjects.each  do |subject|
+                ="#{subject.name}, "
           .extra 
             Eklenme tarihi 
-            = metadata.created_at 
+            =metadata.created_at 
             =link_to "aç", metadata, class: "ui tiny primary floated button"
   %p
     = link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button"

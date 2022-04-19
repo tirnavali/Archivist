@@ -79,7 +79,8 @@
         <td><%= t('explaination').titleize %></td>
         <td> <%= record_metadatum.explaination %></td>
       </tr>
-      <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.images.nil?  %>
+      
+      <% if  !record_metadatum.record_attachment.nil? && !record_metadatum.record_attachment.images.empty?  %>
       <tr>
         <td><%= t('file_name').titleize %></td>
         <td> <%= record_metadatum.record_attachment.images.first.filename %></td>

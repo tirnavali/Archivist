@@ -5,8 +5,12 @@ class RecordAttachmentsController < ApplicationController
     puts params[:id]
     @image = ActiveStorage::Attachment.find(params[:id])
     @record_attachment = RecordAttachment.find(@image.record_id)
-    @image.purge
-    redirect_back fallback_location: @record_attachment, notice: "Record attachment was successfully deleted."
+    begin
+      @image.purge
+      redirect_back fallback_location: @record_attachment, notice: "Record attachment was successfully deleted."
+    rescue Seahorse::Client::NetworkingError
+      redirect_back fallback_location: @record_attachment, notice: "Record attachment was successfully deleted."
+    end
     
   end
 
