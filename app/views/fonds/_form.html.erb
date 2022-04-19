@@ -21,7 +21,7 @@
     <%= form.text_area :explanation %>
   </div>
 
-  <div>
+  <div class="asd">
     <%= form.label :parent, style: "display: block" %>
     <%#= form.text_field :Fond_id %>
     <%= form.collection_select :parent_id, Fond.order(:name), :id, :to_s, {prompt: true}, {include_blank: true, class: "ui fluid selection dropdown"} %>

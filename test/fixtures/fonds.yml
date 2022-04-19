@@ -1,12 +1,12 @@
 first:
-  name: Türkiye Büyük Millet Meclisi
+  name: At vero eos et accusamus
   explanation: some explanation
-  parent: second
+  parent: third
 second:
-  name: Kanunlar Kararlar Fonu
+  name: laborum et dolorum fuga. Et
   explanation: some explanation
   parent: first
 third:
-  name: Türkiye Büyük Millet Meclisi
+  name: perfectly simple and easy
   explanation: some explanation
-  parent: first
+  parent: second
