@@ -44,6 +44,7 @@ gem 'aws-sdk-s3', '~> 1.113'
 gem 'aws-sdk-ec2', '~> 1'
 
 
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
