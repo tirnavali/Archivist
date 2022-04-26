@@ -13,6 +13,8 @@ class Fond < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name
   validates_length_of :name, in: 3..100
+  validates :depth, presence: true, numericality: true
+
 
   def to_s
     self.name
