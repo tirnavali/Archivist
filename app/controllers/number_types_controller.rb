@@ -3,7 +3,8 @@ class NumberTypesController < ApplicationController
 
   # GET /number_types or /number_types.json
   def index
-    @number_types = NumberType.all
+    @number_types = NumberType.page params[:page]  
+      
   end
 
   # GET /number_types/1 or /number_types/1.json

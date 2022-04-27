@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     end
   end
   resources :special_numbers
-  resources :special_number_names
   resources :people do
     collection do
       get :search

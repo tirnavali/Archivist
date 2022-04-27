@@ -1,0 +1,24 @@
+<% @number_types.each do |number_type| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{number_type.id}", number_type %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= number_type.name%> </div>
+  </td>
+  
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=number_type.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label">
+      <%=number_type.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+  <%= render "layouts/shared/actions", resource: number_type %>
+</tr>
+<% end %>

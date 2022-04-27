@@ -1,10 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Privacies</h1>
-
-<%= link_to t("new_privacy").humanize, new_privacy_path, class: "ui button green segment" %>
-
-
+<p>
+  <%= link_to t("new_privacy"), new_privacy_path, class: "ui teal button small" %>
+</p>
 <div id="privacies">
 <table class="ui celled padded very compact table">  
    <thead>

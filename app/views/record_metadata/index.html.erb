@@ -25,11 +25,14 @@
   <% end %>
 <% end %>
 </fieldset>
+<div class="ui segment">
   <a id="add-field" class="ui tiny button" data-controller="search" data-action="search#add"> <%= t('add') %></a>
   <%= f.submit class: "ui tiny primary button"%>
+</div>
 <% end %>
-
-<%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui green button segment"%>
+<p>
+  <%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui teal button small "%>
+</p>
 
 <div id="record_metadata">
   <table class="ui celled padded very compact table">

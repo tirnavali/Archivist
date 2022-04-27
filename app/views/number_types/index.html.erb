@@ -1,14 +1,28 @@
 <p style="color: green"><%= notice %></p>
-
+<div id="languages">
 <h1>Number types</h1>
-
-<div id="number_types">
-  <% @number_types.each do |number_type| %>
-    <%= render number_type %>
-    <p>
-      <%= link_to "Show this number type", number_type %>
-    </p>
-  <% end %>
+<p>
+<%= link_to "New language", new_number_type_path, class:"ui teal small button  "%>
+</p>
+  <table class="ui celled padded very compact table">  
+    <thead>
+      <tr><th class="single line">Id</th>
+      <th><%= t :name %></th>    
+      <th><%= t :created_at%></th>
+      <th><%= t :updated_at%></th>
+      
+      <th><%= t :action%></th>
+    </tr></thead>
+    <tbody>  
+      <%= render "number_types_table", class:"ui right floated pagination menu" %>
+    </tbody>
+      <tfoot>
+      
+        <tr><th colspan="8">
+          <div class="segment">
+          <%= paginate @number_types %>                
+          </div>
+        </th>
+      </tr></tfoot>
+   </table>
 </div>
-
-<%= link_to "New number type", new_number_type_path %>

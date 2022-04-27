@@ -34,7 +34,7 @@
         </div>        
         <div class="item">
         <% if current_user.nil? %>
-          <%= link_to "Sign In", new_user_session_path, class: "ui primary button" %>
+          <%= link_to "Sign In", new_user_session_path, class: "ui black button" %>
         <% else %>
           <div class="item">
             <%#=current_user.email %>
@@ -47,7 +47,7 @@
             <% end %> 
           </div>
           <div class="item">
-            <%= link_to "Sign Out", destroy_user_session_path, data: {"turbo-method": :delete}, class: "ui primary button" %>
+            <%= link_to "Sign Out", destroy_user_session_path, data: {"turbo-method": :delete}, class: "ui black button" %>
           </div>
         <% end %>
           </div>
@@ -116,6 +116,16 @@
     <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
     <%= "language".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= Language.all.size %></div>
+    <% end %>
+
+    <%= link_to (number_types_url), class: is_page_active?(number_types_url) do %>
+    <%= "number_type".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%= NumberType.all.size %></div>
+    <% end %>
+
+    <%= link_to (special_numbers_url), class: is_page_active?(special_numbers_url) do %>
+    <%= "special_number".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%= SpecialNumber.all.size %></div>
     <% end %>
  
   <div class="item">

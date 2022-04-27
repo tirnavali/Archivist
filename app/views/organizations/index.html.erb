@@ -1,9 +1,9 @@
 <p style="color: green"><%#= notice %></p>
 
 <h1><%= t :organizations %></h1>
-
-<%= link_to t("new_organization"), new_organization_path, class: "ui button green segment" %>
-
+<p>
+<%= link_to t("new_organization"), new_organization_path, class: "ui teal button small" %>
+</p>
 <div id="organizations">
 <div class="segment">
         <%= paginate @organizations %>                

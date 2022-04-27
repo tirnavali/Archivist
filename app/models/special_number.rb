@@ -6,6 +6,6 @@ class SpecialNumber < ApplicationRecord
   validates_presence_of :value
 
   def to_s
-    return self.name
+    return self.value
   end
 end
