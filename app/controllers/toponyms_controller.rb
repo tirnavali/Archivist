@@ -15,16 +15,18 @@ class ToponymsController < ApplicationController
   # GET /toponyms/new
   def new
     @toponym = Toponym.new
+    authorize @toponym
   end
 
   # GET /toponyms/1/edit
   def edit
+    authorize @toponym
   end
 
   # POST /toponyms or /toponyms.json
   def create
     @toponym = Toponym.new(toponym_params)
-
+    authorize @toponym
     respond_to do |format|
       if @toponym.save
         flash[:info] = "Toponym was successfully created."
@@ -40,6 +42,7 @@ class ToponymsController < ApplicationController
 
   # PATCH/PUT /toponyms/1 or /toponyms/1.json
   def update
+    authorize @toponym
     respond_to do |format|
       if @toponym.update(toponym_params)
         format.html { redirect_to toponym_url(@toponym), notice: "Toponym was successfully updated." }
@@ -53,8 +56,8 @@ class ToponymsController < ApplicationController
 
   # DELETE /toponyms/1 or /toponyms/1.json
   def destroy
+    authorize @toponym
     @toponym.destroy
-
     respond_to do |format|
       format.html { redirect_to toponyms_url, notice: "Toponym was successfully destroyed." }
       format.json { head :no_content }

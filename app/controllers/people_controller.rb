@@ -22,16 +22,18 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
+    authorize @person
   end
 
   # GET /people/1/edit
   def edit
+    authorize @person
   end
 
   # POST /people or /people.json
   def create
     @person = Person.new(person_params)
-
+    authorize @person
     respond_to do |format|
       if @person.save
         flash[:info] = "Person was successfully created."
@@ -47,6 +49,7 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /people/1 or /people/1.json
   def update
+    authorize @person
     respond_to do |format|
       if @person.update(person_params)
         format.html { redirect_to person_url(@person), notice: "Person was successfully updated." }
@@ -60,6 +63,7 @@ class PeopleController < ApplicationController
 
   # DELETE /people/1 or /people/1.json
   def destroy
+    authorize @person
     @person.destroy
 
     respond_to do |format|

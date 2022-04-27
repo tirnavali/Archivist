@@ -13,16 +13,18 @@ class SpecialNumbersController < ApplicationController
   # GET /special_numbers/new
   def new
     @special_number = SpecialNumber.new
+    authorize @special_number
   end
 
   # GET /special_numbers/1/edit
   def edit
+    authorize @special_number
   end
 
   # POST /special_numbers or /special_numbers.json
   def create
     @special_number = SpecialNumber.new(special_number_params)
-
+    authorize @special_number
     respond_to do |format|
       if @special_number.save
         format.html { redirect_to special_number_url(@special_number), notice: "Special number was successfully created." }
@@ -36,6 +38,7 @@ class SpecialNumbersController < ApplicationController
 
   # PATCH/PUT /special_numbers/1 or /special_numbers/1.json
   def update
+    authorize @special_number
     respond_to do |format|
       if @special_number.update(special_number_params)
         format.html { redirect_to special_number_url(@special_number), notice: "Special number was successfully updated." }
@@ -49,8 +52,8 @@ class SpecialNumbersController < ApplicationController
 
   # DELETE /special_numbers/1 or /special_numbers/1.json
   def destroy
+    authorize @special_number
     @special_number.destroy
-
     respond_to do |format|
       format.html { redirect_to special_numbers_url, notice: "Special number was successfully destroyed." }
       format.json { head :no_content }

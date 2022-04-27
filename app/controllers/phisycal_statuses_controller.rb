@@ -13,16 +13,18 @@ class PhisycalStatusesController < ApplicationController
   # GET /phisycal_statuses/new
   def new
     @phisycal_status = PhisycalStatus.new
+    authorize @phisycal_status
   end
 
   # GET /phisycal_statuses/1/edit
   def edit
+    authorize @phisycal_status
   end
 
   # POST /phisycal_statuses or /phisycal_statuses.json
   def create
     @phisycal_status = PhisycalStatus.new(phisycal_status_params)
-
+    authorize @phisycal_status
     respond_to do |format|
       if @phisycal_status.save
         format.html { redirect_to phisycal_status_url(@phisycal_status), notice: "Phisycal status was successfully created." }
@@ -36,6 +38,7 @@ class PhisycalStatusesController < ApplicationController
 
   # PATCH/PUT /phisycal_statuses/1 or /phisycal_statuses/1.json
   def update
+    authorize @phisycal_status
     respond_to do |format|
       if @phisycal_status.update(phisycal_status_params)
         format.html { redirect_to phisycal_status_url(@phisycal_status), notice: "Phisycal status was successfully updated." }
@@ -49,8 +52,8 @@ class PhisycalStatusesController < ApplicationController
 
   # DELETE /phisycal_statuses/1 or /phisycal_statuses/1.json
   def destroy
+    authorize @phisycal_status
     @phisycal_status.destroy
-
     respond_to do |format|
       format.html { redirect_to phisycal_statuses_url, notice: "Phisycal status was successfully destroyed." }
       format.json { head :no_content }

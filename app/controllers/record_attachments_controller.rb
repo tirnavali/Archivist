@@ -35,7 +35,7 @@ class RecordAttachmentsController < ApplicationController
 
   # GET /record_attachments/1/edit
   def edit
-    #authorize @record_attachment
+    authorize @record_attachment
   end
 
   # POST /record_attachments or /record_attachments.json

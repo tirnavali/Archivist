@@ -78,6 +78,9 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "rails-erd"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "brakeman"
   
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

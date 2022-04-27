@@ -5,33 +5,39 @@ class VacationsController < ApplicationController
 
   # GET /vacations or /vacations.json
   def index
+    @vacations = Vacation.order(:starting_date)
+    authorize @vacations
     #Eğer super admin ise tüm vacation listesini görsün
-    if current_user && current_user.superadmin?
-      @vacations = Vacation.order(:starting_date)
-    elsif current_user
-      @vacations = Vacation.user_vacations(current_user)
-    else
-      @vacations = Vacation.order(:starting_date)
-    end
+    # if current_user && current_user.superadmin?
+    #   @vacations = Vacation.order(:starting_date)
+    # elsif current_user
+    #   @vacations = Vacation.user_vacations(current_user)
+    # else
+    #   @vacations = Vacation.order(:starting_date)
+    # end
 
   end
 
   # GET /vacations/1 or /vacations/1.json
   def show    
+    authorize @vacation
   end
 
   # GET /vacations/new
   def new
     @vacation = Vacation.new
+    authorize @vacation
   end
 
   # GET /vacations/1/edit
   def edit
+    authorize @vacation
   end
 
   # POST /vacations or /vacations.json
   def create
     @vacation = Vacation.new(vacation_params)
+    authorize @vacation
     
     if @vacation.user_id.nil?
       @vacation.user_id = current_user.id
@@ -50,6 +56,7 @@ class VacationsController < ApplicationController
 
   # PATCH/PUT /vacations/1 or /vacations/1.json
   def update
+    authorize @vacation
     respond_to do |format|
       if @vacation.update(vacation_params)
         if @vacation.user_id.nil?
@@ -66,8 +73,8 @@ class VacationsController < ApplicationController
 
   # DELETE /vacations/1 or /vacations/1.json
   def destroy
+    authorize @vacation
     @vacation.destroy
-
     respond_to do |format|
       format.html { redirect_to vacations_url, notice: "Vacation was successfully destroyed." }
       format.json { head :no_content }

@@ -13,16 +13,18 @@ class PrivaciesController < ApplicationController
   # GET /privacies/new
   def new
     @privacy = Privacy.new
+    authorize @privacy
   end
 
   # GET /privacies/1/edit
   def edit
+    authorize @privacy
   end
 
   # POST /privacies or /privacies.json
   def create
     @privacy = Privacy.new(privacy_params)
-
+    authorize @privacy
     respond_to do |format|
       if @privacy.save
         format.html { redirect_to privacy_url(@privacy), notice: "Privacy was successfully created." }
@@ -36,6 +38,7 @@ class PrivaciesController < ApplicationController
 
   # PATCH/PUT /privacies/1 or /privacies/1.json
   def update
+    authorize @privacy
     respond_to do |format|
       if @privacy.update(privacy_params)
         format.html { redirect_to privacy_url(@privacy), notice: "Privacy was successfully updated." }
@@ -49,8 +52,8 @@ class PrivaciesController < ApplicationController
 
   # DELETE /privacies/1 or /privacies/1.json
   def destroy
+    authorize @privacy
     @privacy.destroy
-
     respond_to do |format|
       format.html { redirect_to privacies_url, notice: "Privacy was successfully destroyed." }
       format.json { head :no_content }

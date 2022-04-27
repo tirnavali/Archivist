@@ -13,16 +13,18 @@ class NumberTypesController < ApplicationController
   # GET /number_types/new
   def new
     @number_type = NumberType.new
+    authorize @number_type
   end
 
   # GET /number_types/1/edit
   def edit
+    authorize @number_type
   end
 
   # POST /number_types or /number_types.json
   def create
     @number_type = NumberType.new(number_type_params)
-
+    authorize @number_type
     respond_to do |format|
       if @number_type.save
         format.html { redirect_to number_type_url(@number_type), notice: "Number type was successfully created." }
@@ -36,6 +38,7 @@ class NumberTypesController < ApplicationController
 
   # PATCH/PUT /number_types/1 or /number_types/1.json
   def update
+    authorize @number_type
     respond_to do |format|
       if @number_type.update(number_type_params)
         format.html { redirect_to number_type_url(@number_type), notice: "Number type was successfully updated." }
@@ -49,6 +52,7 @@ class NumberTypesController < ApplicationController
 
   # DELETE /number_types/1 or /number_types/1.json
   def destroy
+    authorize @number_type
     @number_type.destroy
 
     respond_to do |format|
