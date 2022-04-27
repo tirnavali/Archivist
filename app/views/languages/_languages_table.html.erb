@@ -1,0 +1,24 @@
+<% @languages.each do |language| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{language.id}", language %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= language.name%> </div>
+  </td>
+  
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=language.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label">
+      <%=language.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+  <%= render "layouts/shared/actions", resource: language %>
+</tr>
+<% end %>

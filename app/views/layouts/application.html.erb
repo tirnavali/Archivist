@@ -112,6 +112,11 @@
     <%= "subject".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= Subject.all.size %></div>
     <% end %>
+
+    <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
+    <%= "language".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%= Language.all.size %></div>
+    <% end %>
  
   <div class="item">
     <div class="ui transparent icon input">
