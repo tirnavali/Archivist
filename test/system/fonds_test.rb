@@ -37,22 +37,25 @@ class FondsTest < ApplicationSystemTestCase
     assert_text "Fond was successfully created"
   end
 
-  # test "should update Fond" do
-  #   visit fond_url(@fond)
-  #   click_on "Edit this fond", match: :first
+  test "should update Fond" do
+    visit fond_url(@fond)
+    click_on "Edit this fond", match: :first
 
-  #   fill_in "Fond", with: @fond.Fond_id
-  #   fill_in "Name", with: @fond.name
-  #   click_on "Update Fond"
+    fill_in "Name", with: "Deneme deneme"
+    fill_in "Explanation", with: @fond_related.explanation
+    first(:xpath, "/html/body/div[2]/div[2]/form/div[3]/div").click()
+    
+    find('div.item', text: @fond_related.name).click()
+    click_on "Fond Güncelle"
 
-  #   assert_text "Fond was successfully updated"
-  #   click_on "Back"
-  # end
+    assert_text "Fond was successfully updated"
+    click_on "Back"
+  end
 
-  # test "should destroy Fond" do
-  #   visit fond_url(@fond)
-  #   click_on "Destroy this fond", match: :first
+  test "should destroy Fond" do
+    visit fond_url(@fond)
+    click_on "Destroy this fond", match: :first
 
-  #   assert_text "Fond was successfully destroyed"
-  # end
+    assert_text "Fond was successfully destroyed"
+  end
 end

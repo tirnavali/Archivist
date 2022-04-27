@@ -15,16 +15,18 @@ class FondsController < ApplicationController
   # GET /fonds/new
   def new
     @fond = Fond.new
+    authorize @fond
   end
 
   # GET /fonds/1/edit
   def edit
+    authorize @fond
   end
 
   # POST /fonds or /fonds.json
   def create
     @fond = Fond.new(fond_params)
-
+    authorize @fond
     respond_to do |format|
       if @fond.save
         format.html { redirect_to fond_url(@fond), notice: "Fond was successfully created." }
@@ -38,6 +40,7 @@ class FondsController < ApplicationController
 
   # PATCH/PUT /fonds/1 or /fonds/1.json
   def update
+    authorize @fond
     respond_to do |format|
       if @fond.update(fond_params)
         format.html { redirect_to fond_url(@fond), notice: "Fond was successfully updated." }
@@ -51,6 +54,7 @@ class FondsController < ApplicationController
 
   # DELETE /fonds/1 or /fonds/1.json
   def destroy
+    authorize @fond
     @fond.destroy
 
     respond_to do |format|

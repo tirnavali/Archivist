@@ -5,6 +5,7 @@ class RecordMetadataController < ApplicationController
   end
 
   def audit
+    authorize @record_metadatum 
     unless @record_metadatum.audits.empty?
       @audits =Audit.sort_model_audits @record_metadatum
     end
@@ -33,17 +34,19 @@ class RecordMetadataController < ApplicationController
   # GET /record_metadata/new
   def new
     @record_metadatum = RecordMetadatum.new
+    authorize @record_metadatum 
     @record_metadatum.special_numbers.build
   end
 
   # GET /record_metadata/1/edit
   def edit
+    authorize @record_metadatum
   end
 
   # POST /record_metadata or /record_metadata.json
   def create
     @record_metadatum = RecordMetadatum.new(record_metadatum_params)
-
+    authorize @record_metadatum 
     respond_to do |format|
       if @record_metadatum.save
         format.html { redirect_to new_record_attachment_url(record_metadatum_id: @record_metadatum.id), notice: "Record metadatum was successfully created." }
@@ -75,6 +78,7 @@ class RecordMetadataController < ApplicationController
 
   # DELETE /record_metadata/1 or /record_metadata/1.json
   def destroy
+    authorize @record_metadatum
     @record_metadatum.destroy
 
     respond_to do |format|

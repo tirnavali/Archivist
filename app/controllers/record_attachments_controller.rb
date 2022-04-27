@@ -5,6 +5,7 @@ class RecordAttachmentsController < ApplicationController
     puts params[:id]
     @image = ActiveStorage::Attachment.find(params[:id])
     @record_attachment = RecordAttachment.find(@image.record_id)
+    authorize @record_attachment
     begin
       @image.purge
       redirect_back fallback_location: @record_attachment, notice: "Record attachment was successfully deleted."
@@ -26,6 +27,7 @@ class RecordAttachmentsController < ApplicationController
   # GET /record_attachments/new
   def new
     @record_attachment = RecordAttachment.new
+    authorize @record_attachment
     metadatum = RecordMetadatum.find(params[:record_metadatum_id])
     @record_attachment.record_metadatum= metadatum
   
@@ -33,12 +35,13 @@ class RecordAttachmentsController < ApplicationController
 
   # GET /record_attachments/1/edit
   def edit
+    #authorize @record_attachment
   end
 
   # POST /record_attachments or /record_attachments.json
   def create
     @record_attachment = RecordAttachment.new(record_attachment_params)
-
+    #authorize @record_attachment
     respond_to do |format|
       if @record_attachment.save
         format.html { redirect_to record_attachment_url(@record_attachment), notice: "Record attachment was successfully created." }
@@ -52,6 +55,7 @@ class RecordAttachmentsController < ApplicationController
 
   # PATCH/PUT /record_attachments/1 or /record_attachments/1.json
   def update
+    authorize @record_attachment
     respond_to do |format|
       if @record_attachment.update(record_attachment_params)
         format.html { redirect_to record_attachment_url(@record_attachment), notice: "Record attachment was successfully updated." }
@@ -65,6 +69,7 @@ class RecordAttachmentsController < ApplicationController
 
   # DELETE /record_attachments/1 or /record_attachments/1.json
   def destroy
+    authorize @record_attachment
     @record_attachment.destroy
 
     respond_to do |format|

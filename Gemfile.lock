@@ -233,6 +233,8 @@ GEM
     public_suffix (4.0.6)
     puma (5.6.2)
       nio4r (~> 2.0)
+    pundit (2.2.0)
+      activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.3)
     rack-cors (1.1.1)
@@ -356,6 +358,7 @@ DEPENDENCIES
   kaminari
   poppler
   puma (~> 5.0)
+  pundit (~> 2.2)
   rack-cors
   rails (~> 7.0.0)
   rails-erd
@@ -375,4 +378,4 @@ RUBY VERSION
    ruby 3.0.3p157
 
 BUNDLED WITH
-   2.3.6
+   2.3.10
