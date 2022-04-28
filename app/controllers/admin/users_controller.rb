@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   include Administration
   before_action :set_user, only: %i[ show edit update destroy activities ]
-  before_action :require_admin, only: %i[new create edit update destroy]
+  #before_action :require_admin, only: %i[new create edit update destroy]
 
   def activities  
     if @user.id != current_user.id && !current_user.superadmin?
@@ -13,22 +13,27 @@ class Admin::UsersController < ApplicationController
   
   def index
     @users = User.all
+    authorize @users
   end
 
   def edit
+    authorize @user
     if @user.id != current_user.id && !current_user.superadmin?
       redirect_to root_path, alert: "You are not authorized to do that action" 
     end
   end
 
   def show
+    authorize @user
   end
 
   def new
     @user = User.new
+    authorize @user
   end
 
   def update
+    authorize @user
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to admin_user_url(@user), notice: "User was successfully updated." }
@@ -43,6 +48,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    authorize @user
     respond_to do |format|
       if @user.save
         format.html { redirect_to admin_users_url, notice: "User was successfully created." }
@@ -55,6 +61,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+    authorize @user
     @user.destroy
 
     respond_to do |format|

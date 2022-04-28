@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+<div id="languages">
+<h1>Roles</h1>
+<%= link_to "New role", new_role_path, class:"ui teal small button  "%>
+  <table class="ui celled padded very compact table">  
+    <thead>
+      <tr><th class="single line">Id</th>
+      <th><%= t :name %></th>   
+      <th><%= t :resource_type %></th> 
+      <th><%= t :resource_id %></th>  
+      <th><%= t :created_at%></th>
+      <th><%= t :updated_at%></th>
+      
+      <th><%= t :action%></th>
+    </tr></thead>
+    <tbody>  
+      <%= render "roles_table", class:"ui right floated pagination menu" %>
+    </tbody>
+      <tfoot>
+        <tr><th colspan="8">
+          <div class="segment">
+            <%= paginate @roles %>                
+          </div>
+        </th>
+        </tr>
+       </tfoot>
+   </table>
+</div>

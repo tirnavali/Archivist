@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_28_083847) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
 
   create_table "documents", force: :cascade do |t|
     t.text "summary"
+    t.integer "pub_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "language_id"
@@ -104,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
     t.index ["person_id"], name: "index_documents_on_person_id"
     t.index ["phisycal_status_id"], name: "index_documents_on_phisycal_status_id"
     t.index ["privacy_id"], name: "index_documents_on_privacy_id"
+    t.index ["pub_type_id"], name: "index_documents_on_pub_type_id"
     t.index ["toponym_id"], name: "index_documents_on_toponym_id"
   end
 
@@ -188,6 +190,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pub_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "record_attachments", force: :cascade do |t|
     t.boolean "completed"
     t.datetime "created_at", null: false
@@ -225,6 +233,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
   create_table "record_metadata_toponyms", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "toponym_id", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "special_number_names", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "special_numbers", force: :cascade do |t|
@@ -271,6 +296,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
   create_table "vacations", force: :cascade do |t|
     t.string "explanation"
     t.integer "user_id", null: false
@@ -290,6 +323,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_133734) do
   add_foreign_key "documents", "people"
   add_foreign_key "documents", "phisycal_statuses"
   add_foreign_key "documents", "privacies"
+  add_foreign_key "documents", "pub_types"
   add_foreign_key "documents", "toponyms"
   add_foreign_key "fonds", "fonds", column: "parent_id"
   add_foreign_key "record_attachments", "record_metadata"

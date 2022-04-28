@@ -295,6 +295,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    rolify (6.0.0)
     ruby-graphviz (1.2.5)
       rexml
     ruby-vips (2.1.4)
@@ -375,6 +376,7 @@ DEPENDENCIES
   rails (~> 7.0.0)
   rails-erd
   ransack
+  rolify
   selenium-webdriver
   simple_form
   sprockets-rails

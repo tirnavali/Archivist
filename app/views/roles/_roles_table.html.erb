@@ -1,0 +1,34 @@
+<% @roles.each do |role| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{role.id}", role %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= role.name%> </div>
+  </td>
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=role.resource_type%></div>
+  </td>
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=role.resource_id%></div>
+  </td>
+  
+
+  <td class="right aligned">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=role.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="right aligned ">
+    <div class="ui label">
+      <%=role.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+  <%= render "layouts/shared/actions", resource: role %>
+</tr>
+<% end %>
