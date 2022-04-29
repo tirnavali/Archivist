@@ -17,8 +17,6 @@ class RolesController < ApplicationController
   def edit
     Zeitwerk::Loader.eager_load_all
     @models = ApplicationRecord.descendants
-
-    
   end
 
   def create

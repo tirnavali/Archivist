@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
   include Pundit::Authorization
+  #after_action :verify_authorized
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

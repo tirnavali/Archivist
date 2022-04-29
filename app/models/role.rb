@@ -11,4 +11,8 @@ class Role < ApplicationRecord
             :allow_nil => true
 
   scopify
+
+  def to_s
+    name
+  end
 end

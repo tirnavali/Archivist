@@ -1,25 +1,32 @@
 class FondPolicy < ApplicationPolicy
-    def new?
-      user.admin?
-    end
-  
-    def edit?
-      user.admin?
-    end
-  
-    def create?
-      user.admin?
-    end
-    
-    def update?
-      user.admin?
-    end
-    
-    def destroy?
-      user.admin?
-    end
-  
-    def audit?
-      user.admin?
-    end
+  def index?
+    true
+  end  
+
+  def show?
+    true
   end
+  def new?
+    user.has_role? :admin
+  end
+
+  def edit?
+    user.has_role? :admin
+  end
+
+  def create?
+    user.has_role? :admin
+  end
+  
+  def update?
+    user.has_role? :admin
+  end
+  
+  def destroy?
+    user.has_role? :admin
+  end
+
+  def audit?
+    user.has_role? :admin
+  end
+end

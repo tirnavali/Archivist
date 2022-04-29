@@ -1,25 +1,25 @@
 class RecordAttachmentPolicy < ApplicationPolicy
     def new?
-      user.admin?
+      user.has_role? :admin
     end
   
     def edit?
-      user.admin?
+      user.has_role? :admin
     end
   
     def create?
-      user.admin?
+      user.has_role? :admin
     end
     
     def update?
-      user.admin?
+      user.has_role? :admin
     end
     
     def destroy?
-      user.admin?
+      user.has_role? :admin
     end
 
     def delete_image_attachment?
-      user.admin?
+      user.has_role? :admin
     end
   end
