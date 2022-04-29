@@ -127,6 +127,11 @@
     <%= "special_number".pluralize.titleize %>
       <div class="ui teal left pointing label"><%= SpecialNumber.all.size %></div>
     <% end %>
+
+    <%= link_to (roles_url), class: is_page_active?(roles_url) do %>
+    <%= "role".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%= Role.all.size %></div>
+    <% end %>
  
   <div class="item">
     <div class="ui transparent icon input">
