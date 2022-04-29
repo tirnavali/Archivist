@@ -13,10 +13,11 @@ class RecordMetadataController < ApplicationController
   # GET /record_metadata or /record_metadata.json
   def index
     #@record_metadata = RecordMetadatum.all
+    
     @q = RecordMetadatum.ransack(params[:q])
     @q.build_grouping.build_condition
     
-    @record_metadata = @q.result.page params[:page]
+    @record_metadata = policy_scope(@q.result.page params[:page])
   end
 
   def search
@@ -25,6 +26,7 @@ class RecordMetadataController < ApplicationController
   end
   # GET /record_metadata/1 or /record_metadata/1.json
   def show
+    authorize @record_metadatum 
     unless @record_metadatum.record_attachment.nil?
       @image =  @record_metadatum.record_attachment.images.first
     end
@@ -109,7 +111,8 @@ class RecordMetadataController < ApplicationController
         :privacy_id,
         :organization_id, 
         :phisycal_status_id,
-        :explaination,         
+        :explaination,
+        :is_secret,         
         subject_ids:[], 
         language_ids:[], 
         person_ids:[], 

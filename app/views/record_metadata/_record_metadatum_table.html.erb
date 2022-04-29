@@ -15,6 +15,14 @@
     <div class="ui right aligned"><%= record_metadatum.organization_code%></div>
   </td>
   <td class="right aligned">
+    <%if record_metadatum.is_secret? %>
+    <i class="user red secret icon"></i>
+    <% else %>
+    <i class="green check icon"></i>
+    <% end %>
+
+  </td>
+  <td class="right aligned">
     <%=record_metadatum.box%>
   </td>
   <td>

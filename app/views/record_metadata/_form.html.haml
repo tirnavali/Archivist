@@ -64,4 +64,6 @@
       .field
         .grouped.fields{"data-controller": "checkbox"}
           = f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " }
+    .field 
+      = f.input :is_secret
   = f.button :submit, class: "ui green button"

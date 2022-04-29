@@ -54,7 +54,7 @@
       </tr>
       <tr>
         <td><%=t('privacy').titleize %></td>
-        <td><%= record_metadatum.privacy.name %></td>
+        <td><%if record_metadatum.privacy %> <%= record_metadatum.privacy.name %><% end %></td>
       </tr>
       <tr>
         <td><%= t('subjects').humanize %></td>
