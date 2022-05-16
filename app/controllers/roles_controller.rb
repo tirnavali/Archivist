@@ -60,6 +60,7 @@ class RolesController < ApplicationController
 
     def set_role
       @role = Role.find(params[:id])
+      authorize @role
     end
 
     def role_params
