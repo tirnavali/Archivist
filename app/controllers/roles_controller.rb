@@ -7,6 +7,7 @@ class RolesController < ApplicationController
 
   def new
     @role = Role.new
+    authorize @role
     Zeitwerk::Loader.eager_load_all
     @models = ApplicationRecord.descendants
   end

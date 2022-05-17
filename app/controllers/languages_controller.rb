@@ -10,10 +10,10 @@ class LanguagesController < ApplicationController
   
   def new
     @language = Language.new
+    authorize @language
   end
 
   def edit
-    authorize @language
   end
 
   def create
@@ -32,7 +32,6 @@ class LanguagesController < ApplicationController
   end
 
   def update
-    authorize @language
     respond_to do |format|
       if @language.update(language_params)
         format.html { redirect_to language_url(@language), notice: "Language was successfully updated." }
@@ -45,9 +44,7 @@ class LanguagesController < ApplicationController
   end
 
   def destroy
-    authorize @language
     @language.destroy
-
     respond_to do |format|
       format.html { redirect_to languages_url, notice: "Language was successfully destroyed." }
       format.json { head :no_content }
@@ -57,6 +54,7 @@ class LanguagesController < ApplicationController
   private
   def set_language
     @language = Language.find(params[:id])
+    authorize @language
   end
 
   def language_params

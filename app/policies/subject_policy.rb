@@ -1,4 +1,7 @@
 class SubjectPolicy < ApplicationPolicy
+  def show?
+    user.superadmin?
+  end
   def new?
     user.superadmin?
   end
