@@ -7,26 +7,26 @@ class FondPolicy < ApplicationPolicy
     true
   end
   def new?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def edit?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def create?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def update?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def destroy?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def audit?
-    user.has_role? :admin
+    user.superadmin?
   end
 end

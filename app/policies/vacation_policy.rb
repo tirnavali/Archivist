@@ -1,29 +1,29 @@
 class VacationPolicy < ApplicationPolicy
   def show?
-    user.has_role? :admin || user.superadmin?
+    user.superadmin?
   end
 
   def index?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def new?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def edit?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def create?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def update?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def destroy?
-    user.has_role? :admin
+    user.superadmin?
   end
 end

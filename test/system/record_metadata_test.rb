@@ -10,6 +10,7 @@ class RecordMetadataTest < ApplicationSystemTestCase
     @toponym = @record_metadatum.toponyms.first
     @person = people(:first)
     @number_type_first = number_types(:first)
+    @fond = fonds(:first)
   end
 
   test "visiting the index" do
@@ -24,7 +25,7 @@ class RecordMetadataTest < ApplicationSystemTestCase
     click_on I18n.t("new_record_metadatum")
     
     first(".select2-selection__arrow", maximum: 10).click
-    find('li.select2-results__option[role="option"]', text: 'Kanunlar').click
+    find('li.select2-results__option[role="option"]', text: @fond.name).click
 
     fill_in "record_metadatum_organization_code", with: @record_metadatum.organization_code
     fill_in "record_metadatum_box", with: @record_metadatum.box

@@ -6,7 +6,7 @@ class RecordMetadatumPolicy < ApplicationPolicy
     end
 
     def resolve
-      if (user.has_role? :admin)
+      if (user.superadmin?)
         scope.all
       else
         scope.where(is_secret: false)
@@ -19,31 +19,31 @@ class RecordMetadatumPolicy < ApplicationPolicy
   end
 
   def show?
-    (user.has_role? :admin) or !record.is_secret?
+    (user.superadmin?) or !record.is_secret?
   end
 
   def new?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def edit?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def create?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def update?
-    user.has_role? :admin
+    user.superadmin?
   end
   
   def destroy?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   def audit?
-    user.has_role? :admin
+    user.superadmin?
   end
 
   private 
