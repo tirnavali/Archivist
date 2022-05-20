@@ -1,25 +1,23 @@
 class SubjectPolicy < ApplicationPolicy
-  def show?
-    user.superadmin?
-  end
+  
   def new?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
   end
 
   def edit?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?  
   end
 
   def create?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?  
   end
   
   def update?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?  
   end
   
   def destroy?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?  
   end
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!

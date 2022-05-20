@@ -10,23 +10,23 @@
 4. Editor     # Content editor and writer, don't have to delete permission for some models.
 5. Writer     # Data writer. Writers don't have any update, edit or delete persmission for some models. 
 
-## Authorization Table
-| Models            | Admin | Editor | Writer | User |
-|-------------------|-------|--------|--------|------|
-| Fond              | CRU   | CRU    | UR     | R    |
-| Language          | CRU   | CR     | R      | R    |
-| Number Type       | CRUD  | CRUD   | R      | R    |
-| Organization      | CRUD  | CRUD   | CRU    | R    |
-| Person            | CRUD  | CRUD   | CRU    | R    |
-| Phisycal Status   | CRUD  | CRU    | R      | R    |
-| Privacy           | CRUD  | CRU    | R      | R    |
-| Record Attachment | CRUD  | CRU    | CR     | R    |
-| Record Metadatum  | CRUD  | CRU    | CR     | R    |
-| Special Number    | CRUD  | CRU    | CRU    | R    |
-| Subject           | CRUD  | CRUD   | R      | R    |
-| Toponym           | CRUD  | CRUD   | CR     | R    |
-| User              | CRU   |        |        |      |
-| Vacation          | CRUD  | CRUD   | CRUD   |      |
+## Authorization Table (Create Read Update Delete)
+| Models            |Superadmin| Admin | Editor | Writer | User |
+|-------------------|----------|-------|--------|--------|------|
+| Fond              | CRUD     | CRU   | CRU    | R      | R    |
+| Language          | CRUD     | CRU   | CR     | R      | R    |
+| Number Type       | CRUD     | CRUD  | CRUD   | R      | R    |
+| Organization      | CRUD     | CRUD  | CRUD   | CRU    | R    |
+| Person            | CRUD     | CRUD  | CRUD   | CRU    | R    |
+| Phisycal Status   | CRUD     | CRUD  | CRU    | R      | R    |
+| Privacy           | CRUD     | CRUD  | CRU    | R      | R    |
+| Record Attachment | CRUD     | CRUD  | CRU    | CR     | R    |
+| Record Metadatum  | CRUD     | CRUD  | CRU    | CR     | R    |
+| Special Number    | CRUD     | CRUD  | CRU    | CRU    | R    |
+| Subject           | CRUD     | CRUD  | CRUD   | R      | R    |
+| Toponym           | CRUD     | CRUD  | CRUD   | CR     | R    |
+| User              | CRUD     | CRU   |        |        |      |
+| Vacation          | CRUD     | CRUD  | CRUD   | CRUD   |      |
 
 ---
 # System dependencies

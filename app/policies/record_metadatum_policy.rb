@@ -23,27 +23,27 @@ class RecordMetadatumPolicy < ApplicationPolicy
   end
 
   def new?
-    user.superadmin?
-  end
-
-  def edit?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
   end
 
   def create?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
+  end
+
+  def edit?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
   end
   
   def update?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
   end
   
   def destroy?
-    user.superadmin?
+    user.superadmin? || user.admin? 
   end
 
   def audit?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
   end
 
   private 

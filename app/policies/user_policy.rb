@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
  
   def activities?
-    user.superadmin? || users_record?
+    user.superadmin? || user.admin? || users_record? 
   end
 
   def show?
@@ -13,19 +13,19 @@ class UserPolicy < ApplicationPolicy
   end
   
   def new?
-    user.superadmin?
+    user.superadmin?|| user.admin?
   end
 
   def edit?
-    user.superadmin?
+    user.superadmin?|| user.admin?
   end
 
   def create?
-    user.superadmin?
+    user.superadmin?|| user.admin?
   end
   
   def update?
-    user.superadmin?
+    user.superadmin?|| user.admin?
   end
   
   def destroy?

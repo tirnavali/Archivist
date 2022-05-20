@@ -16,7 +16,7 @@ class NumberTypePolicy < ApplicationPolicy
   end
   
   def destroy?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?
   end
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
