@@ -8,9 +8,9 @@ import * as ActiveStorage from "@rails/activestorage";
 
 
 ActiveStorage.start()
-// document.addEventListener("turbo:load", function(event){ 
-//    $('.ui.dropdown').dropdown();
-//    console.log("APPLication loaded"); }, false)
+document.addEventListener("turbo:load", function(event){ 
+   $('.ui.dropdown').dropdown();
+}, false)
 
 document.addEventListener("turbo:frame-render", function(event){ 
     //console.log("turbo:frame-render is working application.js");
