@@ -1,15 +1,15 @@
 class UserPolicy < ApplicationPolicy
  
   def activities?
-    (user.has_role? :admin) || (users_record?)
+    user.superadmin? || users_record?
   end
 
   def show?
-    (user.has_role? :admin) || users_record?  
+    user.superadmin? || user.admin? || users_record? 
   end
 
   def index?
-    user.superadmin?
+    user.superadmin? || user.admin?
   end
   
   def new?
@@ -33,9 +33,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   private 
-
     def users_record?
       @user.id == @record.id
     end
-
 end

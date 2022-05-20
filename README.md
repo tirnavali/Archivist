@@ -4,19 +4,30 @@
 # Authorization Specifications
 - Application has 5 levels of authentication
 
-1. User 
+1. Superadmin # Site manager has all privileges.
+2. User       # Data reader. Don't have to create, update or delete permission for all models.
+3. Admin      # Content manager and User supervisor,  don't have to delete permission for some models.
+4. Editor     # Content editor and writer, don't have to delete permission for some models.
+5. Writer     # Data writer. Writers don't have any update, edit or delete persmission for some models. 
 
-2. Superadmin
-3. Admin
-4. Manager
-5. Chief
-- User can sign up
-- User can delete his/her  account
-- Users can change passwords
-- Users can save their forgetton passwords
-- Users can manage through admin
-- Admins can ban/lock users' acoount
-- Admins can CRUD new users with roles 
+## Authorization Table
+| Models            | Admin | Editor | Writer | User |
+|-------------------|-------|--------|--------|------|
+| Fond              | CRU   | CRU    | UR     | R    |
+| Language          | CRU   | CR     | R      | R    |
+| Number Type       | CRUD  | CRUD   | R      | R    |
+| Organization      | CRUD  | CRUD   | CRU    | R    |
+| Person            | CRUD  | CRUD   | CRU    | R    |
+| Phisycal Status   | CRUD  | CRU    | R      | R    |
+| Privacy           | CRUD  | CRU    | R      | R    |
+| Record Attachment | CRUD  | CRU    | CR     | R    |
+| Record Metadatum  | CRUD  | CRU    | CR     | R    |
+| Special Number    | CRUD  | CRU    | CRU    | R    |
+| Subject           | CRUD  | CRUD   | R      | R    |
+| Toponym           | CRUD  | CRUD   | CR     | R    |
+| User              | CRU   |        |        |      |
+| Vacation          | CRUD  | CRUD   | CRUD   |      |
+
 ---
 # System dependencies
 - Ruby version > 3

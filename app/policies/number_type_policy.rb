@@ -1,18 +1,18 @@
 class NumberTypePolicy < ApplicationPolicy
   def new?
-    user.superadmin?
-  end
-
-  def edit?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?
   end
 
   def create?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?
   end
-  
+
+  def edit?
+    user.superadmin? || user.admin? || user.editor?
+  end
+
   def update?
-    user.superadmin?
+    user.superadmin? || user.admin? || user.editor?
   end
   
   def destroy?

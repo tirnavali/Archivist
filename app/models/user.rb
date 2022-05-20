@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable, :lockable
 
   has_many :vacations, dependent: :destroy
-  enum role: [:user, :superadmin, :admin, :manager, :editor, :writer]
+  enum role: [:user, :admin, :editor, :writer]
   has_many :audits
   
   # scope :update_actions, -> { joins(:audits).where('audits.action is = ?', 'update') }
