@@ -21,7 +21,10 @@
         %td
           - audit.audited_changes.flatten.each_with_index do |item, index|
             - if index % 2 == 1
-              %p=  "#{item.join(" ==> ")}"
+              - if !item.kind_of? Array
+                %p= "#{item}"
+              -else 
+                %p=  "#{item.join(" ==> ")}"
             - else 
               %b=  "#{item}"
 
