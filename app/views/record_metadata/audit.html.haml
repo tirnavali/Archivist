@@ -10,18 +10,20 @@
       %th created_at
       %th activity
   %tbody
-  - @record_metadatum.audits.descending.each do |audit|
-    %tr
-      %td=audit.version
-      %td=User.find(audit.user_id)
-      %td=audit.auditable_type
-      %td=audit.action
-      %td=audit.audited_changes
-      %td= l audit.created_at, format: :long
-      %td
-        - audit.audited_changes.each do |key, value|
-          %p
-            =key
-            - unless value
-              ="#{value[0]} / #{value[1]}"
+    - @record_metadatum.audits.descending.each do |audit|
+      %tr
+        %td=audit.version
+        %td=User.find(audit.user_id)
+        %td=audit.auditable_type
+        %td=audit.action
+        %td=audit.audited_changes
+        %td= l audit.created_at, format: :long
+        %td
+          - audit.audited_changes.flatten.each_with_index do |item, index|
+            - if index % 2 == 1
+              %p=  "#{item.join(" ==> ")}"
+            - else 
+              %b=  "#{item}"
+
+      
             
