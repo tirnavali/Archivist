@@ -24,28 +24,28 @@
         Messages
       </a>
       <div class="right menu">
-        <div class="ui dropdown item">
-          <%= current_user.email %> <i class="dropdown icon"></i>
-          <div class="menu">
-            <%= link_to  "Profile", admin_user_path(current_user), class: "item" %>
-            <%= link_to  "Account", edit_user_registration_path, class: "item" %>
-            <%= link_to "My Activity", activities_admin_user_path(current_user), class: "item" %>
-            <%= link_to vacations_url, class: "item" do %>
-             Vacation <i class="calendar alternate icon"></i>
-            <% end %>          
-          </div>
-        </div>        
-        <div class="item">
         <% if current_user.nil? %>
-          <%= link_to "Sign In", new_user_session_path, class: "ui black button" %>
+          <div class="item">
+            <%= link_to "Sign In", new_user_session_path, class: "ui black button" %>
+          </div><!-- item-->
         <% else %>
+          <div class="ui dropdown item">
+            <%= current_user.email %> <i class="dropdown icon"></i>
+            <div class="menu">
+              <%= link_to  "Profile", admin_user_path(current_user), class: "item" %>
+              <%= link_to  "Account", edit_user_registration_path, class: "item" %>
+              <%= link_to "My Activity", activities_admin_user_path(current_user), class: "item" %>
+              <%= link_to vacations_url, class: "item" do %>
+              Vacation <i class="calendar alternate icon"></i>
+              <% end %>          
+            </div> <!--menu-->
+          </div><!--ui dropdown item--> 
           <div class="item">
             <%= link_to "Sign Out", destroy_user_session_path, data: {"turbo-method": :delete}, class: "ui black button" %>
-          </div>
+          </div><!-- item -->
         <% end %>
-          </div>
-      </div>
-    </div>
+      </div><!--ui dropdown item-->
+    </div><!-- right menu -->
   <!--Menu -->
   <div class="ui grid">
   <% if current_user %>

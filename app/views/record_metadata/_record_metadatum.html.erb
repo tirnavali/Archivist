@@ -106,8 +106,9 @@
           <div class="summary">
             <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
             <div class="date"><%=l  record_metadatum.audits.last.created_at, format: :long%></div>
-            <%= link_to t("more"), audit_record_metadatum_path %>   
-            <a><%= t('more') %><i class="external alternate icon"></i></a>
+            <%= link_to audit_record_metadatum_path do %>
+              <%= t("more") %> <i class="external alternate icon"></i>
+            <% end %>   
           </div>
         </div>
       </div>

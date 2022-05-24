@@ -35,6 +35,9 @@
   <td class="right aligned">
     <% if record_metadatum.record_attachment %> <%= record_metadatum.record_attachment.images.count%> <% end %>
   </td>
+  <td class="left aligned">
+    <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
+  </td>
   <td>
   <div class="left aligned">
     <%= record_metadatum.summary[..200]%>
