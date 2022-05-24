@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  record_metadatum: one
+  approved: false
+  user: one
+
+two:
+  record_metadatum: two
+  approved: false
+  user: two

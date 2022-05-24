@@ -12,6 +12,7 @@ class RecordMetadatum < ApplicationRecord
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :people
   has_many :special_numbers #, dependent: :destroy
+  has_many :users, :through => :record_submissions
   
   
   validates_presence_of :box, :order, numericality: true
