@@ -79,7 +79,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
 
   create_table "documents", force: :cascade do |t|
     t.text "summary"
-    t.integer "pub_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "language_id"
@@ -105,7 +104,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.index ["person_id"], name: "index_documents_on_person_id"
     t.index ["phisycal_status_id"], name: "index_documents_on_phisycal_status_id"
     t.index ["privacy_id"], name: "index_documents_on_privacy_id"
-    t.index ["pub_type_id"], name: "index_documents_on_pub_type_id"
     t.index ["toponym_id"], name: "index_documents_on_toponym_id"
   end
 
@@ -190,12 +188,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pub_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "record_attachments", force: :cascade do |t|
     t.boolean "completed"
     t.datetime "created_at", null: false
@@ -239,7 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   create_table "record_submissions", force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "user_id", null: false
-    t.boolean "approved"
+    t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_metadatum_id"], name: "index_record_submissions_on_record_metadatum_id"
@@ -255,12 +247,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
-  end
-
-  create_table "special_number_names", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "special_numbers", force: :cascade do |t|
@@ -335,7 +321,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   add_foreign_key "documents", "people"
   add_foreign_key "documents", "phisycal_statuses"
   add_foreign_key "documents", "privacies"
-  add_foreign_key "documents", "pub_types"
   add_foreign_key "documents", "toponyms"
   add_foreign_key "fonds", "fonds", column: "parent_id"
   add_foreign_key "record_attachments", "record_metadata"

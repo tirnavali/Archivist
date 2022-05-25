@@ -36,7 +36,9 @@
     <% if record_metadatum.record_attachment %> <%= record_metadatum.record_attachment.images.count%> <% end %>
   </td>
   <td class="left aligned">
-    <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
+    <% if record_metadatum.user %>
+    <%=  record_metadatum.user%> <span class="custom last action"> created </span>this record. 
+    <% end %>
   </td>
   <td>
   <div class="left aligned">

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :vacations, dependent: :destroy
   enum role: [:user, :admin, :editor, :writer]
   has_many :audits
+  has_many :record_submissions
   has_many :record_metadata, :through => :record_submissions
   
   # scope :update_actions, -> { joins(:audits).where('audits.action is = ?', 'update') }

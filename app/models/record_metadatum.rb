@@ -1,4 +1,5 @@
 class RecordMetadatum < ApplicationRecord
+  after_create :save_submission
   audited
   has_one :record_attachment
   belongs_to :fond
@@ -12,7 +13,8 @@ class RecordMetadatum < ApplicationRecord
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :people
   has_many :special_numbers #, dependent: :destroy
-  has_many :users, :through => :record_submissions
+  has_one :record_submission
+  has_one :user, through: :record_submission
   
   
   validates_presence_of :box, :order, numericality: true
@@ -29,9 +31,14 @@ class RecordMetadatum < ApplicationRecord
 
   scope :sort_audits,-> (record_metadata_id) { Audit.joins("INNER JOIN record_metadata on audits.auditable_id = record_metadata.id ")
                             .where("record_metadata.id = ?", record_metadata_id).order("audits.version DESC")}
-  
+  private 
+
   def to_s
     "id: #{self.id} summary: #{self.summary}"
+  end
+
+  def save_submission
+    RecordSubmission.create!(record_metadatum_id: self.id, user_id: Current.user.id)
   end
 
 end

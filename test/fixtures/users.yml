@@ -2,6 +2,7 @@ admin:
   email: tran.ce.co@gmail.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
+  superadmin: true
   role: 1
 
 standartuser:
@@ -9,9 +10,11 @@ standartuser:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 0
+  superadmin: false
 
 standartuser2:
   email: standard2_user@yahoo.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 0
+  superadmin: false

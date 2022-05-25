@@ -16,6 +16,7 @@ first:
   languages: first, second, third
   document_types: first, second, third
   phisycal_status: first
+  is_secret: false
 
 second:
   organization_code: MSG-123
@@ -41,6 +42,7 @@ second:
   languages: first, second, third
   document_types: first, second, third
   phisycal_status: first
+  is_secret: false
 
 third:
   organization_code: DKL-123
@@ -64,3 +66,4 @@ third:
   languages: first, second, third
   document_types: first, second, third
   phisycal_status: first
+  is_secret: false

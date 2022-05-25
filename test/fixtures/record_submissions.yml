@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  record_metadatum: one
+first:
+  record_metadatum: first
   approved: false
-  user: one
+  user: admin
 
-two:
-  record_metadatum: two
+second:
+  record_metadatum: first
   approved: false
-  user: two
+  user: admin

@@ -47,6 +47,7 @@ class RecordMetadataController < ApplicationController
 
   # POST /record_metadata or /record_metadata.json
   def create
+    Current.user = current_user
     @record_metadatum = RecordMetadatum.new(record_metadatum_params)
     authorize @record_metadatum 
     respond_to do |format|
