@@ -23,6 +23,10 @@
       <a class="item">
         Messages
       </a>
+      <% unless current_user.nil? %>
+      <%= link_to "All submissions", record_submissions_path(current_user), class: "item" %>
+      <%= link_to "My submissions", record_submissions_admin_user_path(current_user), class: "item" %>
+      <% end %>
       <div class="right menu">
         <% if current_user.nil? %>
           <div class="item">
@@ -34,6 +38,7 @@
             <div class="menu">
               <%= link_to  "Profile", admin_user_path(current_user), class: "item" %>
               <%= link_to  "Account", edit_user_registration_path, class: "item" %>
+              <%= link_to  "My Submissions", record_submissions_admin_user_path(current_user), class: "item" %>
               <%= link_to "My Activity", activities_admin_user_path(current_user), class: "item" %>
               <%= link_to vacations_url, class: "item" do %>
               Vacation <i class="calendar alternate icon"></i>

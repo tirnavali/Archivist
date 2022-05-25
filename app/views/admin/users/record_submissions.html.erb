@@ -1,0 +1,7 @@
+<h1>RecordSubmissions#index</h1>
+
+<% @record_submissions.each_with_index do |submission, index|  %>
+<%=index+1 %><p><%= submission.user %></p>
+<p><%= submission.record_metadatum %></p>
+Aprroved?: <% if submission.approved? %> <i class="green check icon"></i> <% else %> <i class="red minus circle icon"></i>  <% end %>
+<% end %>

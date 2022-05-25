@@ -31,10 +31,10 @@ class RecordMetadatum < ApplicationRecord
 
   scope :sort_audits,-> (record_metadata_id) { Audit.joins("INNER JOIN record_metadata on audits.auditable_id = record_metadata.id ")
                             .where("record_metadata.id = ?", record_metadata_id).order("audits.version DESC")}
-  private 
+   
 
   def to_s
-    "id: #{self.id} summary: #{self.summary}"
+    "id: #{self.id} fond: #{self.fond.name} summary: #{self.summary}"
   end
 
   def save_submission

@@ -49,10 +49,12 @@ Rails.application.routes.draw do
     resources :users do
       member do
         get :activities
+        get :record_submissions
       end
     end
     #resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] 
   end
+  resources :record_submissions, only: [:index]
   root to: "home#index"
 
 end
