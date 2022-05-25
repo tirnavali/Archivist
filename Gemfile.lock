@@ -66,6 +66,9 @@ GEM
     activerecord (7.0.2.2)
       activemodel (= 7.0.2.2)
       activesupport (= 7.0.2.2)
+    activerecord-sqlserver-adapter (7.0.0.0)
+      activerecord (~> 7.0.0)
+      tiny_tds
     activestorage (7.0.2.2)
       actionpack (= 7.0.2.2)
       activejob (= 7.0.2.2)
@@ -323,6 +326,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
+    tiny_tds (2.1.5)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -352,6 +356,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-sqlserver-adapter
   audited (~> 5.0)
   aws-sdk-ec2 (~> 1)
   aws-sdk-s3 (~> 1.113)
@@ -382,6 +387,7 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
+  tiny_tds
   turbo-rails
   tzinfo-data
   vanilla_nested

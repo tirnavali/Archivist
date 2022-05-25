@@ -5,13 +5,20 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: sqlite3
+  #adapter: sqlite3
+  adapter: sqlserver
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  host: SQL5108.site4now.net
+
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: db_a7f03d_sercant
+  username: db_a7f03d_sercant_admin
+  password: SercanTirnavali10
+  appname: <%= "myapp_#{Process.pid}" %>
+  #database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

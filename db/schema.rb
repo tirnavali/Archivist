@@ -68,26 +68,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   end
 
   create_table "document_types_documents", id: false, force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.integer "document_type_id", null: false
+    t.bigint "document_id", null: false
+    t.bigint "document_type_id", null: false
   end
 
   create_table "document_types_record_metadata", id: false, force: :cascade do |t|
-    t.integer "record_metadatum_id", null: false
-    t.integer "document_type_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.bigint "document_type_id", null: false
   end
 
   create_table "documents", force: :cascade do |t|
     t.text "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "language_id"
-    t.integer "organization_id"
-    t.integer "document_type_id"
-    t.integer "phisycal_status_id"
-    t.integer "toponym_id"
-    t.integer "privacy_id"
-    t.integer "person_id"
+    t.bigint "language_id"
+    t.bigint "organization_id"
+    t.bigint "document_type_id"
+    t.bigint "phisycal_status_id"
+    t.bigint "toponym_id"
+    t.bigint "privacy_id"
+    t.bigint "person_id"
     t.string "organization_code"
     t.integer "box"
     t.integer "folder"
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.text "explaination"
     t.date "starting_date"
     t.date "ending_date"
-    t.integer "fond_id", null: false
+    t.bigint "fond_id", null: false
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["fond_id"], name: "index_documents_on_fond_id"
     t.index ["language_id"], name: "index_documents_on_language_id"
@@ -108,33 +108,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   end
 
   create_table "documents_languages", id: false, force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.integer "language_id", null: false
+    t.bigint "document_id", null: false
+    t.bigint "language_id", null: false
   end
 
   create_table "documents_people", id: false, force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.integer "person_id", null: false
+    t.bigint "document_id", null: false
+    t.bigint "person_id", null: false
   end
 
   create_table "documents_privacies", id: false, force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.integer "privacy_id", null: false
+    t.bigint "document_id", null: false
+    t.bigint "privacy_id", null: false
   end
 
   create_table "documents_subjects", id: false, force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.integer "subject_id", null: false
+    t.bigint "document_id", null: false
+    t.bigint "subject_id", null: false
   end
 
   create_table "documents_toponyms", id: false, force: :cascade do |t|
-    t.integer "document_id", null: false
-    t.integer "toponym_id", null: false
+    t.bigint "document_id", null: false
+    t.bigint "toponym_id", null: false
   end
 
   create_table "fonds", force: :cascade do |t|
     t.string "name"
-    t.integer "parent_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "depth", default: 0, null: false
@@ -149,8 +149,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   end
 
   create_table "languages_record_metadata", id: false, force: :cascade do |t|
-    t.integer "record_metadatum_id", null: false
-    t.integer "language_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.bigint "language_id", null: false
   end
 
   create_table "number_types", force: :cascade do |t|
@@ -172,8 +172,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   end
 
   create_table "people_record_metadata", id: false, force: :cascade do |t|
-    t.integer "record_metadatum_id", null: false
-    t.integer "person_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.bigint "person_id", null: false
   end
 
   create_table "phisycal_statuses", force: :cascade do |t|
@@ -192,7 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "record_metadatum_id", null: false
+    t.bigint "record_metadatum_id", null: false
     t.index ["record_metadatum_id"], name: "index_record_attachments_on_record_metadatum_id"
   end
 
@@ -200,10 +200,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.text "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "fond_id"
-    t.integer "organization_id"
-    t.integer "phisycal_status_id"
-    t.integer "privacy_id"
+    t.bigint "fond_id"
+    t.bigint "organization_id"
+    t.bigint "phisycal_status_id"
+    t.bigint "privacy_id"
     t.string "organization_code"
     t.integer "box"
     t.integer "folder"
@@ -219,18 +219,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   end
 
   create_table "record_metadata_subjects", id: false, force: :cascade do |t|
-    t.integer "record_metadatum_id", null: false
-    t.integer "subject_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.bigint "subject_id", null: false
   end
 
   create_table "record_metadata_toponyms", id: false, force: :cascade do |t|
-    t.integer "record_metadatum_id", null: false
-    t.integer "toponym_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.bigint "toponym_id", null: false
   end
 
   create_table "record_submissions", force: :cascade do |t|
-    t.integer "record_metadatum_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -241,7 +241,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -253,8 +253,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number_type_id", null: false
-    t.integer "record_metadatum_id", null: false
+    t.bigint "number_type_id", null: false
+    t.bigint "record_metadatum_id", null: false
     t.index ["number_type_id"], name: "index_special_numbers_on_number_type_id"
     t.index ["record_metadatum_id"], name: "index_special_numbers_on_record_metadatum_id"
   end
@@ -295,8 +295,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
@@ -304,7 +304,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
 
   create_table "vacations", force: :cascade do |t|
     t.string "explanation"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "starting_date"
     t.datetime "ending_date"
     t.datetime "created_at", null: false
