@@ -2,6 +2,7 @@ class User < ApplicationRecord
   rolify
   audited
   after_create :assign_default_role
+  after_create :set_superadmin
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable, :omniauthable
@@ -20,6 +21,14 @@ class User < ApplicationRecord
   
   def to_s
     self.email
+  end
+
+  def set_superadmin
+    # initialize superadmin
+    if User.all.size == 1
+      self.superadmin = true
+      self.save
+    end
   end
 
   def assign_default_role

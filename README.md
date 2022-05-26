@@ -2,6 +2,7 @@
 
 
 # Authorization Specifications
+- Superadmin will be set on when first user signs up
 - Application has 5 levels of authentication
 
 1. Superadmin # Site manager has all privileges.
