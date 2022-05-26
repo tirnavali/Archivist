@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  rolify
   audited
   after_create :assign_default_role
   after_create :set_superadmin
@@ -32,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def assign_default_role
-    self.add_role(:user) if self.roles.blank?
+    self.user!
   end
 
   def fullname

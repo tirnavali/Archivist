@@ -1,5 +1,4 @@
 class Fond < ApplicationRecord
-  resourcify
   audited
   before_validation :clean_white_spaces
   before_create :assign_depth

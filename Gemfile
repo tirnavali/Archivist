@@ -42,7 +42,7 @@ gem 'haml'
 gem 'rack-cors'
 gem 'aws-sdk-s3', '~> 1.113'
 gem 'aws-sdk-ec2', '~> 1'
-gem 'rolify'
+#gem 'rolify'
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter'
 
