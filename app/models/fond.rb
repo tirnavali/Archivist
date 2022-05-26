@@ -7,12 +7,11 @@ class Fond < ApplicationRecord
   
   belongs_to :parent, class_name: "Fond", optional: true
   has_many :children, class_name: "Fond", foreign_key: "parent_id", dependent: :nullify
-  has_many :documents
   has_many :metadata
 
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name
-  validates_length_of :name, in: 3..100
+  validates_length_of :name, in: 3..150
   validates :depth, presence: true, numericality: true
 
 

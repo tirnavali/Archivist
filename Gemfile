@@ -46,6 +46,9 @@ gem 'aws-sdk-ec2', '~> 1'
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter'
 
+gem 'sunspot_rails'
+gem "roo"
+
 
 
 # Use Redis adapter to run Action Cable in production
@@ -84,6 +87,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "brakeman"
+  gem 'sunspot_solr'
   
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

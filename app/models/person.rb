@@ -6,7 +6,7 @@ class Person < ApplicationRecord
   
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name
-  validates_length_of :name, in: 3..100
+  validates_length_of :name, in: 3..200
 
   def to_s
     return self.name

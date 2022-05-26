@@ -4,7 +4,7 @@ class DocumentType < ApplicationRecord
 
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name
-  validates_length_of :name, in: 3..20
+  validates_length_of :name, in: 2..20
   
   def to_s
     return self.name

@@ -40,7 +40,9 @@ class User < ApplicationRecord
   end
 
   def assign_default_role
-    self.user!
+    if self.role == nil
+      self.user!
+    end
   end
 
   def fullname

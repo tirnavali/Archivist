@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# doc_types = %w{belge cd harita ferman mektup}
+# doc_types = ["belge", "cd", "harita", "ferman", "mektup",]
 # doc_types.each {|doc_type| DocumentType.create! name: doc_type}
 
 # languages = %w{türkçe ingilizce almanca fransızca osmanlıca farsça}
@@ -34,5 +34,41 @@
 # number_types.each {|nt| NumberType.create! name: nt}
 
 # 25.times do |u|
-#     User.create(email: "user#{u*2}@gmail.com", password: "123456")
+    # User.create(email: "random#{u*2}@gmail.com", password: "123456", role: ((u+1)%3))
+    # User.create(email: "standart#{u*2}@gmail.com", password: "123456")
 # end
+# fonds = ["CUMHURİYET HALK PARTİSİ", "CUMHURİYETÇİ GÜVEN PARTİSİ", "ADALET PARTİSİ", "MİLLİ SELAMET PARTİSİ", "MİLLİYETÇİ HAREKET PARTİSİ",
+# "MİLLİ BİRLİK KURULU", "İSTİKLAL MAHKEMELERİ", "YASSI ADA - YÜCE DİVAN", "İSTİKLAL MADALYALARI", 
+# "GAZETECİ NALAN SEÇKİN TARAFINDAN 1970 YILINDA İLK MECLİSİN 14 SAYIN ÜYESİ İLE YAPILAN GÖRÜŞME BANTLARI", "İSDEMİR KÖMÜR DOSYASI",
+# "OYLAMA PULLARI", "MSB ASKERİ KADROLARA AİT DOSYALAR", "ATATÜRK İMZALI ÖZEL", "TBMM VAKFI", "TAKVİM-İ VAKAYİ", "ÜNVERSİTE SAYIŞTAY RAPORU", "RESMİ GAZETE", 
+# "DÜSTUR", "TUTANAK DERGİLERİ", "KANUNLAR DERGİSİ", "TUTANAKLAR MECLİSİ MEBUSAN", "TUTANAKLAR MECLİSİ AYAN", "KOÇGİRİ"]
+# fonds.each {|fond| Fond.create! name: fond}
+
+# tutanaklar_f = Fond.create! name: "TUTANAKLAR"
+# Fond.create! name: "GİZLİ OTURUM TUTANAKLARI", parent_id: tutanaklar_f.id
+# Fond.create! name: "AÇILAN GİZLİ ZABITLAR", parent_id: tutanaklar_f.id
+# Fond.create! name: "KİT KOMİSYONU", parent_id: tutanaklar_f.id
+# Fond.create! name: "DİLEKÇE KOMİSYONU", parent_id: tutanaklar_f.id
+# Fond.create! name: "İHTİSAS KARMA KOMİSYONLAR", parent_id: tutanaklar_f.id
+# Fond.create! name: "İNSAN HAKLARI KOMİSYONU", parent_id: tutanaklar_f.id
+
+# kanunlar_f = Fond.create! name: "KANUNLAR FONU"
+# kaduk_f = Fond.create! name: "KADÜK", parent_id: kanunlar_f.id
+
+xlsx = Roo::Spreadsheet.open('db/kocgiri1.xlsx')
+
+#7th column person
+person_list = xlsx.sheet(0).cell(3,7).split(",")
+person_ids = []
+person_list.each do |pers|
+  pers = pers.squish # remove whitespaces
+  pf = Person.find_by_name pers
+  if pf.nil?
+    p = Person.create! name: pers
+    person_ids << p.id
+  else
+    person_ids << pf.id
+  end
+end
+person_ids.uniq!
+#end of 7th column
