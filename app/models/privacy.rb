@@ -1,7 +1,6 @@
 class Privacy < ApplicationRecord
   before_validation :clean_white_spaces
   audited
-  has_and_belongs_to_many :documents
   has_many :record_metadata, dependent: :nullify
 
   validates :name, uniqueness: { case_sensitive: false }

@@ -1,6 +1,7 @@
 class Organization < ApplicationRecord
   has_associated_audits
   before_validation :clean_white_spaces
+  
   has_many :record_metadata, dependent: :nullify
 
   validates :name, uniqueness: { case_sensitive: false }
