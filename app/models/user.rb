@@ -2,6 +2,7 @@ class User < ApplicationRecord
   audited
   after_create :assign_default_role
   after_create :set_superadmin
+  before_destroy :do_not_delete_superadmin, prepend: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable, :omniauthable
@@ -13,6 +14,7 @@ class User < ApplicationRecord
   has_many :audits
   has_many :record_submissions
   has_many :record_metadata, :through => :record_submissions
+
   
   # scope :update_actions, -> { joins(:audits).where('audits.action is = ?', 'update') }
   # scope :find_user, -> (id) { where('id = ?', id)}
@@ -27,6 +29,13 @@ class User < ApplicationRecord
     if User.all.size == 1
       self.superadmin = true
       self.save
+    end
+  end
+
+  def do_not_delete_superadmin
+    if self.superadmin?
+      self.errors.add(:base, "You can not delete superadmins!")
+      throw(:abort)
     end
   end
 

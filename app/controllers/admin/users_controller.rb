@@ -71,12 +71,16 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     authorize @user
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to admin_users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end 
+    if @user.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_users_url, notice: "User was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to admin_users_url, notice: @user.errors[:base].join() }
+      end 
+    end
   end
 
   private 
