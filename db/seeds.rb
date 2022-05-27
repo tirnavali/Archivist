@@ -55,6 +55,22 @@
 # kanunlar_f = Fond.create! name: "KANUNLAR FONU"
 # kaduk_f = Fond.create! name: "KADÜK", parent_id: kanunlar_f.id
 
+rm = RecordMetadatum.new
+rm.fond= Fond.first
+rm.box= 1
+rm.order = 2
+rm.folder = 3
+rm.organization_code = "TBM-12"
+rm.summary="asdfasdf asdf asd asdf asdf sdf"
+rm.explaination=""
+rm.starting_date="22.10.1342"
+rm.ending_date="26.11.1342"
+rm.subjects << Subject.first
+rm.people << Person.first
+rm.organizations << Organization.first
+rm.toponyms << Toponym.first
+rm.save
+
 xlsx = Roo::Spreadsheet.open('db/kocgiri1.xlsx')
 
 #7th column person

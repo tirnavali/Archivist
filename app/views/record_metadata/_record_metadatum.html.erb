@@ -33,7 +33,15 @@
       </tr>
       <tr>
         <td><%=  t('organization').titleize %></td>
-        <td><%= record_metadatum.organization.name %></td>
+        <td>
+        <ul class="ui list">
+        <% record_metadatum.organizations.order(:name).each do |organization| %>
+            <li >
+                <%= organization.name %>
+              </li>
+              <% end %>  
+        </ul>
+        </td>
       </tr>
       <tr>
         <td><%=  t('languages').titleize %></td>
