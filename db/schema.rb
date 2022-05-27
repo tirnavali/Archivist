@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -105,6 +105,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "organizations_record_metadata", id: false, force: :cascade do |t|
+    t.integer "organization_id", null: false
+    t.integer "record_metadatum_id", null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -141,7 +146,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "fond_id"
-    t.integer "organization_id"
     t.integer "phisycal_status_id"
     t.integer "privacy_id"
     t.string "organization_code"
@@ -153,7 +157,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
     t.text "explaination"
     t.boolean "is_secret", default: false
     t.index ["fond_id"], name: "index_record_metadata_on_fond_id"
-    t.index ["organization_id"], name: "index_record_metadata_on_organization_id"
     t.index ["phisycal_status_id"], name: "index_record_metadata_on_phisycal_status_id"
     t.index ["privacy_id"], name: "index_record_metadata_on_privacy_id"
   end
@@ -257,7 +260,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_143336) do
   add_foreign_key "fonds", "fonds", column: "parent_id"
   add_foreign_key "record_attachments", "record_metadata"
   add_foreign_key "record_metadata", "fonds"
-  add_foreign_key "record_metadata", "organizations"
   add_foreign_key "record_metadata", "phisycal_statuses"
   add_foreign_key "record_metadata", "privacies"
   add_foreign_key "record_submissions", "record_metadata"

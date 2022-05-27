@@ -1,31 +1,34 @@
 import "jquery";
 import "select2";
+
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {   
-    // this code written because of browser back|forward actions   
+  connect() {  
     $(document).on("turbo:before-cache", function(){ 
-      $('#multiple-people').select2('destroy');
-    }); 
+      $('#organizations-dropdown').select2('destroy');
+    });
+  
     $(document).ready(function(){
-      $('#multiple-people').select2({
+      $('#organizations-dropdown').select2({
         //width: 500,
-        placeholder: "Kişi seçiniz",
+        placeholder: "Kurum seçiniz",
         allowClear: true,
         minimumResultsForSearch: 20,
-        minimumInputLength: 3,         
+        minimumInputLength: 3,
         ajax: {
-          url: "http://localhost:3000/people/search.json",
+          url: "http://localhost:3000/organizations.json",
           dataType: "json",       
           delay: 250,
           data: function (params) {
-            //console.log(params);
-            var query = {
-              term: params.term            
+            var q = {
+              term:{name_cont: params.term},
+              //commit:"Ara"
             }
             // Query parameters will be ?search=[term]&page=[page]
-            return query;
+            //  organizations.json?term[name_cont]=some&[page]=2
+            // /organizations.json?term[name_cont]
+            return q;
           },
           processResults: function (response) {
             //console.log(response);

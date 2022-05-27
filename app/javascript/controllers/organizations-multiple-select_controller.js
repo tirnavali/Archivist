@@ -4,14 +4,14 @@ import "select2";
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  
   connect() {  
+    // this code written because of browser back|forward actions   
     $(document).on("turbo:before-cache", function(){ 
-      $('#organizations-dropdown').select2('destroy');
+      $('#multiple-organizations').select2('destroy');
     });
   
     $(document).ready(function(){
-      $('#organizations-dropdown').select2({
+      $('#multiple-organizations').select2({
         //width: 500,
         placeholder: "Kurum seçiniz",
         allowClear: true,
@@ -21,6 +21,8 @@ export default class extends Controller {
           url: "http://localhost:3000/organizations.json",
           dataType: "json",       
           delay: 250,
+          crossDomain: true,
+          type: 'GET',
           data: function (params) {
             var q = {
               term:{name_cont: params.term},

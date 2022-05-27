@@ -6,6 +6,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   
   connect() { 
+    // this code written because of browser back|forward actions   
     $(document).on("turbo:before-cache", function(){ 
       $('#multiple-toponyms').select2('destroy');
     });    
