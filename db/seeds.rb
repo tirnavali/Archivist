@@ -74,7 +74,7 @@ rm.save
 xlsx = Roo::Spreadsheet.open('db/kocgiri1.xlsx')
 
 #7th column person
-person_list = xlsx.sheet(0).cell(3,7).split(",")
+person_list = xlsx.sheet(0).cell(2,7).split(",")
 person_ids = []
 person_list.each do |pers|
   pers = pers.squish # remove whitespaces
