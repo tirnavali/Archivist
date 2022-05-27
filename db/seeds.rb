@@ -72,3 +72,4 @@ person_list.each do |pers|
 end
 person_ids.uniq!
 #end of 7th column
+#8th column organization
