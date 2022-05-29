@@ -1,9 +1,8 @@
 <h1><%= t('new_organization') %></h1>
-
-<%= render "form", organization: @organization %>
-
-<br>
-
+<%= turbo_frame_tag "new_organization" do %>
+  <%= render "form", organization: @organization %>
+  <br/>
+<% end %>
 <div>
   <%= link_to t("back_to_organizations"), organizations_path %>
 </div>

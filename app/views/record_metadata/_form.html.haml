@@ -43,8 +43,13 @@
     = turbo_frame_tag "person_flash_messages"
     = turbo_frame_tag "new_person"
   .field
-    =# f.association :organization, input_html: { class: "select2 basic", id: "organizations-dropdown", "data-controller": "organizations-multiple-select", style: "width: 100%"}
     = f.association :organizations, collection: Organization.find(@record_metadatum.organization_ids), input_html: { class: "", id: "multiple-organizations", multiple: "multiple", "data-controller": "organizations-multiple-select", style: "width: 100%"}
+    = link_to new_organization_path, data: { turbo_frame: dom_id(Organization.new) }, class: "" do
+      = t("add_organization") 
+      %i.ui.plus.square.outline.icon.green
+  .ui.form.field
+    = turbo_frame_tag "organization_flash_messages"
+    = turbo_frame_tag "new_organization"
   .field
     = f.association :toponyms, collection: Toponym.find(@record_metadatum.toponym_ids), input_html: { class: "", id: "multiple-toponyms", multiple: "multiple", "data-controller": "toponyms-multiple-select", style: "width: 100%"}
     %i.ui.plus.icon= link_to t("add"), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) } 
