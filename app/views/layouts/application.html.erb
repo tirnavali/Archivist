@@ -57,25 +57,21 @@
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
   
-    <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
-    <%= "user".pluralize.titleize %>
-      <div class="ui teal left pointing label"><%= User.all.size %></div>
-    <% end %>
-
-    <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
-    <%= t("fond").titleize %>
-      <div class="ui teal left pointing label"><%= Fond.all.size %></div>
-    <% end %>
-    
-    <%#= link_to (documents_url) , class: is_page_active?(documents_url) do %>
-    <%#= "document".pluralize.titleize %>
-    <%# end %>
-
     <%= link_to (record_metadata_url) , class: is_page_active?(record_metadata_url) do %>
     <%= t("record_metadata").titleize %>
       <div class="ui teal left pointing label"><%= RecordMetadatum.all.size %></div>
     <% end %>
   
+    <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
+    <%= t("fond").titleize %>
+      <div class="ui teal left pointing label"><%= Fond.all.size %></div>
+    <% end %>
+    
+    <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
+    <%= "user".pluralize.titleize %>
+      <div class="ui teal left pointing label"><%= User.all.size %></div>
+    <% end %>
+
     <%= link_to (privacies_url) , class: is_page_active?(privacies_url) do %>
     <%= t("privacy").titleize %>
       <div class="ui teal left pointing label"><%= Privacy.all.size %></div>

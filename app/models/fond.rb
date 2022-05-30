@@ -14,7 +14,8 @@ class Fond < ApplicationRecord
   validates_length_of :name, in: 3..150
   validates :depth, presence: true, numericality: true
 
-
+ 
+ 
   def to_s
     self.name
   end

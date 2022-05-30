@@ -31,6 +31,7 @@ class RecordMetadatum < ApplicationRecord
   accepts_nested_attributes_for :special_numbers, limit: 5, reject_if: :all_blank, allow_destroy: true
   validates_associated :special_numbers
 
+
   scope :sort_audits,-> (record_metadata_id) { Audit.joins("INNER JOIN record_metadata on audits.auditable_id = record_metadata.id ")
                             .where("record_metadata.id = ?", record_metadata_id).order("audits.version DESC")}
    

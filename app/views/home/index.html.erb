@@ -2,6 +2,19 @@
 <%= alert %>
 <% if current_user %>
   <h1>Fonlarda ve belgelerde arayın...</h1>
+  <%= search_form_for @q do |f| %>
+
+  
+    <%= f.label :summary_or_fond_name_i_cont %>
+    <%= f.search_field :summary_or_fond_name_i_cont %>
+    <%= f.label :fond_name_i_cont %>
+    <%= f.search_field :fond_name_i_cont %>
+
+    
+
+
+    <%= f.submit %>
+  <% end %>
   <h2>Son eklenen belgeler</h2>
   <div class="ui yellow message">
     <i class="star icon"></i>
