@@ -18,6 +18,7 @@ class RecordMetadataController < ApplicationController
     @q.build_grouping.build_condition
     
     @record_metadata = policy_scope(@q.result.page params[:page])
+    flash.now[:notice] = "We have exactly #{@q.result.size} record available."
   end
 
   def search

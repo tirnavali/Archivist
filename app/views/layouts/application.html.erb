@@ -135,6 +135,7 @@
     <% end %>
       <div class="ui container thirteen wide column">
         <%= render "layouts/shared/notice", locals: {notice: notice, alert: alert} %> 
+        <%#= render "layouts/shared/notice", locals: {notice: notice} %> 
         <%= yield %>
         <%= turbo_frame_tag "modal" %>
         <%#= console %>

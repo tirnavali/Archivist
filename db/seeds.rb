@@ -1,10 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+
 
 doc_types = ["belge", "cd", "harita", "ferman", "mektup",]
 doc_types.each {|doc_type| DocumentType.create! name: doc_type}
@@ -55,37 +52,99 @@ Fond.create! name: "İNSAN HAKLARI KOMİSYONU", parent_id: tutanaklar_f.id
 kanunlar_f = Fond.create! name: "KANUNLAR FONU"
 kaduk_f = Fond.create! name: "KADÜK", parent_id: kanunlar_f.id
 
-# rm = RecordMetadatum.new
-# rm.fond= Fond.first
-# rm.box= 1
-# rm.order = 2
-# rm.folder = 3
-# rm.organization_code = "TBM-12"
-# rm.summary="asdfasdf asdf asd asdf asdf sdf"
-# rm.explaination=""
-# rm.starting_date="22.10.1342"
-# rm.ending_date="26.11.1342"
-# rm.subjects << Subject.first
-# rm.people << Person.first
-# rm.organizations << Organization.first
-# rm.toponyms << Toponym.first
-# rm.save
+xlsx = Roo::Spreadsheet.open('db/kocgiri01.xlsx')
+(2..260).each do |num|
+  rm = RecordMetadatum.new
+  rm.fond= Fond.find_by_name("KOÇGİRİ")
+  rm.organization_code = xlsx.sheet(0).cell(num,1)
+  rm.box= xlsx.sheet(0).cell(num,2)
+  rm.folder = xlsx.sheet(0).cell(num,3)
+  rm.order = xlsx.sheet(0).cell(num,4)
+  rm.starting_date= xlsx.sheet(0).cell(num,5)
+  rm.summary= xlsx.sheet(0).cell(num,8)
+  rm.explaination=""
 
-# xlsx = Roo::Spreadsheet.open('db/kocgiri1.xlsx')
+  ## 9 column person
+  person_list = xlsx.sheet(0).cell(20,9).split(",")
+  person_ids = []
+  person_list.each do |pers|
+    pers = pers.squish # remove whitespaces
+    if pers.empty?
+      next
+    end
+    pf = Person.find_by_name pers
+    if pf.nil?
+      p = Person.create! name: pers
+      person_ids << p.id
+    else
+      person_ids << pf.id
+    end
+  end
+  person_ids.uniq!
+  rm.person_ids =person_ids
 
-# #7th column person
-# person_list = xlsx.sheet(0).cell(2,7).split(",")
-# person_ids = []
-# person_list.each do |pers|
-#   pers = pers.squish # remove whitespaces
-#   pf = Person.find_by_name pers
-#   if pf.nil?
-#     p = Person.create! name: pers
-#     person_ids << p.id
-#   else
-#     person_ids << pf.id
-#   end
-# end
-# person_ids.uniq!
-# #end of 7th column
-# #8th column organization
+
+  ## 10. column person
+  organization_list = xlsx.sheet(0).cell(4,10).split(",")
+  organization_ids = []
+  organization_list.each do |organization|
+    organization = organization.squish # remove whitespaces
+    if organization.empty?
+      next
+    end
+    org = Organization.find_by_name organization
+    if org.nil?
+      o = Organization.create! name: organization
+      organization_ids << o.id
+    else
+      organization_ids << org.id
+    end
+  end
+  organization_ids.uniq!
+
+  rm.organization_ids = organization_ids
+
+
+  ## 11 toponym
+  toponym_list = xlsx.sheet(0).cell(5,11).split(",")
+  toponym_ids = []
+  toponym_list.each do |toponym|
+      toponym = toponym.squish # remove whitespaces
+    if toponym.empty?
+      next
+    end
+    top = Toponym.find_by_name toponym
+    if top.nil?
+      t = Toponym.create! name: toponym
+      toponym_ids << t.id
+    else
+      toponym_ids << top.id
+    end
+  end
+  toponym_ids.uniq!
+
+  rm.toponym_ids = toponym_ids
+
+
+  ## 12 subjects
+  subject_list = xlsx.sheet(0).cell(5,12).split(",")
+  subject_ids = []
+  subject_list.each do |subject|
+      subject = subject.squish # remove whitespaces
+    if subject.empty?
+      next
+    end
+    subj = Subject.find_by_name subject
+    if subj.nil?
+      s = Subject.create! name: subject
+      subject_ids << s.id
+    else
+      subject_ids << subj.id
+    end
+  end
+  subject_ids.uniq!
+  rm.subject_ids = subject_ids
+  rm.save
+  # 
+  
+end # end of excel
