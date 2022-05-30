@@ -1,0 +1,17 @@
+= form_with(model: @organization, class:"ui form")  do |form|
+  - if @organization.errors.any?
+    .ui.red.message 
+      %h2= "#{pluralize(@organization.errors.count, "error")} prohibited this organization from being saved:"
+      %ul
+        - @organization.errors.each do |error|
+          %li
+            = error.full_message
+  .inline.fields
+    .field
+      = form.label t(:name),  autofocus: true 
+    .five.wide.field
+      = form.text_field :name, {"data-controller": "focus"}
+    .field 
+      = form.submit class: "ui green button"
+    .field 
+      = link_to "Cancel", organizations_path, class: "ui red button"

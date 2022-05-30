@@ -4,7 +4,7 @@ class RecordMetadatum < ApplicationRecord
   audited
   has_one :record_attachment
   belongs_to :fond
-  audited associated_with: :organization
+  #audited associated_with: :organization
   belongs_to :phisycal_status
   belongs_to :privacy
   has_and_belongs_to_many :organizations
