@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
-
+User.create!(email: "tran.ce.co@gmail.com", password: "123456")
 
 doc_types = ["belge", "cd", "harita", "ferman", "mektup",]
 doc_types.each {|doc_type| DocumentType.create! name: doc_type}
@@ -52,8 +52,17 @@ Fond.create! name: "İNSAN HAKLARI KOMİSYONU", parent_id: tutanaklar_f.id
 kanunlar_f = Fond.create! name: "KANUNLAR FONU"
 kaduk_f = Fond.create! name: "KADÜK", parent_id: kanunlar_f.id
 
+class String
+  def titleize_turkish()
+    word_list = self.split(" ")
+    word_list.map!{|word| word[0].upcase(:turkic) + word[1..] }
+    word_list.join(" ")
+  end
+end
+
 xlsx = Roo::Spreadsheet.open('db/kocgiri01.xlsx')
 (2..260).each do |num|
+  puts "Working on row :#{num}"
   rm = RecordMetadatum.new
   rm.fond= Fond.find_by_name("KOÇGİRİ")
   rm.organization_code = xlsx.sheet(0).cell(num,1)
@@ -65,72 +74,84 @@ xlsx = Roo::Spreadsheet.open('db/kocgiri01.xlsx')
   rm.explaination=""
 
   ## 9 column person
-  person_list = xlsx.sheet(0).cell(20,9).split(",")
-  person_ids = []
-  person_list.each do |pers|
-    pers = pers.squish # remove whitespaces
-    if pers.empty?
-      next
+  xlsx_data = xlsx.sheet(0).cell(num,9)
+  unless xlsx_data.nil?  
+    person_list = xlsx_data.split(",")
+  
+    person_ids = []
+    person_list.each do |pers|
+      puts pers
+      pers = pers.squish.titleize_turkish # remove whitespaces
+      if pers.empty?
+        next
+      end
+      # pf = Person.where("LOWER(name)=?", pers.downcase(:turkic))
+      pf = Person.find_by_name pers
+
+      if pf.nil?
+        p = Person.create! name: pers
+        person_ids << p.id
+      else
+        person_ids << pf.id
+      end
     end
-    pf = Person.find_by_name pers
-    if pf.nil?
-      p = Person.create! name: pers
-      person_ids << p.id
-    else
-      person_ids << pf.id
-    end
+    person_ids.uniq!
+    rm.person_ids =person_ids
   end
-  person_ids.uniq!
-  rm.person_ids =person_ids
+  
 
+  ## 10. column organization
+  xlsx_data = xlsx.sheet(0).cell(num,10)
+  unless xlsx_data.nil? 
+    organization_list = xlsx_data.split(",")
+    organization_ids = []
+    organization_list.each do |organization|
+      organization = organization.squish.titleize_turkish # remove whitespaces
+      if organization.empty?
+        next
+      end
+      org = Organization.find_by_name organization
+      if org.nil?
+        o = Organization.create! name: organization
+        organization_ids << o.id
+      else
+        organization_ids << org.id
+      end
+    end
+    organization_ids.uniq!
 
-  ## 10. column person
-  organization_list = xlsx.sheet(0).cell(4,10).split(",")
-  organization_ids = []
-  organization_list.each do |organization|
-    organization = organization.squish # remove whitespaces
-    if organization.empty?
-      next
-    end
-    org = Organization.find_by_name organization
-    if org.nil?
-      o = Organization.create! name: organization
-      organization_ids << o.id
-    else
-      organization_ids << org.id
-    end
+    rm.organization_ids = organization_ids
   end
-  organization_ids.uniq!
-
-  rm.organization_ids = organization_ids
 
 
   ## 11 toponym
-  toponym_list = xlsx.sheet(0).cell(5,11).split(",")
-  toponym_ids = []
-  toponym_list.each do |toponym|
-      toponym = toponym.squish # remove whitespaces
-    if toponym.empty?
-      next
+  xlsx_data = xlsx.sheet(0).cell(num,11)
+  unless xlsx_data.nil?  
+    toponym_list = xlsx_data.split(",")
+    toponym_ids = []
+    toponym_list.each do |toponym|
+        toponym = toponym.squish.titleize_turkish # remove whitespaces
+      if toponym.empty?
+        next
+      end
+      top = Toponym.find_by_name toponym
+      if top.nil?
+        t = Toponym.create! name: toponym
+        toponym_ids << t.id
+      else
+        toponym_ids << top.id
+      end
     end
-    top = Toponym.find_by_name toponym
-    if top.nil?
-      t = Toponym.create! name: toponym
-      toponym_ids << t.id
-    else
-      toponym_ids << top.id
-    end
+    toponym_ids.uniq!
+      rm.toponym_ids = toponym_ids
   end
-  toponym_ids.uniq!
-
-  rm.toponym_ids = toponym_ids
 
 
   ## 12 subjects
-  subject_list = xlsx.sheet(0).cell(5,12).split(",")
+  subject_list = xlsx.sheet(0).cell(num,12).split(",")
   subject_ids = []
   subject_list.each do |subject|
-      subject = subject.squish # remove whitespaces
+      subject = subject.squish.titleize_turkish # remove whitespaces
     if subject.empty?
       next
     end

@@ -4,7 +4,7 @@ class Person < ApplicationRecord
   
   has_and_belongs_to_many :record_metadata, dependent: :nullify
   
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { case_sensitive: true }
   validates_presence_of :name
   validates_length_of :name, in: 3..200
 

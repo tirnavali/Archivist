@@ -1,5 +1,6 @@
 <%= notice %>
 <%= alert %>
+
 <% if current_user %>
   <h1>Fonlarda ve belgelerde arayın...</h1>
   <%= search_form_for @q do |f| %>
@@ -7,6 +8,10 @@
   
     <%= f.label :summary_or_fond_name_i_cont %>
     <%= f.search_field :summary_or_fond_name_i_cont %>
+    <%= f.label :subjects_name_i_cont %>
+    <%= f.search_field :subjects_name_i_cont %>
+    <%= f.label :toponyms_name_cont %>
+    <%= f.search_field :toponyms_name_cont %>
     <%= f.label :fond_name_i_cont %>
     <%= f.search_field :fond_name_i_cont %>
 

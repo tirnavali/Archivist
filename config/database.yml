@@ -9,7 +9,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   adapter: sqlite3
   # adapter: sqlserver
-  # host: SQL5108.site4now.net
+  # host: SQL5102.site4now.net
 
 
 development:
