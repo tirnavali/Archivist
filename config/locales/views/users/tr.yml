@@ -1,0 +1,10 @@
+tr:
+  user: "Kullanıcı"
+  users: "Kullanıcılar"
+  new_user: "Yeni kullanıcı ekle"
+  show_this_person: "Bu kullanıcıyı göster"
+  edit_this_user: "Kullanıcı kaydını düzenle"
+  editing_user: "Kullanıcı kaydı düzenleniyor"
+  update_this_user: "Kullanıcı kaydını güncelle"
+  back_to_users: "Kullanıcılara geri dön"
+  create_user: "Kullanıcı oluştur"

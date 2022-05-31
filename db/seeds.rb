@@ -55,7 +55,7 @@ kaduk_f = Fond.create! name: "KADÜK", parent_id: kanunlar_f.id
 class String
   def titleize_turkish()
     word_list = self.split(" ")
-    word_list.map!{|word| word[0].upcase(:turkic) + word[1..] }
+    word_list.map!{|word| word[0].upcase(:turkic) + word[1..].downcase(:turkic) }
     word_list.join(" ")
   end
 end
@@ -107,7 +107,7 @@ xlsx = Roo::Spreadsheet.open('db/kocgiri01.xlsx')
     organization_ids = []
     organization_list.each do |organization|
       organization = organization.squish.titleize_turkish # remove whitespaces
-      if organization.empty?
+      if organization.empty? || organization.length <= 3
         next
       end
       org = Organization.find_by_name organization

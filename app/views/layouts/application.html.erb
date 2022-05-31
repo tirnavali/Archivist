@@ -24,8 +24,8 @@
         Messages
       </a>
       <% unless current_user.nil? %>
-      <%= link_to "All submissions", record_submissions_path(current_user), class: "item" %>
-      <%= link_to "My submissions", record_submissions_admin_user_path(current_user), class: "item" %>
+      <%= link_to t("all_submissions"), record_submissions_path(current_user), class: "item" %>
+      <%= link_to t("my_submissions"), record_submissions_admin_user_path(current_user), class: "item" %>
       <% end %>
       <div class="right menu">
         <% if current_user.nil? %>
@@ -36,10 +36,10 @@
           <div class="ui dropdown item">
             <%= current_user.email %> <i class="dropdown icon"></i>
             <div class="menu">
-              <%= link_to  "Profile", admin_user_path(current_user), class: "item" %>
-              <%= link_to  "Account", edit_user_registration_path, class: "item" %>
-              <%= link_to  "My Submissions", record_submissions_admin_user_path(current_user), class: "item" %>
-              <%= link_to "My Activity", activities_admin_user_path(current_user), class: "item" %>
+              <%= link_to  t(:profile) , admin_user_path(current_user), class: "item" %>
+              <%= link_to  t(:account), edit_user_registration_path, class: "item" %>
+              <%= link_to  t(:my_submissions), record_submissions_admin_user_path(current_user), class: "item" %>
+              <%= link_to  t(:my_activity), activities_admin_user_path(current_user), class: "item" %>
               <%= link_to vacations_url, class: "item" do %>
               Vacation <i class="calendar alternate icon"></i>
               <% end %>          
@@ -63,12 +63,12 @@
     <% end %>
   
     <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
-    <%= t("fond").titleize %>
+    <%= t("fonds").titleize %>
       <div class="ui teal left pointing label"><%= Fond.all.size %></div>
     <% end %>
     
     <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
-    <%= "user".pluralize.titleize %>
+    <%= t("users").titleize %>
       <div class="ui teal left pointing label"><%= User.all.size %></div>
     <% end %>
 
@@ -78,12 +78,12 @@
     <% end %>
     
     <%= link_to (people_url), class: is_page_active?(people_url) do %>
-    <%= "person".pluralize.titleize %>
+    <%= t("people").titleize %>
       <div class="ui teal left pointing label"><%= Person.all.size %></div>
     <% end %>
 
     <%= link_to (toponyms_url), class: is_page_active?(toponyms_path) do %>
-    <%= t :toponyms %>
+    <%= t(:toponyms).titleize %>
       <div class="ui teal left pointing label"><%= Toponym.all.size %></div>
     <% end %>
 
@@ -93,32 +93,32 @@
     <% end %>
 
     <%= link_to (document_types_url), class: is_page_active?(document_types_url) do %>
-    <%= "document type".pluralize.titleize %>
+    <%= t("document_types").titleize %>
       <div class="ui teal left pointing label"><%= DocumentType.all.size %></div>
     <% end %>
 
     <%= link_to (phisycal_statuses_url), class: is_page_active?(phisycal_statuses_url) do %>
-    <%= "phisycal status".pluralize.titleize %>
+    <%= t("phisycal_statuses").titleize %>
       <div class="ui teal left pointing label"><%= PhisycalStatus.all.size %></div>
     <% end %>
 
     <%= link_to (subjects_url), class: is_page_active?(subjects_url) do %>
-    <%= "subject".pluralize.titleize %>
+    <%= t("subjects").titleize %>
       <div class="ui teal left pointing label"><%= Subject.all.size %></div>
     <% end %>
 
     <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
-    <%= "language".pluralize.titleize %>
+    <%= t("languages").titleize %>
       <div class="ui teal left pointing label"><%= Language.all.size %></div>
     <% end %>
 
     <%= link_to (number_types_url), class: is_page_active?(number_types_url) do %>
-    <%= "number_type".pluralize.titleize %>
+    <%= t("number_types").titleize %>
       <div class="ui teal left pointing label"><%= NumberType.all.size %></div>
     <% end %>
 
     <%= link_to (special_numbers_url), class: is_page_active?(special_numbers_url) do %>
-    <%= "special_number".pluralize.titleize %>
+    <%= t("special_numbers").titleize %>
       <div class="ui teal left pointing label"><%= SpecialNumber.all.size %></div>
     <% end %>
   <div class="item">

@@ -1,0 +1,10 @@
+tr:
+  people: "Kişiler"
+  person: "Kişi"
+  new_person: "Yeni kişi ekle"
+  show_this_person: "Bu kişiyi göster"
+  edit_this_person: "Kişi kaydını düzenle"
+  editing_person: "Kişi kaydı düzenleniyor"
+  update_this_person: "Kişi kaydını güncelle"
+  back_to_people: "Kişilere geri dön"
+  create_person: "Kişi oluştur"

@@ -32,12 +32,24 @@
         <td><%= "#{l record_metadatum.starting_date, format: :short}" %> <% if record_metadatum.ending_date %> - <%= l record_metadatum.ending_date, format: :short %> <% end %>  </td>
       </tr>
       <tr>
-        <td><%=  t('organization').titleize %></td>
+        <td><%=  t('organizations').titleize %></td>
         <td>
         <ul class="ui list">
         <% record_metadatum.organizations.order(:name).each do |organization| %>
             <li >
                 <%= organization.name %>
+              </li>
+              <% end %>  
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><%=  t('people').titleize %></td>
+        <td>
+        <ul class="ui list">
+        <% record_metadatum.people.order(:name).each do |person| %>
+            <li >
+                <%= person.name %>
               </li>
               <% end %>  
         </ul>
