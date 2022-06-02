@@ -32,7 +32,7 @@ gem "jbuilder"
 #for pdf view
 gem "gtk3"
 gem "poppler"
-gem "ransack"
+gem "ransack", "~> 3.2.1"
 
 gem "kaminari"
 gem "cocoon"
@@ -46,7 +46,8 @@ gem 'aws-sdk-ec2', '~> 1'
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter'
 
-gem 'sunspot_rails'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+gem 'sunspot_rails', github: 'sunspot/sunspot', glob: 'sunspot_rails/*.gemspec'
 gem "roo"
 
 
@@ -88,6 +89,7 @@ group :development do
   gem "binding_of_caller"
   gem "brakeman"
   gem 'sunspot_solr'
+  gem 'progress_bar'
   
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

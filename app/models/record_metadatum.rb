@@ -1,4 +1,22 @@
 class RecordMetadatum < ApplicationRecord
+  searchable do
+    integer :box, :folder, :order
+    time :starting_date
+    text :summary
+    text :toponyms do
+      toponyms.map{ |toponym| toponym.name} 
+    end
+
+    text :people do
+      people.map{ |person| person.name} 
+    end
+
+    text :organizations do
+      organizations.map{ |organization| organization.name} 
+    end
+
+  end
+
   before_validation :assign_default_values
   after_create :save_submission
   audited
