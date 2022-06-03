@@ -1,72 +1,14 @@
 <%= notice %>
 <%= alert %>
 <% if current_user %>
-  <h1>Fonlarda ve belgelerde arayın...</h1>
-  <%= search_form_for @q, url: root_path do |f| %>
-<table>
-  <tr>
-    <td>
-      <%= f.label :box_eq %>
-    </td>
-    <td>
-      <%= f.search_field :box_eq%>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :folder_eq %>
-    </td>
-    <td>
-      <%= f.search_field :folder_eq%>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :order_eq%>
-    </td>
-    <td>
-      <%= f.search_field :order_eq%>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :summary_or_fond_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :summary_or_fond_name_cont %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :subjects_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :subjects_name_cont %>
-    </td>
-  </tr>  
-  <tr>
-    <td>
-      <%= f.label :toponyms_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :toponyms_name_cont %>
-    </td>
-  </tr>  
-  <tr>
-    <td>
-      <%= f.label :fond_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :fond_name_cont %>
-    </td>
-  </tr> 
-  <tr>
-    <td></td>
-    <td><%= f.submit  class: "ui button"%></td>
-  </tr>
-</table>
-  <% end %>
+  <h1>Tüm fonlarda ve belgelerde arayın...</h1>
+  <h4>Search size: <%= @search.total %></h4>
   
+  <%= form_with url: "/", method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.text_field :query %>
+    <%= form.submit "Search" %>
+  <% end %>  
   <h2>Son eklenen belgeler</h2>
   <div class="ui yellow message">
     <i class="star icon"></i>
@@ -74,6 +16,7 @@
   </div>
   <div class="ui items">
     <% @record_metadata.each do |metadata| %>
+   
       <div class="item">
         <% if !metadata.record_attachment.nil? && !metadata.record_attachment.images.empty? %>
           <% file = metadata.record_attachment.images.first %>

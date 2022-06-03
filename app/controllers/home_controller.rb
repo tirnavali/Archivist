@@ -1,15 +1,17 @@
 class HomeController < ApplicationController
   def index
-    @q = RecordMetadatum.ransack(params[:q])
-    
-    if (params[:q]).nil?
-      @q = RecordMetadatum.ransack(params[:q])
-      @record_metadata = @q.result.page.limit 2 # burada sorun var :D
-    else
-      
-      @record_metadata = @q.result.page params[:page]
+    @search = RecordMetadatum.search do 
+      fulltext params[:query]
     end
-      # @record_metadata = (@q.result.includes(:fond, :subjects, :toponyms).page, params[:page])
+    @record_metadata = @search.results
+    if (params[:query]).nil?
+      #@record_metadata = RecordMetadatum.limit(5)
+    end
+  end
+
+  def basic_search
+    @q = RecordMetadatum.ransack(params[:q])
+    @record_metadata = @q.result.page params[:page]
   end
 
  

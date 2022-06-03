@@ -4,16 +4,22 @@ class RecordMetadatum < ApplicationRecord
     time :starting_date
     text :summary
     text :toponyms do
-      toponyms.map{ |toponym| toponym.name} 
+      toponyms.map{ |toponym| toponym} 
     end
+    text :subjects do
+      subjects.map{ |subject| subject} 
+    end
+    integer :toponym_ids, :multiple => true
 
     text :people do
       people.map{ |person| person.name} 
     end
+    integer :person_ids, :multiple => true
 
     text :organizations do
       organizations.map{ |organization| organization.name} 
     end
+    integer :organization_ids, :multiple => true
 
   end
 
