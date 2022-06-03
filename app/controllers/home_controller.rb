@@ -2,6 +2,9 @@ class HomeController < ApplicationController
   def index
     @search = RecordMetadatum.search do 
       fulltext params[:query]
+      facet :subjects
+      facet :toponyms
+      with(:toponyms, params[:toponyms]) if params[:toponyms].present?
     end
     @record_metadata = @search.results
     if (params[:query]).nil?
