@@ -13,7 +13,7 @@
     - @record_metadatum.audits.descending.each do |audit|
       %tr
         %td=audit.version
-        %td=User.find(audit.user_id)
+        %td="" || User.find(audit.user_id) 
         %td=audit.auditable_type
         %td=audit.action
         %td=audit.audited_changes

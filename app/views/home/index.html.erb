@@ -16,7 +16,7 @@
       <div class="four wide column">
         <h3><%= t(:subjects) %></h3>
         <% @search.facet(:subjects).rows.each do |facet| %>
-          <li class="ui blue label"><%= link_to facet.value, subjects: facet.value %> <%= facet.count %></li> 
+          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
         <% end %> 
       </div>
     </div>
@@ -26,7 +26,7 @@
       <div class="four wide column">
       <h3><%= t(:toponyms) %></h3>
           <% @search.facet(:toponyms).rows.each do |facet| %>
-          <li class="ui blue label"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value) %> <%= facet.count %></li> 
+          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
           <% end %> 
         </div>
     </div><!-- row -->

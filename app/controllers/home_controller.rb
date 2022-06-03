@@ -5,6 +5,7 @@ class HomeController < ApplicationController
       facet :subjects
       facet :toponyms
       with(:toponyms, params[:toponyms]) if params[:toponyms].present?
+      with(:subjects, params[:subjects]) if params[:subjects].present?
     end
     @record_metadata = @search.results
     if (params[:query]).nil?

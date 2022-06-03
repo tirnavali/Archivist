@@ -7,6 +7,14 @@ module ApplicationHelper
     end
   end
 
+  def is_filter_active?(current_page_path)
+    if current_page?(current_page_path)
+      "ui blue label"
+    else 
+      "ui basic blue label"
+    end
+  end
+
   def user_superadmin?
     current_user.superadmin?
   end
