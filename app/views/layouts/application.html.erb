@@ -37,7 +37,7 @@
       <div class="right menu">
         <% if current_user.nil? %>
           <div class="item">
-            <%= link_to "Sign In", new_user_session_path, class: "ui black button" %>
+            <%= link_to t("sign_in"), new_user_session_path, class: "ui black button" %>
           </div><!-- item-->
         <% else %>
           <div class="ui dropdown item">

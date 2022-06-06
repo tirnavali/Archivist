@@ -20,3 +20,13 @@ tr:
   profile: "Profilim"
   account: "Hesap"
   vacation: "Tatil"
+  
+  login: "Giriş"
+  login_to_your_account: "Hesaba Giriş Yap"
+  email: "E-posta"
+  password: "Parola"
+  remember_me: "Beni Hatırla"
+  sign_up: "Kayıt Ol"
+  sign_in: "Giriş Yap"
+  forgot_your_password?: "Şifremi Unuttum"
+  did_not_receive_unlock_instructions?: "Kilidi Açma Talimatı Almadım"
