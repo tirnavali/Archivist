@@ -1,7 +1,7 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     integer :box, :folder, :order
-    time :starting_date
+    #time :starting_date
     text :summary
     text :toponyms do
       toponyms.map{ |toponym| toponym} 
