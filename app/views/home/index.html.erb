@@ -23,7 +23,7 @@
     <div class="row">
     <div class="twelve wide column">
     </div>
-      <div class="four wide column">
+      <div class="four wide column" data-controller="homex">
       <h3><%= t(:toponyms) %></h3>
           <% @search.facet(:toponyms).rows.each do |facet| %>
           <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
@@ -31,6 +31,35 @@
         </div>
     </div><!-- row -->
   </div><!-- grid -->
+  <div class="ui styled accordion">
+  <div class="title active">
+    <i class="dropdown icon"></i>
+    <%= t(:toponyms) %>
+  </div>
+  <div class="content active">
+    
+    <% @search.facet(:toponyms).rows.each do |facet| %>
+          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
+          <% end %> 
+          </div>
+  <div class="title">
+    <i class="dropdown icon"></i>
+    <%= t(:subjects) %>
+  </div>
+  <div class="content">
+  <% @search.facet(:subjects).rows.each do |facet| %>
+          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
+        <% end %> 
+  </div>
+  <div class="title">
+    <i class="dropdown icon"></i>
+    How do you acquire a dog?
+  </div>
+  <div class="content">
+    <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
+    <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.</p>
+  </div>
+</div>
    
 
   <h2>Son eklenen belgeler</h2>
