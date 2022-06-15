@@ -5,64 +5,25 @@
   <h1>Tüm fonlarda ve belgelerde arayın...</h1>
   <h4>Search size: <%= @search.total %></h4>
   <div class="ui grid">
-  <div class="row">
     <div class="twelve wide column">
       <%= form_with url: :root, method: :get do |form| %>
-        <%= form.label :query, "Search for:" %>
-        <%= form.text_field :query, value: params[:query] %>
-        <%= form.submit "Search" %>
-      <% end %> 
-    </div>
-      <div class="four wide column">
-        <h3><%= t(:subjects) %></h3>
-        <% @search.facet(:subjects).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
-        <% end %> 
-      </div>
-    </div>
-    <div class="row">
-    <div class="twelve wide column">
-    </div>
-      <div class="four wide column" data-controller="homex">
-      <h3><%= t(:toponyms) %></h3>
-          <% @search.facet(:toponyms).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
-          <% end %> 
-        </div>
-    </div><!-- row -->
-  </div><!-- grid -->
-  <div class="ui styled accordion">
-  <div class="title active">
-    <i class="dropdown icon"></i>
-    <%= t(:toponyms) %>
-  </div>
-  <div class="content active">
-    
-    <% @search.facet(:toponyms).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
-          <% end %> 
+      <div class="ui fluid action input">
+          <%= form.text_field :query, value: params[:query] %>
+          <%= form.select :field,   RecordMetadatum.attribute_names.map {|attr| [t(attr), attr] }, {prompt: 'select', initial: "Tümü"}, {class: "ui  selection dropdown"} %>
+          <select class="ui compact selection dropdown">
+            <option value="all">All</option>
+            <option selected="" value="articles">Articles</option>
+            <option value="products">Products</option>
+          </select>
+          <div class="">
+          <%= form.submit "Search", class: "ui button"%>
+           <% end %> 
           </div>
-  <div class="title">
-    <i class="dropdown icon"></i>
-    <%= t(:subjects) %>
-  </div>
-  <div class="content">
-  <% @search.facet(:subjects).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
-        <% end %> 
-  </div>
-  <div class="title">
-    <i class="dropdown icon"></i>
-    How do you acquire a dog?
-  </div>
-  <div class="content">
-    <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
-    <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.</p>
-  </div>
-</div>
-   
+        </div>
 
-  <h2>Son eklenen belgeler</h2>
+        <!-------------------------------------------------------------------------------->
+
+        <h2>Son eklenen belgeler</h2>
   <div class="ui yellow message">
     <i class="star icon"></i>
     To make the entire content of an item link, check out the link variation below
@@ -91,14 +52,14 @@
         <% end %>
         <div class="content">
           <a class="header">
-            <%= "#{metadata.fond} fonu" %>
+            <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
           </a>
           <div class="description">
             <p>
-              <%= metadata.summary[..200]... %>
+               <%= t('summary').capitalize %> : <%= metadata.summary[..300]... %>
             </p>
             <p>
-              Konular: 
+              <%= t('subjects').capitalize %> : 
               <% metadata.subjects.each  do |subject| %>
                 <%= "#{subject.name}, " %>
               <% end %>
@@ -117,26 +78,22 @@
   <p>
     <%= link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button" %>
   </p>
-<% else %>
-  <h2>Log In</h2>
-  <%= form_with(model: @user, url: new_user_session_path(@user), class: "form ui") do |f| %>
-    <div class="field">
-      <%= f.label :email %>
-      <br/>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+
+
+
     </div>
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-        <em>
-          (#{@minimum_password_length} characters minimum)
-        </em>
-      <% end %>
-      <br/>
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <div class="four wide column" >
+      <h3><%= t(:subjects) %></h3>
+        <% @search.facet(:subjects).rows.each do |facet| %>
+          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
+        <% end %> 
+      <h3 data-controller="homex"><%= t(:toponyms) %></h3>
+          <% @search.facet(:toponyms).rows.each do |facet| %>
+          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
+          <% end %> 
+        </div>
+    </div><!-- row -->
+  </div><!-- grid -->
     </div>
-    <div class="actions">
-      <%= f.submit "Sign In", class: "ui primary button" %>
-    </div>
-  <% end %>
 <% end %>
