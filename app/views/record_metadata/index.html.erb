@@ -1,4 +1,6 @@
 <h1><%= t('record_metadata') %></h1>
+<div class="ui segment">
+Belgelerde ara
 <%= search_form_for(
   @q,
   url: search_record_metadata_path,
@@ -23,15 +25,17 @@
   <% end %>
 <% end %>
 </fieldset>
-<div class="ui segment">
+
   <a id="add-field" class="ui tiny button" data-controller="search" data-action="search#add"> <%= t('add') %></a>
   <%= f.submit class: "ui tiny primary button"%>
 </div>
 <% end %>
-<p>
-  <%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui teal button small "%>
-</p>
-
+<% unless current_user.user? %>
+  <p>
+    <%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui teal button small "%>
+  </p>
+<% end#unless %>
+<p></p>
 <div id="record_metadata">
   <table class="ui celled padded very compact table">
     <thead>
