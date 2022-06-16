@@ -20,17 +20,24 @@
       <%= link_to root_path, class: is_page_active?(root_path) do%>
       <i class="big home icon"></i>
       <% end %>
-      <a class="item">
-        Messages
-      </a>
+      
       <% unless current_user.nil? %>
-      <%= link_to t("all_submissions"), record_submissions_path(current_user), class: "item" %>
-      <%= link_to t("my_submissions"), record_submissions_admin_user_path(current_user), class: "item" %>
+        <%= link_to "basic_search", basic_search_path, class: "item" %>
+        <%= link_to t("all_submissions"), record_submissions_path(current_user), class: "item" %>
+        <%= link_to t("my_submissions"), record_submissions_admin_user_path(current_user), class: "item" %>
+        <%= link_to (record_metadata_url) , class: is_page_active?(record_metadata_url) do %>
+          <%= t("record_metadata").titleize %>
+        <% end %>
+          
+        <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
+          <%= t("fonds").titleize %>
+        <% end %>
+
       <% end %>
       <div class="right menu">
         <% if current_user.nil? %>
           <div class="item">
-            <%= link_to "Sign In", new_user_session_path, class: "ui black button" %>
+            <%= link_to t("sign_in"), new_user_session_path, class: "ui black button" %>
           </div><!-- item-->
         <% else %>
           <div class="ui dropdown item">

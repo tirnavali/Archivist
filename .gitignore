@@ -39,3 +39,11 @@
 
 
 /config/master.key
+# Ignore solr data
+solr/data
+solr/test/data
+solr/development/data
+solr/default/data
+solr/pids
+
+/config/master.key

@@ -44,7 +44,7 @@ class RecordAttachmentsController < ApplicationController
     #authorize @record_attachment
     respond_to do |format|
       if @record_attachment.save
-        format.html { redirect_to record_attachment_url(@record_attachment), notice: "Record attachment was successfully created." }
+        format.html { redirect_to record_metadatum_url(@record_attachment.record_metadatum), notice: "Record attachment was successfully created." }
         format.json { render :show, status: :created, location: @record_attachment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class RecordAttachmentsController < ApplicationController
     authorize @record_attachment
     respond_to do |format|
       if @record_attachment.update(record_attachment_params)
-        format.html { redirect_to record_attachment_url(@record_attachment), notice: "Record attachment was successfully updated." }
+        format.html { redirect_to record_metadatum_url(@record_attachment.record_metadatum), notice: "Record attachment was successfully updated." }
         format.json { render :show, status: :ok, location: @record_attachment }
       else
         format.html { render :edit, status: :unprocessable_entity }

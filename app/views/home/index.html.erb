@@ -1,79 +1,34 @@
 <%= notice %>
 <%= alert %>
+<%#= console %>
 <% if current_user %>
-  <h1>Fonlarda ve belgelerde arayın...</h1>
-  <%= search_form_for @q, url: root_path do |f| %>
-<table>
-  <tr>
-    <td>
-      <%= f.label :box_eq %>
-    </td>
-    <td>
-      <%= f.search_field :box_eq%>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :folder_eq %>
-    </td>
-    <td>
-      <%= f.search_field :folder_eq%>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :order_eq%>
-    </td>
-    <td>
-      <%= f.search_field :order_eq%>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :summary_or_fond_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :summary_or_fond_name_cont %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= f.label :subjects_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :subjects_name_cont %>
-    </td>
-  </tr>  
-  <tr>
-    <td>
-      <%= f.label :toponyms_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :toponyms_name_cont %>
-    </td>
-  </tr>  
-  <tr>
-    <td>
-      <%= f.label :fond_name_cont %>
-    </td>
-    <td>
-      <%= f.search_field :fond_name_cont %>
-    </td>
-  </tr> 
-  <tr>
-    <td></td>
-    <td><%= f.submit  class: "ui button"%></td>
-  </tr>
-</table>
-  <% end %>
-  
-  <h2>Son eklenen belgeler</h2>
+  <h1>Tüm fonlarda ve belgelerde arayın...</h1>
+  <h4>Bulunan kayıt sayısı: <%= @search.total %></h4>
+  <div class="ui grid">
+    <div class="twelve wide column">
+      <%= form_with url: :root, method: :get do |form| %>
+      <div class="ui fluid action input">
+          <%= form.text_field :query, value: params[:query] %>
+          <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, {prompt: 'select', selected: params[:field], include_blank: true  }, {class: "ui  selection dropdown"} %>
+          <div class="ui input">
+            <%= form.number_field :updated_at %>
+          </div>
+          <div class="ui ">
+            <%= form.submit "Ara", class: "ui primary button"%>
+           <% end %> 
+          </div>
+        </div>
+
+        <!-------------------------------------------------------------------------------->
+
+        <h2>Son eklenen belgeler</h2>
   <div class="ui yellow message">
     <i class="star icon"></i>
     To make the entire content of an item link, check out the link variation below
   </div>
   <div class="ui items">
     <% @record_metadata.each do |metadata| %>
+   
       <div class="item">
         <% if !metadata.record_attachment.nil? && !metadata.record_attachment.images.empty? %>
           <% file = metadata.record_attachment.images.first %>
@@ -95,14 +50,14 @@
         <% end %>
         <div class="content">
           <a class="header">
-            <%= "#{metadata.fond} fonu" %>
+            <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
           </a>
           <div class="description">
             <p>
-              <%= metadata.summary[..200]... %>
+               <%= t('summary').capitalize %> : <%= metadata.summary[..300]... %>
             </p>
             <p>
-              Konular: 
+              <%= t('subjects').capitalize %> : 
               <% metadata.subjects.each  do |subject| %>
                 <%= "#{subject.name}, " %>
               <% end %>
@@ -121,26 +76,22 @@
   <p>
     <%= link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button" %>
   </p>
-<% else %>
-  <h2>Log In</h2>
-  <%= form_with(model: @user, url: new_user_session_path(@user), class: "form ui") do |f| %>
-    <div class="field">
-      <%= f.label :email %>
-      <br/>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+
+
+
     </div>
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-        <em>
-          (#{@minimum_password_length} characters minimum)
-        </em>
-      <% end %>
-      <br/>
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <div class="four wide column" >
+      <h3><%= t(:subjects) %></h3>
+        <% @search.facet(:subjects).rows.each do |facet| %>
+          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
+        <% end %> 
+      <h3 data-controller="homex"><%= t(:toponyms) %></h3>
+          <% @search.facet(:toponyms).rows.each do |facet| %>
+          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
+          <% end %> 
+        </div>
+    </div><!-- row -->
+  </div><!-- grid -->
     </div>
-    <div class="actions">
-      <%= f.submit "Sign In", class: "ui primary button" %>
-    </div>
-  <% end %>
 <% end %>

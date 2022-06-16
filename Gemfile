@@ -2,28 +2,19 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.3"
-
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
-
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
-
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
-
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -32,7 +23,7 @@ gem "jbuilder"
 #for pdf view
 gem "gtk3"
 gem "poppler"
-gem "ransack"
+gem "ransack", "~> 3.2.1"
 
 gem "kaminari"
 gem "cocoon"
@@ -46,10 +37,10 @@ gem 'aws-sdk-ec2', '~> 1'
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter'
 
-gem 'sunspot_rails'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+gem 'sunspot_rails', github: 'sunspot/sunspot', glob: 'sunspot_rails/*.gemspec'
 gem "roo"
-
-
+gem "pundit", "~> 2.2"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -70,7 +61,7 @@ gem "devise", github: "heartcombo/devise", branch: "main"
 gem "vanilla_nested"
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
@@ -88,6 +79,8 @@ group :development do
   gem "binding_of_caller"
   gem "brakeman"
   gem 'sunspot_solr'
+  gem 'progress_bar'
+  
   
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -104,4 +97,3 @@ group :test do
   gem "webdrivers"
 end
 
-gem "pundit", "~> 2.2"

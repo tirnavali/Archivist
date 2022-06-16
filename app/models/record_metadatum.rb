@@ -1,4 +1,28 @@
 class RecordMetadatum < ApplicationRecord
+  searchable do
+    integer :box, :folder, :order
+    time :updated_at
+    text :summary
+    text :toponyms do
+      toponyms.map{ |toponym| toponym} 
+    end
+    text :subjects do
+      subjects.map{ |subject| subject} 
+    end
+    integer :toponym_ids, :multiple => true
+
+    text :people do
+      people.map{ |person| person.name} 
+    end
+    integer :person_ids, :multiple => true
+
+    text :organizations do
+      organizations.map{ |organization| organization.name} 
+    end
+    integer :organization_ids, :multiple => true
+
+  end
+
   before_validation :assign_default_values
   after_create :save_submission
   audited
@@ -38,6 +62,13 @@ class RecordMetadatum < ApplicationRecord
 
   def to_s
     "id: #{self.id} fond: #{self.fond.name} summary: #{self.summary}"
+  end
+
+  def self.fields_and_related_model_fields
+    fields = []
+    fields = RecordMetadatum.attribute_names.collect{|f| f}
+    fields.concat RecordMetadatum.reflect_on_all_associations.collect {|p| p.name.to_s.tableize }
+    fields
   end
 
   def save_submission

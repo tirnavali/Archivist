@@ -1,0 +1,64 @@
+<%= search_form_for @q, url: root_path do |f| %>
+<table>
+  <tr>
+    <td>
+      <%= f.label :box_eq %>
+    </td>
+    <td>
+      <%= f.search_field :box_eq%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :folder_eq %>
+    </td>
+    <td>
+      <%= f.search_field :folder_eq%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :order_eq%>
+    </td>
+    <td>
+      <%= f.search_field :order_eq%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :summary_or_fond_name_cont %>
+    </td>
+    <td>
+      <%= f.search_field :summary_or_fond_name_cont %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :subjects_name_cont %>
+    </td>
+    <td>
+      <%= f.search_field :subjects_name_cont %>
+    </td>
+  </tr>  
+  <tr>
+    <td>
+      <%= f.label :toponyms_name_cont %>
+    </td>
+    <td>
+      <%= f.search_field :toponyms_name_cont %>
+    </td>
+  </tr>  
+  <tr>
+    <td>
+      <%= f.label :fond_name_cont %>
+    </td>
+    <td>
+      <%= f.search_field :fond_name_cont %>
+    </td>
+  </tr> 
+  <tr>
+    <td></td>
+    <td><%= f.submit  class: "ui button"%></td>
+  </tr>
+</table>
+  <% end %>
