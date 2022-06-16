@@ -1,22 +1,25 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Fonds</h1>
-
-<p>
-<%= link_to "New fond", new_fond_path, class: "ui teal button small " %>
-</p>
+<h1><%= t('fonds') %></h1>
+<% unless current_user.user? %>
+  <p>
+  <%= link_to t("new_fond"), new_fond_path, class: "ui teal button small " %>
+  </p>
+<% end#unless %>
 <!-- added new -->
 <div id="fonds">
   <table class="ui celled padded very compact table">
     <thead>
       <tr>
         <th class="single line">Id</th>
-        <th>Fond Name</th>
-        <th>Parent Fond</th>
-        <th>Child Fonds</th>
-        <th>Cildren Size</th>
-        <th>Fond Depth</th>
-        <th>Action</th>
+        <th><%= t("fond_name") %></th>
+        <th><%= t("parent_fond") %></th>
+        <th><%= t("child_fonds") %></th>
+        <% unless current_user.user? %>
+          <th>Cildren Size</th>
+          <th>Fond Depth</th>
+          <th>Action</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>

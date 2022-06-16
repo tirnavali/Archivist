@@ -17,7 +17,7 @@
   <td class="ui aligned">
     <%=fond.children_to_s%>
   </td>
-
+  <% unless current_user.user? %>
   <td>
     <div class="center aligned ui label" data-rating="3" data-max-rating="3">
     <%=fond.children.count%></div>
@@ -26,7 +26,8 @@
   <td class="right aligned ">
     <div class="ui label"><%=fond.depth%></div>
   </td>
-
-  <%= render "layouts/shared/actions", resource: fond %>
+  
+  <%= render "layouts/shared/actions", resource: fond  %>
+  <% end#unless %>
 </tr>
 <% end %>

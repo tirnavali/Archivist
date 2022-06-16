@@ -1,7 +1,10 @@
 tr:
   fond: "Fon"
+  fond_name: "Fon Adı"
   fonds: "Fonlar"
   parent_fond: "Üst Fon"
-  children: "Alt Fonlar"
+  child_fonds: "Alt Fonlar"
   has_no_children: "Bu fona ait hiç alt fon yok."
   has_no_parent: "Bu fon en üst fon düzeyinde"
+  new_fond: "Yeni Fon"
+  explanation: "Açıklamalar"
