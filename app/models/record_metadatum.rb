@@ -64,6 +64,13 @@ class RecordMetadatum < ApplicationRecord
     "id: #{self.id} fond: #{self.fond.name} summary: #{self.summary}"
   end
 
+  def self.fields_and_related_model_fields
+    fields = []
+    fields = RecordMetadatum.attribute_names.collect{|f| f}
+    fields.concat RecordMetadatum.reflect_on_all_associations.collect {|p| p.name.to_s.tableize }
+    fields
+  end
+
   def save_submission
     if Current.user.nil?
       # if record saved from console, attach first superadmin to record

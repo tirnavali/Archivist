@@ -3,18 +3,14 @@
 <%#= console %>
 <% if current_user %>
   <h1>Tüm fonlarda ve belgelerde arayın...</h1>
-  <h4>Search size: <%= @search.total %></h4>
+  <h4>Bulunan kayıt sayısı: <%= @search.total %></h4>
   <div class="ui grid">
     <div class="twelve wide column">
       <%= form_with url: :root, method: :get do |form| %>
       <div class="ui fluid action input">
           <%= form.text_field :query, value: params[:query] %>
-          <%= form.select :field,   RecordMetadatum.attribute_names.map {|attr| [t(attr), attr] }, {prompt: 'select', initial: "Tümü"}, {class: "ui  selection dropdown"} %>
-          <select class="ui compact selection dropdown">
-            <option value="all">All</option>
-            <option selected="" value="articles">Articles</option>
-            <option value="products">Products</option>
-          </select>
+          <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, {prompt: 'select', selected: params[:field], include_blank: true  }, {class: "ui  selection dropdown"} %>
+          <%= form.number_field :updated_at %>
           <div class="">
           <%= form.submit "Search", class: "ui button"%>
            <% end %> 
