@@ -10,9 +10,11 @@
       <div class="ui fluid action input">
           <%= form.text_field :query, value: params[:query] %>
           <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, {prompt: 'select', selected: params[:field], include_blank: true  }, {class: "ui  selection dropdown"} %>
-          <%= form.number_field :updated_at %>
-          <div class="">
-          <%= form.submit "Search", class: "ui button"%>
+          <div class="ui input">
+            <%= form.number_field :updated_at %>
+          </div>
+          <div class="ui ">
+            <%= form.submit "Ara", class: "ui primary button"%>
            <% end %> 
           </div>
         </div>
