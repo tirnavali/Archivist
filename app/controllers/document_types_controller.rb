@@ -4,6 +4,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types or /document_types.json
   def index
     @document_types = DocumentType.order(:name).page params[:page]
+    authorize @document_types
   end
 
   # GET /document_types/1 or /document_types/1.json

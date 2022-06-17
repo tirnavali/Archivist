@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
 
   def record_submissions
     @record_submissions = @user.record_submissions
+    
   end
 
   def activities

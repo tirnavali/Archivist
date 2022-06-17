@@ -1,16 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @fond %>
-<% unless current_user.user? %>
 <div>
-  <%= link_to "Add New Document", new_fond_document_path(@fond.id) %> |
-  <%= link_to "Edit this fond", edit_fond_path(@fond) %> |
-  <%= link_to "Back to fonds", fonds_path %>
-
-  <%= button_to "Destroy this fond", @fond, method: :delete %>
-</div>
-<% else %>
-  <%= link_to  fonds_path, class:"ui secondary button" do %>
-  <i class="angle double left icon"></i> <%= t "fonds" %>
+  <% if policy(@fond).create? %>
+    <%= link_to "Add New Fond", new_fond_path%> |
   <% end %>
+  <% if policy(@fond).update? %>
+    <%= link_to "Edit this fond", edit_fond_path(@fond) %> |
+  <% end %>
+  <% if policy(@fond).destroy? %>
+    <%= button_to "Destroy this fond", @fond, method: :delete %>
+  <% end %>
+</div>
+<%= link_to  fonds_path, class:"ui secondary button" do %>
+<i class="angle double left icon"></i> <%= t "fonds" %>
 <% end %>

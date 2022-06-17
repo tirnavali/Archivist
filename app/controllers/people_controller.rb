@@ -13,6 +13,7 @@ class PeopleController < ApplicationController
     #@people = Person.order(:name).page params[:page]
     @q = Person.ransack(params[:q])
     @people = @q.result.page params[:page]
+    authorize @people
   end
 
   # GET /people/1 or /people/1.json
@@ -76,6 +77,7 @@ class PeopleController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_person
       @person = Person.find(params[:id])
+      authorize @person
     end
 
     # Only allow a list of trusted parameters through.

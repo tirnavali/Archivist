@@ -1,4 +1,7 @@
 class UserPolicy < ApplicationPolicy
+  def record_submissions?
+    user.superadmin? || user.admin? || users_record? 
+  end
  
   def activities?
     user.superadmin? || user.admin? || users_record? 

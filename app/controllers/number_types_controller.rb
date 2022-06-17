@@ -4,6 +4,7 @@ class NumberTypesController < ApplicationController
   # GET /number_types or /number_types.json
   def index
     @number_types = NumberType.page params[:page]  
+    authorize @number_types
       
   end
 

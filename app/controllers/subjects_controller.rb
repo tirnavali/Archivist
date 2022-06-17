@@ -5,7 +5,8 @@ class SubjectsController < ApplicationController
   # GET /subjects or /subjects.json
   def index
     @q = Subject.ransack(params[:term])
-    @subjects = @q.result.page params[:page]    
+    @subjects = @q.result.page params[:page]  
+    authorize @subjects  
   end
 
   # GET /subjects/1 or /subjects/1.json

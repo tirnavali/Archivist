@@ -1,4 +1,12 @@
 class DocumentTypePolicy < ApplicationPolicy
+  def index?
+    user.superadmin? || user.admin? || user.editor?
+  end
+  
+  def show?
+    user.superadmin? || user.admin? || user.editor?
+  end
+  
   def new?
     user.superadmin?
   end

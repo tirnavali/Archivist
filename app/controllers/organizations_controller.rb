@@ -6,6 +6,7 @@ class OrganizationsController < ApplicationController
   def index
     @q = Organization.ransack(params[:term])
     @organizations = @q.result.page params[:page]
+    authorize @organizations
   end
 
   # GET /organizations/1 or /organizations/1.json
@@ -67,6 +68,7 @@ class OrganizationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
       @organization = Organization.find(params[:id])
+      authorize @organization
     end
 
     # Only allow a list of trusted parameters through.

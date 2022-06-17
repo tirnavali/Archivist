@@ -30,7 +30,7 @@ Belgelerde ara
   <%= f.submit class: "ui tiny primary button"%>
 </div>
 <% end %>
-<% unless current_user.user? %>
+<% if policy(@record_metadata).create?  %>
   <p>
     <%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui teal button small "%>
   </p>
@@ -47,7 +47,7 @@ Belgelerde ara
         <th>Folder</th>
         <th>Order</th>
         <th>Summary</th>
-        <% unless current_user.user? %>
+        <% if policy(@record_metadata).create? || policy(@record_metadata).update? %>
         <th>Viewable?</th>
         <th>Attached?</th>
         <th>Writer</th>

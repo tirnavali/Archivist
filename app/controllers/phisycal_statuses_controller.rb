@@ -4,6 +4,7 @@ class PhisycalStatusesController < ApplicationController
   # GET /phisycal_statuses or /phisycal_statuses.json
   def index
     @phisycal_statuses = PhisycalStatus.order(:name).page params[:page]
+    authorize @phisycal_statuses
   end
 
   # GET /phisycal_statuses/1 or /phisycal_statuses/1.json

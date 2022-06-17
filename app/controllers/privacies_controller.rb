@@ -3,11 +3,13 @@ class PrivaciesController < ApplicationController
 
   # GET /privacies or /privacies.json
   def index
-    @privacies = Privacy.order(:name).page params[:page]
+    @privacies = authorize Privacy.order(:name).page params[:page]
+  
   end
 
   # GET /privacies/1 or /privacies/1.json
   def show
+    
   end
 
   # GET /privacies/new
@@ -63,7 +65,8 @@ class PrivaciesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_privacy
-      @privacy = Privacy.find(params[:id])
+      @privacy =  Privacy.find(params[:id])
+      authorize @privacy
     end
 
     # Only allow a list of trusted parameters through.

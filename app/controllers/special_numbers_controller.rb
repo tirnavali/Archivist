@@ -4,6 +4,7 @@ class SpecialNumbersController < ApplicationController
   # GET /special_numbers or /special_numbers.json
   def index
     @special_numbers = SpecialNumber.all
+    authorize @special_numbers
   end
 
   # GET /special_numbers/1 or /special_numbers/1.json

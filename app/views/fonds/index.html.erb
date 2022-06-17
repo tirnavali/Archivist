@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <h1><%= t('fonds') %></h1>
-<% unless current_user.user? %>
+<% if policy(@fonds).create? %>
   <p>
   <%= link_to t("new_fond"), new_fond_path, class: "ui teal button small " %>
   </p>
@@ -15,7 +15,7 @@
         <th><%= t("fond_name") %></th>
         <th><%= t("parent_fond") %></th>
         <th><%= t("child_fonds") %></th>
-        <% unless current_user.user? %>
+        <% if policy(@fonds).create?  || policy(@fonds).update?%>
           <th>Cildren Size</th>
           <th>Fond Depth</th>
           <th>Action</th>

@@ -60,7 +60,7 @@
     </div><!-- right menu -->
   <!--Menu -->
   <div class="ui grid">
-  <% if current_user %>
+  <% if current_user.superadmin? || current_user.admin? || current_user.editor? %>
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
   

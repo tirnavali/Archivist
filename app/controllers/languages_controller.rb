@@ -3,6 +3,7 @@ class LanguagesController < ApplicationController
 
   def index 
     @languages = Language.order(:name).page params[:page]
+    authorize @languages
   end
 
   def show

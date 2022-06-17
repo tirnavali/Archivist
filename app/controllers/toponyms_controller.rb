@@ -6,6 +6,7 @@ class ToponymsController < ApplicationController
   def index
     @q = Toponym.ransack(params[:term])
     @toponyms = @q.result.page params[:page]
+    authorize @toponyms
   end
 
   # GET /toponyms/1 or /toponyms/1.json
@@ -68,6 +69,7 @@ class ToponymsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_toponym
       @toponym = Toponym.find(params[:id])
+      authorize @toponym
     end
 
     # Only allow a list of trusted parameters through.

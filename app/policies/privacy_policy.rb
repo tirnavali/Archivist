@@ -1,4 +1,12 @@
 class PrivacyPolicy < ApplicationPolicy
+  def index?
+    user.superadmin? || user.admin? || user.editor?
+  end
+  
+  def show?
+    user.superadmin? || user.admin? || user.editor?
+  end
+
   def new?
     user.superadmin? || user.admin? || user.editor?
   end
@@ -18,6 +26,7 @@ class PrivacyPolicy < ApplicationPolicy
   def destroy?
     user.superadmin?
   end
+  
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
