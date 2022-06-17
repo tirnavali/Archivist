@@ -73,10 +73,6 @@
         <% end %> </td>
       </tr>
       <tr>
-        <td><%=t('privacy').titleize %></td>
-        <td><%if record_metadatum.privacy %> <%= record_metadatum.privacy.name %><% end %></td>
-      </tr>
-      <tr>
         <td><%= t('subjects').humanize %></td>
         <td><% record_metadatum.subjects.each do |subject| %>
           <span class="ui basic blue label"><i class="tag icon"></i><%= subject.name%></span>
@@ -91,6 +87,12 @@
         </span>
       <% end %></td>
       </tr>
+      <% unless current_user.user? %>
+        <tr>
+          <td><%=t('privacy').titleize %></td>
+          <td><%if record_metadatum.privacy %> <%= record_metadatum.privacy.name %><% end %></td>
+        </tr>
+      <% end %>
       <tr>
         <td><%= t('summary').titleize %></td>
         <td> <%= record_metadatum.summary %></td>
@@ -115,7 +117,7 @@
             <%# water = Vips::Image.text('sercan').jpegsave_target(target) %>
             <%#= image_tag "watermarking/k2.jpg" %>
             <%#= image_tag @image.variant(resize_to_limit: [800, 800],  composite: [overlay: ImageProcessing::Vips::Image.load_image("app/assets/images/watermarking/k2.jpg"), gravity: "south-east"] ).processed if @image.variable? %>
-  <% unless record_metadatum.audits.empty? %>
+  <% unless record_metadatum.audits.empty? || current_user.user? %>
     <h4 class="ui horizontal divider header"> Info</h4>
     <div class="ui feed">
       <div class="event">

@@ -43,14 +43,16 @@ Belgelerde ara
         <th class="single line">Id</th>
         <th>Fond</th>
         <th>Organization Code</th>
-        <th>Viewable?</th>
         <th>Box</th>
         <th>Folder</th>
         <th>Order</th>
-        <th>Images</th>
-        <th>Writer</th>
         <th>Summary</th>
+        <% unless current_user.user? %>
+        <th>Viewable?</th>
+        <th>Attached?</th>
+        <th>Writer</th>
         <th>Action</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>

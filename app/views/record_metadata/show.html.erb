@@ -10,10 +10,16 @@
   <div class="row">
     <div class="four wide column"></div>
     <div class="seven wide centered column">
+    <% unless current_user.user? %>
       <div class="ui buttons">
       <%= link_to t("edit"), edit_record_metadatum_path(@record_metadatum), class: "ui green basic button" %> 
       <%= link_to t("back"), record_metadata_path, class: "ui blue basic button" %>
       <%= button_to t("destroy"), @record_metadatum, method: :delete, class: "ui red basic button" %>
       </div>
+      <% else %>
+      <%= link_to  record_metadata_path, class:"ui secondary button" do %>
+        <i class="angle double left icon"></i> <%= t "record_metadata" %>
+      <% end %>
+      <% end %>
     </div>
   </div>
