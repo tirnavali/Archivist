@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @user = User.new
+
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
         fields(params[:field]) if params[:field].present?

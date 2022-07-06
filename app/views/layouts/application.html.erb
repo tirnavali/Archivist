@@ -60,7 +60,7 @@
     </div><!-- right menu -->
   <!--Menu -->
   <div class="ui grid">
-  <% if current_user.superadmin? || current_user.admin? || current_user.editor? %>
+    <% if current_user && policy(:menu).show? %>
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
   
@@ -113,11 +113,11 @@
     <%= t("subjects").titleize %>
       <div class="ui teal left pointing label"><%= Subject.all.size %></div>
     <% end %>
-
-    <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
-    <%= t("languages").titleize %>
-      <div class="ui teal left pointing label"><%= Language.all.size %></div>
-    <% end %>
+    
+      <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
+        <%= t("languages").titleize %>
+          <div class="ui teal left pointing label"><%= Language.all.size %></div>
+        <% end %>
 
     <%= link_to (number_types_url), class: is_page_active?(number_types_url) do %>
     <%= t("number_types").titleize %>
@@ -135,7 +135,7 @@
     </div>
   </div>
 </div>
-    <% end %>
+    <% end %> <!-- end of policy -->
       <div class="ui container thirteen wide column">
         <%= render "layouts/shared/notice", locals: {notice: notice, alert: alert} %> 
         <%#= render "layouts/shared/notice", locals: {notice: notice} %> 
