@@ -65,12 +65,12 @@
         </td>
       </tr>
       <tr>
-      <td><%=t('document_types').titleize %></td>
-      <td><% record_metadatum.document_types.each do |document_type| %>
-          <span class="ui basic violet  label">
-          <%= document_type.name %>
-          </span>
-        <% end %> </td>
+        <td><%=t('document_types').titleize %></td>
+        <td><% record_metadatum.document_types.each do |document_type| %>
+            <span class="ui basic violet  label">
+            <%= document_type.name %>
+            </span>
+          <% end %> </td>
       </tr>
       <tr>
         <td><%= t('subjects').humanize %></td>
@@ -145,22 +145,43 @@
         <%= t('record_attachment') %>
       </h4>
       <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
+        <% if index < 1 %> <!-- ilk pdf gösterilsin-->
+
+        <%# file = file.preview(resize_to_limit: [800, 800], colourspace: "b-w").processed %>
         <iframe  src="<%= file.url expires_in: 30 ,disposition: :inline %>" width="100%" height="750" style="border: none;"></iframe>
-      <div class="item">
-        <div class="ui small image">
-          <%#= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
-          <%#= ImageProcessing::Vips.valid_image?(file.url) %>
-        </div>
-        <div class="content">
-          <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
-            <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
-          <% end %>
-          <%= link_to  file , target: :_blank, class: "ui orange button" do %><i class="folder open  icon"></i>Yeni sekmede aç<% end %>
-        <div class="description">
-                <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
-        </div>
-       </div>
-      </div>
+        <div class="item">
+          <div class="ui small image">
+            <%#= image_tag file.preview(resize_to_limit: [250, 250]).processed if file.previewable? %>
+            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
+          </div>
+          <div class="content">
+            <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
+              <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
+            <% end %>
+            <%= link_to  file , target: :_blank, class: "ui orange button" do %>
+              <i class="folder open  icon"></i>Yeni sekmede aç
+            <% end %>
+            <div class="description">
+                    <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
+            </div>
+          </div>
+        </div><!--item-->
+        <% else %>
+        <div class="item">
+          <div class="ui small image">
+            <%= image_tag file.preview(resize_to_limit: [100, 100]).processed if file.previewable? %>
+            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
+          </div>
+          <div class="content">
+            <div class="extra">
+              <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
+                <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
+              <% end %>
+              <%= link_to  file , target: :_blank, class: "ui orange button" do %><i class="folder open  icon"></i>Yeni sekmede aç<% end %>
+              </div>
+          </div>
+        </div><!--item-->
+        <% end %>
     </div>
        <% end %>
     <% end %>

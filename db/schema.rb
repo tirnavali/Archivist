@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_07_122658) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -59,6 +59,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "user_type"
+    t.string "document_id"
+    t.string "document_type"
+    t.binary "title"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["document_id"], name: "index_bookmarks_on_document_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "document_types", force: :cascade do |t|
@@ -91,6 +103,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
   create_table "languages_record_metadata", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "language_id", null: false
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "name"
+    t.integer "size"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "number_types", force: :cascade do |t|
@@ -138,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "record_metadatum_id", null: false
+    t.integer "page_count"
     t.index ["record_metadatum_id"], name: "index_record_attachments_on_record_metadatum_id"
   end
 
@@ -179,6 +200,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_105534) do
     t.datetime "updated_at", null: false
     t.index ["record_metadatum_id"], name: "index_record_submissions_on_record_metadatum_id"
     t.index ["user_id"], name: "index_record_submissions_on_user_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.binary "query_params"
+    t.integer "user_id"
+    t.string "user_type"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
   create_table "special_numbers", force: :cascade do |t|

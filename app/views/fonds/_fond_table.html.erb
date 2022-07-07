@@ -17,7 +17,7 @@
   <td class="ui aligned">
     <%=fond.children_to_s%>
   </td>
-  <% unless current_user.user? %>
+  <% if policy(:menu).show? %>
   <td>
     <div class="center aligned ui label" data-rating="3" data-max-rating="3">
     <%=fond.children.count%></div>

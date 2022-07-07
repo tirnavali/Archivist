@@ -29,25 +29,23 @@
     <%= record_metadatum.summary[..200]%>
     </div>
   </td>
-  <% unless current_user.user? %>
-  <td class="right aligned">
-    <%if record_metadatum.is_secret? %>
-    <i class="user red secret icon"></i>
-    <% else %>
-    <i class="green check icon"></i>
-    <% end %>
-
-  </td>
-  <td class="right aligned">
-    <% if record_metadatum.record_attachment %> <i class="green check icon"></i> <% else %> <i class="red x icon"> <% end %>
-  </td>
-  <td class="left aligned">
-    <% if record_metadatum.user %>
-    <%=  record_metadatum.user%> <span class="custom last action"> created </span>this record. 
-    <% end %>
-  </td>
-
-  <%= render "layouts/shared/actions", resource: record_metadatum  %>
+  <% if policy(:menu).show?  %>
+    <td class="right aligned">
+      <%if record_metadatum.is_secret? %>
+      <i class="user red secret icon"></i>
+      <% else %>
+      <i class="green check icon"></i>
+      <% end %>
+    </td>
+    <td class="right aligned">
+      <% if record_metadatum.record_attachment %> <i class="green check icon"></i> <% else %> <i class="red x icon"> <% end %>
+    </td>
+    <td class="left aligned">
+      <% if record_metadatum.user %>
+      <%=  record_metadatum.user%> <span class="custom last action"> created </span>this record. 
+      <% end %>
+    </td>
+    <%= render "layouts/shared/actions", resource: record_metadatum  %>
   <% end %>
 </tr>
 <% end %>   

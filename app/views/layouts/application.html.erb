@@ -13,7 +13,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
+  <body >
 
   <!--Menu -->
     <div class="ui small inverted menu">
@@ -64,6 +64,10 @@
   <div class="ui vertical menu three wide column">
     <%= link_to "Home", root_path, class: is_page_active?(root_path)%>
   
+    <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
+    <%= t("users").titleize %>
+      <div class="ui black left pointing label"><i class="users icon"></i><%= User.all.size %></div>
+    <% end %>
     <%= link_to (record_metadata_url) , class: is_page_active?(record_metadata_url) do %>
     <%= t("record_metadata").titleize %>
       <div class="ui teal left pointing label"><%= RecordMetadatum.all.size %></div>
@@ -74,10 +78,6 @@
       <div class="ui teal left pointing label"><%= Fond.all.size %></div>
     <% end %>
     
-    <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
-    <%= t("users").titleize %>
-      <div class="ui teal left pointing label"><%= User.all.size %></div>
-    <% end %>
 
     <%= link_to (privacies_url) , class: is_page_active?(privacies_url) do %>
     <%= t("privacy").titleize %>
@@ -128,20 +128,17 @@
     <%= t("special_numbers").titleize %>
       <div class="ui teal left pointing label"><%= SpecialNumber.all.size %></div>
     <% end %>
-  <div class="item">
-    <div class="ui transparent icon input">
-      <input type="text" placeholder="Search mail...">
-      <i class="search icon"></i>
-    </div>
-  </div>
+  
 </div>
     <% end %> <!-- end of policy -->
       <div class="ui container thirteen wide column">
+        
         <%= render "layouts/shared/notice", locals: {notice: notice, alert: alert} %> 
         <%#= render "layouts/shared/notice", locals: {notice: notice} %> 
         <%= yield %>
         <%= turbo_frame_tag "modal" %>
         <%#= console %>
+        
       </div>
     </div> <!--ui grid-->
   </body>
