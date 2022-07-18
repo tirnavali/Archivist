@@ -8,6 +8,7 @@ action_text:install
 action_text:install:migrations
 active_storage:install
 active_storage:purge_unattached
+active_storage:watermark_pdf
 app:template
 app:update
 assets:clean[keep]
