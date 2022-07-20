@@ -102,10 +102,10 @@
         <td> <%= record_metadatum.explaination %></td>
       </tr>
       
-      <% if  !record_metadatum.record_attachment.nil? && !record_metadatum.record_attachment.images.empty?  %>
+      <% if  !record_metadatum.record_attachment.nil? && !record_metadatum.record_attachment.watermarked_images.empty?  %>
       <tr>
         <td><%= t('file_name').titleize %></td>
-        <td> <%= record_metadatum.record_attachment.images.first.filename %></td>
+        <td> <%= record_metadatum.record_attachment.watermarked_images.first.filename %></td>
       </tr>
       <% end %>
     </tbody>
@@ -139,12 +139,12 @@
 </div> <!-- column -->
   
     <div class="nine wide column">
-    <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.images.nil?  %>
+    <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.watermarked_images.nil?  %>
       <h4 class="ui horizontal divider header">
         <i class="file pdf icon"></i>
         <%= t('record_attachment') %>
       </h4>
-      <% record_metadatum.record_attachment.images.each_with_index do |file, index| %>
+      <% record_metadatum.record_attachment.watermarked_images.each_with_index do |file, index| %>
         <% if index < 1 %> <!-- ilk pdf gösterilsin-->
 
         <%# file = file.preview(resize_to_limit: [800, 800], colourspace: "b-w").processed %>

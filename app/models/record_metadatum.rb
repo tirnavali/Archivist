@@ -96,4 +96,8 @@ class RecordMetadatum < ApplicationRecord
     end
   end
 
+  def place_number
+    "#{self.box} - #{self.folder} - #{self.order}"
+  end
+
 end
