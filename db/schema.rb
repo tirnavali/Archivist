@@ -61,18 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
-  create_table "bookmarks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "user_type"
-    t.string "document_id"
-    t.string "document_type"
-    t.binary "title"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["document_id"], name: "index_bookmarks_on_document_id"
-    t.index ["user_id"], name: "index_bookmarks_on_user_id"
-  end
-
   create_table "document_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -103,14 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
   create_table "languages_record_metadata", id: false, force: :cascade do |t|
     t.integer "record_metadatum_id", null: false
     t.integer "language_id", null: false
-  end
-
-  create_table "libraries", force: :cascade do |t|
-    t.string "name"
-    t.integer "size"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "number_types", force: :cascade do |t|
@@ -202,15 +182,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
     t.datetime "updated_at", null: false
     t.index ["record_metadatum_id"], name: "index_record_submissions_on_record_metadatum_id"
     t.index ["user_id"], name: "index_record_submissions_on_user_id"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.binary "query_params"
-    t.integer "user_id"
-    t.string "user_type"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
   create_table "special_numbers", force: :cascade do |t|

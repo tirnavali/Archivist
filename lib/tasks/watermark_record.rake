@@ -24,7 +24,9 @@ namespace :active_storage do
         #temp_file = hexio.write(io, validate: false, optimize: true)
         hexio.write(export_path)
       end
-  
+      ActiveStorage::Attachment.where("record_type = ?", "RecordAttachment").group("record_id").each do |rec|
+        RecordAttachment.find(rec.record_id).inspect
+      end
       ra = RecordAttachment.where("image_count > 0").last
       
       temp_dir_path = "tmp/watermarked/record_attachment_#{ra.id}"
