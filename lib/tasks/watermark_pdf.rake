@@ -33,6 +33,22 @@ namespace :active_storage do
 
       puts hexio.pages.count
       puts reader.info
+
+      def add_pdf
+        puts "0-------------------------------#{self.watermarked}"
+        unless self.watermarked
+          file = self.images.first.blob
+          self.watermarked_images.attach(
+            io: File.open("tmp/watermarked/#{self.record_metadatum.id}_#{self.id}_#{file.filename.to_s}"),
+            filename: file.filename.to_s,
+            content_type: "application/pdf"
+            )
+          self.watermarked = true
+          self.save
+        end
+        puts "9-------------------------------#{self.watermarked}"
+      end
+      
     end
   end
   

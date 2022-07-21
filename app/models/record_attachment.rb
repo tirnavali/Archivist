@@ -1,7 +1,7 @@
 class RecordAttachment < ApplicationRecord
 
-  before_save :process_pdf, :add_pdf
-
+  #before_save :process_pdf
+  after_commit :calculate_image_size
   belongs_to :record_metadatum
 
   has_many_attached :images do |attachable|
@@ -14,6 +14,11 @@ class RecordAttachment < ApplicationRecord
 
   private
 
+  def calculate_image_size
+    #purge_later çalıştığı için hesaplar tutmuyor.
+    self.image_count= self.images.count
+  end
+
   def set_page_count
     unless self.images.empty?
       require 'open-uri'
@@ -23,6 +28,21 @@ class RecordAttachment < ApplicationRecord
     else
       self.page_count = nil
     end
+  end
+
+  def add_pdf
+    puts "0-------------------------------#{self.watermarked}"
+    unless self.watermarked
+      file = self.images.first.blob
+      self.watermarked_images.attach(
+        io: File.open("result1.pdf"),
+        filename: file.filename.to_s,
+        content_type: "application/pdf"
+        )
+      self.watermarked = true
+      self.save
+    end
+    puts "9-------------------------------#{self.watermarked}"
   end
 
   def process_pdf
@@ -46,25 +66,9 @@ class RecordAttachment < ApplicationRecord
     end
 
     hexio.write "tmp/watermarked/#{self.record_metadatum.id}_#{self.id}_#{file.filename.to_s}"
-    #temp_file = hexio.write(io, validate: false, optimize: true)
-    #self.images.attach(io: File.open("tmp/result.pdf"), filename: "#{file.filename.to_s}", content_type: "application/pdf")
+    add_pdf
   end
 
-  def add_pdf
-    puts "-------------------------------#{self.watermarked}"
-    unless self.watermarked
-      file = self.images.first.blob
-      self.watermarked_images.attach(
-        io: File.open("tmp/watermarked/#{self.record_metadatum.id}_#{self.id}_#{file.filename.to_s}"),
-        filename: file.filename.to_s,
-        content_type: "application/pdf"
-        )
-      self.watermarked = true
-      self.save
-    end
-    puts "-------------------------------#{self.watermarked}"
-
-    #self.images.attach(io: File.open("tmp/result.pdf"), filename: "tempTemp.pdf", content_type: "application/pdf")
-  end
+  
 
 end
