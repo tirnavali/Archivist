@@ -2,7 +2,6 @@
   <% if record_attachment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(record_attachment.errors.count, "error") %> prohibited this record_attachment from being saved:</h2>
-
       <ul>
         <% record_attachment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,8 +10,6 @@
     </div>
   <% end %>
 
- 
-  
     <%=form.hidden_field :record_metadatum_id, value: record_attachment.record_metadatum.id%>
     <div class="ui input">
     <%= form.file_field :images, multiple: true, direct_upload: true %>
@@ -40,10 +37,32 @@
         <% end %>
         </div>
       <% end %>
-
-      <div data-controller="direct-upload"></div>
-
-
+    
+    <div class="ui divider" data-controller="direct-upload"></div>
+    
+    <% if @record_attachment.watermarked_images.exists? %>
+      <div class="ui seven column stackable grid">
+      <% record_attachment.watermarked_images.each do |attach| %>
+        <%= form.hidden_field :watermarked_images, value: attach.signed_id, multiple: true %>
+        <div class="ui column fluid card">
+          <div class="content">
+            <%= link_to rails_blob_path(attach, disposition: "attachment"), class: "ui center aligned" do %>
+              <% begin %>
+              <div class="image"><%= image_tag attach.representation(resize_to_limit: [150, 150]).processed if attach.representable? %></div>
+              <% rescue Seahorse::Client::NetworkingError %>
+                <% puts "Seahorse::Client::NetworkingError " %>
+                <i class="big red exclamation triangle icon"></i>
+              <% end %>
+            <% end %>
+            <div class="header">File name: <%=attach.filename%></div> 
+            <div class="">
+              <%= link_to 'Sil', delete_image_attachment_record_attachment_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ui bottom attached button"%>
+            </div>
+          </div>
+        </div>   
+      <% end %>
+      </div>
+    <% end %>
 
   <div>
     <%= form.label :completed, style: "display: block" %>
