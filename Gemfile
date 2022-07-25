@@ -44,6 +44,7 @@ gem "pundit", "~> 2.2"
 gem "hexapdf"
 gem "pdf-reader"
 
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

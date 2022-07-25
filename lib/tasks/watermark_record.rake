@@ -8,6 +8,7 @@ namespace :active_storage do
       def watermark_file(file_url, stamp, export_path)
         begin
           io = URI.open(file_url)
+          puts "#{io.class}"
           hexio = HexaPDF::Document.open io
           
           hexio.pages.each do |page|

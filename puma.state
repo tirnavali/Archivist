@@ -1,5 +1,5 @@
 ---
-pid: 698
+pid: 702
 control_url: unix:///home/sercan/Documents/projects/Archivist/pumactl.sock
-control_auth_token: 6af668d8bfd9e18c1b3808ac59ac356e
+control_auth_token: a950117888ec761ad9f3d8f4e4e0d00a
 running_from: "/home/sercan/Documents/projects/Archivist"
