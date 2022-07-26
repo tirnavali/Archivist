@@ -11,16 +11,32 @@ class WatermarkJob < ApplicationJob
         hexio = HexaPDF::Document.open io
           
         hexio.pages.each do |page|
+          page_width = page.box.width
+          page_height = page.box.height
+          puts "Source page size : #{page_width}x#{page_height}"
           overlay_canvas = page.canvas(type: :overlay)
-          overlay_canvas.fill_color(38, 97, 157).
-          font('Helvetica', size: 30).
-          opacity(fill_alpha: 0.3, stroke_alpha: 0.8).
+          overlay_canvas.fill_color(0, 0, 0).
+          font('Helvetica', variant: :bold, size: 8).
+          opacity(fill_alpha: 0.45, stroke_alpha: 0.6).
           save_graphics_state.
-          translate(170, 330).rotate(0).
-          text(stamp, at: [0, -320]).
+          translate(20, 10).rotate(0).
+          text(stamp, at: [0, 0]).
           restore_graphics_state.
-          translate(170, 470).rotate(0).
-          text(stamp, at: [0, 0])
+          fill_color(255, 255, 255).
+          text(stamp, at: [120, 10]).
+          save_graphics_state.
+          fill_color(0, 0, 0).
+          rotate(0).text(stamp, at: [220, 10]).
+          fill_color(255, 255, 255).
+          text(stamp, at: [320, 10]).
+          fill_color(0, 0, 0).
+          text(stamp, at: [420, 10]).
+          fill_color(255, 255, 255).
+          text(stamp, at: [520, 10]).
+          line(0, 22, page_width, 22).stroke.
+          line(0, 20, page_width, 20).stroke.
+          line(0, 5, page_width, 5).stroke.
+          line(0, 3, page_width, 3).stroke
         end
         hexio.write(export_path)
       rescue OpenURI::HTTPError => ex
