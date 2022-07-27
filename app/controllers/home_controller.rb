@@ -15,11 +15,20 @@ class HomeController < ApplicationController
     if (params[:query]).nil?
       #@record_metadata = RecordMetadatum.limit(5)
     end
+    if @record_metadata.empty?
+      respond_to do |format|
+        format.html { render :nothing_found , notice: "Aramanızda hiç bri sonuç bulunamadı." }
+        format.json { head :no_content }
+      end
+    end
   end
 
   def basic_search
     @q = RecordMetadatum.ransack(params[:q])
     @record_metadata = @q.result.page params[:page]
+  end
+
+  def nothing_found
   end
 
  

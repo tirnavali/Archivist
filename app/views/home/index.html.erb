@@ -1,24 +1,15 @@
 <%= notice %>
 <%= alert %>
-<%#= console %>
+<%= console %>
 <% if current_user %>
   <h1>Tüm fonlarda ve belgelerde arayın...</h1>
-  <h4>Bulunan kayıt sayısı: <%= @search.total %></h4>
+  
+  <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
+    <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
+  </div>
   <div class="ui grid">
     <div class="twelve wide column">
-      <%= form_with url: :root, method: :get do |form| %>
-      <div class="ui fluid action input">
-          <%= form.text_field :query, value: params[:query] %>
-          <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, {prompt: 'select', selected: params[:field], include_blank: true  }, {class: "ui  selection dropdown"} %>
-          <div class="ui input">
-            <%= form.number_field :updated_at %>
-          </div>
-          <div class="ui ">
-            <%= form.submit "Ara", class: "ui primary button"%>
-           <% end %> 
-          </div>
-        </div>
-
+      <%= render "search" %>
         <!-------------------------------------------------------------------------------->
 
         <h2>Son eklenen belgeler</h2>
