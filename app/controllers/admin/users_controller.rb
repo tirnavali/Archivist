@@ -22,7 +22,8 @@ class Admin::UsersController < ApplicationController
   end
   
   def index
-    @users = User.all
+    @q = User.ransack(params[:q])
+    @users = @q.result.page params[:page]
     authorize @users
   end
 

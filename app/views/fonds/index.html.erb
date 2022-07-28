@@ -6,6 +6,13 @@
   <%= link_to t("new_fond"), new_fond_path, class: "ui teal button small " %>
   </p>
 <% end#unless %>
+<%= search_form_for @q, class:"ui form" do |f| %>
+  <div class="ui action input">
+  <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
+  <%= f.button "Ara", class:"ui primary button"%>
+  </div>
+<% end %>
+<p></p>
 <!-- added new -->
 <div id="fonds">
   <table class="ui celled padded very compact table">

@@ -5,10 +5,10 @@ class FondsController < ApplicationController
 
   # GET /fonds or /fonds.json
   def index
-    @fonds = Fond.all
+    @q = Fond.ransack(params[:q])
+    @fonds = @q.result.page params[:page]
     authorize @fonds
   end
-
   # GET /fonds/1 or /fonds/1.json
   def show
     authorize @fond

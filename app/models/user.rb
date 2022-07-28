@@ -19,7 +19,8 @@ class User < ApplicationRecord
   # scope :update_actions, -> { joins(:audits).where('audits.action is = ?', 'update') }
   # scope :find_user, -> (id) { where('id = ?', id)}
   #@user.audits.where("action is ?", "update")
-  
+  paginates_per 15
+
   def to_s
     self.email
   end

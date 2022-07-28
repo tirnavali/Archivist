@@ -1,9 +1,21 @@
 <p style="color: green"><%= notice %></p>
+<%= console%>
 <h1>Users</h1>
 <p>
   <%= link_to "New User", new_admin_user_path, class: "ui teal button small"  %>
 </p>
-<div id="documents">
+<%= search_form_for @q, url: admin_users_path, class:"ui form" do |f| %>
+  <div class="ui action input">
+  <%= f.search_field :email_cont, class:"field", placeholder: :email_cont %>
+  <%= f.button "Ara", class:"ui primary button"%>
+  </div>
+<% end %>
+<p>
+<% unless params[:q].nil? %> Found users: <%= @q.result.size  %> <% end %>
+</p>
+<%= paginate @users %>
+<p></p>
+<div id="users">
   <table class="ui celled padded very compact table">
     <thead>
       <tr><th class="single line">Id</th>
@@ -20,6 +32,7 @@
         <%= render partial: "users_table", locals: {users: @users} %>
       
     </tbody>
+    
     <tfoot>
       <tr><th colspan="8">
         <div class="ui right floated pagination menu">
@@ -37,4 +50,5 @@
       </th>
     </tr></tfoot>
   </table>
+  <%= paginate @users %>
 </div>
