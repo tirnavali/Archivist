@@ -32,5 +32,8 @@ class HomeController < ApplicationController
   def nothing_found
   end
 
+  def search_clues
+  end
+
  
 end

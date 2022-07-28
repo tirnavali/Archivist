@@ -1,5 +1,7 @@
 .ui.grid
   .twelve.wide.column
     = render "search"
-%h1 Aramanızla ilgili hiç bir sonuç bulunamadı
-%p Tekrar deneyebilirsiniz ya da kullanımı kolay arama ipuçları seçeneğine göz gezdirebilirsiniz.
+%h1 Aramanızla ilgili hiç bir sonuç bulunamadı. 
+%p Tekrar deneyebilirsiniz ya da #{link_to t(:search_clues), search_clues_path} seçeneğine göz gezdirebilirsiniz.
+
+=link_to t("back"), :back

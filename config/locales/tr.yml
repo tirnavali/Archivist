@@ -45,6 +45,7 @@ tr:
   updated_at: "Güncellenme Tarihi"
   action: "Eylem"
   add: "Ekle"
+  back: "Geri"
 
   ransack:
     search: "ara"

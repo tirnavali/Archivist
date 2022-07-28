@@ -56,5 +56,6 @@ Rails.application.routes.draw do
   resources :record_submissions, only: [:index]
   root to: "home#index"
   get "/basic_search", to: "home#basic_search"
+  get "/search_clues", to: "home#search_clues"
 
 end

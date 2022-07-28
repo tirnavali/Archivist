@@ -30,3 +30,5 @@ tr:
   sign_in: "Giriş Yap"
   forgot_your_password?: "Şifremi Unuttum"
   did_not_receive_unlock_instructions?: "Kilidi Açma Talimatı Almadım"
+
+  search_clues: "Arama ipuçları"

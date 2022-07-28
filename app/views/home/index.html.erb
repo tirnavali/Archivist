@@ -2,11 +2,12 @@
 <%= alert %>
 <%= console %>
 <% if current_user %>
-  <h1>Tüm fonlarda ve belgelerde arayın...</h1>
-  
+  <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
+  <% unless params[:query].nil? %>
   <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
     <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
   </div>
+  <% end %>
   <div class="ui grid">
     <div class="twelve wide column">
       <%= render "search" %>
