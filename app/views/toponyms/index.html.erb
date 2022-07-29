@@ -5,6 +5,15 @@
   <%= link_to "New toponym", new_toponym_path, class:"ui button teal small"%>
 </p>
 <div id="toponyms">
+<%= search_form_for @q, class:"ui form" do |f| %>
+  <div class="ui action input">
+  <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
+  <%= f.button "Ara", class:"ui primary button"%>
+  </div>
+<% end %>
+<p>
+<% unless params[:q].nil? %> Found toponyms: <%= @q.result.size  %> <% end %>
+</p>
 <table class="ui celled padded very compact table">  
     <thead>
       <tr><th class="single line">Id</th>
