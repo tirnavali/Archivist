@@ -8,10 +8,14 @@
   <div class="ui action input">
   <%= f.search_field :email_cont, class:"field", placeholder: :email_cont %>
   <%= f.button "Ara", class:"ui primary button"%>
+  <% unless params[:q].nil? %>
+    <%= link_to "Temizle", admin_users_path,  class: "ui red button", method: :get %>
+  <% end %>
   </div>
 <% end %>
+<p></p>
 <p>
-<% unless params[:q].nil? %> Found users: <%= @q.result.size  %> <% end %>
+<% unless params[:q].nil? %> Found users: <span class="ui teal circular label"><%= @q.result.size  %></span> <% end %>
 </p>
 <%= paginate @users %>
 <p></p>
