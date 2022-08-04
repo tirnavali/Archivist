@@ -22,8 +22,8 @@
     <% @record_metadata.each do |metadata| %>
    
       <div class="item">
-        <% if !metadata.record_attachment.nil? && !metadata.record_attachment.images.empty? %>
-          <% file = metadata.record_attachment.images.first %>
+        <% if !metadata.record_attachment.nil? && !metadata.record_attachment.watermarked_images.empty? %>
+          <% file = metadata.record_attachment.watermarked_images.first %>
           <a class="ui tiny image">
             <% begin %>
               <%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %>

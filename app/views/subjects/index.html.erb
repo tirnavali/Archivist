@@ -5,7 +5,7 @@
 <p>
 <%= link_to "New subject", new_subject_path, class:"ui small button teal" %>
 </p>
-<%= search_form_for @q, class:"ui form" do |f| %>
+<%= search_form_for @q, as: :term, class:"ui form" do |f| %>
   <div class="ui action input">
   <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
   <%= f.button "Ara", class:"ui primary button"%>
