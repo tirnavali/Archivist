@@ -1,36 +1,10 @@
-<%= form_with(model: fond, class: "ui form") do |form| %>
-  <% if fond.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(fond.errors.count, "error") %> prohibited this fond from being saved:</h2>
-
-      <ul>
-        <% fond.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :explanation, style: "display: block" %>
-    <%= form.text_area :explanation %>
-  </div>
-
-  <div class="asd">
-    <%= form.label :parent, style: "display: block" %>
-    <%#= form.text_field :Fond_id %>
-    <%= form.collection_select :parent_id, Fond.order(:name), :id, :to_s, {prompt: true}, {include_blank: true, class: "ui fluid selection dropdown"} %>
-  </div>
-
-
-  <div class="">
-    <%= form.submit class:"ui primary button" %>
-  </div>
-
-  <div data-controller="dropdown"></div>
+<%= simple_form_for @fond, html: { class: "ui form"} do |f| %>
+  <%= f.input :name %>
+  <%= f.input :explanation %>
+  <%= f.association :parent, 
+    collection: Fond.order(:name),
+    html: {class: 'ui search dropdown' },
+    wrapper_html: {"data-controller": "dropdown" } 
+    %>
+  <%= f.button :submit %>
 <% end %>

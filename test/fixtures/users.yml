@@ -6,14 +6,14 @@ admin:
   role: 1
 
 standartuser:
-  email: standard_user@yahoo.com
+  email: standard0@yahoo.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 0
   superadmin: false
 
 standartuser2:
-  email: standard2_user@yahoo.com
+  email: standard1@yahoo.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   sign_in_count: 0
   role: 0

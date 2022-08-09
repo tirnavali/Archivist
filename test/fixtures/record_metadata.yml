@@ -8,7 +8,7 @@ first:
   starting_date: 12-02-2018
   ending_date: 12-02-2019
   fond: third
-  organization: first
+  organizations: first
   privacy: first
   subjects: first, second, third
   toponyms: first, second, third
@@ -34,7 +34,7 @@ second:
   starting_date: 12-02-2017
   ending_date: 12-02-2019
   fond: second
-  organization: second
+  organizations: second
   privacy: second
   subjects: first, second, third
   toponyms: first, second, third
@@ -58,7 +58,7 @@ third:
   starting_date: 12-02-2017
   ending_date: 12-02-2019
   fond: second
-  organization: third
+  organizations: third
   privacy: second
   subjects: first, second, third
   toponyms: first, second, third
