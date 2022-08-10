@@ -1,4 +1,4 @@
-tr:
+en:
   back_to_fonds: "Fonlara Dön"
   child_fonds: "Alt Fonlar"
   fond: "Fon"
@@ -10,7 +10,7 @@ tr:
   has_no_children: "Bu fona ait hiç alt fon yok."
   has_no_parent: "Bu fon en üst fon düzeyinde"
   new_fond: "Yeni Fon"
-  created_successfully: "Fon başarıyla kaydedildi."
-  updated_successfully: "Fon başarıyla güncellendi."
-  destroyed_successfully: "Fon başarıyla silindi."
-  founded_record_size: "Bulunan kayıt sayısı"
+  created_sucessfully: "Fond was successfully created."
+  updated_successfully: "Fond was successfully updated."
+  destroyed_successfully: "Fond was successfully destroyed."
+  founded_record_size: "Founded record size"

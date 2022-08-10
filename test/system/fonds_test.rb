@@ -5,57 +5,94 @@ class FondsTest < ApplicationSystemTestCase
     login_as users(:admin)
     @fond = fonds(:first)
     @fond_related = fonds(:second)
+    visit fonds_url
   end
 
-  # test "visiting the index" do
-  #   visit fonds_url
-  #   assert_selector "h1", text: "Fonds"
-  # end
+  test "visiting the index" do
+    assert_selector "h1", text: I18n.t(:fonds)
+    has_selector?('nav.pagination', count: 2)
+  end
 
   test "should create fond" do
-    visit fonds_url
     click_on I18n.t("new_fond")
-
-    fill_in I18n.t("name"), with: "new name"
-    fill_in "Explanation", with: "new explanation"
-    click_on "Fond Kaydet"
-    assert_text "Fond was successfully created"
+    fill_in :fond_name, with: "new name"
+    fill_in :fond_explanation, with: "new explanation"
+    click_on I18n.t('helpers.submit.create')
+    assert_text I18n.t(:created_successfully)
   end
 
-  # test "should create related fond" do
-  #   visit fonds_url
-  #   click_on "New fond"
+  test "should create related fond" do
+    click_on I18n.t("new_fond")
+    fill_in :fond_name, with: "Another new fond"
+    fill_in :fond_explanation, with: "This is another new fond's explanation."
+    first(:xpath, "/html/body/div[2]/div[2]/form/div[3]/div").click()
+    find('div.item', text: @fond_related.name).click()
+    click_on I18n.t('helpers.submit.create')
+    assert_text I18n.t(:created_successfully)
+  end
 
-  #   fill_in "Name", with: "Deneme deneme"
-  #   fill_in "Explanation", with: @fond_related.explanation
-  #   first(:xpath, "/html/body/div[2]/div[2]/form/div[3]/div").click()
+  test "should update fond" do
+    visit fond_url(@fond)
+    click_on "Edit this fond", match: :first
+
+    fill_in :fond_name, with: "new name"
+    fill_in :fond_explanation, with: @fond_related.explanation
+    first(:xpath, "/html/body/div[2]/div[2]/form/div[3]/div").click()
     
-  #   find('div.item', text: @fond_related.name).click()
+    find('div.item', text: @fond_related.name).click()
+    click_on I18n.t('helpers.submit.update')
 
-  #   click_on ("Fond Kaydet")
+    assert_text I18n.t(:updated_successfully)
+    #click_on I18n.t("back")
+  end
 
-  #   assert_text "Fond was successfully created"
-  # end
+  test "should destroy fond" do
+    visit fond_url(@fond)
+    click_on I18n.t(:destroy), match: :first
+    assert_text I18n.t(:destroyed_successfully)
+  end
 
-  # test "should update Fond" do
-  #   visit fond_url(@fond)
-  #   click_on "Edit this fond", match: :first
+  test "should search fonds" do 
+    fill_in :q_name_cont, with: @fond.name
+    click_on "Ara"
+    assert_text @fond.name
+    assert_text @fond.id
+    assert_text I18n.t("founded_record_size")
+    find('div.search-result-size')
+  end
 
-  #   fill_in "Name", with: "Deneme deneme"
-  #   fill_in "Explanation", with: @fond_related.explanation
-  #   first(:xpath, "/html/body/div[2]/div[2]/form/div[3]/div").click()
-    
-  #   find('div.item', text: @fond_related.name).click()
-  #   click_on "Fond Güncelle"
+  test "should search fonds with missing name" do 
+    fill_in :q_name_cont, with: @fond.name.slice(1..3)
+    click_on "Ara"
+    assert_text @fond.name
+    assert_text @fond.id
+    assert_text I18n.t("founded_record_size")
+    find('div.search-result-size')
+    has_selector?('nav.pagination', count: 2)
+  end
 
-  #   assert_text "Fond was successfully updated"
-  #   click_on I18n.t("back")
-  # end
+  test "should show empty page for empty results" do 
+    fill_in :q_name_cont, with: "@#%&/()?*."
+    click_on "Ara"
+    assert(find('div.search-result-size').find('span', text: "0"))
+    refute_select("table") # not to have table
+  end
 
-  # test "should destroy Fond" do
-  #   visit fond_url(@fond)
-  #   click_on "Destroy this fond", match: :first
+  test "should show sended query in search form" do
+    query = "some long query"
+    fill_in :q_name_cont, with: query
+    click_on "Ara"
+    assert(find("input#q_name_cont").value == query)
+  end
 
-  #   assert_text "Fond was successfully destroyed"
-  # end
+  test "should clear sended query with clear button" do
+    query = "some long query"
+    fill_in :q_name_cont, with: query
+    click_on "Ara"
+    click_on "Temizle"
+    assert(has_current_path?(fonds_path))
+    refute_select("Temizle")
+    assert(find("input#q_name_cont").value=="")
+  end
+
 end

@@ -10,6 +10,11 @@ tr:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Lütfen aşağıdaki sorunları gözden geçirin:"
+    labels:
+      fond:
+        name: 'Ad'
+        explanation: 'Açıklama'
+        parent: 'Üst Fon'
     # Examples
     # labels:
     #   defaults:

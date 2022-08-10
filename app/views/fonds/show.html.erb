@@ -9,7 +9,7 @@
     <%= link_to "Edit this fond", edit_fond_path(@fond) %> |
   <% end %>
   <% if policy(@fond).destroy? %>
-    <%= button_to "Destroy this fond", @fond, method: :delete %>
+    <%= button_to t(:destroy), @fond, method: :delete %>
   <% end %>
 </div>
 <%= link_to  fonds_path, class:"ui secondary button" do %>

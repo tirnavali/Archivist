@@ -33,11 +33,11 @@ tr:
       more_pages:
         display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
     submit:
-      create: "%{model} Kaydet"
-      update: "%{model} Güncelle"
-      destroy: "Bu %{model} Sil"
+      create: "Kaydet"
+      update: "Güncelle"
+      destroy: "Kaydı Sil"
   
-  create: "Oluştur"
+  #create: "Oluştur"
   save: "Kaydet"
   name: "Ad"
   destroy: "Kaydı Sil"

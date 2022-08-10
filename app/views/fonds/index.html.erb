@@ -10,11 +10,23 @@
   <div class="ui action input">
   <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
   <%= f.button "Ara", class:"ui primary button"%>
+  <% unless params[:q].nil? %>
+    <%= link_to "Temizle", fonds_path,  class: "ui red button", method: :get %>
+  <% end %>
   </div>
 <% end %>
 <p></p>
+<% unless params[:q].nil? %>
+  <div class="search-result-size"> <%= t(:founded_record_size) %>: 
+    <span class="ui teal circular label">
+    <%= @q.result.size %></span> 
+  </div>
+<% end %>
+
+<%= paginate @fonds %>
 <!-- added new -->
 <div id="fonds">
+  <% unless @q.result.size == 0 %>
   <table class="ui celled padded very compact table">
     <thead>
       <tr>
@@ -52,4 +64,5 @@
       </th>
     </tr></tfoot>
   </table>
+  <% end %>
 </div>

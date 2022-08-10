@@ -14,9 +14,13 @@
   </div>
 <% end %>
 <p></p>
-<p>
-<% unless params[:q].nil? %> Found users: <span class="ui teal circular label"><%= @q.result.size  %></span> <% end %>
-</p>
+
+<% unless params[:q].nil? %>
+  <div class="search-result-size">Found users: <span class="ui teal circular label">
+    <%= @q.result.size  %></span> 
+  </div>
+<% end %>
+
 <%= paginate @users %>
 <p></p>
 <div id="users">

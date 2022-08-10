@@ -32,7 +32,7 @@ class FondsController < ApplicationController
     authorize @fond
     respond_to do |format|
       if @fond.save
-        format.html { redirect_to fond_url(@fond), notice: "Fond was successfully created." }
+        format.html { redirect_to fond_url(@fond), notice: t(:created_successfully)}
         format.json { render :show, status: :created, location: @fond }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class FondsController < ApplicationController
     authorize @fond
     respond_to do |format|
       if @fond.update(fond_params)
-        format.html { redirect_to fond_url(@fond), notice: "Fond was successfully updated." }
+        format.html { redirect_to fond_url(@fond), notice: t(:updated_successfully) }
         format.json { render :show, status: :ok, location: @fond }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class FondsController < ApplicationController
     @fond.destroy
 
     respond_to do |format|
-      format.html { redirect_to fonds_url, notice: "Fond was successfully destroyed." }
+      format.html { redirect_to fonds_url, notice: t(:destroyed_successfully) }
       format.json { head :no_content }
     end
   end
