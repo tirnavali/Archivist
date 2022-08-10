@@ -34,16 +34,12 @@ class FondsTest < ApplicationSystemTestCase
   test "should update fond" do
     visit fond_url(@fond)
     click_on "Edit this fond", match: :first
-
     fill_in :fond_name, with: "new name"
     fill_in :fond_explanation, with: @fond_related.explanation
     first(:xpath, "/html/body/div[2]/div[2]/form/div[3]/div").click()
-    
     find('div.item', text: @fond_related.name).click()
     click_on I18n.t('helpers.submit.update')
-
     assert_text I18n.t(:updated_successfully)
-    #click_on I18n.t("back")
   end
 
   test "should destroy fond" do

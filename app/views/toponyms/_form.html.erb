@@ -1,0 +1,5 @@
+<%= simple_form_for @toponym, html: { class: "ui form"} do |f| %>
+  <%= f.input :name %>
+  <%= f.button :submit, class: "ui primary button" %>
+  <%= link_to "Cancel", toponyms_path %>
+<% end %>

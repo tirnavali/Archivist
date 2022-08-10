@@ -1,9 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Toponyms</h1>
+<h1><%= t(:toponyms) %></h1>
 <p>
-  <%= link_to "New toponym", new_toponym_path, class:"ui button teal small"%>
+  <%= link_to t(:new_toponym), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) }, class:"ui button teal small"%>
 </p>
+<%= turbo_frame_tag :new_toponym %>
 <div id="toponyms">
 <%= search_form_for @q, class:"ui form" do |f| %>
   <div class="ui action input">
