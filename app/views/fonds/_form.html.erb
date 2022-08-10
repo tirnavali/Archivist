@@ -3,8 +3,11 @@
   <%= f.input :explanation %>
   <%= f.association :parent, 
     collection: Fond.order(:name),
-    input_html: {class: 'ui fluid search dropdown' },
+    input_html: {include: "blank", class: 'ui fluid search dropdown selection' },
     wrapper_html: {"data-controller": "dropdown" } 
     %>
-  <%= f.button :submit %>
+  <p>
+  </p>
+  <%= f.button :submit, class: "ui primary button" %>
+ 
 <% end %>
