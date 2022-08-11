@@ -1,10 +1,8 @@
 <h1>Editing toponym</h1>
-
-<%= render "form", toponym: @toponym %>
-
+<%= link_to sanitize("&larr; Back to toponym"), toponym_path(@toponym) %>
+<%= turbo_frame_tag  @toponym do %>
+  <%= render "form", toponym: @toponym %>
+<% end %>
 <br>
 
-<div>
-  <%= link_to "Show this toponym", @toponym %> |
-  <%= link_to "Back to toponyms", toponyms_path %>
-</div>
+

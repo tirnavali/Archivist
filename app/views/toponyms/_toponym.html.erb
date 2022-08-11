@@ -1,7 +1,27 @@
-<div id="<%= dom_id toponym %>">
-  <p>
-    <strong>Name:</strong>
-    <%= toponym.name %>
-  </p>
+
+<%= turbo_frame_tag "toponym_#{toponym.id}" do %>
+<div class= "ui card" >
+
+  <div class="content">
+    <div class="header">
+      Name: <%= toponym.name %>
+    </div>
+    <span>Id: <%= toponym.id %></span>
+     <b>Created at:</b>
+    <%= toponym.created_at %>
+    <b>Updated at:</b>
+    <%= toponym.updated_at %>
+  </div>
+  <div class="extra content">
+    <div class="ui two buttons">
+        <%= link_to "Edit", edit_toponym_path(toponym) ,class: "ui basic green button"%>
+        <%= link_to toponym , class: "ui basic red button", data: { 
+          turbo_method: :delete, 
+          turbo_confirm: "Are you sure?"
+           }  do %>      
+          Sil
+        <% end %>
+  </div>
 
 </div>
+<% end %>

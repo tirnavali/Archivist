@@ -1,0 +1,15 @@
+<span>
+  <%= link_to  resource do %>
+    <i class="large folder open icon "></i>
+  <% end %>
+</span>
+<span>
+  <%= link_to  send("edit_#{resource.class.name.underscore}_path", resource.id)  do %>
+    <i class="large edit icon "></i>
+  <% end %>
+</span>
+<span>    
+    <%= link_to resource ,  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>      
+      <i class="red large remove icon "></i>
+    <% end %>
+</span>

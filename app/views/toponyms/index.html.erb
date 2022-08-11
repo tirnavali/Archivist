@@ -2,38 +2,22 @@
 
 <h1><%= t(:toponyms) %></h1>
 <p>
-  <%= link_to t(:new_toponym), new_toponym_path, data: { turbo_frame: dom_id(Toponym.new) }, class:"ui button teal small"%>
+  <%= link_to t(:new_toponym), new_toponym_path, 
+  data: { turbo_frame: dom_id(Toponym.new) }, class:"ui button teal small"%>
 </p>
-<%= turbo_frame_tag :new_toponym %>
-<div id="toponyms">
+
+<%= turbo_frame_tag Toponym.new %>
+
 <%= search_form_for @q, class:"ui form" do |f| %>
   <div class="ui action input">
-  <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
-  <%= f.button "Ara", class:"ui primary button"%>
+    <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
+    <%= f.button "Ara", class:"ui primary button"%>
   </div>
 <% end %>
 <p>
-<% unless params[:q].nil? %> Found toponyms: <%= @q.result.size  %> <% end %>
+  <% unless params[:q].nil? %> Found toponyms: <%= @q.result.size  %> <% end %>
 </p>
-<table class="ui celled padded very compact table">  
-    <thead>
-      <tr><th class="single line">Id</th>
-      <th><%= t :name %></th>    
-      <th><%= t :created_at%></th>
-      <th><%= t :updated_at%></th>
-      
-      <th><%= t :action%></th>
-    </tr></thead>
-    <tbody>  
-      <%= render "toponyms_table", class:"ui right floated pagination menu" %>
-    </tbody>
-      <tfoot>
-      
-        <tr><th colspan="8">
-          <div class="segment">
-          <%= paginate @toponyms %>                
-          </div>
-        </th>
-      </tr></tfoot>
-   </table>
-</div>
+
+<%= turbo_frame_tag :toponyms  do %>
+  <%= render @toponyms %>
+<% end %>

@@ -5,6 +5,7 @@ class ToponymsController < ApplicationController
   # GET /toponyms or /toponyms.json
   def index
     @q = Toponym.ransack(params[:term])
+    @q.sorts= 'created_at desc' if @q.sorts.empty?
     @toponyms = @q.result.page params[:page]
     authorize @toponyms
   end
@@ -62,6 +63,7 @@ class ToponymsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to toponyms_url, notice: "Toponym was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream
     end
   end
 
