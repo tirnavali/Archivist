@@ -1,0 +1,17 @@
+= form_with(model: @toponym, class:"")  do |form|
+  - if @toponym.errors.any?
+    .ui.red.message 
+      %h2= "#{pluralize(@toponym.errors.count, "error")} prohibited this person from being saved:"
+      %ul
+        - @toponym.errors.each do |error|
+          %li
+            = error.full_message
+  .inline.fields
+    .field
+      = form.label t(:name), style: "display: block", autofocus: true 
+    .five.wide.field
+      = form.text_field :name, {"data-controller": "focus"}
+    .field 
+      = form.submit class: "ui green button"
+    .field 
+      = link_to "Cancel", toponyms_path, class: "ui red button"
