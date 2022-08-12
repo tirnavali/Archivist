@@ -34,8 +34,9 @@ gem 'rack-cors'
 gem 'aws-sdk-s3', '~> 1.113'
 gem 'aws-sdk-ec2', '~> 1'
 #gem 'rolify'
-gem 'tiny_tds'
-gem 'activerecord-sqlserver-adapter'
+# active below for mssql --------------
+#gem 'tiny_tds'
+#gem 'activerecord-sqlserver-adapter'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'sunspot_rails', github: 'sunspot/sunspot', glob: 'sunspot_rails/*.gemspec'
@@ -43,6 +44,7 @@ gem "roo"
 gem "pundit", "~> 2.2"
 gem "hexapdf"
 gem "pdf-reader"
+gem "pg"
 
 
 # Use Redis adapter to run Action Cable in production

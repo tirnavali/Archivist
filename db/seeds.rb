@@ -136,8 +136,11 @@ xlsx = Roo::Spreadsheet.open('db/kocgiri01.xlsx')
       end
       top = Toponym.find_by_name toponym
       if top.nil?
+      begin
         t = Toponym.create! name: toponym
         toponym_ids << t.id
+      rescue
+      end
       else
         toponym_ids << top.id
       end

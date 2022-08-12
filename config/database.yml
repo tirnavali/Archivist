@@ -7,26 +7,45 @@
 default: &default
   timeout: 5000
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  adapter: sqlite3
+  #adapter: sqlite3
+
+  # adapter: postgresql
+  # encoding: unicode
+  # host: localhost
+
   # adapter: sqlserver
   # host: SQL5102.site4now.net
 
+postgres: &postgresconfig
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: <%= Rails.application.credentials.database[:username] %>
+  password: <%= Rails.application.credentials.database[:password] %>
 
 development:
   <<: *default
+  <<: *postgresconfig
+  database: app_development
+  # username: <%= Rails.application.credentials.database[:username] %>
+  # password: <%= Rails.application.credentials.database[:password] %>
   # database: db_a7f03d_sercant 
   # username: db_a7f03d_sercant_admin
   # password: SercanTirnavali10
   # appname: <%= "myapp_#{Process.pid}" %>
-  database: db/development.sqlite3
+  #database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  #database: db/test.sqlite3
+  database: app_test
+  username: <%= Rails.application.credentials.database[:username] %>
+  password: <%= Rails.application.credentials.database[:password] %>
 
 production:
   <<: *default
   database: db/production.sqlite3
+
