@@ -1,4 +1,4 @@
-tr:
+en:
   this_record_contains_of: "bu belgenin içerdiği"
   this_record_is_in: "bu belgenin bulunduğu"
   new_record_metadatum: "Yeni belge üstverisi"
@@ -12,7 +12,4 @@ tr:
   remove: "Kaldır"
   file_name: "Dosya adı"
   more: "daha"
-  no_documents: "Bu kayıda ait görüntü bulunmamaktadır."
-  
-
-
+  no_documents: "No documents are listed for this customer."

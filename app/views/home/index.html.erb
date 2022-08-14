@@ -1,6 +1,6 @@
 <%= notice %>
 <%= alert %>
-<%= console %>
+<%#= console %>
 <% if current_user %>
   <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
   <% unless params[:query].nil? %>
@@ -14,10 +14,7 @@
         <!-------------------------------------------------------------------------------->
 
         <h2>Son eklenen belgeler</h2>
-  <div class="ui yellow message">
-    <i class="star icon"></i>
-    To make the entire content of an item link, check out the link variation below
-  </div>
+
   <div class="ui items">
     <% @record_metadata.each do |metadata| %>
    

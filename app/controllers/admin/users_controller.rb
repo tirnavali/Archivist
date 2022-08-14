@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   #before_action :require_admin, only: %i[new create edit update destroy]
 
   def record_submissions
-    @record_submissions = @user.record_submissions
+    @record_submissions = authorize @user.record_submissions
     
   end
 

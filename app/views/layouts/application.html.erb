@@ -22,9 +22,13 @@
       <% end %>
       
       <% unless current_user.nil? %>
-        <%= link_to "basic_search", basic_search_path, class: "item" %>
+        <%= link_to t("basic_search"), basic_search_path, class: "item" %>
+        <% if policy(:record_submission).index? %>
         <%= link_to t("all_submissions"), record_submissions_path(current_user), class: "item" %>
+        <% end %>
+        <% if  policy(:record_submission).record_submissions? %>
         <%= link_to t("my_submissions"), record_submissions_admin_user_path(current_user), class: "item" %>
+        <% end %>
         <%= link_to (record_metadata_url) , class: is_page_active?(record_metadata_url) do %>
           <%= t("record_metadata").titleize %>
         <% end %>
@@ -45,7 +49,9 @@
             <div class="menu">
               <%= link_to  t(:profile) , admin_user_path(current_user), class: "item" %>
               <%= link_to  t(:account), edit_user_registration_path, class: "item" %>
-              <%= link_to  t(:my_submissions), record_submissions_admin_user_path(current_user), class: "item" %>
+              <% if  policy(:record_submission).record_submissions? %>
+                <%= link_to  t(:my_submissions), record_submissions_admin_user_path(current_user), class: "item" %>
+              <% end %>
               <%= link_to  t(:my_activity), activities_admin_user_path(current_user), class: "item" %>
               <%= link_to vacations_url, class: "item" do %>
               Vacation <i class="calendar alternate icon"></i>

@@ -76,9 +76,6 @@ GEM
     activerecord (7.0.3)
       activemodel (= 7.0.3)
       activesupport (= 7.0.3)
-    activerecord-sqlserver-adapter (7.0.0.0)
-      activerecord (~> 7.0.0)
-      tiny_tds
     activestorage (7.0.3)
       actionpack (= 7.0.3)
       activejob (= 7.0.3)
@@ -378,7 +375,6 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.3.0)
-    tiny_tds (2.1.5)
     ttfunk (1.7.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
@@ -411,7 +407,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-sqlserver-adapter
   audited (~> 5.0)
   aws-sdk-ec2 (~> 1)
   aws-sdk-s3 (~> 1.113)
@@ -449,7 +444,6 @@ DEPENDENCIES
   stimulus-rails
   sunspot_rails!
   sunspot_solr
-  tiny_tds
   turbo-rails
   tzinfo-data
   vanilla_nested
@@ -460,4 +454,4 @@ RUBY VERSION
    ruby 3.0.3p157
 
 BUNDLED WITH
-   2.3.18
+   2.3.6
