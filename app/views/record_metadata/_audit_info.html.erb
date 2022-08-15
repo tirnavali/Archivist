@@ -1,0 +1,17 @@
+<h4 class="ui horizontal divider header"> <%= t("audit_info") %></h4>
+  <div class="ui feed">
+    <div class="event">
+      <div class="label">
+        <i class="pencil icon"></i>
+      </div>
+      <div class="content">
+        <div class="summary">
+          <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
+          <div class="date"><%=l  record_metadatum.audits.last.created_at, format: :long%></div>
+          <%= link_to audit_record_metadatum_path do %>
+            <%= t("more") %> <i class="external alternate icon"></i>
+          <% end %>   
+        </div>
+      </div>
+    </div>
+  </div>

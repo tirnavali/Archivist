@@ -13,6 +13,7 @@ tr:
   file_name: "Dosya adı"
   more: "daha"
   no_documents: "Bu kayıda ait görüntü bulunmamaktadır."
+  audit_info: "Kayıt Geçmişi"
   
 
 

@@ -118,23 +118,7 @@
             <%#= image_tag "watermarking/k2.jpg" %>
             <%#= image_tag @image.variant(resize_to_limit: [800, 800],  composite: [overlay: ImageProcessing::Vips::Image.load_image("app/assets/images/watermarking/k2.jpg"), gravity: "south-east"] ).processed if @image.variable? %>
   <% unless record_metadatum.audits.empty? || current_user.user? %>
-    <h4 class="ui horizontal divider header"> Info</h4>
-    <div class="ui feed">
-      <div class="event">
-        <div class="label">
-          <i class="pencil icon"></i>
-        </div>
-        <div class="content">
-          <div class="summary">
-            <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
-            <div class="date"><%=l  record_metadatum.audits.last.created_at, format: :long%></div>
-            <%= link_to audit_record_metadatum_path do %>
-              <%= t("more") %> <i class="external alternate icon"></i>
-            <% end %>   
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render "audit_info", record_metadatum: record_metadatum %>
   <% end %>
 </div> <!-- column -->
   
