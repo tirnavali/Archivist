@@ -5,8 +5,14 @@ class FondsController < ApplicationController
 
   # GET /fonds or /fonds.json
   def index
-    @q = Fond.ransack(params[:q])
-    @fonds = @q.result.page params[:page]
+    if params[:only_ancestors] == '1'
+      @q = Fond.ransack(params[:q] = {"depth_eq": 0} )
+      @fonds = @q.result.page params[:page]
+    else
+      @q = Fond.ransack(params[:q])
+      @fonds = @q.result.page params[:page]
+    end
+
     authorize @fonds
   end
   # GET /fonds/1 or /fonds/1.json

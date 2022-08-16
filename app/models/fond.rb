@@ -1,4 +1,6 @@
 class Fond < ApplicationRecord
+  scope :get_ancestors, -> { where("depth = 0")}
+
   audited
   before_validation :clean_white_spaces
   before_create :assign_depth

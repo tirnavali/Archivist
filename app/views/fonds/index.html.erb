@@ -8,8 +8,9 @@
 <% end#unless %>
 <%= search_form_for @q, class:"ui form" do |f| %>
   <div class="ui action input">
-  <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
-  <%= f.button "Ara", class:"ui primary button"%>
+    <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
+    <%= check_box_tag "only_ancestors" %>
+    <%= f.button "Ara", class:"ui primary button"%>
   <% unless params[:q].nil? %>
     <%= link_to "Temizle", fonds_path,  class: "ui red button", method: :get %>
   <% end %>
