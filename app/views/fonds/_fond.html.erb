@@ -1,5 +1,16 @@
 <div id="<%= dom_id fond %>">
   
+  <div class="ui segment ">
+  <h4> 
+    <%= link_to fonds_path do %>
+      <i class="home icon"></i>
+    <% end %>
+  <% pparent(fond).each do |f| %>
+     / <%= link_to f %>
+  <% end %>
+  </h4>
+  </div>
+  
     <div class="ui secondary red segment">
       <h1 class="custom parent fond name"><%=t('parent_fond')%>:
       <% if fond.parent %>
@@ -42,7 +53,3 @@
     <% end %>
     </div>
   </div >
-  
-
-
-
