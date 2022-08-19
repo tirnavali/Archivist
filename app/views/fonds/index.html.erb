@@ -31,27 +31,40 @@
   <% unless @q.result.size == 0 %>
   
     <%= paginate @fonds %>
-  <table class="ui celled padded very compact table">
-    <thead>
-
-    
-      <tr>
-        <th class="single line">Id</th>
-        <th><%= sort_link(@q, :name, t('fond_name')) %></th>
-        <th><%= t("parent_fond") %></th>
-        <th><%= t("child_fonds") %></th>
-        <% if policy(@fonds).create?  || policy(@fonds).update?%>
-          <th>Cildren Size</th>
-          <th>Fond Depth</th>
-          <th>Action</th>
+    <div class="ui celled equal width grid">
+      <div class="row">
+      <div class="column">
+      <%= sort_link @q, :name do %> 
+        <%= t :name %>
+      <% end %>
+      </div>
+      <% if policy(:fond).edit? %>
+        <div class="four wide column"><%= t :created_at %> </div>
+        <div class="two wide column"><%= t :action %></div>
+      <% end %>
+      </div>
+      <% @fonds.each do |fond| %>
+      <div class="row">
+        <%= link_to fond_path(fond), class: "column" do %>
+          <div class="">
+            <i class="big yellow folder icon"></i>
+            <% if policy(:fond).edit? %>
+            <span class="ui tiny basic   label">
+              <%= fond.id %>
+            </span>
+            <% end %>
+            <b class="ui text black">
+              <%= fond.name %>
+            </b>
+          </div>
         <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: "fond_table" %>
-    </tbody>
-    
-  </table>
+        <% if policy(:fond).edit? %>
+          <div class="four wide column"><%= fond.created_at %></div>
+          <div class="two wide column"><%= render "layouts/shared/actions", resource: fond  %></div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
   <%= paginate @fonds %>
   <% end %>
 </div>
