@@ -1,5 +1,4 @@
 <p style="color: green"><%= notice %></p>
-<%= console %>
 <h1><%= t('fonds') %></h1>
 <% if policy(@fonds).create? %>
   <p>
@@ -9,11 +8,14 @@
 <%= search_form_for @q, class:"ui form" do |f| %>
   <div class="ui action input">
     <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
-    <%= check_box_tag "only_ancestors" %>
     <%= f.button "Ara", class:"ui primary button"%>
+    
   <% unless params[:q].nil? %>
     <%= link_to "Temizle", fonds_path,  class: "ui red button", method: :get %>
   <% end %>
+  </div>
+  <div class="input">
+  <%= check_box_tag "only_ancestors" %>
   </div>
 <% end %>
 <p></p>
@@ -27,9 +29,8 @@
 <!-- added new -->
 <div id="fonds">
   <% unless @q.result.size == 0 %>
-  <div class="ui pagination menu">
+  
     <%= paginate @fonds %>
-  </div>
   <table class="ui celled padded very compact table">
     <thead>
 
@@ -51,8 +52,6 @@
     </tbody>
     
   </table>
-  <div class="ui pagination menu">
-    <%= paginate @fonds %>
-  </div>
+  <%= paginate @fonds %>
   <% end %>
 </div>

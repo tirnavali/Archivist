@@ -13,10 +13,6 @@
  *= require_tree .
  *= require_self
  */
- body {
-     /* background-color: rgb(253, 242, 228); */
-     background-color: rgb(240, 238, 236);
- }
 
  /* turbo-frame {
      display: block;
@@ -30,4 +26,9 @@
 
 .custom.last.action {
     color:rgb(234, 92, 82)
+}
+
+body {
+    /* background-color: rgb(253, 242, 228); */
+    background-color: rgb(240, 238, 236);
 }
