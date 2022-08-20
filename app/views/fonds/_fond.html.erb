@@ -37,10 +37,16 @@
       <% end %>
     </h3>
   </div >
+  <%= search_form_for @q, url: fond_path(fond) do |f| %>
+  <%= f.label :summary_cont %>
+  <%= f.search_field :summary_cont %>
+  <% end %>
   <div class="ui green segment">
     <h2 class=""><%=t('record_metadata')%></h2>
     <div class="ui divided list">
-    <% fond.record_metadata.each_with_index do |metadatum, index| %>
+    <%# fond.record_metadata.each_with_index do |metadatum, index| %>
+    <% @record_metadata.each_with_index do |metadatum, index| %>
+
     <div class="item">
       <div class="content">
         <%= link_to metadatum do %>

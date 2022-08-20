@@ -18,7 +18,6 @@ class RecordMetadataController < ApplicationController
     @q.build_grouping.build_condition
     
     @record_metadata = policy_scope(@q.result.page params[:page])
-    flash.now[:notice] = "We have exactly #{@q.result.size} record available."
   end
 
   def search
@@ -31,8 +30,6 @@ class RecordMetadataController < ApplicationController
     unless @record_metadatum.record_attachment.nil?
       @image =  @record_metadatum.record_attachment.images.first
     end
-    @watermark_image = Pathname.new(Rails.root.join('app', 'assets', 'images', 'k2.jpg'))
-    #@image = @image.representation("quality": 10).processed.download
   end
 
   # GET /record_metadata/new

@@ -18,7 +18,8 @@ class FondsController < ApplicationController
   # GET /fonds/1 or /fonds/1.json
   def show
     authorize @fond
-
+    @q = RecordMetadatum.ransack(params[:q])
+    @record_metadata = @q.result.page params[:page]
   end
 
   # GET /fonds/new
