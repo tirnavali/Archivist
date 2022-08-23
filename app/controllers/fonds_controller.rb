@@ -9,7 +9,7 @@ class FondsController < ApplicationController
       @q = Fond.ransack(params[:q] = {"depth_eq": 0} )
       @fonds = @q.result.page params[:page]
     else
-      @q = Fond.ransack(params[:q])
+      @q = Fond.get_ancestors.ransack(params[:q])
       @fonds = @q.result.page params[:page]
     end
 
@@ -18,7 +18,7 @@ class FondsController < ApplicationController
   # GET /fonds/1 or /fonds/1.json
   def show
     authorize @fond
-    @q = RecordMetadatum.ransack(params[:q])
+    @q = RecordMetadatum.where(fond: @fond).ransack(params[:q])
     @record_metadata = @q.result.page params[:page]
   end
 

@@ -1,5 +1,7 @@
 class Fond < ApplicationRecord
-  scope :get_ancestors, -> { where("depth = 0")}
+  #default_scope {order(:name)}
+
+  scope :get_ancestors, -> { where("depth = 0").order("name asc")}
 
   audited
   before_validation :clean_white_spaces

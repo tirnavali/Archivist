@@ -34,6 +34,13 @@ number_types.each {|nt| NumberType.create! name: nt}
     User.create(email: "random#{u*2}@gmail.com", password: "123456", role: ((u+1)%3))
     User.create(email: "standart#{u*2}@gmail.com", password: "123456")
 end
+fond_explanation = """ Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+  minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+  esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+  non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
+  
 fonds = ["CUMHURİYET HALK PARTİSİ", "CUMHURİYETÇİ GÜVEN PARTİSİ", "ADALET PARTİSİ", "MİLLİ SELAMET PARTİSİ", "MİLLİYETÇİ HAREKET PARTİSİ",
 "MİLLİ BİRLİK KURULU", "İSTİKLAL MAHKEMELERİ", "YASSI ADA - YÜCE DİVAN", "İSTİKLAL MADALYALARI", 
 "GAZETECİ NALAN SEÇKİN TARAFINDAN 1970 YILINDA İLK MECLİSİN 14 SAYIN ÜYESİ İLE YAPILAN GÖRÜŞME BANTLARI", "İSDEMİR KÖMÜR DOSYASI",

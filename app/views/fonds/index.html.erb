@@ -1,4 +1,3 @@
-<p style="color: green"><%= notice %></p>
 <h1><%= t('fonds') %></h1>
 <% if policy(@fonds).create? %>
   <p>
@@ -26,6 +25,9 @@
   </div>
 <% end %>
 
+<span class="ui teal circular label">
+    <%= @q.result.size %></span> 
+
 <!-- added new -->
 <div id="fonds">
   <% unless @q.result.size == 0 %>
@@ -50,7 +52,7 @@
             <i class="big yellow folder icon"></i>
             <% if policy(:fond).edit? %>
             <span class="ui tiny basic   label">
-              <%= fond.id %>
+              <%= "%03d" % fond.id %>
             </span>
             <% end %>
             <b class="ui text black">
@@ -59,7 +61,7 @@
           </div>
         <% end %>
         <% if policy(:fond).edit? %>
-          <div class="four wide column"><%= fond.created_at %></div>
+          <div class="four wide column"><%=l fond.created_at, format: :long %></div>
           <div class="two wide column"><%= render "layouts/shared/actions", resource: fond  %></div>
         <% end %>
       </div>

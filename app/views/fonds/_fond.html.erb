@@ -11,24 +11,19 @@
   </h4>
   </div>
   
-    <div class="ui secondary red segment">
-      <h1 class="custom parent fond name"><%=t('parent_fond')%>:
-      <% if fond.parent %>
-        <%=link_to fond.parent, fond_path(fond.parent) %>
-      <% else %>
-        <%= t("has_no_parent") %>
-      <% end %>
-      </h1>
-    </div>
+ 
   
   <div class="ui yellow segment">
-    <h2 class=""><%=t('name')%>:
+    <h2 class=""><%=t('fond_name')%>:
       <%= fond.name %>
     </h2>
+    <% if fond.explanation %>
     <p class=""><%=t('explanation')%>:
       <%= fond.explanation %>
     </p>
-    <h3 class="custom children fond name"><%=t('children')%>:
+    <% end %>
+    <% unless fond.children.empty? %>
+    <h3 class="custom children fond name"><%=t('child_fonds')%>:
       <% if fond.children.empty? %>
         <ul><%=t('has_no_children')%></ul>
       <% end %>
@@ -36,26 +31,63 @@
         <ul><%=link_to child.name, fond_path(child) %></ul>
       <% end %>
     </h3>
+    <% end %>
+    
   </div >
-  <%= search_form_for @q, url: fond_path(fond) do |f| %>
-  <%= f.label :summary_cont %>
-  <%= f.search_field :summary_cont %>
-  <% end %>
+
   <div class="ui green segment">
     <h2 class=""><%=t('record_metadata')%></h2>
-    <div class="ui divided list">
-    <%# fond.record_metadata.each_with_index do |metadatum, index| %>
-    <% @record_metadata.each_with_index do |metadatum, index| %>
-
-    <div class="item">
-      <div class="content">
-        <%= link_to metadatum do %>
-        <%= index+1 %> - 
-        <i class="ui big folder icon"></i>
-      <% end %> <%= metadatum.box %> / <%= metadatum.folder %> / <%= metadatum.order %> <%= metadatum.summary[..50] %>...
+  <div class="ui green segment">
+    <div class="ui form">
+    <%= search_form_for @q, url: fond_path(fond) do |f| %>
+    <div class="inline fields">
+      <%= f.label :summary_cont %>
+      <%= f.search_field :summary_cont %>
+      <div class="six wide field">
+      <%= f.label :box_eq %>
+      <%= f.search_field :box_eq%>
       </div>
+      <div class="six wide field">
+      <%= f.label :folder_eq %>
+      <%= f.search_field :folder_eq %>
+      </div>
+      <div class="six wide field">
+      <%= f.label :order_eq %>
+      <%= f.search_field :order_eq %>
+      </div>
+      <%= f.submit  class:"ui button" %>
     </div>
-
     <% end %>
+    </div>
+    </div><!--segment-->
+
+    
+    <%# fond.record_metadata.each_with_index do |metadatum, index| %>
+    <%= turbo_frame_tag "record_metadata" do %>
+    <div class="ui equal width divided grid">
+      <div class="row">
+        <div class="column"><%= sort_link(@q, :id) %></div>
+        <div class="column"><%= sort_link(@q, :box) %></div>
+        <div class="column"><%= sort_link(@q, :folder) %></div>
+        <div class="column"><%= sort_link(@q, :order) %></div>
+        <div class="ten wide column"><%= t(:summary)%> </div>
+      </div>
+    
+      
+      <% @record_metadata.each do |record_metadatum| %>
+        <div class="row">
+          <div class="column"><%="%04d" % record_metadatum.id %></div>
+          <div class="column"><%= record_metadatum.box %></div>
+          <div class="column"><%= record_metadatum.folder %></div>
+          <div class="column"><%= record_metadatum.order %></div>
+          <div class="ten wide column"><%= record_metadatum.summary %> </div>
+        </div>
+      <% end %>
+        <div class="row">
+          <%= paginate @record_metadata %>
+        </div>
+      
+      <% end %>
+
     </div>
   </div >
