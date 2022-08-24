@@ -23,8 +23,11 @@ class Admin::UsersController < ApplicationController
   
   def index
     @q = User.ransack(params[:q])
-    @users = @q.result.page params[:page]
+    #@users = @q.result.page params[:page]
+    console
+    @pagy, @users = pagy(@q.result, some_option: 'get merged in the pagy object')
     authorize @users
+
   end
 
   def edit

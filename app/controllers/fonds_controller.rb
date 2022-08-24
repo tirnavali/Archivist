@@ -19,7 +19,9 @@ class FondsController < ApplicationController
   def show
     authorize @fond
     @q = RecordMetadatum.where(fond: @fond).ransack(params[:q])
-    @record_metadata = @q.result.page params[:page]
+    #@record_metadata = @q.result.page params[:page]
+    @pagy, @record_metadata = pagy(@q.result, items: 10)
+
   end
 
   # GET /fonds/new

@@ -1,4 +1,7 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
+  
   def is_page_active?(current_page_path)
     if current_page?(current_page_path)
       "active  item"

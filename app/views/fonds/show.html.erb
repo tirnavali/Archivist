@@ -11,7 +11,7 @@
   <% if policy(@fond).destroy? %>
     <%= button_to t(:destroy), @fond, method: :delete %>
   <% end %>
+  <%= link_to  fonds_path, class:"ui secondary button" do %>
+  <i class="angle double left icon"></i> <%= t "fonds" %>
+  <% end %>
 </div>
-<%= link_to  fonds_path, class:"ui secondary button" do %>
-<i class="angle double left icon"></i> <%= t "fonds" %>
-<% end %>
