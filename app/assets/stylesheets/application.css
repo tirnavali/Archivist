@@ -32,3 +32,7 @@ body {
     /* background-color: rgb(253, 242, 228); */
     background-color: rgb(240, 238, 236);
 }
+
+a {
+    color: #0162c2;
+}
