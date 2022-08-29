@@ -4,7 +4,7 @@ tr:
   new_record_metadatum: "Yeni belge üstverisi"
   editing_record_metadatum: "Belge üstverisi düzenleniyor"
   back_to_record_metadata: "Belgelere geri dön"
-  record_metadata: "Belge üstverileri"
+  record_metadata: "Belge Üstverileri"
   access_identifiers: "Erişim tanımlıyıcıları"
   special_access_numbers: "Özel erişim numaraları"
   detailed_information: "Ayrıntılı bilgiler"
@@ -14,6 +14,3 @@ tr:
   more: "daha"
   no_documents: "Bu kayıda ait görüntü bulunmamaktadır."
   audit_info: "Kayıt Geçmişi"
-  
-
-

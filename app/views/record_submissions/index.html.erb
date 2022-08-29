@@ -1,7 +1,33 @@
 <h1>RecordSubmissions#index</h1>
 
-<% @record_submissions.each_with_index do |submission, index|  %>
-<%=index+1 %><p><%= submission.user %></p>
-<p><%= submission.record_metadatum %></p>
-<p>Aprroved?: <% if submission.approved? %> <i class="green check icon"></i> <% else %> <i class="red minus circle icon"></i>  <% end %></p>
-<% end %>
+<%== pagy_nav(@pagy) %>
+<%== pagy_info(@pagy) %>
+
+<div class ="ui six column celled grid">
+    <div class="row">
+      <div class="one wide column ">Id</div>
+      <div class="column">Kullanıcı</div>
+      <div class="four wide column">Özet</div>
+      <div class="column">Onaylandı mı?</div>
+      <div class="column">Gönderi Tarihi</div>
+      <div class="column"><%= t :updated_at %> </div>
+    </div>
+  <% @record_submissions.each_with_index do |submission, index|  %>
+    <div class="row">
+      <div class="one wide column"><%=submission.id %></div>
+      <div class="column"><%= submission.user %></div>
+      <div class="four wide column "><%= submission.record_metadatum %></div>
+      <div class="column">Aprroved?: 
+        <% if submission.approved? %> 
+            <i class="green check icon"></i> 
+        <% else %> 
+            <i class="red minus circle icon"></i>  
+        <% end %>
+      </div>
+      <div class=" column"><%=l submission.created_at, format: :short %></div>
+      <div class=" column"><%=l submission.updated_at, format: :short %></div>
+
+    </div>
+    <% end %>
+
+</div><!-- ui grid -->

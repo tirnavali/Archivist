@@ -68,7 +68,7 @@
           <div class="column"><%== pagy_info(@pagy) %></div>
         </div>
         <div class="row">
-          <div class="column"><%= sort_link(@q, :id, {}, {"data-turbo-action": "replace"} )%></div>
+          <div class="column"><%= sort_link(@q, :id, {"data-turbo-action": "replace"} )%></div>
           <div class="column"><%= sort_link(@q, :box) %></div>
           <div class="column"><%= sort_link(@q, :folder) %></div>
           <div class="column"><%= sort_link(@q, :order) %></div>
@@ -81,7 +81,10 @@
             <div class="column"><%= record_metadatum.box %></div>
             <div class="column"><%= record_metadatum.folder %></div>
             <div class="column"><%= record_metadatum.order %></div>
-            <div class="ten wide column"><%= record_metadatum.summary %> </div>
+            
+            <div class="ten wide column"><%=link_to record_metadatum , data: { turbo_frame: :_top } do %>
+            <%= record_metadatum.summary %> <% end %></div>
+            
           </div>
         <% end %>
       </div>

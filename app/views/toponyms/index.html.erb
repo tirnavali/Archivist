@@ -19,7 +19,16 @@
 </p>
 
 <%= turbo_frame_tag :toponyms  do %>
-<table class="ui table">
+<div class="ui five column celled grid">
+  <div class="row">
+    <div class="column">Id</div>
+    <div class="column"><%= t :name %></div>
+    <div class="column"><%= t :created_at %></div>
+    <div class="column"><%= t :updated_at %></div>
+    <div class="column"><%= t :action %></div>
+
+
+  </div>
   <%= render @toponyms %>
-  </table>
+  </div>
 <% end %>

@@ -4,8 +4,9 @@ class Admin::UsersController < ApplicationController
   #before_action :require_admin, only: %i[new create edit update destroy]
 
   def record_submissions
-    @record_submissions = authorize @user.record_submissions
-    
+    @record_submissions = @user.record_submissions
+    @pagy, @record_submissions = pagy(@record_submissions, {})
+    authorize @record_submissions
   end
 
   def activities
@@ -23,8 +24,6 @@ class Admin::UsersController < ApplicationController
   
   def index
     @q = User.ransack(params[:q])
-    #@users = @q.result.page params[:page]
-    console
     @pagy, @users = pagy(@q.result, some_option: 'get merged in the pagy object')
     authorize @users
 
