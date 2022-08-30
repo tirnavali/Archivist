@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "toponym_#{toponym.id}" , class: "row" do %>
-  <div class="column"><b>Id:</b><%= toponym.id %></div>
+  <div class="column"><%= toponym.id %></div>
   <div class="column"><h3><a href="#" class="header"><%= toponym.name %></a></h3></div>
-  <div class="column"><%= toponym.created_at %></div>
-  <div class="column"><%= toponym.updated_at %></div>
+  <div class="column"><span class="ui label"><%=l toponym.created_at, format: :short %></span></div>
+  <div class="column"><span class="ui label"><%=l toponym.updated_at, format: :short %></span></div>
   <div class="column">
     <%= link_to "Edit", edit_toponym_path(toponym) ,class: "ui tiny right floated green button"%>
     <%= link_to toponym , class: "ui tiny right floated red button", data: { 

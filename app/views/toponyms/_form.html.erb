@@ -1,5 +1,14 @@
 <%= simple_form_for @toponym, html: { class: "ui form"} do |f| %>
-  <%= f.input :name ,input_html: { autofocus: true }%>
-  <%= f.button :submit, class: "ui primary button" %>
-  <%= link_to "Cancel", toponyms_path %>
+  <div class="inline fields">
+    <div class="field">
+      <%= f.input :name ,input_html: { autofocus: true } ,label: false%>
+    </div>
+    <div class="field">
+
+    <%= f.button :submit, class: "ui primary button" %>
+    </div>
+    <div class="field">
+    <%= link_to "Cancel", toponyms_path %>
+    </div>
+  </div>
 <% end %>

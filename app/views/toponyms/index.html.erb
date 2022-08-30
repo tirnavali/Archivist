@@ -17,17 +17,15 @@
 <p>
   <% unless params[:term].nil? %> Found toponyms: <%= @q.result.size  %> <% end %>
 </p>
-
 <%= turbo_frame_tag :toponyms  do %>
+<%== pagy_nav(@pagy) %>
 <div class="ui five column celled grid">
   <div class="row">
-    <div class="column">Id</div>
-    <div class="column"><%= t :name %></div>
-    <div class="column"><%= t :created_at %></div>
-    <div class="column"><%= t :updated_at %></div>
-    <div class="column"><%= t :action %></div>
-
-
+    <div class="column"><b>Id</b></div>
+    <div class="column"><b><%= t :name %></b></div>
+    <div class="column"><b><%= t :created_at %></b></div>
+    <div class="column"><b><%= t :updated_at %></b></div>
+    <div class="column"><b><%= t :action %></b></div>
   </div>
   <%= render @toponyms %>
   </div>

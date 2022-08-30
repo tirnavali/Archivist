@@ -6,7 +6,8 @@ class ToponymsController < ApplicationController
   def index
     @q = Toponym.ransack(params[:term])
     @q.sorts= 'created_at desc' if @q.sorts.empty?
-    @toponyms = @q.result.page params[:page]
+    #@toponyms = @q.result.page params[:page]
+    @pagy, @toponyms = pagy(@q.result)
     authorize @toponyms
   end
 
