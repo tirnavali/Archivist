@@ -1,5 +1,5 @@
 <h1>RecordSubmissions#index</h1>
-
+<%= turbo_frame_tag "record_submissions" do %>
 <%== pagy_nav(@pagy) %>
 <%== pagy_info(@pagy) %>
 <div class ="ui six column celled grid">
@@ -30,3 +30,4 @@
     <% end %>
 
 </div><!-- ui grid -->
+<% end %>

@@ -1,4 +1,4 @@
-<%= turbo_stream.prepend "toponyms", @toponym  %>
+<%= turbo_stream.prepend "toponyms_list", @toponym  %>
 <%= turbo_stream.update Toponym.new, "" %>
 <%= turbo_stream.prepend "toponym_flash_messages" do %>
     <%= render "flash" %>
