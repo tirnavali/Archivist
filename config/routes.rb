@@ -50,7 +50,11 @@ Rails.application.routes.draw do
         get :activities
         get :record_submissions
       end
-      
+    end
+    resources :statistics, only: [:index] do
+      collection do
+        get :entities
+      end
     end
     #resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] 
   end
