@@ -1,24 +1,181 @@
-<h1>Sistem Varlıkları</h1>
+<h1><%= t :entities %></h1>
 <div class="ui red segment">
-<p><%= @users.name.pluralize %> : <%= @users.count %></p>
-<p><%= @record_metadata.name.pluralize %> : <%= @record_metadata.count %></p>
-<p><%= @fonds.name.pluralize %> : <%= @fonds.count %></p>
+  <div class="ui statistics">
+    <div class="statistic">
+      <div class="value">
+        <%= @users.count %>
+        <i class="user icon"></i>
+      </div>
+      <div class="label">
+        <%= t(@users.name.pluralize.downcase) %> 
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @record_metadata.count %>
+      </div>
+      <div class="label">
+        <%= t @record_metadata.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @fonds.count %>
+      </div>
+      <div class="label">
+        <%= t @fonds.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @special_numbers.count %>
+      </div>
+      <div class="label">
+        <%= t @special_numbers.name.pluralize.downcase %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="ui green segment">
-<p><%= @people.name.pluralize %> : <%= @people.count %></p>
-<p><%= @toponyms.name.pluralize %> : <%= @toponyms.count %></p>
-<p><%= @organizations.name.pluralize %> : <%= @organizations.count %></p>
-<p><%= @subjects.name.pluralize %> : <%= @subjects.count %></p>
+  <div class="ui statistics">
+    <div class="statistic">
+      <div class="value">
+        <%= @people.count %> 
+      </div>
+      <div class="label">
+        <%= t @people.name.pluralize.downcase %> 
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @toponyms.count %>
+      </div>
+      <div class="label">
+        <%= t @toponyms.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @organizations.count%> 
+      </div>
+      <div class="label">
+        <%= t @organizations.name.pluralize.downcase %> 
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @subjects.count %>
+      </div>
+      <div class="label">
+        <%= t @subjects.name.pluralize.downcase %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="ui yellow segment">
-<p><%= @privacies.name.pluralize %> : <%= @privacies.count %></p>
-<p><%= @languages.name.pluralize %> : <%= @languages.count %></p>
-<p><%= @phisycal_statuses.name.pluralize %> : <%= @phisycal_statuses.count %></p>
-<p><%= @document_types.name.pluralize %> : <%= @document_types.count %></p>
-<p><%= @special_numbers.name.pluralize %> : <%= @special_numbers.count %></p>
-<p><%= @num_types.name.pluralize %> : <%= @num_types.count %></p>
-
-
+  <div class="ui statistics">
+    <div class="statistic">
+      <div class="value">
+        <%= @privacies.count %> 
+      </div>
+      <div class="label">
+        <%= t @privacies.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @languages.count %>
+      </div>
+      <div class="label">
+        <%= t @languages.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @phisycal_statuses.count %>
+      </div>
+      <div class="label">
+        <%=  t @phisycal_statuses.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @document_types.count %>
+      </div>
+      <div class="label">
+        <%=  t @document_types.name.pluralize.downcase %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <%= @num_types.count %>
+      </div>
+      <div class="label">
+        <%=  t @num_types.name.pluralize.downcase %>
+      </div>
+    </div>
+  </div>
 </div>
+<table class="ui definition table">
+  <thead>
+    <tr><th><%= t :entities %></th>
+    <th><%= t :total %></th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td><%= t @users.name.pluralize.downcase %></td>
+      <td class="right aligned"><%= @users.count %></td>
+    </tr>
+    <tr>
+      <td><%= t @record_metadata.name.pluralize.downcase %></td>
+      <td class="right aligned"><%= @record_metadata.count %></td>
+    </tr>
+    <tr>
+      <td><%= t @fonds.name.pluralize.downcase %></td>
+      <td class="right aligned"><%= @fonds.count %></td>
+    </tr>
+    <tr>
+      <td><%= t @people.name.pluralize.downcase %></td>
+      <td class="right aligned"><%= @people.count %></td>
+    </tr>
+    <tr>
+      <td><%= t @toponyms.name.pluralize.downcase %></td>
+      <td class="right aligned"><%= @toponyms.count %></td>
+    </tr>
+    <tr>
+      <td><%= t @organizations.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @organizations.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @subjects.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @subjects.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @privacies.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @privacies.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @languages.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @languages.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @phisycal_statuses.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @phisycal_statuses.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @document_types.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @document_types.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @special_numbers.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @special_numbers.count %> </td>
+    </tr>
+    <tr>
+      <td><%= t @num_types.name.pluralize.downcase %> </td>
+      <td class="right aligned"><%= @num_types.count %> </td>
+    </tr>
+  </tbody>
+</table>
+

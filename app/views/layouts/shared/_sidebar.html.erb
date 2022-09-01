@@ -1,64 +1,52 @@
     <%= link_to (admin_users_url) , class: is_page_active?(admin_users_url) do %>
     <%= t("users").titleize %>
-      <div class="ui  left pointing label"><i class="users icon"></i><%= User.count %></div>
+      <div class="ui  left pointing label"><i class="users icon"></i></div>
     <% end %>
 
     <%= link_to (record_metadata_url) , class: is_page_active?(record_metadata_url) do %>
     <%= t("record_metadata").titleize %>
-      <div class="ui teal left pointing label"><%= RecordMetadatum.count %></div>
     <% end %>
   
     <%= link_to (fonds_url) , class: is_page_active?(fonds_url) do %>
     <%= t("fonds").titleize %>
-      <div class="ui teal left pointing label"><%= Fond.count%></div>
     <% end %>
     
     <%= link_to (privacies_url) , class: is_page_active?(privacies_url) do %>
     <%= t("privacy").titleize %>
-      <div class="ui teal left pointing label"><%= Privacy.count %></div>
     <% end %>
     
     <%= link_to (people_url), class: is_page_active?(people_url) do %>
     <%= t("people").titleize %>
-      <div class="ui teal left pointing label"><%= Person.count %></div>
     <% end %>
 
     <%= link_to (toponyms_url), class: is_page_active?(toponyms_path) do %>
     <%= t(:toponyms).titleize %>
-      <div class="ui teal left pointing label"><%= Toponym.count %></div>
     <% end %>
 
     <%= link_to (organizations_url), class: is_page_active?(organizations_url) do %>
     <%= t :organizations %>
-      <div class="ui teal left pointing label"><%= Organization.count %></div>
     <% end %>
 
     <%= link_to (document_types_url), class: is_page_active?(document_types_url) do %>
     <%= t("document_types").titleize %>
-      <div class="ui teal left pointing label"><%= DocumentType.count %></div>
     <% end %>
 
     <%= link_to (phisycal_statuses_url), class: is_page_active?(phisycal_statuses_url) do %>
     <%= t("phisycal_statuses").titleize %>
-      <div class="ui teal left pointing label"><%= PhisycalStatus.count %></div>
     <% end %>
 
     <%= link_to (subjects_url), class: is_page_active?(subjects_url) do %>
     <%= t("subjects").titleize %>
-      <div class="ui teal left pointing label"><%= Subject.count %></div>
     <% end %>
     
-      <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
-        <%= t("languages").titleize %>
-          <div class="ui teal left pointing label"><%= Language.count %></div>
-        <% end %>
+    <%= link_to (languages_url), class: is_page_active?(languages_url) do %>
+    <%= t("languages").titleize %>
+    <% end %>
 
     <%= link_to (number_types_url), class: is_page_active?(number_types_url) do %>
     <%= t("number_types").titleize %>
-      <div class="ui teal left pointing label"><%= NumberType.count %></div>
     <% end %>
 
     <%= link_to (special_numbers_url), class: is_page_active?(special_numbers_url) do %>
-    <%= t("special_numbers").titleize %>
-      <div class="ui teal left pointing label"><%= SpecialNumber.count %></div>
+    <%= t("special_numbers") %>
     <% end %>

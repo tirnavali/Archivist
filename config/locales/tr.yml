@@ -1,4 +1,7 @@
 tr:
+  total: "Toplam"
+  stats: "İstatistikler"
+  recordmetadata: "Belge Üstverileri"
   hello: "Merhaba Dünya"
   time:
     formats:

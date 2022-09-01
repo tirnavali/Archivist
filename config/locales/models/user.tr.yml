@@ -1,0 +1,9 @@
+tr:
+  activerecord:
+    models:
+      user:
+        one: "Kişi"
+        other: "Kişiler"      
+    attributes:
+      user:
+        email: "E-posta"

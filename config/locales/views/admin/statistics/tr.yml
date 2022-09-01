@@ -1,0 +1,19 @@
+tr:
+  starting_date: "Başlangıç Tarihi"
+  ending_date: "Bitiş Tarihi"
+  box: "Kutu"
+  folder: "Dosya"
+  order: "Sıra"
+  fond: "Fon"
+  organization_code: "Rumuz"
+  languages: "Diller"
+  subjects: "Konular"
+  toponyms: "Yer Adları"
+  organizations: "Kuruluşlar"
+  document_types: "Belge Türleri"
+
+  privacy: "Gizlilik Türü"
+  privacies: "Gizlilik Türleri"
+
+
+  entities: "Sistem Varlıkları"

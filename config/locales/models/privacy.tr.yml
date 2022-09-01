@@ -1,0 +1,9 @@
+tr:
+  activerecord:
+    models:
+      privacy:
+        one: "Gizlilik"
+        other: "Gizlilik Türleri"      
+    attributes:
+      privacy:
+        name: "Ad"
