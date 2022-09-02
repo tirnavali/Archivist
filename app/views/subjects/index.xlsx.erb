@@ -1,8 +1,0 @@
-<%
-Xlsxtream::Workbook.open('my_data.xlsx') do |xlsx|
-  xlsx.write_worksheet 'Sheet1' do |sheet|
-    # Boolean, Date, Time, DateTime and Numeric are properly mapped
-    sheet << [true, Date.today, 'hello', 'world', 42, 3.14159265359, 42**13]
-  end
-end
-%>

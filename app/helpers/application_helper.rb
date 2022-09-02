@@ -1,7 +1,19 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  
+  # @author Sercan TIRNAVALI
+  # @date 02.09.2022
+  # Generate formatted url for non html pages
+  # only support pdf, csv, xlsx 
+  def format_current_url_as(format="")
+    if format.match? /^csv$|^pdf$|^xlsx$/
+      url = request.original_url
+      url_array = url.split('?', 2)
+      url_array.insert(1, ".#{format}?")
+      url_array.join()
+    end
+  end
+
   def is_page_active?(current_page_path)
     if current_page?(current_page_path)
       "active  item"

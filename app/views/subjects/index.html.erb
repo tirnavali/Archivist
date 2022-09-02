@@ -1,9 +1,7 @@
 <p style="color: green"><%= notice %></p>
-
 <div id="subjects">
 <h1>Subjects</h1>
-<%= link_to 'Download as .xlsx', subjects_path(format: :xlsx) %>
-<%= link_to 'Download as .csv', subjects_path(format: :csv) %>
+
 <p>
 <%= link_to "New subject", new_subject_path, class:"ui small button teal" %>
 </p>
@@ -37,4 +35,15 @@
         </th>
       </tr></tfoot>
    </table>
+<div class="ui segment">
+  <%= link_to format_current_url_as("xlsx") do %>
+    <i class="ui black file excel icon"></i>
+    Download as .xlsx
+  <% end %>
+
+  <%= link_to format_current_url_as("csv") do %>
+    <i class="ui black file alternate icon"></i>
+    Download as .csv
+  <% end %>
+</div>
 </div>

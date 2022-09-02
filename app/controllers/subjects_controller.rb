@@ -9,9 +9,10 @@ class SubjectsController < ApplicationController
     authorize @subjects
     respond_to do |format|
       format.html   
-      format.xlsx {send_data @subjects.to_xlsx}
-      format.csv {send_data @subjects.to_csv}
+      format.xlsx {send_data(@subjects.to_xlsx, filename: "result.xlsx", disposition: "attachment")}
+      format.csv {send_data @subjects.to_csv, disposition: "attachment"}
     end
+    console
   end
 
   # GET /subjects/1 or /subjects/1.json
