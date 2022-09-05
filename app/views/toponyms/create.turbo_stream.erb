@@ -3,4 +3,11 @@
 <%= turbo_stream.prepend "toponym_flash_messages" do %>
     <%= render "flash" %>
 <% end %>
+<%= turbo_stream.update "total" do %>
+    <%== pagy_nav(@pagy) %>
+    <%== pagy_info(@pagy) %>
+<% end %>
+<%= turbo_stream.update "toponyms_list" do %>
+    <%= render @toponyms %>
+<% end %>
 <%#= turbo_stream.prepend "flash_messages", partial: "flash" %>

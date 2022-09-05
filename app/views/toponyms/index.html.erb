@@ -18,9 +18,11 @@
   <% unless params[:term].nil? %> Found toponyms: <%= @q.result.size  %> <% end %>
 </p>
 <%= turbo_frame_tag "toponyms" do %>
-<table class="ui celled table">
+<div id="total">
 <%== pagy_nav(@pagy) %>
 <%== pagy_info(@pagy) %>
+</div>
+<table class="ui celled table">
 
 <thead>
   <tr>
