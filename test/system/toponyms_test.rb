@@ -31,19 +31,19 @@ class ToponymsTest < ApplicationSystemTestCase
   end
 
   test "should update Toponym" do
-    find("a#toponym_#{@toponym.id}").click()
-    assert_text "Editing toponym"
+    find("a#toponym_#{@toponym.id}_edit").click()
+    #assert_text "Editing toponym"
 
     fill_in "toponym_name", with: "UPGRADES!"
     click_on I18n.t("helpers.submit.update")
     assert_selector "div", text: "UPGRADES!"
-    
+     
     assert_text "Toponym was successfully updated."
   end
 
   test "should cancel update Toponym" do
-    find("a#toponym_#{@toponym.id}").click()
-    assert_text "Editing toponym"
+    find("a#toponym_#{@toponym.id}_edit").click()
+    #assert_text "Editing toponym"
 
     fill_in "toponym_name", with: "UPGRADES!"
     click_on I18n.t("cancel")
@@ -51,10 +51,12 @@ class ToponymsTest < ApplicationSystemTestCase
 
   end
 
-  # test "should destroy Toponym" do
-  #   visit toponym_url(@toponym)
-  #   click_on "Destroy this toponym", match: :first
+  test "should destroy Toponym" do
+    accept_confirm do
+      find("a#toponym_#{@toponym.id}_destroy").click()
+    end
+    assert_no_selector "div", text: @toponym.name
 
-  #   assert_text "Toponym was successfully destroyed"
-  # end
+    assert_text "Toponym was successfully destroyed"
+  end
 end

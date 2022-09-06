@@ -6,7 +6,7 @@ module ApplicationHelper
   # Generate formatted url for non html pages
   # only support pdf, csv, xlsx 
   def format_current_url_as(format="")
-    if format.match? /^csv$|^pdf$|^xlsx$/
+    if format.match? /^csv$|^pdf$|^xlsx$|^html$/
       url = request.original_url
       url_array = url.split('?', 2)
       url_array.insert(1, ".#{format}?")

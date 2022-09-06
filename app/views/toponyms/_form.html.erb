@@ -1,12 +1,13 @@
-<%= simple_form_for @toponym, html: { class: ""} do |f| %>
+<%= simple_form_for @toponym, html: { class: "ui form"} do |f| %>
 <div class="ui form">
 <div class="inline fields">
   <%= f.input :name ,input_html: { autofocus: true } ,wrapper_html: { class: 'twelve wide field' } ,label: false%>
   <div class="field">
     <%= f.button :submit, class: "ui primary button" %>
+  </div>
+  <div class="field">
     <%= link_to t("cancel"), toponyms_path %>
   </div>
-
 </div>
 </div>
 

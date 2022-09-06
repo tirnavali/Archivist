@@ -6,3 +6,6 @@
 <%= turbo_stream.update "toponyms_list" do %>
     <%= render @toponyms %>
 <% end %>
+<%= turbo_stream.prepend "toponym_flash_messages" do %>
+    <%= render "flash" %>
+<% end %>

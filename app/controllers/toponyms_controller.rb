@@ -29,11 +29,9 @@ class ToponymsController < ApplicationController
   # POST /toponyms or /toponyms.json
   def create
     @toponym = Toponym.new(toponym_params)
-    
     authorize @toponym
     respond_to do |format|
       if @toponym.save
-        #@pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
         flash[:info] = "Toponym was successfully created."
         format.turbo_stream
         format.html { redirect_to toponym_url(@toponym), notice: "Toponym was successfully created." }
@@ -65,6 +63,7 @@ class ToponymsController < ApplicationController
   def destroy
     authorize @toponym
     @toponym.destroy
+    flash[:info] = "Toponym was successfully destroyed."
     # This code must be here for update pagination after delete 
     @pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
     respond_to do |format|
@@ -75,6 +74,7 @@ class ToponymsController < ApplicationController
   end
 
   private
+
     def set_pagination
       @pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
     end
