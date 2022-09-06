@@ -1,1 +1,8 @@
 <%= turbo_stream.remove @toponym %>
+<%= turbo_stream.update "total" do %>
+    <%== pagy_nav(@pagy) %>
+    <%== pagy_info(@pagy) %>
+<% end %>
+<%= turbo_stream.update "toponyms_list" do %>
+    <%= render @toponyms %>
+<% end %>

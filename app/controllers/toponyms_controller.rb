@@ -1,5 +1,6 @@
 class ToponymsController < ApplicationController
   before_action :set_toponym, only: %i[ show edit update destroy ]
+  before_action :set_pagination, only: %i[create]
   skip_before_action  :authenticate_user!, only: %i[index]
 
   # GET /toponyms or /toponyms.json
@@ -33,7 +34,7 @@ class ToponymsController < ApplicationController
     authorize @toponym
     respond_to do |format|
       if @toponym.save
-        @pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
+        #@pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
         flash[:info] = "Toponym was successfully created."
         format.turbo_stream
         format.html { redirect_to toponym_url(@toponym), notice: "Toponym was successfully created." }
@@ -63,14 +64,19 @@ class ToponymsController < ApplicationController
   def destroy
     authorize @toponym
     @toponym.destroy
+    # This code must be here for update pagination after delete 
+    @pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
     respond_to do |format|
+      format.turbo_stream
       format.html { redirect_to toponyms_url, notice: "Toponym was successfully destroyed." }
       format.json { head :no_content }
-      format.turbo_stream
     end
   end
 
   private
+    def set_pagination
+      @pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_toponym
       @toponym = Toponym.find(params[:id])
