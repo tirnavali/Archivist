@@ -49,6 +49,7 @@ tr:
   action: "Eylem"
   add: "Ekle"
   back: "Geri"
+  cancel: "Vazgeç"
 
   ransack:
     search: "ara"

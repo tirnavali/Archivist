@@ -4,3 +4,29 @@ second:
   name: İstanbul
 third:
   name: Bandırma
+fourth:
+  name: "Çankaya"
+fifth:
+  name: "Köyceğiz"
+sixth:
+  name: "Kırıkkale"
+seventh:
+  name: "Amasya"
+eigth:
+  name: "Mersin"
+nineth:
+  name: "Alaska"
+tentn:
+  name: "Hakkari"
+eleventh:
+  name: "Van"
+twelvth:
+  name: "Erzurum"
+thirteenth:
+  name: "Trabzon"
+fourteenth:
+  name: "Güdül"
+fifteenth:
+  name: "Malatya"
+sixteenth:
+  name: "Yozgat"

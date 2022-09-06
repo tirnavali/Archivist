@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
+<turbo-frame id="toponym_flash_messages">
 
+</turbo-frame>
 <h1><%= t(:toponyms) %></h1>
 <p>
   <%= link_to t(:new_toponym), new_toponym_path, 
@@ -18,24 +20,22 @@
   <% unless params[:term].nil? %> Found toponyms: <%= @q.result.size  %> <% end %>
 </p>
 <%= turbo_frame_tag "toponyms" do %>
-<div id="total">
-<%== pagy_nav(@pagy) %>
-<%== pagy_info(@pagy) %>
-</div>
-<table class="ui celled table">
+  <div id="total">
+    <%== pagy_nav(@pagy) %>
+    <%== pagy_info(@pagy) %>
+  </div>
 
-<thead>
-  <tr>
-    <th>Id</th>
-    <th>name</th>
-    <th>created at</td>
-    <th>updated</th>
-    <th>actions</th>
-  </tr>
-</thead>
-<tbody id="toponyms_list">
-<%= render @toponyms %>
-</tbody>
+  <div class="ui celled five column grid">
+    <div class="row header">
+      <div class="column">Id</div>
+      <div class="column">name</div>
+      <div class="column">created at</div>
+      <div class="column">updated</div>
+      <div class="column">actions</div>
+    </div>
+  </div>
+  <div id="toponyms_list" class="ui celled five column grid">
+    <%= render @toponyms %>
+  </div>
 
-</table>
 <% end %>

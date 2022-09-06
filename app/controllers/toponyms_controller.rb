@@ -7,7 +7,6 @@ class ToponymsController < ApplicationController
   def index
     @q = Toponym.ransack(params[:term])
     @q.sorts= 'created_at desc' if @q.sorts.empty?
-    #@toponyms = @q.result.page params[:page]
     @pagy, @toponyms = pagy(@q.result)
     authorize @toponyms
   end
@@ -51,6 +50,8 @@ class ToponymsController < ApplicationController
     authorize @toponym
     respond_to do |format|
       if @toponym.update(toponym_params)
+        flash[:info] = "Toponym was successfully updated."
+        format.turbo_stream
         format.html { redirect_to toponym_url(@toponym), notice: "Toponym was successfully updated." }
         format.json { render :show, status: :ok, location: @toponym }
       else

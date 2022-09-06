@@ -1,21 +1,16 @@
-<tr id='<%= dom_id toponym %>'>
-
-  <td><%= toponym.id %></td>
-  <td><%= toponym.name %></td>
-  <td><%=l toponym.created_at, format: :short %></td>
-  <td><%=l toponym.updated_at, format: :short %></td>
-  <td><%= link_to "Edit", edit_toponym_path(toponym) ,class: "ui tiny right floated green button",
-   data:{turbo_frame: "_top" }%>
-    <%= link_to toponym , class: "ui tiny right floated red button", data: { 
-          turbo_method: :delete, 
-          turbo_confirm: "Are you sure?"
-           }  do %>      
-          Sil
-        <% end %>
-  </td>
-
-</tr>
-
-
+<%= turbo_frame_tag dom_id(toponym), class: "row header" do %>
+    <div class="column"><%= toponym.id %></div>
+    <div class="column"><%= toponym.name %></div>
+    <div class="column"><%=l toponym.created_at, format: :short %></div>
+    <div class="column"><%=l toponym.updated_at, format: :short %></div>
+    <div class="column">
+      <%= link_to edit_toponym_path(toponym) ,class: "ui small button", id: dom_id(toponym) do %>
+        <i class="ui teal edit icon"></i> Edit
+      <% end %>
+      <%= link_to toponym , class: "ui small button", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>      
+        <i class="ui red  delete icon"></i>Delete
+      <% end %>
+    </div>
+<% end %>
 
 

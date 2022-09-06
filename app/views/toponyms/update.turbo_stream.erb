@@ -1,0 +1,4 @@
+<%= turbo_stream.replace dom_id(@toponym), @toponym %>
+<%= turbo_stream.prepend "toponym_flash_messages" do %>
+    <%= render "flash" %>
+<% end %>

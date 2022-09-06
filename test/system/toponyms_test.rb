@@ -8,29 +8,48 @@ class ToponymsTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    assert_selector "h1", text: t("toponyms")
+    assert_selector "h1", text: I18n.t("toponyms")
   end
 
   test "should create toponym" do
     click_on I18n.t("new_toponym")
 
-    fill_in "Name", with: @toponym.name
-    click_on "Create Toponym"
+    fill_in "toponym_name", with: "Yer adı testi"
+    click_on I18n.t("save")
 
+    assert_selector "div", text: "Yer adı testi"
+    assert_selector "turbo-frame.row", count: 15
     assert_text "Toponym was successfully created"
-    click_on "Back"
   end
 
-  # test "should update Toponym" do
-  #   visit toponym_url(@toponym)
-  #   click_on "Edit this toponym", match: :first
+  test "should cancel creating toponym" do
+    click_on I18n.t("new_toponym")
 
-  #   fill_in "Name", with: @toponym.name
-  #   click_on "Update Toponym"
+    fill_in "toponym_name", with: "Yer adı testi"
+    click_on I18n.t("cancel")
+    assert_selector "turbo-frame.row", count: 15
+  end
 
-  #   assert_text "Toponym was successfully updated"
-  #   click_on "Back"
-  # end
+  test "should update Toponym" do
+    find("a#toponym_#{@toponym.id}").click()
+    assert_text "Editing toponym"
+
+    fill_in "toponym_name", with: "UPGRADES!"
+    click_on I18n.t("helpers.submit.update")
+    assert_selector "div", text: "UPGRADES!"
+    
+    assert_text "Toponym was successfully updated."
+  end
+
+  test "should cancel update Toponym" do
+    find("a#toponym_#{@toponym.id}").click()
+    assert_text "Editing toponym"
+
+    fill_in "toponym_name", with: "UPGRADES!"
+    click_on I18n.t("cancel")
+    assert_selector "div", text: @toponym.name
+
+  end
 
   # test "should destroy Toponym" do
   #   visit toponym_url(@toponym)
