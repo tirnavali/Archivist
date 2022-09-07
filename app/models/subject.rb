@@ -7,6 +7,7 @@ class Subject < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name
   validates_length_of :name, in: 3..50
+  default_scope {order(id: :desc)}
 
   def self.to_xlsx
     io = StringIO.new

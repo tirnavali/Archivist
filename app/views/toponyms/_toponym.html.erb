@@ -5,10 +5,10 @@
     <div class="column"><%=l toponym.updated_at, format: :short %></div>
     <div class="column">
       <%= link_to edit_toponym_path(toponym) ,class: "ui small button", id: "#{dom_id(toponym)}_edit" do %>
-        <i class="ui teal edit icon"></i> Edit
+        <i class="ui teal edit icon"></i> 
       <% end %>
-      <%= link_to toponym , class: "ui small button",  id: "#{dom_id(toponym)}_destroy" , data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>      
-        <i class="ui red delete icon"></i>Delete
+      <%= link_to toponym , class: "ui small button",  id: "#{dom_id(toponym)}_destroy" , data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}   do %>      
+        <i class="ui red delete icon"></i>
       <% end %>
     </div>
 <% end %>

@@ -144,7 +144,7 @@ Pagy::DEFAULT[:link_extra] = 'data-turbo-action="replace"'            # example
 
 # Semantic extra: Add nav, nav_js and combo_nav_js helpers for Semantic UI pagination
 # See https://ddnexus.github.io/pagy/extras/semantic
-# require 'pagy/extras/semantic'
+ require 'pagy/extras/semantic'
 
 # UIkit extra: Add nav helper and templates for UIkit pagination
 # See https://ddnexus.github.io/pagy/extras/uikit

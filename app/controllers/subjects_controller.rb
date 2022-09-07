@@ -7,12 +7,12 @@ class SubjectsController < ApplicationController
     @q = Subject.ransack(params[:term])
     @subjects = @q.result.page params[:page]  
     authorize @subjects
+    @pagy, @subjects = pagy(@q.result)
     respond_to do |format|
       format.html   
       format.xlsx {send_data(@subjects.to_xlsx, filename: "result.xlsx", disposition: "attachment")}
       format.csv {send_data @subjects.to_csv, disposition: "attachment"}
     end
-    console
   end
 
   # GET /subjects/1 or /subjects/1.json

@@ -1,49 +1,65 @@
-<p style="color: green"><%= notice %></p>
 <div id="subjects">
-<h1>Subjects</h1>
-
-<p>
-<%= link_to "New subject", new_subject_path, class:"ui small button teal" %>
-</p>
-<%= search_form_for @q, as: :term, class:"ui form" do |f| %>
-  <div class="ui action input">
-  <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
-  <%= f.button "Ara", class:"ui primary button"%>
+  <div class="ui  menu">
+    <div class="header item">
+      <h3><%= t :subjects %></h3>
+    </div>
+    <div class=" item">
+      <%= link_to t(:add), new_subject_path, class:"ui green button" %>
+    </div>
+    <div class="right menu">
+      <div class="ui simple dropdown item">
+        <%= t(:save) %>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item"><%= link_to format_current_url_as("xlsx") do %>
+            <i class="ui black file excel icon"></i>
+              xlsx
+          <% end %></div>
+          <div class=" item">
+            <%= link_to format_current_url_as("csv") do %>
+                  <i class="ui black file alternate icon"></i>
+                  csv
+            <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
   </div>
-<% end %>
+
+<%= turbo_frame_tag "subjects"  do %>
+<div class="ui right aligned grid">
+  <div class="left floated left aligned six wide column">
+  <%== pagy_semantic_nav(@pagy)%>
+  </div>
+  
+  <div class="right aligned six wide column">
+  
+    <%= search_form_for @q, as: :term, class:"" do |f| %>
+      <div class="ui action input">
+      <%= f.search_field :name_cont, class:"field", placeholder: :name_cont %>
+      <%= f.button "Ara", class:"ui primary button"%>
+      </div>
+    <% end %>
+  </div>
+</div>
 <p>
 <% unless params[:q].nil? %> Found subjects: <%= @q.result.size  %> <% end %>
 </p>
-  <table class="ui celled padded very compact table">  
+
+  <table class="ui single line table">  
     <thead>
-      <tr><th class="single line">Id</th>
-      <th><%= t :name %></th>    
-      <th><%= t :created_at%></th>
-      <th><%= t :updated_at%></th>
-      
-      <th><%= t :action%></th>
-    </tr></thead>
+      <tr>
+        <th class="single line">Id</th>
+        <th><%= t :name %></th>    
+        <th><%= t :created_at%></th>
+        <th><%= t :updated_at%></th>
+        
+        <th><%= t :action%></th>
+    </tr>
+    </thead>
     <tbody>  
       <%= render "subjects_table", class:"ui right floated pagination menu" %>
     </tbody>
-      <tfoot>
-      
-        <tr><th colspan="8">
-          <div class="segment">
-          <%= paginate @subjects %>                
-          </div>
-        </th>
-      </tr></tfoot>
    </table>
-<div class="ui segment">
-  <%= link_to format_current_url_as("xlsx") do %>
-    <i class="ui black file excel icon"></i>
-    Download as .xlsx
-  <% end %>
-
-  <%= link_to format_current_url_as("csv") do %>
-    <i class="ui black file alternate icon"></i>
-    Download as .csv
-  <% end %>
-</div>
+<% end %>
 </div>

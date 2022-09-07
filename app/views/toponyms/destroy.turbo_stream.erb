@@ -1,11 +1,11 @@
 <%= turbo_stream.remove @toponym %>
 <%= turbo_stream.update "total" do %>
-    <%== pagy_nav(@pagy) %>
+    <%#== pagy_nav(@pagy) %>
     <%== pagy_info(@pagy) %>
 <% end %>
-<%= turbo_stream.update "toponyms_list" do %>
+<%#= turbo_stream.update "toponyms_list" do %>
     <%= render @toponyms %>
-<% end %>
+<%# end %>
 <%= turbo_stream.prepend "toponym_flash_messages" do %>
     <%= render "flash" %>
 <% end %>

@@ -9,6 +9,7 @@ class ToponymsController < ApplicationController
     @q.sorts= 'created_at desc' if @q.sorts.empty?
     @pagy, @toponyms = pagy(@q.result)
     authorize @toponyms
+    console
   end
 
   # GET /toponyms/1 or /toponyms/1.json
@@ -66,6 +67,7 @@ class ToponymsController < ApplicationController
     flash[:info] = "Toponym was successfully destroyed."
     # This code must be here for update pagination after delete 
     @pagy, @toponyms = pagy(Toponym.order(created_at: :desc))
+    
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to toponyms_url, notice: "Toponym was successfully destroyed." }
