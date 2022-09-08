@@ -1,3 +1,4 @@
+<%= turbo_frame_tag subject do %>
 <%= form_with(model: subject) do |form| %>
   <% if subject.errors.any? %>
     <div style="color: red">
@@ -19,4 +20,5 @@
   <div>
     <%= form.submit %>
   </div>
+<% end %>
 <% end %>

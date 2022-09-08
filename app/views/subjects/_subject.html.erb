@@ -1,7 +1,21 @@
-<div id="<%= dom_id subject %>">
-  <p>
-    <strong>Name:</strong>
-    <%= subject.name %>
-  </p>
-
+<div class="ui centered card">
+  <%= turbo_frame_tag subject, class:"ui equal width grid content" do %>
+      <% subject.class.column_names.each do |column| %>
+        <div class="row">
+          <div class="column">
+            <strong><%= t(column)%></strong>
+          </div>
+          <div class="column">
+            <%= subject[column]%>
+          </div>
+        </div>
+      <% end %>
+    <div class="extra content">
+      <div class="ui three buttons">
+        <%= link_to "Back", subjects_path, class:"ui dark button", data:{turbo_frame: "_top"} %>
+        <%= link_to "Edit", edit_subject_path(@subject), class:"ui green button"%>
+        <%= link_to "Delete", subjects_path, class:"ui red button"  %>
+      </div>
+    </div>
+  <% end %>
 </div>

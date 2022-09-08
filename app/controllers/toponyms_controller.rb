@@ -8,8 +8,6 @@ class ToponymsController < ApplicationController
     @q = Toponym.ransack(params[:term])
     @q.sorts= 'created_at desc' if @q.sorts.empty?
     @pagy, @toponyms = pagy(@q.result)
-    authorize @toponyms
-    console
   end
 
   # GET /toponyms/1 or /toponyms/1.json
