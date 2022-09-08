@@ -6,10 +6,11 @@ class SubjectsController < ApplicationController
   def index
     @q = Subject.ransack(params[:term])
     @subjects = @q.result.page params[:page]  
-    authorize @subjects
+    #authorize @subjects
     @pagy, @subjects = pagy(@q.result)
     respond_to do |format|
-      format.html   
+      format.html 
+      format.json 
       format.xlsx {send_data(@subjects.to_xlsx, filename: "result.xlsx", disposition: "attachment")}
       format.csv {send_data @subjects.to_csv, disposition: "attachment"}
     end

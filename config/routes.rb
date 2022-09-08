@@ -1,4 +1,7 @@
 Rails.application.routes.draw do  
+  root to: "home#index"
+  get "/basic_search", to: "home#basic_search"
+  get "/search_clues", to: "home#search_clues"
   resources :organizations
   resources :languages
   resources :record_metadata do
@@ -59,8 +62,5 @@ Rails.application.routes.draw do
     #resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] 
   end
   resources :record_submissions, only: [:index]
-  root to: "home#index"
-  get "/basic_search", to: "home#basic_search"
-  get "/search_clues", to: "home#search_clues"
 
 end
