@@ -1,7 +1,20 @@
-<div id="<%= dom_id number_type %>">
-  <p>
-    <strong>Name:</strong>
-    <%= number_type.name %>
-  </p>
-
+<div class="ui stacked segment">
+  <div class="ui four column celled centered grid">
+    <% number_type.class.column_names.each do |column| %>
+      <div class="row">
+        <div class="right aligned column">
+          <strong><%= t(column)%></strong>
+        </div>
+        <div class="column">
+          <% if column.to_s=~ /created_at|updated_at/%>
+            <span class="ui label">
+              <%=l number_type[column], format: :short %>
+            </span>
+          <% else %>
+          <%= number_type[column]%>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

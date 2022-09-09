@@ -1,22 +1,4 @@
-<%= form_with(model: number_type) do |form| %>
-  <% if number_type.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(number_type.errors.count, "error") %> prohibited this number_type from being saved:</h2>
-
-      <ul>
-        <% number_type.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<%= simple_form_for number_type, html: { class: "ui form"} do |f| %>
+<%= f.input :name %>
+<%= f.submit class: "ui primary button"%>
 <% end %>
