@@ -1,7 +1,20 @@
-<div id="<%= dom_id language %>">
-  <p>
-    <strong>Name:</strong>
-    <%= language.name %>
-  </p>
-
+<div class="ui stacked segment">
+  <div class="ui four column celled centered grid">
+    <% language.class.column_names.each do |column| %>
+      <div class="row">
+        <div class="right aligned column">
+          <strong><%= t(column)%></strong>
+        </div>
+        <div class="column">
+          <% if column.to_s=~ /created_at|updated_at/%>
+            <span class="ui label">
+              <%=l language[column], format: :short %>
+            </span>
+          <% else %>
+          <%= language[column]%>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

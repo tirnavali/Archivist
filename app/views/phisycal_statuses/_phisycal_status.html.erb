@@ -1,7 +1,20 @@
-<div id="<%= dom_id phisycal_status %>">
-  <p>
-    <strong>Name:</strong>
-    <%= phisycal_status.name %>
-  </p>
-
+<div class="ui stacked segment">
+  <div class="ui four column celled centered grid">
+    <% phisycal_status.class.column_names.each do |column| %>
+      <div class="row">
+        <div class="right aligned column">
+          <strong><%= t(column)%></strong>
+        </div>
+        <div class="column">
+          <% if column.to_s=~ /created_at|updated_at/%>
+            <span class="ui label">
+              <%=l phisycal_status[column], format: :short %>
+            </span>
+          <% else %>
+          <%= phisycal_status[column]%>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 <%= notice %>
 <%= alert %>
-<%#= console %>
+<%= console %>
 <% if current_user %>
   <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
   <% unless params[:query].nil? %>
@@ -66,15 +66,11 @@
     <%= link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button" %>
   </p>
 
-
-
-
     </div>
       <div class="four wide column" >
       <h3><%= t(:subjects) %></h3>
-        <% @search.facet(:subjects).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>"><%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %></li> 
-        <% end %> 
+      <%= render "subjects", subjects: @subjects %>
+        
       <h3 data-controller="homex"><%= t(:toponyms) %></h3>
           <% @search.facet(:toponyms).rows.each do |facet| %>
           <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 

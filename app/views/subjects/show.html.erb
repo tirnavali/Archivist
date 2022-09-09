@@ -1,7 +1,10 @@
 <%= render @subject %>
-<%= link_to t("add"), new_subject_path, class: "ui small primary button" %> 
-<div class="">
-  <%= link_to t("edit"), edit_subject_path(@subject) %> 
-  <%= button_to t("destroy"), @subject, method: :delete %>
-  <%= link_to t("back"), subjects_path  %>
+
+<div class="ui secondary pointing menu">
+  <%= link_to t("add"), new_subject_path, class: "item" %>
+  <%= link_to t("edit"), edit_subject_path(@subject), class: "item" %> 
+  <%= button_to t("destroy"), @subject, method: :delete, class: "ui button item" %>
+  <div class="right menu">
+    <%= link_to t("back"), subjects_path, class: "ui item"  %>
+  </div>
 </div>

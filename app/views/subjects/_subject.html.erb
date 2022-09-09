@@ -1,14 +1,20 @@
-<div id="<%= dom_id subject %>" class="ui stacked segment">
-<div class="ui four column celled centered grid">
-  <% subject.class.column_names.each do |column| %>
-    <div class="row">
-      <div class="right aligned column">
-        <strong><%= t(column)%></strong>
+<div class="ui stacked segment">
+  <div class="ui four column celled centered grid">
+    <% subject.class.column_names.each do |column| %>
+      <div class="row">
+        <div class="right aligned column">
+          <strong><%= t(column)%></strong>
+        </div>
+        <div class="column">
+          <% if column.to_s=~ /created_at|updated_at/%>
+            <span class="ui label">
+              <%=l subject[column], format: :short %>
+            </span>
+          <% else %>
+          <%= subject[column]%>
+          <% end %>
+        </div>
       </div>
-      <div class="column">
-        <%= subject[column]%>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 </div>

@@ -1,0 +1,5 @@
+<% subjects.each do |facet| %>
+  <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>">
+  <%= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%= facet.count %>
+  </li> 
+<% end %> 
