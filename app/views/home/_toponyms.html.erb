@@ -1,0 +1,8 @@
+<% toponyms.each do |facet| %>
+<li>
+  <%= check_box_tag "toponyms[#{facet.value}]", facet.value %>
+  <%= label_tag "#{facet.value} #{facet.count}" %>
+</li>
+<!--<li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
+-->
+<% end %> 

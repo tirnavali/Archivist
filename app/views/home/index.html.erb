@@ -72,9 +72,7 @@
       <%= render "subjects", subjects: @subjects %>
         
       <h3 data-controller="homex"><%= t(:toponyms) %></h3>
-          <% @search.facet(:toponyms).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
-          <% end %> 
+          <%= render "toponyms", toponyms: @toponyms %> 
         </div>
     </div><!-- row -->
   </div><!-- grid -->

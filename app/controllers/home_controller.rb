@@ -12,8 +12,9 @@ class HomeController < ApplicationController
       with(:subjects, params[:subjects]) if params[:subjects].present?
       paginate page: params[:page], per_page: 10
     end
-    @subjects = @search.facet(:subjects).rows
-    @subjects_pagy, @subjects = pagy(@subjects)
+    @subjects = @search.facet(:subjects).rows[1..10]
+    @toponyms = @search.facet(:toponyms).rows
+
     
     @record_metadata = @search.results
     if (params[:query]).nil?
