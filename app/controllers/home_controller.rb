@@ -13,7 +13,6 @@ class HomeController < ApplicationController
       paginate page: params[:page], per_page: 10
     end
     @subjects = @search.facet(:subjects).rows
-    @subjects_pagy, @subjects = pagy(@subjects)
     
     @record_metadata = @search.results
     if (params[:query]).nil?
