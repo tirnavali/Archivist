@@ -20,6 +20,7 @@ class HomeController < ApplicationController
     if (params[:query]).nil?
       #@record_metadata = RecordMetadatum.limit(5)
     end
+    
     if @record_metadata.empty?
       respond_to do |format|
         format.html { render :nothing_found , notice: "Aramanızda hiç bir sonuç bulunamadı." }
