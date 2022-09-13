@@ -1,9 +1,7 @@
-<% @search.facet(:subjects).rows.each do |facet| %>
-<li>
-  <%= label_tag "#{facet.value} #{facet.count}" %>
-  <%= check_box_tag "subjects[#{facet.value}]", facet.value , ((!params[:subjects].nil?) && (params[:subjects].include? facet.value)) %>
-</li>
-<!--  <li class="<%= is_filter_active?(url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms])) %>">
-  <%#= link_to facet.value, url_for(query: params[:query], subjects: facet.value, toponyms: params[:toponyms]) %> <%#= facet.count %>
-  </li> -->
-<% end %> 
+  <% @search.facet(:subjects).rows[1..10].each do |facet| %>
+  <li >
+    <%= check_box_tag "subjects[#{facet.value}]", facet.value , ((!params[:subjects].nil?) && (params[:subjects].include? facet.value)) %>
+    <%= label_tag "#{facet.value} #{facet.count}" %>
+    <%#= link_to "#{facet.value} #{facet.count}", request.params.to_hash.merge("subjects[#{facet.value}]": facet.value) %>
+  </li>
+   <% end %> 

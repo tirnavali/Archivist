@@ -1,6 +1,6 @@
 <%= notice %>
 <%= alert %>
-<%= console %>
+<%#= console %>
 <% if current_user %>
   <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
   <% unless params[:query].nil? %>
@@ -9,12 +9,42 @@
   </div>
   <% end %>
   <div class="ui grid">
-    <div class="twelve wide column">
-      <%= render "search" %>
+    <div class="row">
+
+    <div class="sixteen wide column">
+      <%#= render "search" %>
+      <%= form_with url: :root, method: :get do |form| %>
+        <div class="ui fluid action input">
+          <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
+          <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
+          {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
+          <div class="ui input">
+            <%= form.number_field :updated_at %>
+          </div>
+          <div class="ui input ">
+            <%= form.submit "Ara", class: "ui primary button"%>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="ui list two wide column" >
+      <h3><%= t(:subjects) %></h3>
+      <%= render "subjects" %>
+           <%#= render "toponyms", toponyms: @toponyms %>
+    </div>
+    <div class="ui list two wide column" >
+      <h3><%= t(:toponyms) %></h3>
+      <%= render "toponyms" %>
+           <%#= render "toponyms", toponyms: @toponyms %>
+    </div>
+    </div>
+
+    <% end %> 
+  </div>
         <!-------------------------------------------------------------------------------->
 
+  <div class="row">
         <h2>Son eklenen belgeler</h2>
-
   <div class="ui items">
     <% @record_metadata.each do |metadata| %>
    
@@ -61,19 +91,21 @@
       </div>
     <% end %>
   </div>
+  </div > <!-- row -->
   <%= paginate @record_metadata %>
   <p>
     <%= link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button" %>
   </p>
 
     </div>
-      <div class="four wide column" >
-      <h3><%= t(:subjects) %></h3>
-      <%= render "subjects", subjects: @subjects %>
-        
-      <h3 data-controller="homex"><%= t(:toponyms) %></h3>
-          <%= render "toponyms", toponyms: @toponyms %> 
-        </div>
+      <div class="ui list two wide column" >
+        <h3><%#= t(:subjects) %></h3>
+        <%#= render "subjects", subjects: @subjects %>
+      </div>
+      <div class="ui list two wide column">
+      <h3 data-controller="homex"><%#= t(:toponyms) %></h3>
+          <%#= render "toponyms", toponyms: @toponyms %> 
+      </div>
     </div><!-- row -->
   </div><!-- grid -->
     </div>

@@ -1,7 +1,7 @@
-<% toponyms.each do |facet| %>
+<% @search.facet(:toponyms).rows[1..10].each do |facet| %>
 <li>
-  <%= check_box_tag "toponyms[#{facet.value}]", facet.value %>
+  <%= check_box_tag "toponyms[#{facet.value}]", facet.value, ((!params[:toponyms].nil?) && (params[:toponyms].include? facet.value)) %>
   <%= label_tag "#{facet.value} #{facet.count}" %>
+  <%#= link_to "#{facet.value} #{facet.count}", request.params.merge("toponyms[#{facet.value}]": facet.value) %>
 </li>
-
 <% end %> 
