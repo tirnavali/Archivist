@@ -80,11 +80,14 @@
     </div>
     <div class="four wide column">
       <div class="row ui list">
-        <%= facet_helper(@subjects, 10, params[:subjects]) %>
+        <%= facet_helper(@subjects, params[:subjects_size] || 10, params[:subjects]) %>
+        <%= link_to "Daha fazla",request.params.merge(subjects_size: 20) %>
       </div>
       
       <div class="row ui list ">
-        <%= facet_helper(@toponyms, 10, params[:toponyms]) %>
+        <%= facet_helper(@toponyms, params[:toponyms_size] || 10, params[:toponyms]) %>
+        <%= link_to "Daha fazla",request.params.merge(toponyms_size: 20) %>
+
       </div>
       
     </div>
