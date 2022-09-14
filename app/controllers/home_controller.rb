@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   def index
     #@user = User.new
-
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
         fields(params[:field]) if params[:field].present?
@@ -27,8 +26,8 @@ class HomeController < ApplicationController
             
       paginate page: params[:page], per_page: 10
     end
-    @subjects = @search.facet(:subjects).rows
-    @toponyms = @search.facet(:toponyms).rows
+    @subjects = @search.facet(:subjects)
+    @toponyms = @search.facet(:toponyms)
 
     
     @record_metadata = @search.results

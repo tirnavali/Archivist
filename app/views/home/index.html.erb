@@ -1,112 +1,96 @@
 <%= notice %>
 <%= alert %>
-<%#= console %>
-<% if current_user %>
-  <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
-  <% unless params[:query].nil? %>
-  <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
-    <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
-  </div>
-  <% end %>
-  <div class="ui grid">
-    <div class="row">
-
-    <div class="sixteen wide column">
-      <%#= render "search" %>
-      <%= form_with url: :root, method: :get do |form| %>
-        <div class="ui fluid action input">
-          <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
-          <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
-          {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
-          <div class="ui input">
-            <%= form.number_field :updated_at %>
-          </div>
-          <div class="ui input ">
-            <%= form.submit "Ara", class: "ui primary button"%>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="ui list two wide column" >
-      <h3><%= t(:subjects) %></h3>
-      <%= render "subjects" %>
-           <%#= render "toponyms", toponyms: @toponyms %>
-    </div>
-    <div class="ui list two wide column" >
-      <h3><%= t(:toponyms) %></h3>
-      <%= render "toponyms" %>
-           <%#= render "toponyms", toponyms: @toponyms %>
-    </div>
-    </div>
-
-    <% end %> 
-  </div>
-        <!-------------------------------------------------------------------------------->
-
+<%= form_with url: :root, method: :get do |form| %>
+<div class="ui celled grid">
   <div class="row">
-        <h2>Son eklenen belgeler</h2>
-  <div class="ui items">
-    <% @record_metadata.each do |metadata| %>
-   
-      <div class="item">
-        <% if !metadata.record_attachment.nil? && !metadata.record_attachment.watermarked_images.empty? %>
-          <% file = metadata.record_attachment.watermarked_images.first %>
-          <a class="ui tiny image">
-            <% begin %>
-              <%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %>
-            <% rescue => e %>
-              <div class="ui placeholder">
-                <div class="image"></div>
-              </div>
+    <div class="sixteen wide column">
+      <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
+      <% unless params[:query].nil? %>
+        <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
+          <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
+        </div>
+      <% end %>
+      <div class="ui fluid action input">
+        <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
+        <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
+        {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
+        <div class="ui input">
+          <%= form.number_field :updated_at %>
+        </div>
+        <div class="ui input ">
+          <%= form.submit "Ara", class: "ui primary button"%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="twelve wide column">
+      <div class="ui grid">
+        <div class="column">
+          <div class="ui items">
+            <% @record_metadata.each do |metadata| %>
+              <div class="item">
+                <% if !metadata.record_attachment.nil? && !metadata.record_attachment.watermarked_images.empty? %>
+                  <% file = metadata.record_attachment.watermarked_images.first %>
+                  <a class="ui tiny image">
+                    <% begin %>
+                      <%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %>
+                    <% rescue => e %>
+                      <div class="ui placeholder">
+                        <div class="image"></div>
+                      </div>
+                    <% end %>
+                  </a>
+                <% else %>
+                  <a class="ui tiny image">
+                    <div class="ui placeholder">
+                        <div class="image"></div>
+                      </div>
+                  </a>
+                <% end %>
+                <div class="content">
+                  <a class="header">
+                    <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
+                  </a>
+                  <div class="description">
+                    <p>
+                      <%= t('summary').capitalize %> : <%= metadata.summary[..300]... %>
+                    </p>
+                    <p>
+                      <%= t('subjects').capitalize %> : 
+                      <% metadata.subjects.each  do |subject| %>
+                        <%= "#{subject.name}, " %>
+                      <% end %>
+                    </p>
+                  </div>
+                  <div class="extra">
+                    Eklenme tarihi 
+                    <%= metadata.created_at  %>
+                    <%= link_to t("open"), metadata, class: "ui tiny primary floated button" %>
+                  </div>
+                </div>
+              </div><!-- item -->
             <% end %>
-          </a>
-        <% else %>
-          <a class="ui tiny image">
-            <div class="ui placeholder">
-                <div class="image"></div>
-              </div>
-          </a>
-        <% end %>
-        <div class="content">
-          <a class="header">
-            <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
-          </a>
-          <div class="description">
-            <p>
-               <%= t('summary').capitalize %> : <%= metadata.summary[..300]... %>
-            </p>
-            <p>
-              <%= t('subjects').capitalize %> : 
-              <% metadata.subjects.each  do |subject| %>
-                <%= "#{subject.name}, " %>
-              <% end %>
-            </p>
-          </div>
-          <div class="extra">
-            Eklenme tarihi 
-            <%= metadata.created_at  %>
-            <%= link_to t("open"), metadata, class: "ui tiny primary floated button" %>
+          </div><!-- items -->
+          <div class="row">
+            <%= paginate @record_metadata %>
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="four wide column">
+      <div class="row ui list">
+        <%= facet_helper(@subjects, 10, params[:subjects]) %>
+      </div>
+      
+      <div class="row ui list ">
+        <%= facet_helper(@toponyms, 10, params[:toponyms]) %>
+      </div>
+      
+    </div>
   </div>
-  </div > <!-- row -->
-  <%= paginate @record_metadata %>
-  <p>
-    <%= link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button" %>
-  </p>
-
-    </div>
-      <div class="ui list two wide column" >
-        <h3><%#= t(:subjects) %></h3>
-        <%#= render "subjects", subjects: @subjects %>
-      </div>
-      <div class="ui list two wide column">
-      <h3 data-controller="homex"><%#= t(:toponyms) %></h3>
-          <%#= render "toponyms", toponyms: @toponyms %> 
-      </div>
-    </div><!-- row -->
-  </div><!-- grid -->
-    </div>
+</div>
+<% end %>
+<% if current_user %>
+  
 <% end %>

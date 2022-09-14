@@ -1,4 +1,4 @@
-  <% @search.facet(:subjects).rows[1..10].each do |facet| %>
+  <% @subjects.rows[1..10].each do |facet| %>
   <li >
     <%= check_box_tag "subjects[#{facet.value}]", facet.value , ((!params[:subjects].nil?) && (params[:subjects].include? facet.value)) %>
     <%= label_tag "#{facet.value} #{facet.count}" %>
