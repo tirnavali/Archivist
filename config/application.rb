@@ -25,6 +25,8 @@ module Archivist
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_record.async_query_executor= :global_thread_pool
+    config.active_record.yaml_column_permitted_classes = [Date]
+
     
   end
 end

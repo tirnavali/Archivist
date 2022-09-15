@@ -1,6 +1,7 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     integer :box, :folder, :order
+    string :fond
     time :updated_at
     text :summary
     text :toponyms do
@@ -17,9 +18,10 @@ class RecordMetadatum < ApplicationRecord
     integer :person_ids, :multiple => true
 
     text :organizations do
-      organizations.map{ |organization| organization.name} 
+      (organizations.map{ |organization| organization.name})
     end
     integer :organization_ids, :multiple => true
+    
 
   end
 

@@ -87,7 +87,13 @@
       <div class="row ui list ">
         <%= facet_helper(@toponyms, params[:toponyms_size] || 10, params[:toponyms]) %>
         <%= link_to "Daha fazla",request.params.merge(toponyms_size: 20) %>
+      </div>
 
+      <div class="row ui list ">
+        <%= facet_helper(@organizations, params[:organizations_size] || 10, params[:organizations]) %>
+      </div>
+      <div class="row ui list ">
+        <%= facet_helper(@fonds, 10, params[:fond]) %>
       </div>
       
     </div>
