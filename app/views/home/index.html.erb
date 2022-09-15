@@ -93,6 +93,9 @@
         <%= facet_helper(@organizations, params[:organizations_size] || 10, params[:organizations]) %>
       </div>
       <div class="row ui list ">
+      <% @search.facet(:fond).rows.each do |fond| %>
+        <%= fond.value %>
+      <% end %>
         <%= facet_helper(@fonds, 10, params[:fond]) %>
       </div>
       
