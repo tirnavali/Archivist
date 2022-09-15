@@ -79,6 +79,15 @@
       </div>
     </div>
     <div class="four wide column">
+      <div class="row ui list ">
+        <h3><%= t :fond %></h3>
+        <% @search.facet(:fond).rows.each do |fond| %>
+          <li>
+            <%= check_box_tag fond.value %>
+            <label><%=fond.value%> <%=fond.count%></label>
+          </li>
+        <% end %>
+      </div>
       <div class="row ui list">
         <%= facet_helper(@subjects, params[:subjects_size] || 10, params[:subjects]) %>
         <%= link_to "Daha fazla",request.params.merge(subjects_size: 20) %>
@@ -91,12 +100,6 @@
 
       <div class="row ui list ">
         <%= facet_helper(@organizations, params[:organizations_size] || 10, params[:organizations]) %>
-      </div>
-      <div class="row ui list ">
-      <% @search.facet(:fond).rows.each do |fond| %>
-        <%= fond.value %>
-      <% end %>
-        <%= facet_helper(@fonds, 10, params[:fond]) %>
       </div>
       
     </div>
