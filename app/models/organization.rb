@@ -1,4 +1,10 @@
 class Organization < ApplicationRecord
+  searchable do
+    integer :organization_id do
+      id
+    end
+    string :name
+  end
   has_associated_audits
   before_validation :clean_white_spaces
   

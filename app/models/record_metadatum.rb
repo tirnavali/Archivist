@@ -4,6 +4,9 @@ class RecordMetadatum < ApplicationRecord
     string :fond
     time :updated_at
     text :summary
+    integer :organization_ids, :multiple => true, :references => Organization
+
+
     text :toponyms do
       toponyms.map{ |toponym| toponym} 
     end

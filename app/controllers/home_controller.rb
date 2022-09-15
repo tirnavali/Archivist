@@ -40,6 +40,13 @@ class HomeController < ApplicationController
         facet :fond
       end
 
+      if params[:organization_ids].present? 
+        org_filter = with(:organization_ids, params[:organization_ids]) if params[:organization_ids].present?
+        facet :organization_ids, exclude: [org_filter]
+      else
+        with(:organization_ids, params[:organization_ids]) if params[:organization_ids].present?
+        facet :organization_ids
+      end
       
 
             
@@ -49,6 +56,7 @@ class HomeController < ApplicationController
     @toponyms = @search.facet(:toponyms)
     @organizations = @search.facet(:organizations)
     @fonds = @search.facet(:fond)
+    @organization_ids = @search.facet(:organization_ids)
 
     
     @record_metadata = @search.results

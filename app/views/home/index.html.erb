@@ -88,6 +88,15 @@
           </li>
         <% end %>
       </div>
+      <div class="row ui list ">
+        <h3><%= t :organization %></h3>
+        <% @search.facet(:organization_ids).rows.each do |organization| %>
+          <li>
+            <%= check_box_tag organization.value %>
+            <label><%=organization.value%> <%=organization.count%></label>
+          </li>
+        <% end %>
+      </div>
       <div class="row ui list">
         <%= facet_helper(@subjects, params[:subjects_size] || 10, params[:subjects]) %>
         <%= link_to "Daha fazla",request.params.merge(subjects_size: 20) %>
