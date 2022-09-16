@@ -1,7 +1,7 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     integer :box, :folder, :order
-    integer :fond_id
+    integer :fond_id, :multiple => true, :references => Fond
     time :updated_at
     text :summary
 

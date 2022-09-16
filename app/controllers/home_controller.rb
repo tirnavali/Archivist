@@ -34,16 +34,16 @@ class HomeController < ApplicationController
         facet :organizations
       end
 
-      # if params[:fond].present? 
-      #   fond_filter = with(:fond, params[:fond]) if params[:fond].present?
-      #   facet :fond, exclude: [fond_filter]
-      # else
-      #   with(:fond, params[:fond]) if params[:fond].present?
-      #   facet :fond
-      # end
-      #fond_filter = with(:fond_id, params[:fond_id])
-      with(:fond_id, params[:fond_id]) if params[:fond_id].present?
-      facet :fond_id #, exclude: [fond_filter]
+      if params[:fond_id].present? 
+        fond_filter = with(:fond_id, params[:fond_id].values ) if params[:fond_id].present?
+        facet :fond_id ,exclude: [fond_filter]
+      else
+        with(:fond_id, params[:fond_id].values ) if params[:fond_id].present?
+        facet :fond_id
+      end
+
+#      fond_filter = with(:fond_id, params[:fond_id].values ) if params[:fond_id].present?
+ #     facet :fond_id ,exclude: [fond_filter]
 
       # if params[:organization_ids].present? 
       #   #org_filter = with(:organization_ids, params[:organization_ids]) if params[:organization_ids].present?

@@ -83,8 +83,8 @@
         <h3><%= t :fond %></h3>
         <% @search.facet(:fond_id).rows.each do |fond| %>
           <li>
-            <%= check_box_tag "fond_id", fond.value %>
-            <label><%=fond.value%> <%=fond.count%></label>
+            <%= check_box_tag "fond_id[#{fond.value}]", fond.value, ((params[:fond_id].present?) && (params[:fond_id].keys.include? fond.value.to_s)) ? true : nil %>
+            <label><%=fond.instance.name%> <%=fond.count%></label>
           </li>
         <% end %>
       </div>
