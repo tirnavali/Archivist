@@ -2,26 +2,30 @@ class RecordMetadatum < ApplicationRecord
   searchable do
     integer :box, :folder, :order
     integer :fond_id, :multiple => true, :references => Fond
+    integer :subject_ids, :multiple => true, :references => Subject
+    integer :organization_ids, :multiple => true, :references => Organization
+    integer :person_ids, :multiple => true, :references => Person
+    integer :toponym_ids, :multiple => true, :references => Toponym
+
     time :updated_at
     text :summary
 
     text :toponyms do
       toponyms.map{ |toponym| toponym} 
     end
+
     text :subjects do
       subjects.map{ |subject| subject} 
     end
-    integer :toponym_ids, :multiple => true
+
 
     text :people do
       people.map{ |person| person.name} 
     end
-    integer :person_ids, :multiple => true
 
     text :organizations do
       (organizations.map{ |organization| organization.name})
     end
-    integer :organization_ids, :multiple => true, :references => Organization
     
   end
 

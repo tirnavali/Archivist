@@ -6,14 +6,40 @@ class HomeController < ApplicationController
       fulltext params[:query] do
         fields(params[:field]) if params[:field].present?
       end
-
-      if params[:subjects].present? 
-        subject_filter = with(:subjects, params[:subjects]) 
-        facet :subjects , exclude: [subject_filter]
-        
+      
+      if params[:fond_id].present? 
+        fond_filter = with(:fond_id, params[:fond_id].values )
+        facet :fond_id ,exclude: [fond_filter]
       else
-        with(:subjects, params[:subjects]) if params[:subjects].present?
-        facet :subjects 
+        facet :fond_id
+      end
+
+      if params[:subject_ids].present? 
+        subject_filter = with(:subject_ids, params[:subject_ids].values) 
+        facet :subject_ids , exclude: [subject_filter]
+      else
+        facet :subject_ids 
+      end
+
+      if params[:organization_ids].present? 
+        organization_filter = with(:organization_ids, params[:organization_ids].values) 
+        facet :organization_ids , exclude: [organization_filter]
+      else
+        facet :organization_ids 
+      end
+
+      if params[:person_ids].present? 
+        person_filter = with(:person_ids, params[:person_ids].values) 
+        facet :person_ids , exclude: [person_filter]
+      else
+        facet :person_ids 
+      end
+
+      if params[:toponym_ids].present? 
+        toponym_filter = with(:toponym_ids, params[:toponym_ids].values) 
+        facet :toponym_ids , exclude: [toponym_filter]
+      else
+        facet :toponym_ids 
       end
 
       # if params[:toponyms].present? 
@@ -23,37 +49,6 @@ class HomeController < ApplicationController
       #   with(:toponyms, params[:toponyms]) if params[:toponyms].present?
       #   facet :toponyms
       # end
-      with(:toponyms, params[:toponyms]) if params[:toponyms].present?
-      facet :toponyms
-
-      if params[:organizations].present? 
-        organization_filter = with(:organizations, params[:organizations]) if params[:organizations].present?
-        facet :organizations, exclude: [organization_filter]
-      else
-        with(:organizations, params[:organizations]) if params[:organizations].present?
-        facet :organizations
-      end
-
-      if params[:fond_id].present? 
-        fond_filter = with(:fond_id, params[:fond_id].values ) if params[:fond_id].present?
-        facet :fond_id ,exclude: [fond_filter]
-      else
-        with(:fond_id, params[:fond_id].values ) if params[:fond_id].present?
-        facet :fond_id
-      end
-
-#      fond_filter = with(:fond_id, params[:fond_id].values ) if params[:fond_id].present?
- #     facet :fond_id ,exclude: [fond_filter]
-
-      # if params[:organization_ids].present? 
-      #   #org_filter = with(:organization_ids, params[:organization_ids]) if params[:organization_ids].present?
-      #   facet :organization_ids
-      # else
-      #   with(:organization_ids, params[:organization_ids]) if params[:organization_ids].present?
-      #   facet :organization_ids
-      # end
-      facet :organization_ids
-
             
       paginate page: params[:page], per_page: 10
     end
