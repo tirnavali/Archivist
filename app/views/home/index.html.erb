@@ -81,22 +81,25 @@
     <div class="four wide column">
       <div class="row ui list ">
         <h3><%= t :fond %></h3>
-        <% @search.facet(:fond).rows.each do |fond| %>
+        <% @search.facet(:fond_id).rows.each do |fond| %>
           <li>
-            <%= check_box_tag fond.value %>
+            <%= check_box_tag "fond_id", fond.value %>
             <label><%=fond.value%> <%=fond.count%></label>
           </li>
         <% end %>
       </div>
       <div class="row ui list ">
         <h3><%= t :organization %></h3>
-        <% @search.facet(:organization_ids).rows.each do |organization| %>
+        <% @organization_ids.rows.each do |organization| %>
+          <%= link_to "#{organization.value} #{organization.count}", request.params.to_hash.merge("organization_ids[#{organization.value}]": organization.value.to_i) %>
           <li>
-            <%= check_box_tag organization.value %>
-            <label><%=organization.value%> <%=organization.count%></label>
+            <%#= check_box_tag organization.instance.name %>
+            <%#= check_box_tag "#{organization.instance.class.name.downcase}_ids[#{organization.instance.id}]", "#{organization.instance.id}", (!params[:organization_ids].nil?) && (params[:organization_ids].include?(organization.instance.id)) ? true : nil %>
+            <label><%#=organization.instance.name%> <%#=organization.count%></label>
           </li>
         <% end %>
       </div>
+      
       <div class="row ui list">
         <%= facet_helper(@subjects, params[:subjects_size] || 10, params[:subjects]) %>
         <%= link_to "Daha fazla",request.params.merge(subjects_size: 20) %>
@@ -111,6 +114,9 @@
         <%= facet_helper(@organizations, params[:organizations_size] || 10, params[:organizations]) %>
       </div>
       
+      <div class="row ui list ">
+        <%= facet_helper(@organization_ids, 10, params[:organization_ids]) %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,11 +1,9 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     integer :box, :folder, :order
-    string :fond
+    integer :fond_id
     time :updated_at
     text :summary
-    integer :organization_ids, :multiple => true, :references => Organization
-
 
     text :toponyms do
       toponyms.map{ |toponym| toponym} 
@@ -23,9 +21,8 @@ class RecordMetadatum < ApplicationRecord
     text :organizations do
       (organizations.map{ |organization| organization.name})
     end
-    integer :organization_ids, :multiple => true
+    integer :organization_ids, :multiple => true, :references => Organization
     
-
   end
 
   before_validation :assign_default_values
