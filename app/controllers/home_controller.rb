@@ -52,11 +52,12 @@ class HomeController < ApplicationController
             
       paginate page: params[:page], per_page: 10
     end
-    @subjects = @search.facet(:subjects)
-    @toponyms = @search.facet(:toponyms)
-    @organizations = @search.facet(:organizations)
+    @subjects_facet = @search.facet(:subject_ids)
+    @toponyms_facet = @search.facet(:toponym_ids)
+    @organizations_facet = @search.facet(:organization_ids)
+    @person_facet = @search.facet(:person_ids)
     @fonds = @search.facet(:fond)
-    @organization_ids = @search.facet(:organization_ids)
+    #@organization_ids = @search.facet(:organization_ids)
 
     
     @record_metadata = @search.results

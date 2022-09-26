@@ -59,7 +59,7 @@
                   </a>
                   <div class="description">
                     <p>
-                      <%= t('summary').capitalize %> : <%= metadata.summary[..300]... %>
+                      <%= t('summary').capitalize %> : <%= sshorter metadata.summary, 300 %>
                     </p>
                     <p>
                       <%= t('subjects').capitalize %> : 
@@ -90,50 +90,57 @@
         <% @search.facet(:fond_id).rows.each do |fond| %>
           <li>
             <%= check_box_tag "fond_id[#{fond.instance.name}]",  fond.value, ((params[:fond_id].present?) && (params[:fond_id].keys.include? fond.instance.name)) ? true : nil %>
-            <label><%=fond.instance.name%> <%=fond.count%></label>
+            <label title="<%= fond.instance.name %>"><%=sshorter fond.instance.name%> <%=fond.count%></label>
           </li>
         <% end %>
       </div>
+      <% if @subjects_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :subjects %></h3>
+          <% @subjects_facet.rows.each do |subject| %>
+            <li>
+              <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
+              <label title="<%=subject.instance.name%>"><%=sshorter subject.instance.name%> <%=subject.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
 
-      <div class="row ui list ">
-        <h3><%= t :subjects %></h3>
-        <% @search.facet(:subject_ids).rows.each do |subject| %>
-          <li>
-            <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
-            <label><%=subject.instance.name%> <%=subject.count%></label>
-          </li>
-        <% end %>
-      </div>
+      <% if @organizations_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :organizations %></h3>
+          <% @organizations_facet.rows[1..10].each do |organization| %>
+            <li>
+              <%= check_box_tag "organization_ids[#{organization.instance.name}]", organization.value, ((params[:organization_ids].present?) && (params[:organization_ids].keys.include? organization.instance.name)) ? true : nil %>
+              <label title="<%=organization.instance.name%>"><%= sshorter organization.instance.name%> <%=organization.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @person_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :people %></h3>
+          <% @person_facet.rows[1..10].each do |person| %>
+            <li>
+              <%= check_box_tag "person_ids[#{person.instance.name}]", person.value, ((params[:person_ids].present?) && (params[:person_ids].keys.include? person.instance.name)) ? true : nil %>
+              <label title="<%=person.instance.name%>"><%= sshorter person.instance.name%> <%=person.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
 
-      <div class="row ui list ">
-        <h3><%= t :organizations %></h3>
-        <% @search.facet(:organization_ids).rows[1..10].each do |organization| %>
-          <li>
-            <%= check_box_tag "organization_ids[#{organization.instance.name}]", organization.value, ((params[:organization_ids].present?) && (params[:organization_ids].keys.include? organization.instance.name)) ? true : nil %>
-            <label><%=organization.instance.name%> <%=organization.count%></label>
-          </li>
-        <% end %>
-      </div>
+      <% if @person_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :toponyms %></h3>
+          <% @person_facet.rows[1..10].each do |toponym| %>
+            <li>
+              <%= check_box_tag "toponym_ids[#{toponym.instance.name}]", toponym.value, ((params[:toponym_ids].present?) && (params[:toponym_ids].keys.include? toponym.instance.name)) ? true : nil %>
+              <label title="<%=toponym.instance.name%>"><%=sshorter toponym.instance.name%> <%=toponym.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
 
-      <div class="row ui list ">
-        <h3><%= t :people %></h3>
-        <% @search.facet(:person_ids).rows[1..10].each do |person| %>
-          <li>
-            <%= check_box_tag "person_ids[#{person.instance.name}]", person.value, ((params[:person_ids].present?) && (params[:person_ids].keys.include? person.instance.name)) ? true : nil %>
-            <label><%=person.instance.name%> <%=person.count%></label>
-          </li>
-        <% end %>
-      </div>
-
-      <div class="row ui list ">
-        <h3><%= t :toponyms %></h3>
-        <% @search.facet(:toponym_ids).rows[1..10].each do |toponym| %>
-          <li>
-            <%= check_box_tag "toponym_ids[#{toponym.instance.name}]", toponym.value, ((params[:toponym_ids].present?) && (params[:toponym_ids].keys.include? toponym.instance.name)) ? true : nil %>
-            <label><%=toponym.instance.name%> <%=toponym.count%></label>
-          </li>
-        <% end %>
-      </div>
       
     </div>
   </div>
