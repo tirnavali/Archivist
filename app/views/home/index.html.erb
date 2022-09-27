@@ -1,10 +1,12 @@
 <%= notice %>
 <%= alert %>
+<%= turbo_frame_tag "search_clues" do%>
+<% end %>
 <%= form_with url: :root, method: :get do |form| %>
 <div class="ui celled grid">
   <div class="row"><!-- input field -->
     <div class="sixteen wide column">
-      <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
+      <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues, data: {turbo_frame: "search_clues"} %> </h1>
       <% unless params[:query].nil? %>
         <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
@@ -14,13 +16,14 @@
         <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
         <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
         {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
-        <div class="ui input">
-          <%= form.number_field :updated_at %>
-        </div>
         <div class="ui input ">
           <%= form.submit "Ara", class: "ui primary button"%>
         </div>
       </div>
+        <div class="ui labeled input">
+          <%= form.label :from_the_starting_date_to_the_present, class: "ui label" %>
+          <%= form.date_field :starting_date %>
+        </div>
     </div>
   </div>
     <div class="row">
@@ -71,7 +74,7 @@
                   <div class="extra">
                     Eklenme tarihi 
                     <%= metadata.created_at  %>
-                    <%= link_to t("open"), metadata, class: "ui tiny primary floated button" %>
+                    <%= link_to t("show"), metadata, class: "ui tiny primary floated button" %>
                   </div>
                 </div>
               </div><!-- item -->
@@ -84,7 +87,7 @@
       </div>
     </div>
     <div class="four wide column"><!-- facets -->
-      
+    
       <div class="row ui list ">
         <h3><%= t :fond %></h3>
         <% @search.facet(:fond_id).rows.each do |fond| %>
@@ -129,10 +132,10 @@
         </div>
       <% end %>
 
-      <% if @person_facet.rows.present? %>
+      <% if @toponyms_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :toponyms %></h3>
-          <% @person_facet.rows[1..10].each do |toponym| %>
+          <% @toponyms_facet.rows[1..10].each do |toponym| %>
             <li>
               <%= check_box_tag "toponym_ids[#{toponym.instance.name}]", toponym.value, ((params[:toponym_ids].present?) && (params[:toponym_ids].keys.include? toponym.instance.name)) ? true : nil %>
               <label title="<%=toponym.instance.name%>"><%=sshorter toponym.instance.name%> <%=toponym.count%></label>

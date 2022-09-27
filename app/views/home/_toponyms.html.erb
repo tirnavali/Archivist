@@ -1,6 +1,0 @@
-<% @toponyms.rows[1..10].each do |facet| %>
-  <li>
-    <%= check_box_tag "toponyms[#{facet.value}]", facet.value, ((!params[:toponyms].nil?) && (params[:toponyms].include? facet.value)) %>
-    <%= label_tag "#{facet.value} #{facet.count}" %>
-  </li>
-<% end %> 

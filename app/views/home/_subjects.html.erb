@@ -1,7 +1,0 @@
-  <% @subjects.rows[1..10].each do |facet| %>
-  <li >
-    <%= check_box_tag "subjects[#{facet.value}]", facet.value , ((!params[:subjects].nil?) && (params[:subjects].include? facet.value)) %>
-    <%= label_tag "#{facet.value} #{facet.count}" %>
-    <%#= link_to "#{facet.value} #{facet.count}", request.params.to_hash.merge("subjects[#{facet.value}]": facet.value) %>
-  </li>
-   <% end %> 

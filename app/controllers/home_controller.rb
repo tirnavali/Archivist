@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   def index
     #@user = User.new
-    console
+    #console
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
-        fields(params[:field]) if params[:field].present?
+        fields( [:field]) if params[:field].present?
       end
       
       if params[:fond_id].present? 
@@ -42,14 +42,8 @@ class HomeController < ApplicationController
         facet :toponym_ids 
       end
 
-      # if params[:toponyms].present? 
-      #   toponym_filter = with(:toponyms, params[:toponyms]) if params[:toponyms].present?
-      #   facet :toponyms, exclude: [toponym_filter]
-      # else
-      #   with(:toponyms, params[:toponyms]) if params[:toponyms].present?
-      #   facet :toponyms
-      # end
-            
+      with(:starting_date).greater_than params[:starting_date] if params[:starting_date].present?
+
       paginate page: params[:page], per_page: 10
     end
     @subjects_facet = @search.facet(:subject_ids)
@@ -57,7 +51,6 @@ class HomeController < ApplicationController
     @organizations_facet = @search.facet(:organization_ids)
     @person_facet = @search.facet(:person_ids)
     @fonds = @search.facet(:fond)
-    #@organization_ids = @search.facet(:organization_ids)
 
     
     @record_metadata = @search.results
@@ -65,7 +58,7 @@ class HomeController < ApplicationController
       #@record_metadata = RecordMetadatum.limit(5)
     end
 
-    if @record_metadata.empty?
+    if @record_metadata.empty? || @record_metadata.nil?
       respond_to do |format|
         format.html { render :nothing_found , notice: "Aramanızda hiç bir sonuç bulunamadı." }
         format.json { head :no_content }
