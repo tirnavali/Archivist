@@ -7,6 +7,7 @@ class RecordMetadatum < ApplicationRecord
     integer :person_ids, :multiple => true, :references => Person
     integer :toponym_ids, :multiple => true, :references => Toponym
     time :starting_date
+    time :ending_date
     time :created_at
     time :updated_at
     text :summary

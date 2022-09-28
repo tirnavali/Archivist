@@ -2,7 +2,7 @@
 <%= alert %>
 <%= turbo_frame_tag "search_clues" do%>
 <% end %>
-<%= form_with url: :root, method: :get do |form| %>
+<%= form_with url: :root, method: :get, class: "ui form" do |form| %>
 <div class="ui celled grid">
   <div class="row"><!-- input field -->
     <div class="sixteen wide column">
@@ -20,11 +20,26 @@
           <%= form.submit "Ara", class: "ui primary button"%>
         </div>
       </div>
-        <div class="ui labeled input">
-          <%= form.label :from_the_starting_date_to_the_present, class: "ui label" %>
-          <%= form.date_field :starting_date %>
+      <div class="four fields">
+        <div class="field">
+          <%= form.label :starting_date_from %>
+          <%= form.date_field :starting_date_from, class:"ui input"%>
         </div>
+        <div class="field">
+          <%= form.label :starting_date_to %>
+          <%= form.date_field :starting_date_to, class:"ui input" %>
+        </div>
+        <div class="field">
+          <%= form.label :ending_date_from %>
+          <%= form.date_field :ending_date_from, class:"ui input"%>
+        </div>
+        <div class="field">
+          <%= form.label :ending_date_to %>
+          <%= form.date_field :ending_date_to, class:"ui input" %>
+        </div>
+      </div>
     </div>
+    
   </div>
     <div class="row">
       <% params.each do |key, val| %>

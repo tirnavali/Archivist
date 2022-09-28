@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     #@user = User.new
-    #console
+    console
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
         fields( [:field]) if params[:field].present?
@@ -42,7 +42,8 @@ class HomeController < ApplicationController
         facet :toponym_ids 
       end
 
-      with(:starting_date).greater_than params[:starting_date] if params[:starting_date].present?
+      with(:starting_date).between(params[:starting_date_from]..params[:starting_date_to]) if params[:starting_date_from].present? && params[:starting_date_to].present?
+      with(:ending_date).between(params[:ending_date_from]..params[:ending_date_to]) if params[:ending_date_from].present? && params[:ending_date_to].present?
 
       paginate page: params[:page], per_page: 10
     end
