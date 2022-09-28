@@ -1,5 +1,5 @@
 class RecordAttachment < ApplicationRecord
-
+  
   #before_save :process_pdf
   #after_commit :calculate_image_size
   belongs_to :record_metadatum

@@ -34,7 +34,7 @@ class RecordMetadatum < ApplicationRecord
   before_validation :assign_default_values
   after_create :save_submission
   audited
-  has_one :record_attachment
+  has_one :record_attachment, dependent: :destroy
   belongs_to :fond
   #audited associated_with: :organization
   belongs_to :phisycal_status
@@ -46,7 +46,7 @@ class RecordMetadatum < ApplicationRecord
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :people
   has_many :special_numbers #, dependent: :destroy
-  has_one :record_submission
+  has_one :record_submission, dependent: :destroy
   has_one :user, through: :record_submission
   
   

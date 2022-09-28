@@ -3,6 +3,7 @@ class SpecialNumber < ApplicationRecord
 
   belongs_to :number_type
   belongs_to :record_metadatum
+  
   validates_presence_of :value
 
   def to_s
