@@ -44,6 +44,9 @@ class HomeController < ApplicationController
 
       with(:starting_date).between(params[:starting_date_from]..params[:starting_date_to]) if params[:starting_date_from].present? && params[:starting_date_to].present?
       with(:ending_date).between(params[:ending_date_from]..params[:ending_date_to]) if params[:ending_date_from].present? && params[:ending_date_to].present?
+      with(:created_at).between(params[:created_at_from]..params[:created_at_to]) if params[:created_at_from].present? && params[:created_at_to].present?
+      with(:updated_at).between(params[:updated_at_from]..params[:updated_at_to]) if params[:updated_at_from].present? && params[:updated_at_to].present?
+
 
       paginate page: params[:page], per_page: 10
     end

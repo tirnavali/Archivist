@@ -20,7 +20,7 @@
           <%= form.submit "Ara", class: "ui primary button"%>
         </div>
       </div>
-      <div class="four fields">
+      <div class="six fields">
         <div class="field">
           <%= form.label :starting_date_from %>
           <%= form.date_field :starting_date_from, class:"ui input"%>
@@ -36,6 +36,26 @@
         <div class="field">
           <%= form.label :ending_date_to %>
           <%= form.date_field :ending_date_to, class:"ui input" %>
+        </div>
+      </div>
+      <div class="ui inverted segment">
+        <div class="six fields">
+          <div class="field">
+            <%= form.label :created_at_from %>
+            <%= form.date_field :created_at_from, class:"ui input"%>
+          </div>
+          <div class="field">
+            <%= form.label :created_at_to %>
+            <%= form.date_field :created_at_to, class:"ui input" %>
+          </div>
+          <div class="field">
+            <%= form.label :updated_at_from %>
+            <%= form.date_field :updated_at_from, class:"ui input"%>
+          </div>
+          <div class="field">
+            <%= form.label :updated_at_to %>
+            <%= form.date_field :updated_at_to, class:"ui input" %>
+          </div>
         </div>
       </div>
     </div>
