@@ -46,7 +46,7 @@ class HomeController < ApplicationController
       with(:ending_date).between(params[:ending_date_from]..params[:ending_date_to]) if params[:ending_date_from].present? && params[:ending_date_to].present?
       with(:created_at).between(params[:created_at_from]..params[:created_at_to]) if params[:created_at_from].present? && params[:created_at_to].present?
       with(:updated_at).between(params[:updated_at_from]..params[:updated_at_to]) if params[:updated_at_from].present? && params[:updated_at_to].present?
-
+      with :document_type_ids, params[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if params[:document_type_ids].present?
 
       paginate page: params[:page], per_page: 10
     end

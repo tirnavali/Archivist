@@ -6,6 +6,7 @@ class RecordMetadatum < ApplicationRecord
     integer :organization_ids, :multiple => true, :references => Organization
     integer :person_ids, :multiple => true, :references => Person
     integer :toponym_ids, :multiple => true, :references => Toponym
+    integer :document_type_ids, :multiple => true
     time :starting_date
     time :ending_date
     time :created_at
