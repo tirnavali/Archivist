@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     #@user = User.new
-    console
+    #console
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
         fields( [:field]) if params[:field].present?
@@ -62,7 +62,7 @@ class HomeController < ApplicationController
       elsif params[:not_secret].present?
         with :is_secret, (nil if params[:not_secret] == "nil" )
       end
-
+      
 
       paginate page: params[:page], per_page: 10
     end

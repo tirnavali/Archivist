@@ -1,6 +1,7 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     boolean :is_secret
+    
     string  :organization_code do
       organization_code.upcase(:turkic)
     end
