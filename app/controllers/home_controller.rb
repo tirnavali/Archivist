@@ -48,10 +48,22 @@ class HomeController < ApplicationController
       with(:updated_at).between(params[:updated_at_from]..params[:updated_at_to]) if params[:updated_at_from].present? && params[:updated_at_to].present?
       with :document_type_ids, params[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if params[:document_type_ids].present?
       with :privacy_id, params[:privacy_id] if params[:privacy_id].present?
-      with :is_secret, params[:is_secret] if params[:is_secret].present?
-      with :is_secret, (nil if params[:not_secret] == "nil" )if params[:not_secret].present?
-      #with :is_secret, nil
+      with :phisycal_status_id, params[:phisycal_status_id] if params[:phisycal_status_id].present?
       
+      with :organization_code, params[:organization_code].upcase(:turkic) if params[:organization_code].present?
+      with :box, params[:box] if params[:box].present?
+      with :folder, params[:folder] if params[:folder].present?
+      with :order, params[:order] if params[:order].present?
+      
+      if params[:is_secret].present? && params[:not_secret].present?
+        with :is_secret
+      elsif params[:is_secret].present?
+        with :is_secret, params[:is_secret] 
+      elsif params[:not_secret].present?
+        with :is_secret, (nil if params[:not_secret] == "nil" )
+      end
+
+
       paginate page: params[:page], per_page: 10
     end
     @subjects_facet = @search.facet(:subject_ids)

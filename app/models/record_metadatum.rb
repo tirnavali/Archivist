@@ -1,7 +1,12 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     boolean :is_secret
-    integer :box, :folder, :order
+    string  :organization_code do
+      organization_code.upcase(:turkic)
+    end
+    integer :box
+    integer :folder
+    integer :order
     integer :fond_id, :multiple => true, :references => Fond
     integer :subject_ids, :multiple => true, :references => Subject
     integer :organization_ids, :multiple => true, :references => Organization
@@ -9,11 +14,13 @@ class RecordMetadatum < ApplicationRecord
     integer :toponym_ids, :multiple => true, :references => Toponym
     integer :document_type_ids, :multiple => true
     integer :privacy_id
+    integer :phisycal_status_id
     time :starting_date
     time :ending_date
     time :created_at
     time :updated_at
     text :summary
+    text :explaination
 
     text :toponyms do
       toponyms.map{ |toponym| toponym} 
