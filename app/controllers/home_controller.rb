@@ -47,7 +47,11 @@ class HomeController < ApplicationController
       with(:created_at).between(params[:created_at_from]..params[:created_at_to]) if params[:created_at_from].present? && params[:created_at_to].present?
       with(:updated_at).between(params[:updated_at_from]..params[:updated_at_to]) if params[:updated_at_from].present? && params[:updated_at_to].present?
       with :document_type_ids, params[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if params[:document_type_ids].present?
-
+      with :privacy_id, params[:privacy_id] if params[:privacy_id].present?
+      with :is_secret, params[:is_secret] if params[:is_secret].present?
+      with :is_secret, (nil if params[:not_secret] == "nil" )if params[:not_secret].present?
+      #with :is_secret, nil
+      
       paginate page: params[:page], per_page: 10
     end
     @subjects_facet = @search.facet(:subject_ids)
@@ -58,6 +62,8 @@ class HomeController < ApplicationController
 
     
     @record_metadata = @search.results
+
+
     if (params[:query]).nil?
       #@record_metadata = RecordMetadatum.limit(5)
     end

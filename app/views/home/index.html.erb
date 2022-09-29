@@ -37,11 +37,11 @@
           <%= form.label :ending_date_to %>
           <%= form.date_field :ending_date_to, class:"ui input" %>
         </div>
-          <div class="field" data-controller="checkbox">
-            <%= form.label :document_types %>
-            <%= form.collection_check_boxes :document_type_ids, DocumentType.order(:name), :id, :name, 
-            {checked: (params[:document_type_ids].map(&:to_param) if params[:document_type_ids].present?)} ,{class: "checkbox ui field checkbox"}  %>
-          </div>
+        <div class="field" >
+          <%= form.label :document_types %>
+          <%= form.collection_check_boxes :document_type_ids, DocumentType.order(:name), :id, :name, 
+          {checked: (params[:document_type_ids].map(&:to_param) if params[:document_type_ids].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
+        </div>
       </div>
       <div class="ui inverted segment">
         <div class="six fields">
@@ -60,6 +60,17 @@
           <div class="field">
             <%= form.label :updated_at_to %>
             <%= form.date_field :updated_at_to, class:"ui input" %>
+          </div>
+          <div class="field" >
+            <%= form.label :privacies %>
+            <%= form.collection_radio_buttons :privacy_id, Privacy.order(:name), :id, :name, 
+            {checked: (params[:privacy_id] if params[:privacy_id].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
+          </div>
+          <div class="field">
+            <%= form.label :show_secret %>
+            <%= form.check_box :is_secret, {checked: (params[:is_secret] == "1" ? true : false), class: "checkbox ui field checkbox" }, 1, nil%>
+            <%= form.label :show_not_secret %>
+            <%= form.check_box :not_secret, {checked: (params[:not_secret] == "1" ? true : false), class: "checkbox ui field checkbox" }, 'nil', nil%>
           </div>
         </div>
       </div>

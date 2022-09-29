@@ -1,5 +1,6 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
+    boolean :is_secret
     integer :box, :folder, :order
     integer :fond_id, :multiple => true, :references => Fond
     integer :subject_ids, :multiple => true, :references => Subject
@@ -7,6 +8,7 @@ class RecordMetadatum < ApplicationRecord
     integer :person_ids, :multiple => true, :references => Person
     integer :toponym_ids, :multiple => true, :references => Toponym
     integer :document_type_ids, :multiple => true
+    integer :privacy_id
     time :starting_date
     time :ending_date
     time :created_at
