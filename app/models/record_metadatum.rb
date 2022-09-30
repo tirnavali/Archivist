@@ -1,17 +1,20 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
     boolean :is_secret
+    text :special_numbers do 
+      special_numbers.map{ |no| no.value }
+    end
     string  :organization_code do
       organization_code.upcase(:turkic)
     end
     integer :box
     integer :folder
     integer :order
-    integer :fond_id, :multiple => true, :references => Fond
-    integer :subject_ids, :multiple => true, :references => Subject
-    integer :organization_ids, :multiple => true, :references => Organization
-    integer :person_ids, :multiple => true, :references => Person
-    integer :toponym_ids, :multiple => true, :references => Toponym
+    integer :fond_id,           :multiple => true, :references => Fond
+    integer :subject_ids,       :multiple => true, :references => Subject
+    integer :organization_ids,  :multiple => true, :references => Organization
+    integer :person_ids,        :multiple => true, :references => Person
+    integer :toponym_ids,       :multiple => true, :references => Toponym
     integer :document_type_ids, :multiple => true
     integer :privacy_id
     integer :phisycal_status_id

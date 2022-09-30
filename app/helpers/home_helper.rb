@@ -21,7 +21,9 @@ module HomeHelper
       ""
     end
   end
-  #takes Sunspot::Search::FieldFacet 
+  #
+  # takes Sunspot::Search::FieldFacet
+  #
   def facet_helper(field_facet, result_size=10, field_facet_params)
     inputs = ""
     unless field_facet.nil? || field_facet.rows.size == 0
