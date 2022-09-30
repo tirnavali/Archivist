@@ -22,11 +22,11 @@
       </div>
       <br/>
       <div class="ui styled fluid accordion" data-controller="accordion">
-        <div class="<%= 'active' if params[:organization_code].present? %> title">
+        <div class="<%= active_accordion([:organization_code, :box, :order, :folder]) %> title">
           <i class="dropdown icon"></i>
           <%= t :advanced_options %>
         </div>
-        <div class="<%= 'active' if params[:organization_code].present? %> content">
+        <div class="<%=  active_accordion([:organization_code, :box, :order, :folder]) %> content">
           <div class=" four fields">
             <div class="field">
               <%= form.label t(:organization_code) %>

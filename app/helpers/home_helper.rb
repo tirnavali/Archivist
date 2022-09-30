@@ -1,4 +1,26 @@
 module HomeHelper
+  #
+  # generates active tag with help of given parameters
+  # use it in erb views
+  #
+  def active_accordion(param_names=[])
+    begin
+      result = false
+      param_names.map!{|n| n.to_sym }
+      param_names.each do |n| 
+        unless params[n].empty?
+          result = true 
+        end 
+      end
+      if result
+        "active"
+      else 
+        ""
+      end
+    rescue
+      ""
+    end
+  end
   #takes Sunspot::Search::FieldFacet 
   def facet_helper(field_facet, result_size=10, field_facet_params)
     inputs = ""
