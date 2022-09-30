@@ -103,7 +103,7 @@
             <%= form.label :show_secret %>
             <%= form.check_box :is_secret, {checked: (params[:is_secret] == "1" ? true : false), class: "checkbox ui field checkbox" }, 1, nil%>
             <%= form.label :show_not_secret %>
-            <%= form.check_box :not_secret, {checked: (params[:not_secret] == "nil" ? true : false), class: "checkbox ui field checkbox" }, "nil", nil%>
+            <%= form.check_box :not_secret, {checked: params[:not_secret].present?  , class: "checkbox ui field checkbox" }, false, nil%>
           </div>
         </div>
       </div>
