@@ -48,6 +48,11 @@
         </div>
       </div>
       <br/>
+      <div class="inline field">
+        <%= form.label :number_type %>
+        <%= form.collection_select(:number_types, NumberType.order(:name), :name, :name , {include_blank: t(:all), selected: (params[:number_types][:choice] if params[:number_types].present?) }, {name: "number_types[choice]" }) %>
+        <%= form.text_field :number_types,  { name: "number_types[text]", value: "#{params[:number_types][:text] if params[:number_types]}" } %>
+      </div>
       <div class="six fields">
         <div class="field">
           <%= form.label :starting_date_from %>
@@ -69,6 +74,11 @@
           <%= form.label t(:document_types) %>
           <%= form.collection_check_boxes :document_type_ids, DocumentType.order(:name), :id, :name, 
           {checked: (params[:document_type_ids].map(&:to_param) if params[:document_type_ids].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
+        </div>
+        <div class="field" >
+          <%= form.label t(:languages) %>
+          <%= form.collection_check_boxes :language_ids, Language.order(:name), :id, :name, 
+          {checked: (params[:language_ids].map(&:to_param) if params[:language_ids].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
         </div>
       </div>
       <div class="ui inverted segment">

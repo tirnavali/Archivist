@@ -1,6 +1,7 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+
   # @author Sercan TIRNAVALI
   # @date 26.09.2022
   # Generate specific lengt of strings

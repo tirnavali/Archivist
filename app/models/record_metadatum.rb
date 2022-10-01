@@ -2,8 +2,11 @@ class RecordMetadatum < ApplicationRecord
   searchable do
     boolean :is_secret
     text :special_numbers do 
-      special_numbers.map{ |no| no.value }
+      special_numbers.map{ |no| no.to_solr_index }
     end
+
+    #string :special_numbers, multiple: true, references: SpecialNumber
+    
     string  :organization_code do
       organization_code.upcase(:turkic)
     end
@@ -16,6 +19,7 @@ class RecordMetadatum < ApplicationRecord
     integer :person_ids,        :multiple => true, :references => Person
     integer :toponym_ids,       :multiple => true, :references => Toponym
     integer :document_type_ids, :multiple => true
+    integer :language_ids,      :multiple => true
     integer :privacy_id
     integer :phisycal_status_id
     time :starting_date

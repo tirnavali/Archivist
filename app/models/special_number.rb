@@ -9,4 +9,8 @@ class SpecialNumber < ApplicationRecord
   def to_s
     return self.value
   end
+
+  def to_solr_index
+    return self.number_type.name + " " + self.value 
+  end
 end

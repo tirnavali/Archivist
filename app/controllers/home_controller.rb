@@ -49,6 +49,7 @@ class HomeController < ApplicationController
       with :document_type_ids, params[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if params[:document_type_ids].present?
       with :privacy_id, params[:privacy_id] if params[:privacy_id].present?
       with :phisycal_status_id, params[:phisycal_status_id] if params[:phisycal_status_id].present?
+      with :language_ids, params[:language_ids].filter_map {|val| val.to_i if val.length > 0 } if params[:language_ids].present?
       
       with :organization_code, params[:organization_code].upcase(:turkic) if params[:organization_code].present?
       with :box, params[:box] if params[:box].present?
