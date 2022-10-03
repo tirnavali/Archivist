@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     #@user = User.new
-    console
+    #console
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
         fields( [:field]) if params[:field].present?
@@ -58,8 +58,10 @@ class HomeController < ApplicationController
       #
       # NumberTypes
       #
-      if params[:number_types].present? && params[:number_types][:choice].empty?
+      if params[:number_types].present? && params[:number_types][:choice].empty? && params[:number_types][:text].present?
         with :special_value, params[:number_types][:text]
+      elsif params[:number_types].present? && !(params[:number_types].keys.include? "text")
+        with :special_value, ""
       elsif params[:number_types].present? && !params[:number_types][:choice].empty?
         all_of do
           with(:special_value).equal_to(params[:number_types][:text])
