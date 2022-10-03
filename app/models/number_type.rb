@@ -5,5 +5,9 @@ class NumberType < ApplicationRecord
     self.name
   end
 
+  def solrable_name
+    return self.name.gsub(/\s/, '')
+  end
+
   validates :name, uniqueness: { case_sensitive: false }
 end

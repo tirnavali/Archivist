@@ -32,6 +32,8 @@
 en:
   hello: "Hello world"
   advanced_options: "Advanced Options"
+  all: "All"
+  show: "Show"
   views:
     pagination:
       first: "&laquo; First"

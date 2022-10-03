@@ -5,7 +5,13 @@ class RecordMetadatum < ApplicationRecord
       special_numbers.map{ |no| no.to_solr_index }
     end
 
-    #string :special_numbers, multiple: true, references: SpecialNumber
+    string :special_value, :multiple => true, :references => SpecialNumber do
+      special_numbers.map(&:value)
+    end
+
+    string :special_number_type, :multiple => true, :references => SpecialNumber do
+      special_numbers.map(&:solrable_number_type_name)
+    end
     
     string  :organization_code do
       organization_code.upcase(:turkic)

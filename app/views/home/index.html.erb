@@ -49,8 +49,8 @@
       </div>
       <br/>
       <div class="inline field">
-        <%= form.label :number_type %>
-        <%= form.collection_select(:number_types, NumberType.order(:name), :name, :name , {include_blank: t(:all), selected: (params[:number_types][:choice] if params[:number_types].present?) }, {name: "number_types[choice]" }) %>
+        <%= form.label t :number_type %>
+        <%= form.collection_select(:number_types, NumberType.order(:name), :solrable_name, :name , {include_blank: t(:all), selected: (params[:number_types][:choice] if params[:number_types].present?) }, {name: "number_types[choice]" }) %>
         <%= form.text_field :number_types,  { name: "number_types[text]", value: "#{params[:number_types][:text] if params[:number_types]}" } %>
       </div>
       <div class="six fields">

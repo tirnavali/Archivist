@@ -1,5 +1,7 @@
 tr:
   advanced_options: "Gelişmiş Seçenekler"
+  all: "Tümü"
+  show: "Göster"
   total: "Toplam"
   stats: "İstatistikler"
   recordmetadata: "Belge Üstverileri"

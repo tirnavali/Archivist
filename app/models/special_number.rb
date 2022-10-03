@@ -13,4 +13,12 @@ class SpecialNumber < ApplicationRecord
   def to_solr_index
     return self.number_type.name + " " + self.value 
   end
+
+  def solrable_number_type_name
+    return self.number_type.name.gsub(/\s/, '')
+  end
+
+  def number_type_name
+    return self.number_type.name
+  end
 end
