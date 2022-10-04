@@ -19,6 +19,9 @@ class RecordMetadatum < ApplicationRecord
     integer :box
     integer :folder
     integer :order
+    integer :fond_scope_id do
+      fond_id
+    end
     integer :fond_id,           :multiple => true, :references => Fond
     integer :subject_ids,       :multiple => true, :references => Subject
     integer :organization_ids,  :multiple => true, :references => Organization

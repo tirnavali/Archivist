@@ -34,6 +34,8 @@ en:
   advanced_options: "Advanced Options"
   all: "All"
   show: "Show"
+  show_secret: "Show secret"
+  show_not_secret: "Show not secret"
   views:
     pagination:
       first: "&laquo; First"

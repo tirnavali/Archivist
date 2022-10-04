@@ -2,6 +2,8 @@ tr:
   advanced_options: "Gelişmiş Seçenekler"
   all: "Tümü"
   show: "Göster"
+  show_secret: "Gizlileri Göster"
+  show_not_secret: "Gizli Olmayanları Göster"
   total: "Toplam"
   stats: "İstatistikler"
   recordmetadata: "Belge Üstverileri"

@@ -6,6 +6,7 @@ class HomeController < ApplicationController
       fulltext params[:query] do
         fields( [:field]) if params[:field].present?
       end
+      with :fond_scope_id, params[:fond_scope_id] if params[:fond_scope_id].present?
       
       if params[:fond_id].present? 
         fond_filter = with(:fond_id, params[:fond_id].values )

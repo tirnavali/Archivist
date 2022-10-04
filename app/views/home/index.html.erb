@@ -12,6 +12,10 @@
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
         </div>
       <% end %>
+      <div class="ui fluid input field">
+        <%= form.select :fond_scope_id, Fond.order(:name).map{|fond| [fond, fond.id] }, 
+        {include_blank: t(:all), selected: (params[:fond_scope_id]) }, {class: "ui fluid search selection dropdown"}%>
+      </div>
       <div class="ui fluid action input">
         <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
         <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
@@ -48,27 +52,30 @@
         </div>
       </div>
       <br/>
-      <div class="inline field">
+      <div class="inline field " data-controller="dropdown">
         <%= form.label t :number_type %>
-        <%= form.collection_select(:number_types, NumberType.order(:name), :solrable_name, :name , {include_blank: t(:all), selected: (params[:number_types][:choice] if params[:number_types].present?) }, {name: "number_types[choice]" }) %>
+        <%= form.collection_select(:number_types, NumberType.order(:name), :solrable_name, :name , 
+          {include_blank: t(:all), selected: (params[:number_types][:choice] if params[:number_types].present?) }, 
+          {name: "number_types[choice]", class: "ui selection dropdown" }) 
+        %>
         <%= form.text_field :number_types,  { name: "number_types[text]", value: "#{params[:number_types][:text] if params[:number_types]}" } %>
       </div>
       <div class="six fields">
         <div class="field">
           <%= form.label :starting_date_from %>
-          <%= form.date_field :starting_date_from, class:"ui input"%>
+          <%= form.date_field :starting_date_from, {class:"ui input", value: params[:starting_date_from] }%>
         </div>
         <div class="field">
           <%= form.label :starting_date_to %>
-          <%= form.date_field :starting_date_to, class:"ui input" %>
+          <%= form.date_field :starting_date_to, {class:"ui input", value: params[:starting_date_to] } %>
         </div>
         <div class="field">
           <%= form.label :ending_date_from %>
-          <%= form.date_field :ending_date_from, class:"ui input"%>
+          <%= form.date_field :ending_date_from, {class:"ui input", value: params[:ending_date_from] }%>
         </div>
         <div class="field">
           <%= form.label :ending_date_to %>
-          <%= form.date_field :ending_date_to, class:"ui input" %>
+          <%= form.date_field :ending_date_to, {class:"ui input", value: params[:ending_date_to] } %>
         </div>
         <div class="field" >
           <%= form.label t(:document_types) %>
@@ -85,19 +92,19 @@
         <div class="six fields">
           <div class="field">
             <%= form.label :created_at_from %>
-            <%= form.date_field :created_at_from, class:"ui input"%>
+            <%= form.date_field :created_at_from, {class:"ui input", value: params[:created_at_from] }%>
           </div>
           <div class="field">
             <%= form.label :created_at_to %>
-            <%= form.date_field :created_at_to, class:"ui input" %>
+            <%= form.date_field :created_at_to, {class:"ui input", value: params[:created_at_to] } %>
           </div>
           <div class="field">
             <%= form.label :updated_at_from %>
-            <%= form.date_field :updated_at_from, class:"ui input"%>
+            <%= form.date_field :updated_at_from, {class:"ui input", value: params[:updated_at_from] }%>
           </div>
           <div class="field">
             <%= form.label :updated_at_to %>
-            <%= form.date_field :updated_at_to, class:"ui input" %>
+            <%= form.date_field :updated_at_to, {class:"ui input", value: params[:updated_at_to] }%>
           </div>
           <div class="field" >
             <%= form.label t(:privacies) %>
@@ -110,9 +117,9 @@
             {checked: (params[:phisycal_status_id] if params[:phisycal_status_id].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
           </div>
           <div class="field">
-            <%= form.label :show_secret %>
+            <%= form.label t :show_secret %>
             <%= form.check_box :is_secret, {checked: (params[:is_secret] == "1" ? true : false), class: "checkbox ui field checkbox" }, 1, nil%>
-            <%= form.label :show_not_secret %>
+            <%= form.label t :show_not_secret %>
             <%= form.check_box :not_secret, {checked: params[:not_secret].present?  , class: "checkbox ui field checkbox" }, false, nil%>
           </div>
         </div>
@@ -217,7 +224,7 @@
       <% if @person_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :people %></h3>
-          <% @person_facet.rows[1..10].each do |person| %>
+          <% @person_facet.rows.slice(1,10).each do |person| %>
             <li>
               <%= check_box_tag "person_ids[#{person.instance.name}]", person.value, ((params[:person_ids].present?) && (params[:person_ids].keys.include? person.instance.name)) ? true : nil %>
               <label title="<%=person.instance.name%>"><%= sshorter person.instance.name%> <%=person.count%></label>
