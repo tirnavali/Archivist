@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="four wide column"><!-- facets -->
-      
+      <% if @search.facet(:fond_id).present? && @search.facet(:fond_id).rows.present? %>
       <div class="row ui list ">
         <h3><%= t :fond %></h3>
         <% @search.facet(:fond_id).rows.each do |fond| %>
@@ -92,6 +92,7 @@
           </li>
         <% end %>
       </div>
+      <% end %>
       <% if @subjects_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :subjects %></h3>

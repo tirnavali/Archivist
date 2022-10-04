@@ -190,6 +190,7 @@
     <div class="four wide column"><!-- facets -->
     
       <div class="row ui list ">
+      <% if @search.facet(:fond_id).present? && @search.facet(:fond_id).rows.present? %>
         <h3><%= t :fond %></h3>
         <% @search.facet(:fond_id).rows.each do |fond| %>
           <li>
@@ -198,10 +199,11 @@
           </li>
         <% end %>
       </div>
+      <% end %>
       <% if @subjects_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :subjects %></h3>
-          <% @subjects_facet.rows.each do |subject| %>
+          <% @subjects_facet.rows[1..10].each do |subject| %>
             <li>
               <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
               <label title="<%=subject.instance.name%>"><%=sshorter subject.instance.name%> <%=subject.count%></label>
@@ -224,7 +226,7 @@
       <% if @person_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :people %></h3>
-          <% @person_facet.rows.slice(1,10).each do |person| %>
+          <% @person_facet.rows[1..10].each do |person| %>
             <li>
               <%= check_box_tag "person_ids[#{person.instance.name}]", person.value, ((params[:person_ids].present?) && (params[:person_ids].keys.include? person.instance.name)) ? true : nil %>
               <label title="<%=person.instance.name%>"><%= sshorter person.instance.name%> <%=person.count%></label>
