@@ -12,17 +12,26 @@
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
         </div>
       <% end %>
-      <div class="ui fluid input field">
-        <%= form.select :fond_scope_id, Fond.order(:name).map{|fond| [fond, fond.id] }, 
-        {include_blank: t(:all), selected: (params[:fond_scope_id]) }, {class: "ui fluid search selection dropdown"}%>
-      </div>
-      <div class="ui fluid action input">
-        <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
-        <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
-        {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
-        <div class="ui input ">
-          <%= form.submit "Ara", class: "ui primary button"%>
+      <div class="ui red segment">
+        
+          <%= form.label "Ara" , class: "" %>
+        <div class="ui fluid action input">
+          <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
+          <%=# form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
+          #{prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} 
+          %>
+          
+          <div class="inline field ">
+            
+          </div>
         </div>
+        
+        <div class="inline field">
+            <%= form.label "fon"  %>
+            <%= form.select :fond_scope_id, Fond.order(:name).map{|fond| [fond, fond.id] }, 
+            {include_blank: t(:all), selected: (params[:fond_scope_id]) }, {class: "ui fluid  search selection dropdown"}%>
+        </div>
+            <%= form.submit "Ara", class: "ui primary button"%>
       </div>
       <br/>
       <div class="ui styled fluid accordion" data-controller="accordion">
@@ -52,7 +61,7 @@
         </div>
       </div>
       <br/>
-      <div class="inline field " data-controller="dropdown">
+      <div id ="special_numbers_section" class="inline field " data-controller="dropdown">
         <%= form.label t :number_type %>
         <%= form.collection_select(:number_types, NumberType.order(:name), :solrable_name, :name , 
           {include_blank: t(:all), selected: (params[:number_types][:choice] if params[:number_types].present?) }, 
