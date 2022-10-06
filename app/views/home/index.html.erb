@@ -8,22 +8,21 @@
     <div class="sixteen wide column">
       <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues, data: {turbo_frame: "search_clues"} %> </h1>
       <% unless params[:query].nil? %>
-        <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
+        <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%> 
+          <% params.each do |key, val| %>
+            <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
+          <% end %> 
+          </i>
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
         </div>
       <% end %>
-      <div class="ui red segment">
-        
+      <div class="ui blue segment">
           <%= form.label "Ara" , class: "" %>
-        <div class="ui fluid action input">
+        <div class="ui fluid input">
           <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
           <%=# form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
           #{prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} 
           %>
-          
-          <div class="inline field ">
-            
-          </div>
         </div>
         
         <div class="inline field">
@@ -32,6 +31,7 @@
             {include_blank: t(:all), selected: (params[:fond_scope_id]) }, {class: "ui fluid  search selection dropdown"}%>
         </div>
             <%= form.submit "Ara", class: "ui primary button"%>
+            <%= link_to t(:clean), root_path, class: "ui button"%>
       </div>
       <br/>
       <div class="ui styled fluid accordion" data-controller="accordion">

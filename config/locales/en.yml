@@ -33,9 +33,18 @@ en:
   hello: "Hello world"
   advanced_options: "Advanced Options"
   all: "All"
+  clean: "Clean"
   show: "Show"
   show_secret: "Show secret"
   show_not_secret: "Show not secret"
+  starting_date_from: "Starting Date From"
+  starting_date_to: "Starting Date To"
+  ending_date_from: "Ending Date From"
+  ending_date_to: "Ending Date To"
+  created_at_from: "Created At From"
+  created_at_to: "Created At To"
+  updated_at_from: "Updated At From"
+  updated_at_to: "Updated At To"
   views:
     pagination:
       first: "&laquo; First"
