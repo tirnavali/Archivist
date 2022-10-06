@@ -97,6 +97,25 @@
           {checked: (params[:language_ids].map(&:to_param) if params[:language_ids].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
         </div>
       </div>
+
+      <%= simple_form_for :src, url: :root, method: :get do |f| %>
+        <%= f.input :query, input_html: { value: (params[:src][:query] if params[:src])  } %>
+        <%= f.input :fond_scope_id, collection: Fond.order(:name), selected: (params[:src][:fond_scope_id] if params[:src]) %>
+        <%= f.submit :search, class: "ui primary button" %>
+        <%= link_to t(:clean), root_path, class: "ui button" %>
+        <div class="three fields">
+          <%= f.input :box, as: :numeric%>
+          <%= f.input :folder, as: :numeric %>
+          <%= f.input :order, as: :numeric %>
+        </div>
+        <div class="four fields">
+          <%= f.input :starting_date_from, as: :date, html5: true %>
+          <%= f.input :starting_date_to, as: :date, html5: true %>
+          <%= f.input :ending_date_from, as: :date, html5: true %>
+          <%= f.input :ending_date_to, as: :date, html5: true %>
+        </div>
+      <% end %>
+
       <div class="ui inverted segment">
         <div class="six fields">
           <div class="field">
