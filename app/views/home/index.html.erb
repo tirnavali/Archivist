@@ -1,5 +1,4 @@
 <%= notice %>
-<%= alert %>
 <%= turbo_frame_tag "search_clues" do%>
 <% end %>
 <%= form_with url: :root, method: :get, class: "ui form" do |form| %>
@@ -99,21 +98,74 @@
       </div>
 
       <%= simple_form_for :src, url: :root, method: :get do |f| %>
-        <%= f.input :query, input_html: { value: (params[:src][:query] if params[:src])  } %>
-        <%= f.input :fond_scope_id, collection: Fond.order(:name), selected: (params[:src][:fond_scope_id] if params[:src]) %>
-        <%= f.submit :search, class: "ui primary button" %>
-        <%= link_to t(:clean), root_path, class: "ui button" %>
-        <div class="three fields">
-          <%= f.input :box, as: :numeric%>
-          <%= f.input :folder, as: :numeric %>
-          <%= f.input :order, as: :numeric %>
+        <div class="ui blue segment">
+          <div class="ui fluid action input">
+            <%= f.input :query, label: false, placeholder: t(:search_ex), input_html: { value: (params[:src][:query] if params[:src])  }, wrapper: false %>
+              <%= f.button :button,  t(:search), class: "ui primary button" %>
+          </div>
+          <%= f.input :fond_scope_id, label: t(:fond), required: false, collection: Fond.order(:name), 
+              selected: (params[:src][:fond_scope_id] if params[:src]), include_blank: true,
+              input_html: {class: 'ui fluid search selection dropdown '} 
+            %>
+          <%= link_to t(:clean), root_path, class: "ui right button" %>
         </div>
-        <div class="four fields">
-          <%= f.input :starting_date_from, as: :date, html5: true %>
-          <%= f.input :starting_date_to, as: :date, html5: true %>
-          <%= f.input :ending_date_from, as: :date, html5: true %>
-          <%= f.input :ending_date_to, as: :date, html5: true %>
+        <div class="ui styled fluid accordion" data-controller="accordion">
+          <div class="<%= active_accordion([:organization_code, :box, :order, :folder]) %> title">
+            <i class="dropdown icon"></i>
+            <%= t :advanced_options %>
+          </div>
+          <div class="<%=  active_accordion([:organization_code, :box, :order, :folder]) %> content">
+            <div class="five fields">
+              <%= f.input :box, as: :numeric, label: t(:box), required: false %>
+              <%= f.input :folder, as: :numeric, label: t(:folder), required: false %>
+              <%= f.input :order, as: :numeric, label: t(:order), required: false %>
+              <%= f.input :number_type, collection: NumberType.order(:name), required: false, label: t(:number_type), input_html: {class: 'ui fluid selection dropdown '} %>
+              <%= f.input :number_value, required: false, label: t(:number_value)%>
+            </div>
+            <div class="four fields">
+              <%= f.input :starting_date_from, as: :date, html5: true, label: t(:starting_date_from), required: false %>
+              <%= f.input :starting_date_to, as: :date, html5: true, label: t(:starting_date_to), required: false %>
+              <%= f.input :ending_date_from, as: :date, html5: true, label: t(:ending_date_from), required: false %>
+              <%= f.input :ending_date_to, as: :date, html5: true, label: t(:ending_date_to), required: false %>
+            </div>
+            <div class="inline fields">
+              <%= f.input :document_type_ids, label: t(:document_types), required: false, collection: DocumentType.order(:name), as: :check_boxes %>
+            </div>
+            <div class="inline fields">
+              <%= f.input :language_ids, label: t(:languages), required: false, collection: Language.order(:name), as: :check_boxes %>
+            </div>
+          </div>
         </div>
+        <% if policy(:admin_search).show? %>
+        <div class="ui inverted grey segment">
+          <div class="four fields">
+            <%= f.input :created_at_from, as: :date, html5: true, label: t(:created_at_from), required: false %>
+            <%= f.input :created_at_to, as: :date, html5: true, label: t(:created_at_to), required: false %>
+            <%= f.input :updated_at_from, as: :date, html5: true, label: t(:updated_at_from), required: false %>
+            <%= f.input :updated_at_to, as: :date, html5: true, label: t(:updated_at_to), required: false %>
+          </div>
+          <div class="inline fields">
+            <div class="ui checkbox">
+              <%= f.input :show_sec, as: :boolean, label: t(:show_secret), checked: (params[:src].present? && params[:src][:show_sec] == "1" ? true : false)  %>
+            </div>
+            <div class="ui checkbox">
+            <%= console %>
+              <%= f.input :show_not_sec, as: :boolean, checked_value: false, unchecked_value: nil, label: t(:show_not_secret), 
+              input_html: { checked: params.fetch(:src, {}).fetch(:show_not_sec, false) == "false" } %>
+            </div>
+          </div>
+          <div class="inline fields">
+            <%= f.input :privacy_id, as: :radio_buttons, collection: Privacy.all, label: t(:privacy), required: false, 
+              checked: (params[:src][:privacy_id] if params[:src].present?) 
+              %>
+          </div>
+          <div class="inline fields">
+            <%= f.input :phisycal_status_id, as: :radio_buttons, collection: PhisycalStatus.all, label: t(:phisycal_status), required: false,
+              checked: (params[:src][:phisycal_status_id] if params[:src].present?) 
+              %>
+          </div>
+        </div>
+        <% end %>
       <% end %>
 
       <div class="ui inverted segment">
