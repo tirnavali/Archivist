@@ -129,24 +129,28 @@
               <%= f.input :ending_date_to, as: :date, html5: true, label: t(:ending_date_to), required: false %>
             </div>
             <div class="inline fields">
-              <%= f.input :document_type_ids, label: t(:document_types), required: false, collection: DocumentType.order(:name), as: :check_boxes %>
+              <%= f.input :document_type_ids, label: t(:document_types), required: false, collection: DocumentType.order(:name), as: :check_boxes,
+              checked: params.fetch(:src,{}).fetch(:language_ids, nil) %>
             </div>
             <div class="inline fields">
-              <%= f.input :language_ids, label: t(:languages), required: false, collection: Language.order(:name), as: :check_boxes %>
+              <%= f.input :language_ids, label: t(:languages), required: false, collection: Language.order(:name), as: :check_boxes,
+                checked: params.fetch(:src,{}).fetch(:document_type_ids, nil) %>
             </div>
           </div>
         </div>
         <% if policy(:admin_search).show? %>
         <div class="ui inverted grey segment">
           <div class="four fields">
-            <%= f.input :created_at_from, as: :date, html5: true, label: t(:created_at_from), required: false %>
-            <%= f.input :created_at_to, as: :date, html5: true, label: t(:created_at_to), required: false %>
-            <%= f.input :updated_at_from, as: :date, html5: true, label: t(:updated_at_from), required: false %>
-            <%= f.input :updated_at_to, as: :date, html5: true, label: t(:updated_at_to), required: false %>
+            <%= f.input :created_at_from, as: :date, html5: true, label: t(:created_at_from), required: false,  input_html:{value: params.fetch(:src, {}).fetch(:created_at_from, false) } %>
+            <%= f.input :created_at_to, as: :date, html5: true, label: t(:created_at_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:created_at_to, false) } %>
+            <%= f.input :updated_at_from, as: :date, html5: true, label: t(:updated_at_from), required: false, input_html:{value: params.fetch(:src, {}).fetch(:updated_at_from, false) } %>
+            <%= f.input :updated_at_to, as: :date, html5: true, label: t(:updated_at_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:updated_at_to, false) } %>
           </div>
           <div class="inline fields">
             <div class="ui checkbox">
-              <%= f.input :show_sec, as: :boolean, label: t(:show_secret), checked: (params[:src].present? && params[:src][:show_sec] == "1" ? true : false)  %>
+              <%= f.input :show_sec, as: :boolean, label: t(:show_secret),unchecked_value: nil,
+                input_html: { checked: params.fetch(:src, {}).fetch(:show_sec, false) == "1" } 
+                %>
             </div>
             <div class="ui checkbox">
             <%= console %>
