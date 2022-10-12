@@ -26,7 +26,7 @@
         
         <div class="inline field">
             <%= form.label "fon"  %>
-            <%= form.select :fond_scope_id, Fond.order(:name).map{|fond| [fond, fond.id] }, 
+            <%= form.select :fond_scope_idx, Fond.order(:name).map{|fond| [fond, fond.id] }, 
             {include_blank: t(:all), selected: (params[:fond_scope_id]) }, {class: "ui fluid  search selection dropdown"}%>
         </div>
             <%= form.submit "Ara", class: "ui primary button"%>
@@ -104,7 +104,7 @@
               <%= f.button :button,  t(:search), class: "ui primary button" %>
           </div>
           <%= f.input :fond_scope_id, label: t(:fond), required: false, collection: Fond.order(:name), 
-              selected: (params[:src][:fond_scope_id] if params[:src]), include_blank: true,
+              selected: params.fetch(:src, {}).fetch(:fond_scope_id, false), include_blank: true,
               input_html: {class: 'ui fluid search selection dropdown '} 
             %>
           <%= link_to t(:clean), root_path, class: "ui right button" %>
@@ -116,17 +116,17 @@
           </div>
           <div class="<%=  active_accordion([:organization_code, :box, :order, :folder]) %> content">
             <div class="five fields">
-              <%= f.input :box, as: :numeric, label: t(:box), required: false %>
-              <%= f.input :folder, as: :numeric, label: t(:folder), required: false %>
-              <%= f.input :order, as: :numeric, label: t(:order), required: false %>
-              <%= f.input :number_type, collection: NumberType.order(:name), required: false, label: t(:number_type), input_html: {class: 'ui fluid selection dropdown '} %>
-              <%= f.input :number_value, required: false, label: t(:number_value)%>
+              <%= f.input :box, as: :numeric, label: t(:box), required: false, input_html: {value: params.fetch(:src,{}).fetch(:box, "")} %>
+              <%= f.input :folder, as: :numeric, label: t(:folder), required: false,  input_html: {value: params.fetch(:src,{}).fetch(:folder, "")} %>
+              <%= f.input :order, as: :numeric, label: t(:order), required: false,  input_html: {value: params.fetch(:src,{}).fetch(:order, "")} %>
+              <%= f.input :number_type, collection: NumberType.order(:name), required: false, label: t(:number_type), input_html: {class: 'ui fluid selection dropdown ' }, selected: params.fetch(:src,{}).fetch(:number_type, false) %>
+              <%= f.input :number_value, required: false, label: t(:number_value), input_html: {value: params.fetch(:src,{}).fetch(:number_value, "")}%>
             </div>
             <div class="four fields">
-              <%= f.input :starting_date_from, as: :date, html5: true, label: t(:starting_date_from), required: false %>
-              <%= f.input :starting_date_to, as: :date, html5: true, label: t(:starting_date_to), required: false %>
-              <%= f.input :ending_date_from, as: :date, html5: true, label: t(:ending_date_from), required: false %>
-              <%= f.input :ending_date_to, as: :date, html5: true, label: t(:ending_date_to), required: false %>
+              <%= f.input :starting_date_from, as: :date, html5: true, label: t(:starting_date_from), required: false, input_html:{value: params.fetch(:src, {}).fetch(:starting_date_from, false) } %>
+              <%= f.input :starting_date_to, as: :date, html5: true, label: t(:starting_date_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:starting_date_to, false) } %>
+              <%= f.input :ending_date_from, as: :date, html5: true, label: t(:ending_date_from), required: false, input_html:{value: params.fetch(:src, {}).fetch(:ending_date_from, false) } %>
+              <%= f.input :ending_date_to, as: :date, html5: true, label: t(:ending_date_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:ending_date_to, false) } %>
             </div>
             <div class="inline fields">
               <%= f.input :document_type_ids, label: t(:document_types), required: false, collection: DocumentType.order(:name), as: :check_boxes,
@@ -153,7 +153,6 @@
                 %>
             </div>
             <div class="ui checkbox">
-            <%= console %>
               <%= f.input :show_not_sec, as: :boolean, checked_value: false, unchecked_value: nil, label: t(:show_not_secret), 
               input_html: { checked: params.fetch(:src, {}).fetch(:show_not_sec, false) == "false" } %>
             </div>

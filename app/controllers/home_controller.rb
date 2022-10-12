@@ -1,12 +1,15 @@
 class HomeController < ApplicationController
   def index
+
+    search_param = params[:src]
     #@user = User.new
-    #console
+    console
     @search = RecordMetadatum.search do 
       fulltext params[:query] do
-        fields( [:field]) if params[:field].present?
+        #fields( [:field]) if params[:field].present?
       end
-      with :fond_scope_id, params[:fond_scope_id] if params[:fond_scope_id].present?
+      #with :fond_scope_id, params[:fond_scope_id] if params[:fond_scope_id].present?
+      with :fond_scope_id, search_param[:fond_scope_id] if search_param.try(:[], :fond_scope_id).present?
       
       if params[:fond_id].present? 
         fond_filter = with(:fond_id, params[:fond_id].values )
@@ -43,19 +46,29 @@ class HomeController < ApplicationController
         facet :toponym_ids 
       end
 
-      with(:starting_date).between(params[:starting_date_from]..params[:starting_date_to]) if params[:starting_date_from].present? && params[:starting_date_to].present?
-      with(:ending_date).between(params[:ending_date_from]..params[:ending_date_to]) if params[:ending_date_from].present? && params[:ending_date_to].present?
-      with(:created_at).between(params[:created_at_from]..params[:created_at_to]) if params[:created_at_from].present? && params[:created_at_to].present?
-      with(:updated_at).between(params[:updated_at_from]..params[:updated_at_to]) if params[:updated_at_from].present? && params[:updated_at_to].present?
-      with :document_type_ids, params[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if params[:document_type_ids].present?
-      with :privacy_id, params[:privacy_id] if params[:privacy_id].present?
-      with :phisycal_status_id, params[:phisycal_status_id] if params[:phisycal_status_id].present?
-      with :language_ids, params[:language_ids].filter_map {|val| val.to_i if val.length > 0 } if params[:language_ids].present?
+      #with(:starting_date).between(params[:src][:starting_date_from]..params[:src][:starting_date_to]) if params.fetch(:src, {} ).fetch(:starting_date_from, nil) && params.fetch(:src, {} ).fetch(:starting_date_to, nil)
+      if (search_param.try(:[], :starting_date_from).present? && search_param.try(:[], :starting_date_to).present?) == true
+        with(:starting_date).between(search_param[:starting_date_from]..search_param[:starting_date_to])
+      end
       
-      with :organization_code, params[:organization_code].upcase(:turkic) if params[:organization_code].present?
-      with :box, params[:box] if params[:box].present?
-      with :folder, params[:folder] if params[:folder].present?
-      with :order, params[:order] if params[:order].present?
+      if (search_param.try(:[], :ending_date_from).present? && search_param.try(:[], :ending_date_to).present?) == true
+        with(:ending_date).between(search_param[:ending_date_from]..search_param[:ending_date_to]) 
+      end
+
+      #with(:ending_date).between(params[:src][:ending_date_from]..params[:src][:ending_date_to]) if params.fetch(:src, {} ).fetch(:ending_date_from, false) && params.fetch(:src, {} ).fetch(:ending_date_to, false)
+      with(:created_at).between(search_param[:created_at_from]..search_param[:created_at_to]) if search_param.try(:[], :created_at_from).present? && search_param.try(:[], :created_at_to).present?
+      with(:updated_at).between(search_param[:updated_at_from]..search_param[:updated_at_to]) if search_param.try(:[], :updated_at_from).present? && search_param.try(:[], :updated_at_to).present?
+
+      with :document_type_ids, search_param[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if search_param.try(:[], :document_type_ids).present?
+      with :privacy_id, search_param[:privacy_id] if search_param.try(:[], :privacy_id).present?
+      with :phisycal_status_id, search_param[:phisycal_status_id] if search_param.try(:[], :phisycal_status_id).present?
+      with :language_ids, search_param[:language_ids].filter_map {|val| val.to_i if val.length > 0 } if search_param.try(:[], :language_ids).present?
+      
+      with :organization_code, search_param[:organization_code].upcase(:turkic) if search_param.try(:[], :organization_code).present?
+    
+      with :box, search_param[:box] if search_param.try(:[], :box).present?
+      with :folder, search_param[:folder] if search_param.try(:[], :folder).present?
+      with :order, search_param[:order] if search_param.try(:[], :order).present?
       #
       # NumberTypes
       #
@@ -72,12 +85,12 @@ class HomeController < ApplicationController
       #
       # IsSecret
       #
-      if params[:is_secret].present? && params[:not_secret].present?
+      if search_param.try(:[],:show_sec).present? && search_param.try(:[],:show_not_sec).present?
         with :is_secret
-      elsif params[:is_secret].present?
-        with :is_secret, params[:is_secret] 
-      elsif params[:not_secret].present?
-        with :is_secret, false if params[:not_secret] == "false"
+      elsif search_param.try(:[],:show_sec).present?
+        with :is_secret, search_param[:show_sec] 
+      elsif search_param.try(:[],:not_secret).present?
+        with :is_secret, false if search_param[:show_not_sec] == "false"
       end
       
 
