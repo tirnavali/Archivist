@@ -3,12 +3,12 @@ module HomeHelper
   # generates active tag with help of given parameters
   # use it in erb views
   #
-  def active_accordion(param_names=[])
+  def active_accordion(params_hash, param_names=[])
     begin
       result = false
       param_names.map!{|n| n.to_sym }
       param_names.each do |n| 
-        unless params[n].empty?
+        unless params_hash.fetch(n, {}).empty?
           result = true 
         end 
       end
@@ -17,10 +17,11 @@ module HomeHelper
       else 
         ""
       end
-    rescue
+    rescue 
       ""
     end
   end
+
   #
   # takes Sunspot::Search::FieldFacet
   #

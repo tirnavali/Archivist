@@ -6,7 +6,7 @@
   <div class="row"><!-- input field -->
     <div class="sixteen wide column">
       <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues, data: {turbo_frame: "search_clues"} %> </h1>
-      <% unless params[:query].nil? %>
+      <% unless params[:src].nil? %>
         <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%> 
           <% params.each do |key, val| %>
             <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
@@ -15,50 +15,11 @@
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
         </div>
       <% end %>
-      <div class="ui blue segment">
-          <%= form.label "Ara" , class: "" %>
-        <div class="ui fluid input">
-          <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
           <%=# form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
           #{prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} 
           %>
-        </div>
         
-        <div class="inline field">
-            <%= form.label "fon"  %>
-            <%= form.select :fond_scope_idx, Fond.order(:name).map{|fond| [fond, fond.id] }, 
-            {include_blank: t(:all), selected: (params[:fond_scope_id]) }, {class: "ui fluid  search selection dropdown"}%>
-        </div>
-            <%= form.submit "Ara", class: "ui primary button"%>
-            <%= link_to t(:clean), root_path, class: "ui button"%>
-      </div>
-      <br/>
-      <div class="ui styled fluid accordion" data-controller="accordion">
-        <div class="<%= active_accordion([:organization_code, :box, :order, :folder]) %> title">
-          <i class="dropdown icon"></i>
-          <%= t :advanced_options %>
-        </div>
-        <div class="<%=  active_accordion([:organization_code, :box, :order, :folder]) %> content">
-          <div class=" four fields">
-            <div class="field">
-              <%= form.label t(:organization_code) %>
-              <%= form.text_field :organization_code, {value: params[:organization_code]} %>
-            </div>
-            <div class="field">
-              <%= form.label t(:box)%>
-              <%= form.number_field :box , {value: params[:box]} %>
-            </div>
-            <div class="field">
-              <%= form.label t(:folder)%>
-              <%= form.number_field :folder, {value: params[:folder] }%>
-            </div>
-            <div class="field">
-              <%= form.label t(:order)%>
-              <%= form.number_field :order, {value: params[:order] }%>
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <br/>
       <div id ="special_numbers_section" class="inline field " data-controller="dropdown">
         <%= form.label t :number_type %>
@@ -67,34 +28,6 @@
           {name: "number_types[choice]", class: "ui selection dropdown" }) 
         %>
         <%= form.text_field :number_types,  { name: "number_types[text]", value: "#{params[:number_types][:text] if params[:number_types]}" } %>
-      </div>
-      <div class="six fields">
-        <div class="field">
-          <%= form.label :starting_date_from %>
-          <%= form.date_field :starting_date_from, {class:"ui input", value: params[:starting_date_from] }%>
-        </div>
-        <div class="field">
-          <%= form.label :starting_date_to %>
-          <%= form.date_field :starting_date_to, {class:"ui input", value: params[:starting_date_to] } %>
-        </div>
-        <div class="field">
-          <%= form.label :ending_date_from %>
-          <%= form.date_field :ending_date_from, {class:"ui input", value: params[:ending_date_from] }%>
-        </div>
-        <div class="field">
-          <%= form.label :ending_date_to %>
-          <%= form.date_field :ending_date_to, {class:"ui input", value: params[:ending_date_to] } %>
-        </div>
-        <div class="field" >
-          <%= form.label t(:document_types) %>
-          <%= form.collection_check_boxes :document_type_ids, DocumentType.order(:name), :id, :name, 
-          {checked: (params[:document_type_ids].map(&:to_param) if params[:document_type_ids].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
-        </div>
-        <div class="field" >
-          <%= form.label t(:languages) %>
-          <%= form.collection_check_boxes :language_ids, Language.order(:name), :id, :name, 
-          {checked: (params[:language_ids].map(&:to_param) if params[:language_ids].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
-        </div>
       </div>
 
       <%= simple_form_for :src, url: :root, method: :get do |f| %>
@@ -110,11 +43,11 @@
           <%= link_to t(:clean), root_path, class: "ui right button" %>
         </div>
         <div class="ui styled fluid accordion" data-controller="accordion">
-          <div class="<%= active_accordion([:organization_code, :box, :order, :folder]) %> title">
+          <div class="<%= active_accordion(params[:src], %w( box order folder starting_date_from starting_date_to ending_date_from  ending_date_to number_type number_value language_ids)) %> title">
             <i class="dropdown icon"></i>
             <%= t :advanced_options %>
           </div>
-          <div class="<%=  active_accordion([:organization_code, :box, :order, :folder]) %> content">
+          <div class="<%=  active_accordion(params[:src], %w( box order folder starting_date_from starting_date_to ending_date_from  ending_date_to number_type number_value language_ids) ) %> content">
             <div class="five fields">
               <%= f.input :box, as: :numeric, label: t(:box), required: false, input_html: {value: params.fetch(:src,{}).fetch(:box, "")} %>
               <%= f.input :folder, as: :numeric, label: t(:folder), required: false,  input_html: {value: params.fetch(:src,{}).fetch(:folder, "")} %>
@@ -130,11 +63,11 @@
             </div>
             <div class="inline fields">
               <%= f.input :document_type_ids, label: t(:document_types), required: false, collection: DocumentType.order(:name), as: :check_boxes,
-              checked: params.fetch(:src,{}).fetch(:language_ids, nil) %>
+              checked: params.fetch(:src,{}).fetch(:document_type_ids, nil) %>
             </div>
             <div class="inline fields">
               <%= f.input :language_ids, label: t(:languages), required: false, collection: Language.order(:name), as: :check_boxes,
-                checked: params.fetch(:src,{}).fetch(:document_type_ids, nil) %>
+                checked: params.fetch(:src,{}).fetch(:language_ids, nil) %>
             </div>
           </div>
         </div>
@@ -171,42 +104,7 @@
         <% end %>
       <% end %>
 
-      <div class="ui inverted segment">
-        <div class="six fields">
-          <div class="field">
-            <%= form.label :created_at_from %>
-            <%= form.date_field :created_at_from, {class:"ui input", value: params[:created_at_from] }%>
-          </div>
-          <div class="field">
-            <%= form.label :created_at_to %>
-            <%= form.date_field :created_at_to, {class:"ui input", value: params[:created_at_to] } %>
-          </div>
-          <div class="field">
-            <%= form.label :updated_at_from %>
-            <%= form.date_field :updated_at_from, {class:"ui input", value: params[:updated_at_from] }%>
-          </div>
-          <div class="field">
-            <%= form.label :updated_at_to %>
-            <%= form.date_field :updated_at_to, {class:"ui input", value: params[:updated_at_to] }%>
-          </div>
-          <div class="field" >
-            <%= form.label t(:privacies) %>
-            <%= form.collection_radio_buttons :privacy_id, Privacy.order(:name), :id, :name, 
-            {checked: (params[:privacy_id] if params[:privacy_id].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
-          </div>
-          <div class="field" >
-            <%= form.label t(:phisycal_statuses) %>
-            <%= form.collection_radio_buttons :phisycal_status_id, PhisycalStatus.order(:name), :id, :name, 
-            {checked: (params[:phisycal_status_id] if params[:phisycal_status_id].present?)} ,{class: "checkbox ui field checkbox", data: {controlller: "checkbox"} }  %>
-          </div>
-          <div class="field">
-            <%= form.label t :show_secret %>
-            <%= form.check_box :is_secret, {checked: (params[:is_secret] == "1" ? true : false), class: "checkbox ui field checkbox" }, 1, nil%>
-            <%= form.label t :show_not_secret %>
-            <%= form.check_box :not_secret, {checked: params[:not_secret].present?  , class: "checkbox ui field checkbox" }, false, nil%>
-          </div>
-        </div>
-      </div>
+      
     </div>
     
   </div>

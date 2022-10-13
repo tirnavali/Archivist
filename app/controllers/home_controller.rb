@@ -89,13 +89,13 @@ class HomeController < ApplicationController
         with :is_secret
       elsif search_param.try(:[],:show_sec).present?
         with :is_secret, search_param[:show_sec] 
-      elsif search_param.try(:[],:not_secret).present?
+      elsif search_param.try(:[],:show_not_sec).present?
         with :is_secret, false if search_param[:show_not_sec] == "false"
       end
-      
 
       paginate page: params[:page], per_page: 10
     end
+    
     @subjects_facet = @search.facet(:subject_ids)
     @toponyms_facet = @search.facet(:toponym_ids)
     @organizations_facet = @search.facet(:organization_ids)
