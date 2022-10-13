@@ -8,8 +8,15 @@ module HomeHelper
       result = false
       param_names.map!{|n| n.to_sym }
       param_names.each do |n| 
-        unless params_hash.fetch(n, {}).empty?
-          result = true 
+        if params_hash.fetch(n, {}).is_a? String 
+          if !params_hash.fetch(n, {}).empty? 
+            result = true
+          end 
+        end
+        if params_hash.fetch(n, {}).is_a? Array
+          if params_hash.fetch(n, {}).size > 1 
+            result = true 
+          end
         end 
       end
       if result
