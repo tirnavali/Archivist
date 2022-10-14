@@ -12,8 +12,7 @@ module HomeHelper
           if !params_hash.fetch(n, {}).empty? 
             result = true
           end 
-        end
-        if params_hash.fetch(n, {}).is_a? Array
+        elsif params_hash.fetch(n, {}).is_a? Array
           if params_hash.fetch(n, {}).size > 1 
             result = true 
           end

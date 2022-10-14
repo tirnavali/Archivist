@@ -3,12 +3,9 @@ class HomeController < ApplicationController
 
     search_param = params[:src]
     #@user = User.new
-    console
+    #console
     @search = RecordMetadatum.search do 
-      fulltext params[:query] do
-        #fields( [:field]) if params[:field].present?
-      end
-      #with :fond_scope_id, params[:fond_scope_id] if params[:fond_scope_id].present?
+      fulltext search_param[:query] if search_param.try(:[], :query)
       with :fond_scope_id, search_param[:fond_scope_id] if search_param.try(:[], :fond_scope_id).present?
       
       if params[:fond_id].present? 
@@ -72,16 +69,18 @@ class HomeController < ApplicationController
       #
       # NumberTypes
       #
-      if params[:number_types].present? && params[:number_types][:choice].empty? && params[:number_types][:text].present?
-        with :special_value, params[:number_types][:text]
-      elsif params[:number_types].present? && !(params[:number_types].keys.include? "text")
-        with :special_value, ""
-      elsif params[:number_types].present? && !params[:number_types][:choice].empty?
+      
+      if search_param.present? &&  search_param[:number_type].empty? && search_param[:number_value].present?
+        with :special_value, params[:number_value]
+      elsif search_param.present? && search_param[:number_type].present? && search_param[:number_value].empty?
+        #
+      elsif search_param.present? && search_param[:number_type].present? && search_param[:number_value].present?
         all_of do
-          with(:special_value).equal_to(params[:number_types][:text])
-          with(:special_number_type).equal_to(params[:number_types][:choice])
+          with(:special_value).equal_to(search_param[:number_value])
+          with(:special_number_type).equal_to(search_param[:number_type])
         end
       end
+
       #
       # IsSecret
       #
