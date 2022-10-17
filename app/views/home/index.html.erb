@@ -104,6 +104,19 @@
           <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
       <% end %>
     </div>
+    <div class="row">
+      <div class="ui three column stackable grid">
+        <div class="column">
+          <div class="ui green tiny button "> Create New Curation</div>
+        </div>
+        <div class="column">
+          <div class="ui primary tiny button "> Add Items To My Curation</div>
+        </div>
+        <div class="column">
+          <%= select_tag(:curation_id, options_for_select([['Yeni Araştırma', 1], ['Kitap Projesi', 2]])) %>
+        </div>
+      </div>
+    </div>
   <div class="row"> <!-- result list -->
     <div class="twelve wide column">
       <div class="ui grid">
@@ -134,6 +147,7 @@
                     <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
                   </a>
                   <div class="description">
+                    <%= check_box_tag "cureted_metadata[#{metadata.id}]",  metadata.id %>
                     <p>
                       <%= t('summary').capitalize %> : <%= sshorter metadata.summary, 300 %>
                     </p>
@@ -159,6 +173,7 @@
         </div>
       </div>
     </div>
+
     <div class="four wide column"><!-- facets -->
       <!-- Filter and revert -->
       <div class="ui small icon buttons">
