@@ -7,5 +7,5 @@
     remote:        data-remote
 -%>
 
-  <%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, class:"item", remote: remote %>
+  <%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, class:"item", remote: remote, data: {turbo_action: "advance"}%>
 

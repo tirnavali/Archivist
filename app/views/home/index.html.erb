@@ -1,6 +1,7 @@
 <%= notice %>
 <%= turbo_frame_tag "search_clues" do%>
 <% end %>
+<%= turbo_frame_tag "search" do%>
 <%= form_with url: :root, method: :get, class: "ui form" do |form| %>
 <div class="ui celled grid">
   <div class="row"><!-- input field -->
@@ -26,7 +27,7 @@
             <%= f.input :query, label: false, placeholder: t(:search_ex), input_html: { value: (params[:src][:query] if params[:src])  }, wrapper: false %>
               <%= f.button :button,  t(:search), class: "ui primary button" %>
           </div>
-          <%= f.input :fond_scope_id, label: t(:fond), required: false, collection: Fond.order(:name), 
+          <%= f.input :fond_scope_id, label: t(:fond), required: false, collection: Fond.all_without_empty, 
               selected: params.fetch(:src, {}).fetch(:fond_scope_id, false), include_blank: true,
               input_html: {class: 'ui fluid search selection dropdown '} 
             %>
@@ -159,6 +160,16 @@
       </div>
     </div>
     <div class="four wide column"><!-- facets -->
+      <!-- Filter and revert -->
+      <div class="ui small icon buttons">
+        <%= form.button class: "ui primary button", name: "filter_button" do %>
+          Filter<i class="filter icon"></i>
+        <% end %>
+        <%= link_to root_path , class: "ui button", data: {turbo_frame: "_top"} do %>
+          <i class="undo icon"></i>
+        <% end %>
+      </div>
+      <!-- Filter and revert -->
     
       <div class="row ui list ">
       <% if @search.facet(:fond_id).present? && @search.facet(:fond_id).rows.present? %>
@@ -174,6 +185,7 @@
       <% if @subjects_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :subjects %></h3>
+          
           <% @subjects_facet.rows[1..10].each do |subject| %>
             <li>
               <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
@@ -182,11 +194,11 @@
           <% end %>
         </div>
       <% end %>
-
       <% if @organizations_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :organizations %></h3>
           <% @organizations_facet.rows[1..10].each do |organization| %>
+            <%#= link_to organization.instance.name, root_path(params.permit(:organization_ids).merge(organization_ids: {"#{organization.instance.name}": organization.value} )) %>
             <li>
               <%= check_box_tag "organization_ids[#{organization.instance.name}]", organization.value, ((params[:organization_ids].present?) && (params[:organization_ids].keys.include? organization.instance.name)) ? true : nil %>
               <label title="<%=organization.instance.name%>"><%= sshorter organization.instance.name%> <%=organization.count%></label>
@@ -217,9 +229,20 @@
           <% end %>
         </div>
       <% end %>
-
       
+      <!-- Filter and revert -->
+      <div class="ui small icon buttons">
+        <%= form.button class: "ui primary button", name: "filter_button" do %>
+          Filter<i class="filter icon"></i>
+        <% end %>
+        <%= link_to root_path , class: "ui button", data:{turbo_action: "_top" } do %>
+          <i class="undo icon"></i>
+        <% end %>
+      </div>
+      <!-- Filter and revert -->
+    
     </div>
   </div>
 </div>
 <% end %>
+<% end %> <!-- turbo end -->

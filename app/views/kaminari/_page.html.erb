@@ -8,9 +8,9 @@
     remote:        data-remote
 -%>
 <% if page.current? %>
-  <%= link_to  page, url, {remote: remote, class:"teal active item", rel: page.rel} %>
+  <%= link_to  page, url, {remote: remote, class:"teal active item", rel: page.rel, data: {turbo_action: "advance"}} %>
 <% else %>
-  <%= link_to  page, url, {remote: remote, class:"item", rel: page.rel} %>
+  <%= link_to  page, url, {remote: remote, class:"item", rel: page.rel, data: {turbo_action: "advance"}} %>
 <% end %>
   
   <%#= link_to_unless page.current?, page, url, {remote: remote, class:"item", rel: page.rel} %>

@@ -101,8 +101,8 @@ class HomeController < ApplicationController
     @person_facet = @search.facet(:person_ids)
     @fonds = @search.facet(:fond)
 
-    
     @record_metadata = @search.results
+
 
 
     if (params[:query]).nil?
