@@ -88,8 +88,6 @@ group :development do
   gem "brakeman"
   gem 'sunspot_solr'
   gem 'progress_bar'
-  
-  
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

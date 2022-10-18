@@ -1,82 +1,267 @@
 <%= notice %>
-<%= alert %>
-<%= console %>
-<% if current_user %>
-  <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
-  <% unless params[:query].nil? %>
-  <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
-    <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
-  </div>
-  <% end %>
-  <div class="ui grid">
-    <div class="twelve wide column">
-      <%= render "search" %>
-        <!-------------------------------------------------------------------------------->
+<%= turbo_frame_tag "search_clues" do%>
+<% end %>
+<%= turbo_frame_tag "search" do%>
+<%= form_with url: :root, method: :get, class: "ui form" do |form| %>
+<div class="ui celled grid">
+  <div class="row"><!-- input field -->
+    <div class="sixteen wide column">
+      <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues, data: {turbo_frame: "search_clues"} %> </h1>
+      <% unless params[:src].nil? %>
+        <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%> 
+          <% params.each do |key, val| %>
+            <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
+          <% end %> 
+          </i>
+          <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
+        </div>
+      <% end %>
+          <%=# form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
+          #{prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} 
+          %>
+       
 
-        <h2>Son eklenen belgeler</h2>
-
-  <div class="ui items">
-    <% @record_metadata.each do |metadata| %>
-   
-      <div class="item">
-        <% if !metadata.record_attachment.nil? && !metadata.record_attachment.watermarked_images.empty? %>
-          <% file = metadata.record_attachment.watermarked_images.first %>
-          <a class="ui tiny image">
-            <% begin %>
-              <%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %>
-            <% rescue => e %>
-              <div class="ui placeholder">
-                <div class="image"></div>
-              </div>
-            <% end %>
-          </a>
-        <% else %>
-          <a class="ui tiny image">
-            <div class="ui placeholder">
-                <div class="image"></div>
-              </div>
-          </a>
-        <% end %>
-        <div class="content">
-          <a class="header">
-            <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
-          </a>
-          <div class="description">
-            <p>
-               <%= t('summary').capitalize %> : <%= metadata.summary[..300]... %>
-            </p>
-            <p>
-              <%= t('subjects').capitalize %> : 
-              <% metadata.subjects.each  do |subject| %>
-                <%= "#{subject.name}, " %>
-              <% end %>
-            </p>
+      <%= simple_form_for :src, url: :root, method: :get do |f| %>
+        <div class="ui blue segment">
+          <div class="ui fluid action input">
+            <%= f.input :query, label: false, placeholder: t(:search_ex), input_html: { value: (params[:src][:query] if params[:src])  }, wrapper: false %>
+              <%= f.button :button,  t(:search), class: "ui primary button" %>
           </div>
-          <div class="extra">
-            Eklenme tarihi 
-            <%= metadata.created_at  %>
-            <%= link_to t("open"), metadata, class: "ui tiny primary floated button" %>
+          <%= f.input :fond_scope_id, label: t(:fond), required: false, collection: Fond.all_without_empty, 
+              selected: params.fetch(:src, {}).fetch(:fond_scope_id, false), include_blank: true,
+              input_html: {class: 'ui fluid search selection dropdown '} 
+            %>
+          <%= link_to t(:clean), root_path, class: "ui right button" %>
+        </div>
+        <div class="ui styled fluid accordion" data-controller="accordion">
+          <div class="<%= active_accordion(params[:src], %w( box order folder starting_date_from starting_date_to ending_date_from  ending_date_to number_type number_value language_ids document_type_ids)) %> title">
+            <i class="dropdown icon"></i>
+            <%= t :advanced_options %>
+          </div>
+          <div class="<%=  active_accordion(params[:src], %w( box order folder starting_date_from starting_date_to ending_date_from  ending_date_to number_type number_value language_ids document_type_ids) ) %> content">
+            <div class="five fields">
+              <%= f.input :box, as: :numeric, label: t(:box), required: false, input_html: {value: params.fetch(:src,{}).fetch(:box, "")} %>
+              <%= f.input :folder, as: :numeric, label: t(:folder), required: false,  input_html: {value: params.fetch(:src,{}).fetch(:folder, "")} %>
+              <%= f.input :order, as: :numeric, label: t(:order), required: false,  input_html: {value: params.fetch(:src,{}).fetch(:order, "")} %>
+              <%= f.input :number_type, collection: NumberType.order(:name), value_method: :solrable_name, required: false, label: t(:number_type), include_blank: true, input_html: {class: 'ui fluid selection dropdown ' }, selected: params.fetch(:src,{}).fetch(:number_type, false) %>
+              <%= f.input :number_value, required: false, label: t(:number_value), input_html: {value: params.fetch(:src,{}).fetch(:number_value, "")}%>
+            </div>
+            <div class="four fields">
+              <%= f.input :starting_date_from, as: :date, html5: true, label: t(:starting_date_from), required: false, input_html:{value: params.fetch(:src, {}).fetch(:starting_date_from, false) } %>
+              <%= f.input :starting_date_to, as: :date, html5: true, label: t(:starting_date_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:starting_date_to, false) } %>
+              <%= f.input :ending_date_from, as: :date, html5: true, label: t(:ending_date_from), required: false, input_html:{value: params.fetch(:src, {}).fetch(:ending_date_from, false) } %>
+              <%= f.input :ending_date_to, as: :date, html5: true, label: t(:ending_date_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:ending_date_to, false) } %>
+            </div>
+            <div class="inline fields">
+              <%= f.input :document_type_ids, label: t(:document_types), required: false, collection: DocumentType.order(:name), as: :check_boxes,
+              checked: params.fetch(:src,{}).fetch(:document_type_ids, nil) %>
+            </div>
+            <div class="inline fields">
+              <%= f.input :language_ids, label: t(:languages), required: false, collection: Language.order(:name), as: :check_boxes,
+                checked: params.fetch(:src,{}).fetch(:language_ids, nil) %>
+            </div>
+          </div>
+        </div>
+        <% if policy(:admin_search).show? %>
+        <div class="ui inverted grey segment">
+          <div class="four fields">
+            <%= f.input :created_at_from, as: :date, html5: true, label: t(:created_at_from), required: false,  input_html:{value: params.fetch(:src, {}).fetch(:created_at_from, false) } %>
+            <%= f.input :created_at_to, as: :date, html5: true, label: t(:created_at_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:created_at_to, false) } %>
+            <%= f.input :updated_at_from, as: :date, html5: true, label: t(:updated_at_from), required: false, input_html:{value: params.fetch(:src, {}).fetch(:updated_at_from, false) } %>
+            <%= f.input :updated_at_to, as: :date, html5: true, label: t(:updated_at_to), required: false, input_html:{value: params.fetch(:src, {}).fetch(:updated_at_to, false) } %>
+          </div>
+          <div class="inline fields">
+            <div class="ui checkbox">
+              <%= f.input :show_sec, as: :boolean, label: t(:show_secret),unchecked_value: nil,
+                input_html: { checked: params.fetch(:src, {}).fetch(:show_sec, false) == "1" } 
+                %>
+            </div>
+            <div class="ui checkbox">
+              <%= f.input :show_not_sec, as: :boolean, checked_value: false, unchecked_value: nil, label: t(:show_not_secret), 
+              input_html: { checked: params.fetch(:src, {}).fetch(:show_not_sec, false) == "false" } %>
+            </div>
+          </div>
+          <div class="inline fields">
+            <%= f.input :privacy_id, as: :radio_buttons, collection: Privacy.all, label: t(:privacy), required: false, 
+              checked: (params[:src][:privacy_id] if params[:src].present?) 
+              %>
+          </div>
+          <div class="inline fields">
+            <%= f.input :phisycal_status_id, as: :radio_buttons, collection: PhisycalStatus.all, label: t(:phisycal_status), required: false,
+              checked: (params[:src][:phisycal_status_id] if params[:src].present?) 
+              %>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+
+      
+    </div>
+    
+  </div>
+    <div class="row">
+      <% params.each do |key, val| %>
+          <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="column">
+      <div class="fields">
+        <div class=" field">
+          <div class="ui green tiny button "> Create New Curation</div>
+        </div>
+        <div class=" field">
+          <div class="ui primary tiny button "> Add Items To My Curation</div>
+        </div>
+        <div class=" field">
+          <%= select_tag(:curation_id, options_for_select([['Yeni Araştırma', 1], ['Kitap Projesi', 2]]), class: "ui tiny selection dropdown ")%>
+        </div>
+      </div>
+      </div>
+    </div>
+    
+  <div class="row"> <!-- result list -->
+    <div class="twelve wide column">
+      <div class="ui grid">
+        <div class="column">
+          <div class="ui items">
+            <% @record_metadata.each do |metadata| %>
+              <div class="item">
+                <% if !metadata.record_attachment.nil? && !metadata.record_attachment.watermarked_images.empty? %>
+                  <% file = metadata.record_attachment.watermarked_images.first %>
+                  <a class="ui tiny image">
+                    <% begin %>
+                      <%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %>
+                    <% rescue => e %>
+                      <div class="ui placeholder">
+                        <div class="image"></div>
+                      </div>
+                    <% end %>
+                  </a>
+                <% else %>
+                  <a class="ui tiny image">
+                    <div class="ui placeholder">
+                        <div class="image"></div>
+                      </div>
+                  </a>
+                <% end %>
+                <div class="content">
+                  <a class="header">
+                    <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
+                  </a>
+                  <div class="description">
+                    <%= check_box_tag "cureted_metadata[#{metadata.id}]",  metadata.id %>
+                    <p>
+                      <%= t('summary').capitalize %> : <%= sshorter metadata.summary, 300 %>
+                    </p>
+                    <p>
+                      <%= t('subjects').capitalize %> : 
+                      <% metadata.subjects.each  do |subject| %>
+                        <%= "#{subject.name}, " %>
+                      <% end %>
+                    </p>
+                  </div>
+                  <div class="extra">
+                    Eklenme tarihi 
+                    <%= metadata.created_at  %>
+                    <%= link_to t("show"), metadata, class: "ui tiny primary floated button" %>
+                  </div>
+                </div>
+              </div><!-- item -->
+            <% end %>
+          </div><!-- items -->
+          <div class="row">
+            <%= paginate @record_metadata %>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @record_metadata %>
-  <p>
-    <%= link_to "daha fazla", record_metadata_path, class: "ui tiny yellow button" %>
-  </p>
+    </div>
 
-    </div>
-      <div class="four wide column" >
-      <h3><%= t(:subjects) %></h3>
-      <%= render "subjects", subjects: @subjects %>
-        
-      <h3 data-controller="homex"><%= t(:toponyms) %></h3>
-          <% @search.facet(:toponyms).rows.each do |facet| %>
-          <li class="<%= is_filter_active?(url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects])) %>"><%= link_to facet.value, url_for(query: params[:query], toponyms: facet.value, subjects: params[:subjects]) %> <%= facet.count %></li> 
-          <% end %> 
+    <div class="four wide column"><!-- facets -->
+      <!-- Filter and revert -->
+      <div class="ui small icon buttons">
+        <%= form.button class: "ui primary button", name: "filter_button" do %>
+          Filter<i class="filter icon"></i>
+        <% end %>
+        <%= link_to root_path , class: "ui button", data: {turbo_frame: "_top"} do %>
+          <i class="undo icon"></i>
+        <% end %>
+      </div>
+      <!-- Filter and revert -->
+    
+      <div class="row ui list ">
+      <% if @search.facet(:fond_id).present? && @search.facet(:fond_id).rows.present? %>
+        <h3><%= t :fond %></h3>
+        <% @search.facet(:fond_id).rows.each do |fond| %>
+          <li>
+            <%= check_box_tag "fond_id[#{fond.instance.name}]",  fond.value, ((params[:fond_id].present?) && (params[:fond_id].keys.include? fond.instance.name)) ? true : nil %>
+            <label title="<%= fond.instance.name %>"><%=sshorter fond.instance.name%> <%=fond.count%></label>
+          </li>
+        <% end %>
+      </div>
+      <% end %>
+      <% if @subjects_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :subjects %></h3>
+          
+          <% @subjects_facet.rows[1..10].each do |subject| %>
+            <li>
+              <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
+              <label title="<%=subject.instance.name%>"><%=sshorter subject.instance.name%> <%=subject.count%></label>
+            </li>
+          <% end %>
         </div>
-    </div><!-- row -->
-  </div><!-- grid -->
+      <% end %>
+      <% if @organizations_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :organizations %></h3>
+          <% @organizations_facet.rows[1..10].each do |organization| %>
+            <%#= link_to organization.instance.name, root_path(params.permit(:organization_ids).merge(organization_ids: {"#{organization.instance.name}": organization.value} )) %>
+            <li>
+              <%= check_box_tag "organization_ids[#{organization.instance.name}]", organization.value, ((params[:organization_ids].present?) && (params[:organization_ids].keys.include? organization.instance.name)) ? true : nil %>
+              <label title="<%=organization.instance.name%>"><%= sshorter organization.instance.name%> <%=organization.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @person_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :people %></h3>
+          <% @person_facet.rows[1..10].each do |person| %>
+            <li>
+              <%= check_box_tag "person_ids[#{person.instance.name}]", person.value, ((params[:person_ids].present?) && (params[:person_ids].keys.include? person.instance.name)) ? true : nil %>
+              <label title="<%=person.instance.name%>"><%= sshorter person.instance.name%> <%=person.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @toponyms_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :toponyms %></h3>
+          <% @toponyms_facet.rows[1..10].each do |toponym| %>
+            <li>
+              <%= check_box_tag "toponym_ids[#{toponym.instance.name}]", toponym.value, ((params[:toponym_ids].present?) && (params[:toponym_ids].keys.include? toponym.instance.name)) ? true : nil %>
+              <label title="<%=toponym.instance.name%>"><%=sshorter toponym.instance.name%> <%=toponym.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <!-- Filter and revert -->
+      <div class="ui small icon buttons">
+        <%= form.button class: "ui primary button", name: "filter_button" do %>
+          Filter<i class="filter icon"></i>
+        <% end %>
+        <%= link_to root_path , class: "ui button", data:{turbo_action: "_top" } do %>
+          <i class="undo icon"></i>
+        <% end %>
+      </div>
+      <!-- Filter and revert -->
+    
     </div>
+  </div>
+</div>
 <% end %>
+<% end %> <!-- turbo end -->

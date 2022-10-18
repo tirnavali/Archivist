@@ -1,32 +1,66 @@
 class RecordMetadatum < ApplicationRecord
   searchable do
-    integer :box, :folder, :order
+    boolean :is_secret
+    text :special_numbers do 
+      special_numbers.map{ |no| no.to_solr_index }
+    end
+
+    string :special_value, :multiple => true, :references => SpecialNumber do
+      special_numbers.map(&:value)
+    end
+
+    string :special_number_type, :multiple => true, :references => SpecialNumber do
+      special_numbers.map(&:solrable_number_type_name)
+    end
+    
+    string  :organization_code do
+      organization_code.upcase(:turkic)
+    end
+    integer :box
+    integer :folder
+    integer :order
+    integer :fond_scope_id do
+      fond_id
+    end
+    integer :fond_id,           :multiple => true, :references => Fond
+    integer :subject_ids,       :multiple => true, :references => Subject
+    integer :organization_ids,  :multiple => true, :references => Organization
+    integer :person_ids,        :multiple => true, :references => Person
+    integer :toponym_ids,       :multiple => true, :references => Toponym
+    integer :document_type_ids, :multiple => true
+    integer :language_ids,      :multiple => true
+    integer :privacy_id
+    integer :phisycal_status_id
+    time :starting_date
+    time :ending_date
+    time :created_at
     time :updated_at
     text :summary
+    text :explaination
+
     text :toponyms do
       toponyms.map{ |toponym| toponym} 
     end
+
     text :subjects do
       subjects.map{ |subject| subject} 
     end
-    integer :toponym_ids, :multiple => true
+
 
     text :people do
       people.map{ |person| person.name} 
     end
-    integer :person_ids, :multiple => true
 
     text :organizations do
-      organizations.map{ |organization| organization.name} 
+      (organizations.map{ |organization| organization.name})
     end
-    integer :organization_ids, :multiple => true
-
+    
   end
 
   before_validation :assign_default_values
   after_create :save_submission
   audited
-  has_one :record_attachment
+  has_one :record_attachment, dependent: :destroy
   belongs_to :fond
   #audited associated_with: :organization
   belongs_to :phisycal_status
@@ -38,7 +72,7 @@ class RecordMetadatum < ApplicationRecord
   has_and_belongs_to_many :toponyms
   has_and_belongs_to_many :people
   has_many :special_numbers #, dependent: :destroy
-  has_one :record_submission
+  has_one :record_submission, dependent: :destroy
   has_one :user, through: :record_submission
   
   

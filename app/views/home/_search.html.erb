@@ -1,12 +1,146 @@
 <%= form_with url: :root, method: :get do |form| %>
-  <div class="ui fluid action input">
-    <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
-    <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
-    <div class="ui input">
-      <%= form.number_field :updated_at %>
-    </div>
-    <div class="ui ">
-      <%= form.submit "Ara", class: "ui primary button"%>
-     <% end %> 
+<div class="ui celled grid">
+  <div class="row"><!-- input field -->
+    <div class="sixteen wide column">
+      <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues %> </h1>
+      <% unless params[:query].nil? %>
+        <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%></i>
+          <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
+        </div>
+      <% end %>
+      <div class="ui fluid action input">
+        <%= form.text_field :query, value: params[:query], placeholder: "Örn. muhabere evrakı / muhabere evra*" %>
+        <%= form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
+        {prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} %>
+        <div class="ui input">
+          <%= form.number_field :updated_at %>
+        </div>
+        <div class="ui input ">
+          <%= form.submit "Ara", class: "ui primary button"%>
+        </div>
+      </div>
     </div>
   </div>
+    <div class="row">
+      <% params.each do |key, val| %>
+          <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
+      <% end %>
+    </div>
+    <div class="row"> <!-- result list -->
+    <div class="twelve wide column">
+      <div class="ui grid">
+        <div class="column">
+          <div class="ui items">
+            <% @record_metadata.each do |metadata| %>
+              <div class="item">
+                <% if !metadata.record_attachment.nil? && !metadata.record_attachment.watermarked_images.empty? %>
+                  <% file = metadata.record_attachment.watermarked_images.first %>
+                  <a class="ui tiny image">
+                    <% begin %>
+                      <%= image_tag file.preview(resize_to_limit: [150, 150]).processed if file.previewable? %>
+                    <% rescue => e %>
+                      <div class="ui placeholder">
+                        <div class="image"></div>
+                      </div>
+                    <% end %>
+                  </a>
+                <% else %>
+                  <a class="ui tiny image">
+                    <div class="ui placeholder">
+                        <div class="image"></div>
+                      </div>
+                  </a>
+                <% end %>
+                <div class="content">
+                  <a class="header">
+                    <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
+                  </a>
+                  <div class="description">
+                    <p>
+                      <%= t('summary').capitalize %> : <%= sshorter metadata.summary, 300 %>
+                    </p>
+                    <p>
+                      <%= t('subjects').capitalize %> : 
+                      <% metadata.subjects.each  do |subject| %>
+                        <%= "#{subject.name}, " %>
+                      <% end %>
+                    </p>
+                  </div>
+                  <div class="extra">
+                    Eklenme tarihi 
+                    <%= metadata.created_at  %>
+                    <%= link_to t("open"), metadata, class: "ui tiny primary floated button" %>
+                  </div>
+                </div>
+              </div><!-- item -->
+            <% end %>
+          </div><!-- items -->
+          <div class="row">
+            <%= paginate @record_metadata %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="four wide column"><!-- facets -->
+      <% if @search.facet(:fond_id).present? && @search.facet(:fond_id).rows.present? %>
+      <div class="row ui list ">
+        <h3><%= t :fond %></h3>
+        <% @search.facet(:fond_id).rows.each do |fond| %>
+          <li>
+            <%= check_box_tag "fond_id[#{fond.instance.name}]",  fond.value, ((params[:fond_id].present?) && (params[:fond_id].keys.include? fond.instance.name)) ? true : nil %>
+            <label title="<%= fond.instance.name %>"><%=sshorter fond.instance.name%> <%=fond.count%></label>
+          </li>
+        <% end %>
+      </div>
+      <% end %>
+      <% if @subjects_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :subjects %></h3>
+          <% @subjects_facet.rows.each do |subject| %>
+            <li>
+              <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
+              <label title="<%=subject.instance.name%>"><%=sshorter subject.instance.name%> <%=subject.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @organizations_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :organizations %></h3>
+          <% @organizations_facet.rows[1..10].each do |organization| %>
+            <li>
+              <%= check_box_tag "organization_ids[#{organization.instance.name}]", organization.value, ((params[:organization_ids].present?) && (params[:organization_ids].keys.include? organization.instance.name)) ? true : nil %>
+              <label title="<%=organization.instance.name%>"><%= sshorter organization.instance.name%> <%=organization.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @person_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :people %></h3>
+          <% @person_facet.rows[1..10].each do |person| %>
+            <li>
+              <%= check_box_tag "person_ids[#{person.instance.name}]", person.value, ((params[:person_ids].present?) && (params[:person_ids].keys.include? person.instance.name)) ? true : nil %>
+              <label title="<%=person.instance.name%>"><%= sshorter person.instance.name%> <%=person.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @person_facet.rows.present? %>
+        <div class="row ui list ">
+          <h3><%= t :toponyms %></h3>
+          <% @person_facet.rows[1..10].each do |toponym| %>
+            <li>
+              <%= check_box_tag "toponym_ids[#{toponym.instance.name}]", toponym.value, ((params[:toponym_ids].present?) && (params[:toponym_ids].keys.include? toponym.instance.name)) ? true : nil %>
+              <label title="<%=toponym.instance.name%>"><%=sshorter toponym.instance.name%> <%=toponym.count%></label>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+  </div><!-- result list-->
+</div>
+<% end %>

@@ -1,6 +1,24 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+
+  # @author Sercan TIRNAVALI
+  # @date 26.09.2022
+  # Generate specific lengt of strings
+  # use for labels in views etc.
+  def sshorter(data_label="", show_lenght=25)
+    begin
+      if data_label.to_s.length > show_lenght
+        data_label = data_label[...show_lenght]
+        data_label << "..."
+      else
+        data_label.to_s
+      end
+    rescue ArgumentError
+      puts "Arguement error occured."
+    end
+  end
+
   # @author Sercan TIRNAVALI
   # @date 02.09.2022
   # Generate formatted url for non html pages

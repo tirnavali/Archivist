@@ -2,6 +2,7 @@ class Fond < ApplicationRecord
   #default_scope {order(:name)}
 
   scope :get_ancestors, -> { where("depth = 0").order("name asc")}
+  scope :all_without_empty, -> {includes(:record_metadata).where(record_metadata: {fond_id: nil}).invert_where.order("name asc")}
 
   audited
   before_validation :clean_white_spaces
@@ -11,7 +12,7 @@ class Fond < ApplicationRecord
   
   belongs_to :parent, class_name: "Fond", optional: true
   has_many :children, class_name: "Fond", foreign_key: "parent_id", dependent: :nullify
-  has_many :record_metadata
+  has_many :record_metadata, dependent: :nullify
 
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name

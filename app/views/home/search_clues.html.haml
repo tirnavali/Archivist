@@ -1,81 +1,89 @@
-%h1 Arama ipuçları
-=render "search"
-%p
-.ui.four.column.grid
-  .column
-    .ui.fluid.orange.card
-      .content
-        .header Metin kutusuna istediğiniz kelimeleri yazın
-        .description 
-        %p 
-          Kelimenin yazılışından emin değilseniz sonuna
-          %span.ui.label * yıldız 
-          koyarak tüm olasılıkları tarayabilirsiniz.
-        %p 
-          Örneğin tarama alanına: 
-          %i karahis*
-          yazmak 
-          %p
-          %i karahisa | karahisar | karahisar-ı
-          geçen kayıtları bulmanıza yardımcı olur.
-        %p Bu sorgu biçimi kelimeleri metin üzerindeki ağırlıklarını hesaplayarak çalışır.
-  .column
-    .ui.fluid.orange.card
-      .content
-        .header Metini geçtiği gibi arayabilirsiniz
-        .description 
-        %p 
-          Arama kelimenizden eminseniz
-          %span.ui.label " tırnak 
-          işaretleri koyarak aramanızı keskinleştirebilirsiniz.
-        %p 
-          Örneğin tarama alanına: 
-          %i "muhabere evrakı"
-          yazmak 
-          %p
-          %i muhabere evrakı 
-          kelimesinin kesin olarak geçtiği kayıtları bulmanızı sağlar.
-  .column
-    .ui.fluid.red.card
-      .content
-        .header Boole arama işlevi
-        .description 
-        %p 
-          Aramanızı bool mantığı ile gerçekletirmek isterseniz
-          %span.ui.label AND
-          %span.ui.label OR 
-          %span.ui.label NOT  
-          işlevlerini kullanabilirsiniz.
-        %p 
-          Örneğin tarama alanına: 
-          %i koçigiri AND ahmet yazmak 
-          %i koçigiri ve ahmet içeren 
-          kayıtları bulmanıza yardımcı olur.
-        %p 
-          Tarama alanına: 
-          %i koçigiri AND ahmet NOT mehmet
-          yazmak 
-          
-          %i koçigiri ve ahmet içeren ve mehmet içermeyen
-          kayıtları bulmanıza yardımcı olur.
-        %p 
-          Tarama alanına: 
-          %i koçigiri OR ahmet 
-          yazmak 
-          
-          %i koçigiri veya ahmet içeren 
-          kayıtları bulmanıza yardımcı olur. Bu durumda koçgiri içeren ve ahmet içermeyen kayıtları da bulabilirsiniz.
-  .column
-    .ui.fluid.red.card
-      .content
-        .header Filtreleri kullanın
-        .description 
-        %p 
-          Tarama yaptıktan sonra arama sonuçlarınızı daraltmak için
-          %span.ui.label filtrelerden 
-          faydalanabilirsiniz.
-        %p 
-          Bu sayede aradığınız belgeleri: 
-          %i tarih, yer, zaman, kişi, kurum
-          gibi unsurlara göre süzebilirsiniz. 
+= turbo_frame_tag "search_clues" do
+  .ui.segment
+    
+    %h1 
+      Arama ipuçları 
+      =link_to root_path, data: {controller: "close", action: "click->close#close"} do
+        %i.close.icon
+      =#%a{data: {controller: "close", action: "click->close#close"}}
+      =#  %i.close.icon
+    %p
+    .ui.four.column.grid
+      .column
+        .ui.fluid.orange.card
+          .content
+            .header Metin kutusuna istediğiniz kelimeleri yazın
+            .description 
+            %p 
+              Kelimenin yazılışından emin değilseniz sonuna
+              %span.ui.label * yıldız 
+              koyarak tüm olasılıkları tarayabilirsiniz.
+            %p 
+              Örneğin tarama alanına: 
+              %i karahis*
+              yazmak 
+              %p
+              %i karahisa | karahisar | karahisar-ı
+              geçen kayıtları bulmanıza yardımcı olur.
+            %p Bu sorgu biçimi kelimeleri metin üzerindeki ağırlıklarını hesaplayarak çalışır.
+      .column
+        .ui.fluid.orange.card
+          .content
+            .header Metini geçtiği gibi arayabilirsiniz
+            .description 
+            %p 
+              Arama kelimenizden eminseniz
+              %span.ui.label " tırnak 
+              işaretleri koyarak aramanızı keskinleştirebilirsiniz.
+            %p 
+              Örneğin tarama alanına: 
+              %i "muhabere evrakı"
+              yazmak 
+              %p
+              %i muhabere evrakı 
+              kelimesinin kesin olarak geçtiği kayıtları bulmanızı sağlar.
+      .column
+        .ui.fluid.red.card
+          .content
+            .header Boole arama işlevi
+            .description 
+            %p 
+              Aramanızı bool mantığı ile gerçekletirmek isterseniz
+              %span.ui.label AND
+              %span.ui.label OR 
+              %span.ui.label NOT  
+              işlevlerini kullanabilirsiniz.
+            %p 
+              Örneğin tarama alanına: 
+              %i koçigiri AND ahmet yazmak 
+              %i koçigiri ve ahmet içeren 
+              kayıtları bulmanıza yardımcı olur.
+            %p 
+              Tarama alanına: 
+              %i koçigiri AND ahmet NOT mehmet
+              yazmak 
+              
+              %i koçigiri ve ahmet içeren ve mehmet içermeyen
+              kayıtları bulmanıza yardımcı olur.
+            %p 
+              Tarama alanına: 
+              %i koçigiri OR ahmet 
+              yazmak 
+              
+              %i koçigiri veya ahmet içeren 
+              kayıtları bulmanıza yardımcı olur. Bu durumda koçgiri içeren ve ahmet içermeyen kayıtları da bulabilirsiniz.
+      .column
+        .ui.fluid.red.card
+          .content
+            .header Filtreleri kullanın
+            .description 
+            %p 
+              Tarama yaptıktan sonra arama sonuçlarınızı daraltmak için
+              %span.ui.label filtrelerden 
+              faydalanabilirsiniz.
+            %p 
+              Bu sayede aradığınız belgeleri: 
+              %i tarih, yer, zaman, kişi, kurum
+              gibi unsurlara göre süzebilirsiniz. 
+  
           

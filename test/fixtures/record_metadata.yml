@@ -66,4 +66,4 @@ third:
   languages: first, second, third
   document_types: first, second, third
   phisycal_status: first
-  is_secret: false
+  is_secret: true
