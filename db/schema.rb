@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_135021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "collection_items", force: :cascade do |t|
+    t.bigint "collection_id", null: false
+    t.bigint "record_metadatum_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_collection_items_on_collection_id"
+    t.index ["record_metadatum_id"], name: "index_collection_items_on_record_metadatum_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
   create_table "document_types", force: :cascade do |t|
@@ -126,6 +143,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
 
   create_table "phisycal_statuses", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "field"
+    t.integer "like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -244,6 +268,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_134747) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collection_items", "record_metadata"
+  add_foreign_key "collections", "users"
   add_foreign_key "fonds", "fonds", column: "parent_id"
   add_foreign_key "record_attachments", "record_metadata"
   add_foreign_key "record_metadata", "fonds"

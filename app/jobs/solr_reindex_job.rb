@@ -1,7 +1,4 @@
-#
-# Reindex solr related models
-#
-class SolrReindex < ApplicationJob
+class SolrReindexJob < ApplicationJob
   queue_as :default
 
   rescue_from(NoMethodError) do |exception|

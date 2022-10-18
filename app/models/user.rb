@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :audits
   has_many :record_submissions, dependent: :nullify
   has_many :record_metadata, :through => :record_submissions
+  has_many :collections
   
   enum role: [:user, :admin, :editor, :writer]
   

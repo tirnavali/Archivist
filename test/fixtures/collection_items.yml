@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  collection: one
+  record_metadatum: one
+
+two:
+  collection: two
+  record_metadatum: two

@@ -14,6 +14,7 @@
   <div>
     <%=link_to "Show user submissions", record_submissions_admin_user_path(@user) %> |
     <%=link_to "Show user activity", activities_admin_user_path(@user) %> |
+    <%=link_to "Show user collections", admin_collections_path(@user) %> | 
     <%= link_to "Edit this user", edit_admin_user_path(@user) %> |
     <%= link_to "Back to users", admin_users_path, "data-turbo-frame": "_top" %> 
     <%= button_to "Destroy this user", admin_user_path(@user), method: :delete, form: {data:{ turbo_confirm: "Are you sure?" }} %>
