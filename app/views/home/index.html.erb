@@ -104,19 +104,23 @@
           <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
       <% end %>
     </div>
+
     <div class="row">
-      <div class="ui three column stackable grid">
-        <div class="column">
+      <div class="column">
+      <div class="fields">
+        <div class=" field">
           <div class="ui green tiny button "> Create New Curation</div>
         </div>
-        <div class="column">
+        <div class=" field">
           <div class="ui primary tiny button "> Add Items To My Curation</div>
         </div>
-        <div class="column">
-          <%= select_tag(:curation_id, options_for_select([['Yeni Araştırma', 1], ['Kitap Projesi', 2]])) %>
+        <div class=" field">
+          <%= select_tag(:curation_id, options_for_select([['Yeni Araştırma', 1], ['Kitap Projesi', 2]]), class: "ui tiny selection dropdown ")%>
         </div>
       </div>
+      </div>
     </div>
+    
   <div class="row"> <!-- result list -->
     <div class="twelve wide column">
       <div class="ui grid">
