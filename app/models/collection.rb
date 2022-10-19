@@ -7,4 +7,8 @@ class Collection < ApplicationRecord
   validates :title, presence: true
   validates :title, length: { minimum: 3 }
   validates :title, length: { maximum: 100 }
+
+  def to_s
+    title
+  end
 end

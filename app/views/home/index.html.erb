@@ -104,27 +104,31 @@
           <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
       <% end %>
     </div>
-
-    <div class="row">
-      <div class="column">
-      <div class="fields">
-        <div class=" field">
-          <div class="ui green tiny button "> Create New Curation</div>
-        </div>
-        <div class=" field">
-          <div class="ui primary tiny button "> Add Items To My Curation</div>
-        </div>
-        <div class=" field">
-          <%= select_tag(:curation_id, options_for_select([['Yeni Araştırma', 1], ['Kitap Projesi', 2]]), class: "ui tiny selection dropdown ")%>
-        </div>
-      </div>
-      </div>
-    </div>
     
   <div class="row"> <!-- result list -->
     <div class="twelve wide column">
       <div class="ui grid">
+        
         <div class="column">
+          <div class="row">
+            <%= simple_form_for :collection, url: :root, method: :get do |collection_form| %>
+              <div class="column">
+              <div class="fields">
+              <% if current_user.collections && current_user.collections.size > 0  %>
+                <div class=" field">
+                  <%= collection_form.input "collection_id", collection: current_user.collections, label: false, input_html: {class: "ui selection dropdown"}, include_blank: false   %>
+                </div>
+                <div class=" field">
+                  <%= collection_form.submit "add_documents_to_collection", class: "ui primary button "%>
+                </div>
+              <% end # if %>
+                <div class=" field">
+                  <%= link_to "new_collection", new_admin_collection_path(current_user), class: "ui green button" %>
+                </div>
+              </div>
+              </div>
+            
+          </div><!-- row -->
           <div class="ui items">
             <% @record_metadata.each do |metadata| %>
               <div class="item">
@@ -145,13 +149,14 @@
                         <div class="image"></div>
                       </div>
                   </a>
-                <% end %>
+                <% end # end if %>
                 <div class="content">
                   <a class="header">
                     <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
                   </a>
                   <div class="description">
-                    <%= check_box_tag "cureted_metadata[#{metadata.id}]",  metadata.id %>
+                    <%= collection_form.input "metadatum_#{metadata.id}", as: :boolean, label: false, input_html: {name: "metadatum_ids[]"}, checked_value: "#{metadata.id}", unchecked_value: nil %>
+                                
                     <p>
                       <%= t('summary').capitalize %> : <%= sshorter metadata.summary, 300 %>
                     </p>
@@ -171,12 +176,14 @@
               </div><!-- item -->
             <% end %>
           </div><!-- items -->
-          <div class="row">
-            <%= paginate @record_metadata %>
-          </div>
+          <% end  #simple_form_for :collection %>
+      <div class="row">
+        <%= paginate @record_metadata %>
+      </div>
         </div>
       </div>
     </div>
+ 
 
     <div class="four wide column"><!-- facets -->
       <!-- Filter and revert -->
@@ -200,11 +207,11 @@
           </li>
         <% end %>
       </div>
-      <% end %>
+      <% end #@search.facet %>
+
       <% if @subjects_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :subjects %></h3>
-          
           <% @subjects_facet.rows[1..10].each do |subject| %>
             <li>
               <%= check_box_tag "subject_ids[#{subject.instance.name}]", subject.value, ((params[:subject_ids].present?) && (params[:subject_ids].keys.include? subject.instance.name)) ? true : nil %>
@@ -212,7 +219,8 @@
             </li>
           <% end %>
         </div>
-      <% end %>
+      <% end #@subjects_facet %>
+
       <% if @organizations_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :organizations %></h3>
@@ -224,7 +232,7 @@
             </li>
           <% end %>
         </div>
-      <% end %>
+      <% end #@organizations_facet%>
       <% if @person_facet.rows.present? %>
         <div class="row ui list ">
           <h3><%= t :people %></h3>
@@ -235,7 +243,7 @@
             </li>
           <% end %>
         </div>
-      <% end %>
+      <% end #@person_facet %>
 
       <% if @toponyms_facet.rows.present? %>
         <div class="row ui list ">
@@ -247,7 +255,7 @@
             </li>
           <% end %>
         </div>
-      <% end %>
+      <% end  #@toponyms_facet %>
       
       <!-- Filter and revert -->
       <div class="ui small icon buttons">
