@@ -1,14 +1,68 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Collections</h1>
+<div id="collections">
+  <div class="ui  menu">
+    <div class="header item">
+      <h3><%= t :collections %></h3>
+    </div>
+    <div class=" item">
+      <%= link_to t(:add), new_admin_collection_path, class:"ui green button" %>
+    </div>
+    <div class="right menu">
+      <div class="ui simple dropdown item">
+        <%= t(:save) %>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item"><%= link_to format_current_url_as("xlsx") do %>
+            <i class="ui black file excel icon"></i>
+              xlsx
+          <% end %></div>
+          <div class=" item">
+            <%= link_to format_current_url_as("csv") do %>
+                  <i class="ui black file alternate icon"></i>
+                  csv
+            <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
+  </div>
 
-<div id="admin_collections">
-  <% @collections.each do |admin_collection| %>
-    <%= render admin_collection %>
-    <p>
-      <%= link_to "Show this collection", admin_collection_path(admin_collection) %>
-    </p>
-  <% end %>
+<%= turbo_frame_tag "collections"  do %>
+<div class="ui right aligned grid">
+  <div class="left floated left aligned six wide column">
+  <%== pagy_semantic_nav(@pagy)%>
+  </div>
+  
+  <div class="right aligned six wide column">
+  
+    <%= search_form_for @q, as: :term, url: :admin_collections, class:"" do |f| %>
+      <div class="ui action input">
+      <%= f.search_field :title_cont, class:"field", placeholder: :title_cont %>
+      <%= f.button "Ara", class:"ui primary button"%>
+      </div>
+    <% end %>
+  </div>
 </div>
+<p>
+<% unless params[:q].nil? %> Found collections: <%= @q.result.size  %> <% end %>
+</p>
 
-<%= link_to "New collection", new_admin_collection_path %>
+  <table class="ui single line table">  
+    <thead>
+      <tr>
+        <th class="single line">Id</th>
+        <th><%= t :title %></th>
+        <th><%= t :collection_size %></th>      
+        <th><%= t :created_at%></th>
+        <th><%= t :updated_at%></th>
+        
+        <th><%= t :action%></th>
+    </tr>
+    </thead>
+    <tbody>  
+      <%= render "collections_table", class:"ui right floated pagination menu" %>
+    </tbody>
+   </table>
+<% end %>
+</div>

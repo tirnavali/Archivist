@@ -111,7 +111,7 @@
         
         <div class="column">
           <div class="row">
-            <%= simple_form_for :collection, url: :root, method: :get do |collection_form| %>
+            <%= simple_form_for "collection_items", url: :collection_items, method: :post, html:{remote: true} do |collection_form| %>
               <div class="column">
               <div class="fields">
               <% if current_user.collections && current_user.collections.size > 0  %>

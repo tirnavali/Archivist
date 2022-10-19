@@ -64,5 +64,6 @@ Rails.application.routes.draw do
     end
   end
   resources :record_submissions, only: [:index]
+  resources :collection_items, only: [:create]
 
 end

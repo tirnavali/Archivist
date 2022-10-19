@@ -1,0 +1,26 @@
+<% @collections.each do |collection| %>
+
+<tr>
+  <td>
+    <div class="ui right aligned"><%= link_to "#{collection.id}", admin_collection_path(collection) %></div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= collection.title%> </div>
+  </td>
+  <td>
+    <div class="ui aligned"><%= collection.collection_items.count %> </div>
+  </td>
+
+  <td class="">
+    <div class="ui label" data-rating="3" data-max-rating="3">
+    <%=collection.created_at.strftime("%d.%m.%Y %H.%M")%></div>
+  </td>
+
+  <td class="">
+    <div class="ui label">
+      <%=collection.updated_at.strftime("%d.%m.%Y %H.%M")  %>
+    </div>
+  </td>
+  <%#= render "layouts/shared/actions", resource: collection %>
+</tr>
+<% end %>

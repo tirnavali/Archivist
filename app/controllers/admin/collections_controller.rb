@@ -4,6 +4,10 @@ class Admin::CollectionsController < ApplicationController
   # GET /admin/collections or /admin/collections.json
   def index
     @collections = policy_scope(Collection)
+    @q= @collections.ransack(params[:term])
+    @collections = @q.result.page params[:page] 
+
+    @pagy, @collections = pagy(@collections, {})
   end
 
   # GET /admin/collections/1 or /admin/collections/1.json
