@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   audited
+  after_create :create_collection
   after_create :assign_default_role
   after_create :set_superadmin
   before_destroy :do_not_delete_superadmin, prepend: true
@@ -24,6 +25,10 @@ class User < ApplicationRecord
 
   def to_s
     self.email
+  end
+
+  def create_collection
+    Collection.create!(title: "Araştırma Listem", user: self)
   end
 
   def set_superadmin
