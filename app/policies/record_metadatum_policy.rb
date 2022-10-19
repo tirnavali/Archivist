@@ -6,7 +6,7 @@ class RecordMetadatumPolicy < ApplicationPolicy
     end
 
     def resolve
-      if (user.superadmin?)
+      if (user.superadmin?|| user.admin? || user.editor? || user.writer? )
         scope.all
       else
         scope.where(is_secret: false)

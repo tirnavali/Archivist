@@ -4,7 +4,7 @@ class Collection < ApplicationRecord
   has_many :record_metadata, :through => :collection_items
 
   
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true
   validates :title, length: { minimum: 3 }
   validates :title, length: { maximum: 100 }
 end

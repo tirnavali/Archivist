@@ -3,7 +3,7 @@ class Admin::CollectionsController < ApplicationController
 
   # GET /admin/collections or /admin/collections.json
   def index
-    @collections = Collection.where(user_id: current_user.id)
+    @collections = policy_scope(Collection)
   end
 
   # GET /admin/collections/1 or /admin/collections/1.json

@@ -1,0 +1,24 @@
+<h1>Users#Collections</h1>
+<%= turbo_frame_tag "collections" do %>
+<%== pagy_semantic_nav(@pagy) %>
+<p>
+  <%== pagy_info(@pagy) %></p>
+<div class ="ui six column celled grid">
+    <div class="row">
+      <div class="one wide column ">Id</div>
+      <div class="column">Kullanıcı</div>
+      <div class="four wide column">Koleksiyon Adı</div>
+      <div class="column"><%= t :created_at %></div>
+      <div class="column"><%= t :updated_at %> </div>
+    </div>
+  <% @collections.each_with_index do |collection, index|  %>
+    <div class="row">
+      <div class="one wide column"><%=collection.id %></div>
+      <div class="column"><%= collection.user %></div>
+      <div class="four wide column "><%= collection.title %></div>
+      <div class=" column"><%=l collection.created_at, format: :short %></div>
+      <div class=" column"><%=l collection.updated_at, format: :short %></div>
+    </div>
+    <% end %>
+</div><!-- ui grid -->
+<% end %>

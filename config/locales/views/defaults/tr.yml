@@ -1,4 +1,5 @@
 tr:
+  collections: "Koleksiyonlar"
   starting_date: "Başlangıç Tarihi"
   ending_date: "Bitiş Tarihi"
   box: "Kutu"

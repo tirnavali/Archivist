@@ -1,4 +1,8 @@
 class UserPolicy < ApplicationPolicy
+  def users_collections?
+    user.superadmin? || user.admin? || users_record? 
+  end
+
   def record_submissions?
     user.superadmin? || user.admin? || users_record? 
   end

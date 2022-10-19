@@ -1,7 +1,13 @@
 class Admin::UsersController < ApplicationController
   include Administration
-  before_action :set_user, only: %i[ show edit update destroy activities record_submissions ]
+  before_action :set_user, only: %i[ show edit update destroy activities record_submissions users_collections]
   #before_action :require_admin, only: %i[new create edit update destroy]
+
+  def users_collections
+    authorize @user
+    @collections = @user.collections
+    @pagy, @collections = pagy(@collections, {})
+  end
 
   def record_submissions
     @record_submissions = @user.record_submissions

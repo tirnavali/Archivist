@@ -40,12 +40,12 @@ Rails.application.routes.draw do
   resources :document_types
   resources :phisycal_statuses
   resources :subjects
-  resources :documents do 
-    get 'delete_image_attachment', on: :member
-      member do
-        delete :delete_image_attachment
-      end
-  end
+  # resources :documents do 
+  #   get 'delete_image_attachment', on: :member
+  #     member do
+  #       delete :delete_image_attachment
+  #     end
+  # end
   devise_for :users
   
   namespace :admin do
@@ -53,7 +53,8 @@ Rails.application.routes.draw do
       member do
         get :activities
         get :record_submissions
-        resources :collections
+        get :users_collections
+        resources :collections, shallow: true
       end
     end
     resources :statistics, only: [:index] do
