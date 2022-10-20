@@ -44,7 +44,7 @@ class RecordAttachmentsController < ApplicationController
     #authorize @record_attachment
     respond_to do |format|
       if @record_attachment.save
-        WatermarkJob.set(wait_until: (Time.now + 30.seconds)).perform_later(@record_attachment)
+        WatermarkJob.set(wait_until: (Time.now + 2.seconds)).perform_later(@record_attachment)
         format.html { redirect_to record_metadatum_url(@record_attachment.record_metadatum), notice: "Record attachment was successfully created." }
         format.json { render :show, status: :created, location: @record_attachment }
       else

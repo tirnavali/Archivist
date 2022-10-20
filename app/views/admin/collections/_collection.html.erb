@@ -12,5 +12,10 @@
     <strong>User:</strong>
     <%= collection.user_id %>
   </p>
+  <% collection.record_metadata.each do |record| %>
+    <p><%= record.id %></p>
+    <p><%= record.place_number %></p>
+
+  <% end %>
 
 </div>

@@ -103,27 +103,31 @@
       <% params.each do |key, val| %>
           <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
       <% end %>
+      <%= turbo_frame_tag "collection_flash_messages"%>
     </div>
     
   <div class="row"> <!-- result list -->
     <div class="twelve wide column">
       <div class="ui grid">
-        
+        <turbo-frame id= "collection-items">
         <div class="column">
+        </br>
+          
+            <%= form_for "collection_items", url: :collection_items, method: :post do |collection_form| %>
           <div class="row">
-            <%= simple_form_for "collection_items", url: :collection_items, method: :post, html:{remote: true} do |collection_form| %>
               <div class="column">
               <div class="fields">
               <% if current_user.collections && current_user.collections.size > 0  %>
-                <div class=" field">
-                  <%= collection_form.input "collection_id", collection: current_user.collections, label: false, input_html: {class: "ui selection dropdown"}, include_blank: false   %>
+                <div class=" field ">
+                  <%= collection_form.collection_select :collection_id, current_user.collections, :id, :to_s, 
+                   { selected: (params[:collection_items][:collection_id] if params[:collection_items].present?) } %>
                 </div>
                 <div class=" field">
-                  <%= collection_form.submit "add_documents_to_collection", class: "ui primary button "%>
+                  <%= collection_form.button t("add_documents_to_collection"), class: "ui primary button "%>
                 </div>
               <% end # if %>
                 <div class=" field">
-                  <%= link_to "new_collection", new_admin_collection_path(current_user), class: "ui green button" %>
+                  <%= link_to t("new_collection"), new_admin_collection_path(current_user), class: "ui green button" %>
                 </div>
               </div>
               </div>
@@ -152,31 +156,26 @@
                 <% end # end if %>
                 <div class="content">
                   <a class="header">
-                    <%= t(metadata.fond.class.name.downcase) %> : <%= metadata.fond %>
+                    <%= t(metadata.fond.class.name.downcase) %>: <%= metadata.fond %>
                   </a>
                   <div class="description">
-                    <%= collection_form.input "metadatum_#{metadata.id}", as: :boolean, label: false, input_html: {name: "metadatum_ids[]"}, checked_value: "#{metadata.id}", unchecked_value: nil %>
-                                
-                    <p>
-                      <%= t('summary').capitalize %> : <%= sshorter metadata.summary, 300 %>
-                    </p>
-                    <p>
-                      <%= t('subjects').capitalize %> : 
-                      <% metadata.subjects.each  do |subject| %>
-                        <%= "#{subject.name}, " %>
-                      <% end %>
-                    </p>
+                    <%= collection_form.check_box "record_metadatum_#{metadata.id}", {name: "record_metadatum_ids[]"}, 
+                      metadata.id, nil %><%= turbo_frame_tag "record_metadatum_#{metadata.id}" %>
+                    <p><%= t('summary').capitalize %>: <%= sshorter metadata.summary, 300 %></p>
+                    <p><%= t('document_types').capitalize %>: <%= metadata.document_types_to_s %></p>
+                    <p><%= t('subjects').capitalize %>: <%= metadata.subjects.join(", ") %></p>
                   </div>
                   <div class="extra">
-                    Eklenme tarihi 
-                    <%= metadata.created_at  %>
-                    <%= link_to t("show"), metadata, class: "ui tiny primary floated button" %>
+                    <%= t(:created_at) %>:
+                    <%= l metadata.created_at, format: :short  %> | 
+                    <%= link_to t("show"), metadata %>
                   </div>
                 </div>
               </div><!-- item -->
             <% end %>
           </div><!-- items -->
-          <% end  #simple_form_for :collection %>
+          <% end  #form_for :collection %>
+          </turbo-frame>
       <div class="row">
         <%= paginate @record_metadata %>
       </div>

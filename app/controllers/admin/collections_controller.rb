@@ -25,7 +25,7 @@ class Admin::CollectionsController < ApplicationController
 
   # POST /admin/collections or /admin/collections.json
   def create
-    @collection = Collection.new(collection_params)
+    @collection = Collection.new(title: collection_params[:title], user: current_user)
 
     respond_to do |format|
       if @collection.save

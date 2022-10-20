@@ -132,8 +132,13 @@ class RecordMetadatum < ApplicationRecord
     end
   end
 
+  def document_types_to_s
+    self.document_types.join(", ") 
+  end
+
   def place_number
-    "K#{self.box}_D#{self.folder}_S#{self.order}"
+    # K: Kutu, D: Dosya, G: Gömlek
+    "K#{self.box}_D#{self.folder}_G#{self.order}"
   end
 
 end

@@ -30,7 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  add_documents_to_collection: "Add To Collections"
   collections: "Collections"
+  new_collection: "New Collection"
   hello: "Hello world"
   advanced_options: "Advanced Options"
   all: "All"

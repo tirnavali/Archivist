@@ -1,0 +1,14 @@
+<%#= turbo_stream.update Person.new, "" %>
+<% if @record_metadatum_ids.present? %>
+<%= turbo_stream.prepend "collection_flash_messages" do %>
+    <%= render "flash"  %>
+<% end %>
+<% else %>
+<%= turbo_stream.prepend "collection_flash_messages" do %>
+<div class="ui container negative floating message"  data-controller="removals" data-action=" animationend->removals#remove ">
+    <p><%= t :select_record_first %></p>
+  </div>
+<% end %>
+<% end %>
+
+<%#= turbo_stream.prepend "flash_messages", partial: "flash" %>

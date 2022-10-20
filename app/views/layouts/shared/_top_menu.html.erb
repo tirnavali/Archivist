@@ -12,7 +12,7 @@
     <% end %>
             
     <% unless current_user.nil? %>
-      <%= link_to t("basic_search"), basic_search_path, class: "item" %>
+      <%#= link_to t("basic_search"), basic_search_path, class: "item" %>
       <%= link_to (record_metadata_url), class: is_page_active?(record_metadata_url) do %>
         <%= t("record_metadata").titleize %>
       <% end %>

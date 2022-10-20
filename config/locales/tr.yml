@@ -19,6 +19,7 @@ tr:
   total: "Toplam"
   stats: "İstatistikler"
   recordmetadata: "Belge Üstverileri"
+  records_added_to_collection: "Kayıtlar Listeye Eklendi"
   hello: "Merhaba Dünya"
   time:
     formats:

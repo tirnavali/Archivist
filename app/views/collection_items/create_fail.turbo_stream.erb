@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "collection_flash_messages" do %>
+  <div class="ui container negative floating message"  data-controller="removals" data-action=" animationend->removals#remove ">
+    <p><%= t :records_added_to_collection %></p>
+  </div>
+<% end %>

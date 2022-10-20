@@ -14,6 +14,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="pushable" >
+ 
     <% if current_user && policy(:menu).show? %> <!-- policy begin -->
       <div class="ui sidebar inverted vertical menu">
         <%= render "layouts/shared/sidebar" %>
