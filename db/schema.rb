@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_135021) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_105750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -147,13 +147,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_135021) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.text "field"
-    t.integer "like"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "privacies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -268,6 +261,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_135021) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collection_items", "collections"
   add_foreign_key "collection_items", "record_metadata"
   add_foreign_key "collections", "users"
   add_foreign_key "fonds", "fonds", column: "parent_id"
