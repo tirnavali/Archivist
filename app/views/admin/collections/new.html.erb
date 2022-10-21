@@ -1,9 +1,9 @@
-<h1>New collection</h1>
+<h1><%= t :new_collection %></h1>
 
 <%= render "form", admin_collection: @admin_collection %>
 
 <br>
 
 <div>
-  <%= link_to "Back to collections", admin_collections_path %>
+  <%= link_to  t("back_to_collections"), admin_collections_path %>
 </div>

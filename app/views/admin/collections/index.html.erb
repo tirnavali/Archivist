@@ -27,8 +27,8 @@
         </div>
       </div>
   </div>
-
-<%= turbo_frame_tag "collections"  do %>
+<% if @collections.size > 0%>
+<%= turbo_frame_tag "collections" do %>
 <div class="ui right aligned grid">
   <div class="left floated left aligned six wide column">
   <%== pagy_semantic_nav(@pagy)%>
@@ -64,5 +64,6 @@
       <%= render "collections_table", class:"ui right floated pagination menu" %>
     </tbody>
    </table>
+<% end # turbo_frame %>
 <% end %>
 </div>

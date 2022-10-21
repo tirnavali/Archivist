@@ -9,6 +9,7 @@ class CollectionItemsController < ApplicationController
 
       added = nil
       collection_items.each do |item|
+        #önce koleksiyonu bul ve içini kontrol et.
         added = CollectionItem.find_or_create_by!(item)
       end
 
@@ -31,12 +32,13 @@ class CollectionItemsController < ApplicationController
   end
 
   def destroy
+    puts "destroy ----*********** collection id :"
+    puts @collection_item.collection_id
     collection_id = @collection_item.collection_id
     @collection_item.destroy
 
     respond_to do |format|
-      #format.turbo_stream
-      format.html { redirect_to admin_collection_url(collection_id), notice: "Item was successfully removed." }
+      format.html { redirect_to admin_collection_path(collection_id), notice: "Item was successfully removed." }
       format.json { head :no_content }
     end
   end
