@@ -74,6 +74,8 @@ class RecordMetadatum < ApplicationRecord
   has_many :special_numbers #, dependent: :destroy
   has_one :record_submission, dependent: :destroy
   has_one :user, through: :record_submission
+  has_one :collection_item
+  has_many :collection, :through => :collection_item
   
   
   validates_presence_of :box, :order, numericality: true

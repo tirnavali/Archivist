@@ -12,6 +12,7 @@ class Admin::CollectionsController < ApplicationController
 
   # GET /admin/collections/1 or /admin/collections/1.json
   def show
+    @record_metadata = @collection.record_metadata.order(:box).order(:folder).order(:order)
   end
 
   # GET /admin/collections/new

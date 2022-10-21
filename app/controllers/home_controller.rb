@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
     search_param = params[:src]
     #@user = User.new
-    console
+    #console
     @search = RecordMetadatum.search do 
       fulltext search_param[:query] if search_param.try(:[], :query)
       with :fond_scope_id, search_param[:fond_scope_id] if search_param.try(:[], :fond_scope_id).present?

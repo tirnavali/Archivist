@@ -1,21 +1,24 @@
 <div id="<%= dom_id collection %>">
-  <p>
-    <strong>ID:</strong>
-    <%= collection.id %>
-  </p>
-  <p>
-    <strong>Title:</strong>
-    <%= collection.title %>
-  </p>
+  <h1><%= collection.title %></h1>
+  <table class="ui celled table">
+    <thead>
+      <tr><th><%= t(:fond)%></th>
+      <th><%= t(:place_number)%></th>
+      <th><%= t(:summary)%></th>
+      <th><%= t(:action)%></th>
+    </tr></thead>
+    <tbody>
+    <% @record_metadata.each do |record| %>
+      <tr>
+        <td data-label="<%= record.fond.name %>"><%= record.fond.name %></td>
+        <td data-label="<%= record.place_number %>"><%= record.place_number %></td>
+        <td data-label="<%= record.summary %>"><%=link_to record.summary, record_metadatum_path(record.id) %></td>
+        <td><%= link_to "Listeden Çıkart", collection_item_path(record.collection_item.id), data: {turbo_method: :delete} %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-  <p>
-    <strong>User:</strong>
-    <%= collection.user_id %>
-  </p>
-  <% collection.record_metadata.each do |record| %>
-    <p><%= record.id %></p>
-    <p><%= record.place_number %></p>
-
-  <% end %>
+    
 
 </div>

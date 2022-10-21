@@ -16,10 +16,6 @@
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
         </div>
       <% end %>
-          <%=# form.select :field, RecordMetadatum.fields_and_related_model_fields.map {|attr| [t(attr), attr] }, 
-          #{prompt: 'select', selected: params[:field], include_blank: true }, {class: "ui  selection dropdown"} 
-          %>
-       
 
       <%= simple_form_for :src, url: :root, method: :get do |f| %>
         <div class="ui blue segment">
@@ -155,20 +151,18 @@
                   </a>
                 <% end # end if %>
                 <div class="content">
-                  <a class="header">
-                    <%= t(metadata.fond.class.name.downcase) %>: <%= metadata.fond %>
-                  </a>
+                <h3><%= link_to "#{t(metadata.fond.class.name.downcase)}: #{metadata.fond}", fond_path(metadata.fond.id) %></h3>
                   <div class="description">
-                    <%= collection_form.check_box "record_metadatum_#{metadata.id}", {name: "record_metadatum_ids[]"}, 
-                      metadata.id, nil %><%= turbo_frame_tag "record_metadatum_#{metadata.id}" %>
                     <p><%= t('summary').capitalize %>: <%= sshorter metadata.summary, 300 %></p>
                     <p><%= t('document_types').capitalize %>: <%= metadata.document_types_to_s %></p>
                     <p><%= t('subjects').capitalize %>: <%= metadata.subjects.join(", ") %></p>
                   </div>
                   <div class="extra">
                     <%= t(:created_at) %>:
-                    <%= l metadata.created_at, format: :short  %> | 
-                    <%= link_to t("show"), metadata %>
+                    <%= l metadata.created_at, format: :short  %> |
+                    <%= link_to t("show"), metadata %>| Koleksiyona ekle: 
+                    <%= collection_form.check_box "record_metadatum_#{metadata.id}", {name: "record_metadatum_ids[]"}, 
+                      metadata.id, nil %><%= turbo_frame_tag "record_metadatum_#{metadata.id}" %>
                   </div>
                 </div>
               </div><!-- item -->

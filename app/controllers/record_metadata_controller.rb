@@ -12,8 +12,7 @@ class RecordMetadataController < ApplicationController
   end
   # GET /record_metadata or /record_metadata.json
   def index
-    #@record_metadata = RecordMetadatum.all
-    
+    authorize RecordMetadatum
     @q = RecordMetadatum.ransack(params[:q])
     @q.build_grouping.build_condition
     

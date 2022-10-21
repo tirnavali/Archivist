@@ -4,11 +4,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def record_submissions?
-    user.superadmin? || user.admin? || users_record? 
+    user.superadmin? || user.admin? || (users_record? && !user.user?)
   end
  
   def activities?
-    user.superadmin? || user.admin? || users_record? 
+    user.superadmin? || user.admin? || (users_record? && !user.user?) 
   end
 
   def show?
