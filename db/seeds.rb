@@ -45,7 +45,7 @@ fonds = ["CUMHURİYET HALK PARTİSİ", "CUMHURİYETÇİ GÜVEN PARTİSİ", "ADAL
 "MİLLİ BİRLİK KURULU", "İSTİKLAL MAHKEMELERİ", "YASSI ADA - YÜCE DİVAN", "İSTİKLAL MADALYALARI", 
 "GAZETECİ NALAN SEÇKİN TARAFINDAN 1970 YILINDA İLK MECLİSİN 14 SAYIN ÜYESİ İLE YAPILAN GÖRÜŞME BANTLARI", "İSDEMİR KÖMÜR DOSYASI",
 "OYLAMA PULLARI", "MSB ASKERİ KADROLARA AİT DOSYALAR", "ATATÜRK İMZALI ÖZEL", "TBMM VAKFI", "TAKVİM-İ VAKAYİ", "ÜNVERSİTE SAYIŞTAY RAPORU", "RESMİ GAZETE", 
-"DÜSTUR", "TUTANAK DERGİLERİ", "KANUNLAR DERGİSİ", "TUTANAKLAR MECLİSİ MEBUSAN", "TUTANAKLAR MECLİSİ AYAN", "KOÇGİRİ"]
+"DÜSTUR", "TUTANAK DERGİLERİ", "KANUNLAR DERGİSİ", "TUTANAKLAR MECLİSİ MEBUSAN", "TUTANAKLAR MECLİSİ AYAN", "KOÇGİRİ", "ÖZALP", "KARAKÖPRÜ"]
 fonds.each {|fond| Fond.create! name: fond}
 
 tutanaklar_f = Fond.create! name: "TUTANAKLAR"
@@ -67,115 +67,249 @@ class String
   end
 end
 
-xlsx = Roo::Spreadsheet.open('db/kocgiri01.xlsx')
-(2..260).each do |num|
-  puts "Working on row :#{num}"
-  rm = RecordMetadatum.new
-  rm.fond= Fond.find_by_name("KOÇGİRİ")
-  rm.organization_code = xlsx.sheet(0).cell(num,1)
-  rm.box= xlsx.sheet(0).cell(num,2)
-  rm.folder = xlsx.sheet(0).cell(num,3)
-  rm.order = xlsx.sheet(0).cell(num,4)
-  rm.starting_date= xlsx.sheet(0).cell(num,5)
-  rm.summary= xlsx.sheet(0).cell(num,8)
-  rm.explaination=""
+def excel_to_application(fond_name, spreadsheet_path, row_range)
+  # example usage
+  # fond_name="KOÇGİRİ"
+  # spreadsheet_path = "db/kocgiri01.xlsx"
+  # row_range = 2..10
+  #
+  xlsx = Roo::Spreadsheet.open(spreadsheet_path)
+  row_range.each do |num|
+    puts "Working on row :#{num}"
+    rm = RecordMetadatum.new
+    rm.fond= Fond.find_by_name(fond_name)
+    rm.organization_code = xlsx.sheet(0).cell(num,1)
+    rm.box= xlsx.sheet(0).cell(num,2)
+    rm.folder = xlsx.sheet(0).cell(num,3)
+    rm.order = xlsx.sheet(0).cell(num,4)
+    rm.starting_date= xlsx.sheet(0).cell(num,5)
+    rm.summary= xlsx.sheet(0).cell(num,8)
+    rm.explaination=""
 
-  ## 9 column person
-  xlsx_data = xlsx.sheet(0).cell(num,9)
-  unless xlsx_data.nil?  
-    person_list = xlsx_data.split(",")
-  
-    person_ids = []
-    person_list.each do |pers|
-      puts pers
-      pers = pers.squish.titleize_turkish # remove whitespaces
-      if pers.empty?
+    ## 9 column person
+    xlsx_data = xlsx.sheet(0).cell(num,9)
+    unless xlsx_data.nil?  
+      person_list = xlsx_data.split(",")
+    
+      person_ids = []
+      person_list.each do |pers|
+        puts pers
+        pers = pers.squish.titleize_turkish # remove whitespaces
+        if pers.empty?
+          next
+        end
+        # pf = Person.where("LOWER(name)=?", pers.downcase(:turkic))
+        pf = Person.find_by_name pers
+
+        if pf.nil?
+          p = Person.create! name: pers
+          person_ids << p.id
+        else
+          person_ids << pf.id
+        end
+      end
+      person_ids.uniq!
+      rm.person_ids =person_ids
+    end
+
+
+    ## 10. column organization
+    xlsx_data = xlsx.sheet(0).cell(num,10)
+    unless xlsx_data.nil? 
+      organization_list = xlsx_data.split(",")
+      organization_ids = []
+      organization_list.each do |organization|
+        organization = organization.squish.titleize_turkish # remove whitespaces
+        if organization.empty? || organization.length <= 3
+          next
+        end
+        org = Organization.find_by_name organization
+        if org.nil?
+          o = Organization.create! name: organization
+          organization_ids << o.id
+        else
+          organization_ids << org.id
+        end
+      end
+      organization_ids.uniq!
+
+      rm.organization_ids = organization_ids
+    end
+
+
+    ## 11 toponym
+    xlsx_data = xlsx.sheet(0).cell(num,11)
+    unless xlsx_data.nil?  
+      toponym_list = xlsx_data.split(",")
+      toponym_ids = []
+      toponym_list.each do |toponym|
+          toponym = toponym.squish.titleize_turkish # remove whitespaces
+        if toponym.empty?
+          next
+        end
+        top = Toponym.find_by_name toponym
+        if top.nil?
+        begin
+          t = Toponym.create! name: toponym
+          toponym_ids << t.id
+        rescue
+        end
+        else
+          toponym_ids << top.id
+        end
+      end
+      toponym_ids.uniq!
+        rm.toponym_ids = toponym_ids
+    end
+
+
+    ## 12 subjects
+    subject_list = xlsx.sheet(0).cell(num,12).split(",")
+    subject_ids = []
+    subject_list.each do |subject|
+        subject = subject.squish.titleize_turkish # remove whitespaces
+      if subject.empty?
         next
       end
-      # pf = Person.where("LOWER(name)=?", pers.downcase(:turkic))
-      pf = Person.find_by_name pers
-
-      if pf.nil?
-        p = Person.create! name: pers
-        person_ids << p.id
+      subj = Subject.find_by_name subject
+      if subj.nil?
+        s = Subject.create! name: subject
+        subject_ids << s.id
       else
-        person_ids << pf.id
+        subject_ids << subj.id
       end
     end
-    person_ids.uniq!
-    rm.person_ids =person_ids
-  end
+    subject_ids.uniq!
+    rm.subject_ids = subject_ids
+    rm.save
+    # 
+
+    ## 13 special_numbers
+    # special_number_value = xlsx.sheet(0).cell(num,13)
+    # unless special_number_value.empty?
+    #   sn = SpecialNumber.new(value: special_number_value, number_type: NumberType.find_by_name("Dosya No"), record_metadatum_id: rm.id)
+    #   sn.save
+    # end
+    
+  end # end of excel
+
+end
+
+excel_to_application(fond_name="KOÇGİRİ", spreadsheet_path="db/kocgiri01.xlsx", row_range= 2..260)
+excel_to_application(fond_name="ÖZALP", spreadsheet_path="db/ozalp01.xlsx", row_range= 2..346)
+excel_to_application(fond_name="KARAKÖPRÜ", spreadsheet_path="db/karakopru01.xlsx", row_range= 2..459)
+
+RecordMetadatum.reindex # solr
+
+# xlsx = Roo::Spreadsheet.open('db/ozalp01.xlsx')
+# (2..10).each do |num|
+#   puts "Working on row :#{num}"
+#   rm = RecordMetadatum.new
+#   rm.fond= Fond.find_by_name("ÖZALP")
+#   rm.organization_code = xlsx.sheet(0).cell(num,1)
+#   rm.box= xlsx.sheet(0).cell(num,2)
+#   rm.folder = xlsx.sheet(0).cell(num,3)
+#   rm.order = xlsx.sheet(0).cell(num,4)
+#   rm.starting_date= xlsx.sheet(0).cell(num,5)
+#   rm.summary= xlsx.sheet(0).cell(num,8)
+#   rm.explaination=""
+
+#   ## 9 column person
+#   xlsx_data = xlsx.sheet(0).cell(num,9)
+#   unless xlsx_data.nil?  
+#     person_list = xlsx_data.split(",")
+  
+#     person_ids = []
+#     person_list.each do |pers|
+#       puts pers
+#       pers = pers.squish.titleize_turkish # remove whitespaces
+#       if pers.empty?
+#         next
+#       end
+#       # pf = Person.where("LOWER(name)=?", pers.downcase(:turkic))
+#       pf = Person.find_by_name pers
+
+#       if pf.nil?
+#         p = Person.create! name: pers
+#         person_ids << p.id
+#       else
+#         person_ids << pf.id
+#       end
+#     end
+#     person_ids.uniq!
+#     rm.person_ids =person_ids
+#   end
   
 
-  ## 10. column organization
-  xlsx_data = xlsx.sheet(0).cell(num,10)
-  unless xlsx_data.nil? 
-    organization_list = xlsx_data.split(",")
-    organization_ids = []
-    organization_list.each do |organization|
-      organization = organization.squish.titleize_turkish # remove whitespaces
-      if organization.empty? || organization.length <= 3
-        next
-      end
-      org = Organization.find_by_name organization
-      if org.nil?
-        o = Organization.create! name: organization
-        organization_ids << o.id
-      else
-        organization_ids << org.id
-      end
-    end
-    organization_ids.uniq!
+#   ## 10. column organization
+#   xlsx_data = xlsx.sheet(0).cell(num,10)
+#   unless xlsx_data.nil? 
+#     organization_list = xlsx_data.split(",")
+#     organization_ids = []
+#     organization_list.each do |organization|
+#       organization = organization.squish.titleize_turkish # remove whitespaces
+#       if organization.empty? || organization.length <= 3
+#         next
+#       end
+#       org = Organization.find_by_name organization
+#       if org.nil?
+#         o = Organization.create! name: organization
+#         organization_ids << o.id
+#       else
+#         organization_ids << org.id
+#       end
+#     end
+#     organization_ids.uniq!
 
-    rm.organization_ids = organization_ids
-  end
-
-
-  ## 11 toponym
-  xlsx_data = xlsx.sheet(0).cell(num,11)
-  unless xlsx_data.nil?  
-    toponym_list = xlsx_data.split(",")
-    toponym_ids = []
-    toponym_list.each do |toponym|
-        toponym = toponym.squish.titleize_turkish # remove whitespaces
-      if toponym.empty?
-        next
-      end
-      top = Toponym.find_by_name toponym
-      if top.nil?
-      begin
-        t = Toponym.create! name: toponym
-        toponym_ids << t.id
-      rescue
-      end
-      else
-        toponym_ids << top.id
-      end
-    end
-    toponym_ids.uniq!
-      rm.toponym_ids = toponym_ids
-  end
+#     rm.organization_ids = organization_ids
+#   end
 
 
-  ## 12 subjects
-  subject_list = xlsx.sheet(0).cell(num,12).split(",")
-  subject_ids = []
-  subject_list.each do |subject|
-      subject = subject.squish.titleize_turkish # remove whitespaces
-    if subject.empty?
-      next
-    end
-    subj = Subject.find_by_name subject
-    if subj.nil?
-      s = Subject.create! name: subject
-      subject_ids << s.id
-    else
-      subject_ids << subj.id
-    end
-  end
-  subject_ids.uniq!
-  rm.subject_ids = subject_ids
-  rm.save
-  # 
+#   ## 11 toponym
+#   xlsx_data = xlsx.sheet(0).cell(num,11)
+#   unless xlsx_data.nil?  
+#     toponym_list = xlsx_data.split(",")
+#     toponym_ids = []
+#     toponym_list.each do |toponym|
+#         toponym = toponym.squish.titleize_turkish # remove whitespaces
+#       if toponym.empty?
+#         next
+#       end
+#       top = Toponym.find_by_name toponym
+#       if top.nil?
+#       begin
+#         t = Toponym.create! name: toponym
+#         toponym_ids << t.id
+#       rescue
+#       end
+#       else
+#         toponym_ids << top.id
+#       end
+#     end
+#     toponym_ids.uniq!
+#       rm.toponym_ids = toponym_ids
+#   end
+
+
+#   ## 12 subjects
+#   subject_list = xlsx.sheet(0).cell(num,12).split(",")
+#   subject_ids = []
+#   subject_list.each do |subject|
+#       subject = subject.squish.titleize_turkish # remove whitespaces
+#     if subject.empty?
+#       next
+#     end
+#     subj = Subject.find_by_name subject
+#     if subj.nil?
+#       s = Subject.create! name: subject
+#       subject_ids << s.id
+#     else
+#       subject_ids << subj.id
+#     end
+#   end
+#   subject_ids.uniq!
+#   rm.subject_ids = subject_ids
+#   rm.save
+#   # 
   
-end # end of excel
+# end # end of excel

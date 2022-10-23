@@ -96,9 +96,9 @@
     
   </div>
     <div class="row">
-      <% params.each do |key, val| %>
-          <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
-      <% end %>
+      <%# params.each do |key, val| %>
+          <%#= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
+      <%# end %>
       <%= turbo_frame_tag "collection_flash_messages"%>
     </div>
     

@@ -6,7 +6,7 @@ class RecordMetadatum < ApplicationRecord
     end
 
     string :special_value, :multiple => true, :references => SpecialNumber do
-      special_numbers.map(&:value)
+      special_numbers.map{ |no| no.value.to_s }
     end
 
     string :special_number_type, :multiple => true, :references => SpecialNumber do
