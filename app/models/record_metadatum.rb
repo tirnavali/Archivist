@@ -5,12 +5,16 @@ class RecordMetadatum < ApplicationRecord
       special_numbers.map{ |no| no.to_solr_index }
     end
 
-    string :special_value, :multiple => true, :references => SpecialNumber do
-      special_numbers.map{ |no| no.value.to_s }
-    end
+    # string :special_value, :multiple => true, :references => SpecialNumber do
+    #   special_numbers.map{ |no| no.value.to_s }
+    # end
 
     string :special_number_type, :multiple => true, :references => SpecialNumber do
       special_numbers.map(&:solrable_number_type_name)
+    end
+
+    string :special_code do 
+      special_numbers.join(", ")
     end
     
     string  :organization_code do
@@ -79,8 +83,8 @@ class RecordMetadatum < ApplicationRecord
   
   
   validates_presence_of :box, :order, numericality: true
-  validates_presence_of :organization_code, :starting_date
-  validates_length_of :summary, in: 10..300
+  validates_presence_of :organization_code #, :starting_date
+  validates_length_of :summary, in: 3..300
   validates_presence_of :summary
   validates_length_of :explaination, in: 0..300
   validates_comparison_of :ending_date, greater_than: :starting_date, allow_nil: true

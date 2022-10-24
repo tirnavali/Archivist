@@ -153,7 +153,9 @@
                 <div class="content">
                 <h3><%= link_to "#{t(metadata.fond.class.name.downcase)}: #{metadata.fond}", fond_path(metadata.fond.id) %></h3>
                   <div class="description">
-                    <p><%= t('summary').capitalize %>: <%= sshorter metadata.summary, 300 %></p>
+                    <%= link_to record_metadatum_path(metadata.id) do %>
+                      <p><%= t('summary').capitalize %>: <%= sshorter metadata.summary, 300 %></p>
+                    <% end %>
                     <p><%= t('document_types').capitalize %>: <%= metadata.document_types_to_s %></p>
                     <p><%= t('subjects').capitalize %>: <%= metadata.subjects.join(", ") %></p>
                   </div>

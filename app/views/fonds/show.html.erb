@@ -1,17 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @fond %>
-<div>
+
+<div class="ui secondary pointing menu">
   <% if policy(@fond).create? %>
-    <%= link_to "Add New Fond", new_fond_path%> |
+    <%= link_to t("add"), new_fond_path, class: "item" %>
   <% end %>
   <% if policy(@fond).update? %>
-    <%= link_to "Edit this fond", edit_fond_path(@fond) %> |
+    <%= link_to t("edit"), edit_fond_path(@fond), class: "item" %>
   <% end %>
   <% if policy(@fond).destroy? %>
-    <%= button_to t(:destroy), @fond, method: :delete %>
+    <%= button_to t(:destroy), @fond, method: :delete, class: "ui button item" %>
   <% end %>
-  <%= link_to  fonds_path, class:"ui secondary button" do %>
-  <i class="angle double left icon"></i> <%= t "fonds" %>
-  <% end %>
+  
+  <div class="right menu">
+    <%= link_to t("fonds"), fonds_path, class:"ui secondary button item " %>
+    <%= link_to t("back"), subjects_path, class: "ui item"  %>
+  </div>
 </div>

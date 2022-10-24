@@ -11,9 +11,8 @@
         <td><%= record_metadatum.fond.name %></td>
       </tr>
       <tr>
-        <td>Nums</td>
-        <td><% special_nums_metadata = record_metadatum.special_numbers.map { |no| "#{no.number_type} - #{no.value} " }%>
-      <%= special_nums_metadata.join("/ ")%> </td>
+        <td><%= t('summary').titleize %></td>
+        <td> <%= record_metadatum.summary %></td>
       </tr>
       <tr>
         <td>Yer</td>
@@ -23,13 +22,18 @@
       <% end %>
         <strong><%= t('order').titleize%>: </strong>   <%= record_metadatum.order %></td>
       </tr>
+      <tr>  
+        <td>Özel Erişim Numaraları</td>
+        <td><% special_nums_metadata = record_metadatum.special_numbers.map { |no| "#{no.number_type} - #{no.value} " }%>
+      <%= special_nums_metadata.join("/ ")%> </td>
+      </tr>
       <tr>
         <td><%= t('organization_code').titleize%></td>
         <td><%=record_metadatum.organization_code%></td>
       </tr>
       <tr>
         <td><%= t('dates') %></td>
-        <td><%= "#{l record_metadatum.starting_date, format: :short}" %> <% if record_metadatum.ending_date %> - <%= l record_metadatum.ending_date, format: :short %> <% end %>  </td>
+        <td><% if record_metadatum.starting_date.present? %> <%= "#{l record_metadatum.starting_date, format: :short}" %> <% end %> <% if record_metadatum.ending_date %> - <%= l record_metadatum.ending_date, format: :short %> <% end %>  </td>
       </tr>
       <tr>
         <td><%=  t('organizations').titleize %></td>
@@ -93,10 +97,7 @@
           <td><%if record_metadatum.privacy %> <%= record_metadatum.privacy.name %><% end %></td>
         </tr>
       <% end %>
-      <tr>
-        <td><%= t('summary').titleize %></td>
-        <td> <%= record_metadatum.summary %></td>
-      </tr>
+      
       <tr>
         <td><%= t('explaination').titleize %></td>
         <td> <%= record_metadatum.explaination %></td>
