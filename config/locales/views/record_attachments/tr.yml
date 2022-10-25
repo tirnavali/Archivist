@@ -1,4 +1,5 @@
 tr:
   edit_record_attachment: "Kayıt Ekini Düzenle"
+  new_record_attachment: "Belge Eki Oluştur"
   filename: "Dosya Adı"
   are_you_sure: "Emin Misiniz?"

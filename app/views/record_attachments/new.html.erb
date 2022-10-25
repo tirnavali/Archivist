@@ -1,11 +1,7 @@
-<h1>New record attachment</h1>
+<h1><%= t("new_record_attachment") %></h1>
 <%= record_navigation(attachment_id: @record_attachment.id, metadatum_id: @record_attachment.record_metadatum.id)%>
 
 <%= render "record_metadatum_short", metadatum: @record_attachment.record_metadatum %>
 <%= render "form", record_attachment: @record_attachment %>
 
 <br>
-
-<div>
-  <%= link_to "Back to record attachments", record_attachments_path %>
-</div>

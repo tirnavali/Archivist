@@ -4,23 +4,23 @@
     %strong Id: 
     = metadatum.id
   %p
-    %strong Fond:
+    %strong= "#{t(:fond)}:"
     = metadatum.fond.name
   %p
-    %strong Organization Number:
+    %strong= "#{t(:organization_number)}:"
     = metadatum.organization_code
   %p
-    %strong Box:
+    %strong= "#{t(:box)}:"
     = metadatum.box
     \/
     - if metadatum.folder
-      %strong Folder:
+      %strong= "#{t(:folder)}:"
       = metadatum.folder
       \/
-    %strong Order:
+    %strong= "#{t(:order)}:"
     = metadatum.order
   %p
-    %strong Starting Date:
+    %strong= "#{t(:starting_date)}:"
     %span
       = metadatum.starting_date
     - if metadatum.ending_date
@@ -31,4 +31,4 @@
     /%strong= t('Summary')
     = metadatum.summary
   %p
-    = link_to t("edit_record_metadatum"), edit_record_metadatum_path(metadatum), {class: "ui yellow tiny button"}
+    = link_to t("edit_record_metadatum"), edit_record_metadatum_path(metadatum), {class: "ui red tiny button"}
