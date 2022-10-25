@@ -172,27 +172,28 @@
   <div class="sixteen wide column">
   
 
-    <h4 class="ui horizontal divider header">
-      <i class="bar chart icon"></i>
-        <%= "Other Attachments"%>
-    </h4>
-    <% record_metadatum.record_attachment.watermarked_images.each_with_index do |file, index| %>
-      <% if index > 1 %>
-        <div class="ui horizontal divided list">
-          <div class="item">
-            <%= image_tag file.preview(resize_to_limit: [150, 100]).processed if file.previewable? %>
-            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
-            <div class="content">
-              <%= link_to rails_blob_path(file, disposition: "attachment"), class: "" do %>
-                <i class="download icon"></i>Kaydet
-              <% end %>
-              <%= link_to "Aç: #{file.filename}", file, target: :_blank , class:"header" %>
+    
+    <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.watermarked_images.nil?  %>
+      <% record_metadatum.record_attachment.watermarked_images.each_with_index do |file, index| %>
+        <% if index > 1 %>
+          <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+              <%= "Other Attachments"%>
+          </h4>
+          <div class="ui horizontal divided list">
+            <div class="item">
+              <%= image_tag file.preview(resize_to_limit: [150, 100]).processed if file.previewable? %>
+              <%#= ImageProcessing::Vips.valid_image?(file.url) %>
+              <div class="content">
+                <%= link_to rails_blob_path(file, disposition: "attachment"), class: "" do %>
+                  <i class="download icon"></i>Kaydet
+                <% end %>
+                <%= link_to "Aç: #{file.filename}", file, target: :_blank , class:"header" %>
+              </div>
             </div>
           </div>
-        </div>
-
-        
-      <% end # if %>
-    <% end %>
+        <% end # if %>
+      <% end # end loop %>
+    <% end # unless %>
   </div>
 </div>
