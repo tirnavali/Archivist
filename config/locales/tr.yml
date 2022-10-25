@@ -13,6 +13,7 @@ tr:
   ending_date_to: "Bitiş Tarihi Sonu"
   created_at_from: "Oluşturulma Tarihi Başı"
   created_at_to: "Oluşturulma Tarihi Sonu"
+  make_secret: "Gizle"
   updated_at_from: "Güncellenme Tarihi Başı"
   updated_at_to: "Güncellenme Tarihi Sonu"
   clean: "Temizle"

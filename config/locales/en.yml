@@ -36,6 +36,7 @@ en:
   hello: "Hello world"
   advanced_options: "Advanced Options"
   all: "All"
+  make_secret: "Make Secret"
   number_value: "Number Value"
   clean: "Clean"
   search: "Search"

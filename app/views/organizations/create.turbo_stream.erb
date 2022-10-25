@@ -1,6 +1,4 @@
-<%= turbo_stream.update("notice", "Organization created!") %>
-<%= turbo_stream.replace "new_organization" %>
-
-<%#= turbo_stream.append("contacts-list", partial: "contacts/contact", locals: { contact: @contact }) %>
-<%#= turbo_stream.update("contacts-count", partial: "contacts/count", locals: { contacts: @contacts }) %>
-<%#= turbo_stream.update("contact-form", partial: "contacts/form", locals: { contact: Contact.new }) %>
+<%= turbo_stream.update Organization.new, "" %>
+<%= turbo_stream.prepend "organization_flash_messages" do %>
+    <%= render "flash" %>
+<% end %>

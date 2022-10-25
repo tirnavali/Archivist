@@ -30,8 +30,10 @@ class OrganizationsController < ApplicationController
     authorize @organization
     respond_to do |format|
       if @organization.save
+        flash[:info] = "Organization was successfully created."
         format.html { redirect_to organization_url(@organization), notice: "Organization was successfully created." }
         format.json { render :show, status: :created, location: @organization }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @organization.errors, status: :unprocessable_entity }

@@ -1,0 +1,9 @@
+tr:
+  activerecord:
+    models:
+      organization:
+        one: "Kurum"
+        other: "Kurumlar"      
+    attributes:
+      organization:
+        name: "Ad"

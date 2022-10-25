@@ -57,7 +57,7 @@
     = turbo_frame_tag "toponym_flash_messages"
     = turbo_frame_tag "new_toponym"
   .ui.form
-    .four.fields
+    .four.fields.ui.segment
       .field
         .grouped.fields{"data-controller": "checkbox"}
           = f.association :languages, as: :check_boxes, input_html: { class: "ui"}
@@ -70,6 +70,6 @@
       .field
         .grouped.fields{"data-controller": "checkbox"}
           = f.association :phisycal_status, as: :radio_buttons, input_html: { class: "hidden " }
-    .field 
-      = f.input :is_secret
+    .field
+      = f.input :is_secret, label: t("make_secret"), input_html: {class: "ui checkbox" }
   = f.button :submit, class: "ui green button"
