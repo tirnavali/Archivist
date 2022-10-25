@@ -14,7 +14,15 @@
     <div class="ui input">
     <%= form.file_field :images, multiple: true, direct_upload: true %>
     </div>
-      <% if @record_attachment.images.exists? %>
+      <div>
+        <%= form.label :completed, style: "display: block" %>
+        <%= form.check_box :completed %>
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+      <% if false || @record_attachment.images.exists? %>
         <div class="ui seven column stackable grid">
         <% record_attachment.images.each do |attach| %>
           <%= form.hidden_field :images, value: attach.signed_id, multiple: true %>
@@ -28,7 +36,7 @@
                   <i class="big red exclamation triangle icon"></i>
                 <% end %>
               <% end %>
-              <div class="header">File name: <%=attach.filename%></div> 
+              <div class="header"><%= t("filename") %>: <%=attach.filename%></div> 
               <div class="">
                 <%= link_to 'Sil', delete_image_attachment_record_attachment_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ui bottom attached button"%>
               </div>
@@ -41,10 +49,10 @@
     <div class="ui divider" data-controller="direct-upload"></div>
     
     <% if @record_attachment.watermarked_images.exists? %>
-      <div class="ui seven column stackable grid">
+      <div class="ui cards ">
       <% record_attachment.watermarked_images.each do |attach| %>
         <%= form.hidden_field :watermarked_images, value: attach.signed_id, multiple: true %>
-        <div class="ui column fluid card">
+        <div class=" card">
           <div class="content">
             <%= link_to rails_blob_path(attach, disposition: "attachment"), class: "ui center aligned" do %>
               <% begin %>
@@ -54,9 +62,9 @@
                 <i class="big red exclamation triangle icon"></i>
               <% end %>
             <% end %>
-            <div class="header">File name: <%=attach.filename%></div> 
+            <div class=""><%= t("filename") %>: <%=attach.filename%></div> 
             <div class="">
-              <%= link_to 'Sil', delete_image_attachment_record_attachment_path(attach.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ui bottom attached button"%>
+              <%= link_to 'Sil', delete_image_attachment_record_attachment_path(attach.id), data: { turbo_method: :delete, turbo_confirm: t("are_you_sure") }, class: "ui bottom attached button"%>
             </div>
           </div>
         </div>   
@@ -64,12 +72,5 @@
       </div>
     <% end %>
 
-  <div>
-    <%= form.label :completed, style: "display: block" %>
-    <%= form.check_box :completed %>
-  </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

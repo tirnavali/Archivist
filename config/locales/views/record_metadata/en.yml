@@ -3,7 +3,7 @@ en:
   this_record_contains_of: "This record contains of"
   this_record_is_in: "This record is in"
   new_record_metadatum: "New record metadatum"
-  editing_record_metadatum: "Editing record metadatum"
+  edit_record_metadatum: "Edit record metadatum"
   back_to_record_metadata: "Back to record metadata"
   record_metadata: "Record metadata"
   access_identifiers: "Access identifiers"
@@ -15,3 +15,5 @@ en:
   more: "More"
   no_documents: "No documents are listed for this customer."
   audit_info: "Audit Info"
+
+  record_attachment: "Record Attachment"

@@ -1,116 +1,130 @@
-<div id="<%= dom_id record_metadatum %>" class="ui stackable two column  grid">
+<div id="<%= dom_id record_metadatum %>" class="ui stackable three column  grid">
   <div class="six wide column">
-  <h4 class="ui horizontal divider header">
-  <i class="bar chart icon"></i>
-    <%= t('record_metadata')%>
-  </h4>
-  <table class="ui definition table">
-    <tbody>
-      <tr>
-        <td class="two wide column"><%= t('fond').titleize %></td>
-        <td><%= record_metadatum.fond.name %></td>
-      </tr>
-      <tr>
-        <td><%= t('summary').titleize %></td>
-        <td> <%= record_metadatum.summary %></td>
-      </tr>
-      <tr>
-        <td>Yer</td>
-        <td><strong><%= t('box').titleize%>: </strong>   <%= record_metadatum.box %> /
-      <% if record_metadatum.folder%>
-        <strong><%=t('folder').titleize %>: </strong><%= record_metadatum.folder %> /
-      <% end %>
-        <strong><%= t('order').titleize%>: </strong>   <%= record_metadatum.order %></td>
-      </tr>
-      <tr>  
-        <td>Özel Erişim Numaraları</td>
-        <td><% special_nums_metadata = record_metadatum.special_numbers.map { |no| "#{no.number_type} - #{no.value} " }%>
-      <%= special_nums_metadata.join("/ ")%> </td>
-      </tr>
-      <tr>
-        <td><%= t('organization_code').titleize%></td>
-        <td><%=record_metadatum.organization_code%></td>
-      </tr>
-      <tr>
-        <td><%= t('dates') %></td>
-        <td><% if record_metadatum.starting_date.present? %> <%= "#{l record_metadatum.starting_date, format: :short}" %> <% end %> <% if record_metadatum.ending_date %> - <%= l record_metadatum.ending_date, format: :short %> <% end %>  </td>
-      </tr>
-      <tr>
-        <td><%=  t('organizations').titleize %></td>
-        <td>
-        <ul class="ui list">
-        <% record_metadatum.organizations.order(:name).each do |organization| %>
-            <li >
-                <%= organization.name %>
-              </li>
-              <% end %>  
-        </ul>
-        </td>
-      </tr>
-      <tr>
-        <td><%=  t('people').titleize %></td>
-        <td>
-        <ul class="ui list">
-        <% record_metadatum.people.order(:name).each do |person| %>
-            <li >
-                <%= person.name %>
-              </li>
-              <% end %>  
-        </ul>
-        </td>
-      </tr>
-      <tr>
-        <td><%=  t('languages').titleize %></td>
-        <td><% record_metadatum.languages.each do |language| %>
-              <span class="ui  basic pink  label">
-                <%= language.name %>
-              </span>
-              <% end %>       
-        </td>
-      </tr>
-      <tr>
-        <td><%=t('document_types').titleize %></td>
-        <td><% record_metadatum.document_types.each do |document_type| %>
-            <span class="ui basic violet  label">
-            <%= document_type.name %>
-            </span>
-          <% end %> </td>
-      </tr>
-      <tr>
-        <td><%= t('subjects').humanize %></td>
-        <td><% record_metadatum.subjects.each do |subject| %>
-          <span class="ui basic blue label"><i class="tag icon"></i><%= subject.name%></span>
-          <% end %></td>
-      </tr>
-      <tr>
-        <td><%= t('toponyms').titleize %></td>
-        <td> <% record_metadatum.toponyms.each do|toponym| %>
-        <span class="ui basic orange  label">
-        <i class="map marker alternate icon"></i>
-        <%= toponym[:name] %>
-        </span>
-      <% end %></td>
-      </tr>
-      <% unless current_user.user? %>
+    <h4 class="ui horizontal divider header">
+      <i class="bar chart icon"></i>
+        <%= t('record_metadata')%>
+    </h4>
+    <table class="ui definition table">
+      <tbody>
         <tr>
-          <td><%=t('privacy').titleize %></td>
-          <td><%if record_metadatum.privacy %> <%= record_metadatum.privacy.name %><% end %></td>
+          <td class="two wide column"><%= t('fond').titleize %></td>
+          <td><%= link_to fond_path(record_metadatum.fond) do %><%= record_metadatum.fond.name %><% end %></td>
         </tr>
-      <% end %>
-      
-      <tr>
-        <td><%= t('explaination').titleize %></td>
-        <td> <%= record_metadatum.explaination %></td>
-      </tr>
-      
-      <% if  !record_metadatum.record_attachment.nil? && !record_metadatum.record_attachment.watermarked_images.empty?  %>
-      <tr>
-        <td><%= t('file_name').titleize %></td>
-        <td> <%= record_metadatum.record_attachment.watermarked_images.first.filename %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <tr>
+          <td><%= t('summary').titleize %></td>
+          <td> <%= record_metadatum.summary %></td>
+        </tr>
+        <tr>
+          <td>Yer</td>
+          <td><strong><%= t('box').titleize%>: </strong>   <%= record_metadatum.box %> /
+        <% if record_metadatum.folder%>
+          <strong><%=t('folder').titleize %>: </strong><%= record_metadatum.folder %> /
+        <% end %>
+          <strong><%= t('order').titleize%>: </strong>   <%= record_metadatum.order %></td>
+        </tr>
+        <tr>  
+          <td>Özel Erişim Numaraları</td>
+          <td><% special_nums_metadata = record_metadatum.special_numbers.map { |no| "#{no.number_type} - #{no.value} " }%>
+          <%= special_nums_metadata.join("/ ")%> </td>
+        </tr>
+        <tr>
+          <td><%= t('organization_code').titleize%></td>
+          <td><%=record_metadatum.organization_code%></td>
+        </tr>
+        <tr>
+          <td><%= t('dates') %></td>
+          <td><% if record_metadatum.starting_date.present? %> <%= "#{l record_metadatum.starting_date, format: :short}" %> <% end %> <% if record_metadatum.ending_date %> - <%= l record_metadatum.ending_date, format: :short %> <% end %>  </td>
+        </tr>
+        <tr>
+          <td><%=  t('organizations').titleize %></td>
+          <td>
+          <ul class="ui list">
+            <% record_metadatum.organizations.order(:name).each do |organization| %>
+                <li >
+                    <%= organization.name %>
+                  </li>
+                  <% end %>  
+          </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><%=  t('people').titleize %></td>
+          <td>
+          <ul class="ui list">
+            <% record_metadatum.people.order(:name).each do |person| %>
+                <li >
+                    <%= person.name %>
+                  </li>
+                  <% end %>  
+          </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><%=  t('languages').titleize %></td>
+          <td><% record_metadatum.languages.each do |language| %>
+                <span class="ui  basic pink  label">
+                  <%= language.name %>
+                </span>
+                <% end %>       
+          </td>
+        </tr>
+        <tr>
+          <td><%=t('document_types').titleize %></td>
+          <td><% record_metadatum.document_types.each do |document_type| %>
+              <span class="ui basic violet  label">
+              <%= document_type.name %>
+              </span>
+            <% end %> </td>
+        </tr>
+        <tr>
+          <td><%= t('subjects').humanize %></td>
+          <td><% record_metadatum.subjects.each do |subject| %>
+            <span class="ui basic blue label"><i class="tag icon"></i><%= subject.name%></span>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t('toponyms').titleize %></td>
+          <td> <% record_metadatum.toponyms.each do|toponym| %>
+            <span class="ui basic orange  label">
+              <i class="map marker alternate icon"></i>
+              <%= toponym[:name] %>
+            </span>
+            <% end %>
+          </td>
+        </tr>
+        <% if policy(record_metadatum).create? %>
+          <tr>
+            <td><%=t('privacy').titleize %></td>
+            <td><%if record_metadatum.privacy %> <%= record_metadatum.privacy.name %><% end %></td>
+          </tr>
+        <% end %>
+        
+        <tr>
+          <td><%= t('explaination').titleize %></td>
+          <td> <%= record_metadatum.explaination %></td>
+        </tr>
+        
+        <% if  !record_metadatum.record_attachment.nil? && !record_metadatum.record_attachment.watermarked_images.empty?  %>
+          <tr>
+            <td><%= t('file_name').titleize %></td>
+            <td> <%= record_metadatum.record_attachment.watermarked_images.first.filename %></td>
+          </tr>
+        <% end %>
+        <% if policy(record_metadatum).audit_info? %>
+          <tr>
+            <td><%= t('audit_info').titleize %> <i class="history icon"></i></td>
+            <td>
+              <%=  record_metadatum.audits.last.user.to_s %> <span class="custom last action"> <%=  record_metadatum.audits.last.action %> </span> record. 
+                <div class="date"><%=l  record_metadatum.audits.last.created_at, format: :long%></div>
+                <%= link_to audit_record_metadatum_path do %>
+                  <%= t("more") %> <i class="external alternate icon"></i>
+                <% end %>   
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
             <%# =image_tag @image.representation()%>
             <%#= image_tag @image.representation(resize_to_limit: [500, 500]).processed if @image.previewable? %>
             <%#= image_tag @image.variant(resize_to_limit: [500, 500], colourspace: "b-w", rotate: -90, gaussblur: 2).processed if @image.variable? %>
@@ -118,12 +132,9 @@
             <%# water = Vips::Image.text('sercan').jpegsave_target(target) %>
             <%#= image_tag "watermarking/k2.jpg" %>
             <%#= image_tag @image.variant(resize_to_limit: [800, 800],  composite: [overlay: ImageProcessing::Vips::Image.load_image("app/assets/images/watermarking/k2.jpg"), gravity: "south-east"] ).processed if @image.variable? %>
-  <% unless record_metadatum.audits.empty? || current_user.user? %>
-    <%= render "audit_info", record_metadatum: record_metadatum %>
-  <% end %>
-</div> <!-- column -->
-  
-    <div class="nine wide column">
+  </div> <!-- six wide column -->
+
+  <div class="nine wide column">
     <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.watermarked_images.nil?  %>
       <h4 class="ui horizontal divider header">
         <i class=" attachment  icon"></i>
@@ -132,43 +143,56 @@
       <% record_metadatum.record_attachment.watermarked_images.each_with_index do |file, index| %>
         <% if index < 1 %> <!-- ilk pdf gösterilsin-->
 
-        <%# file = file.preview(resize_to_limit: [800, 800], colourspace: "b-w").processed %>
-        <iframe  src="<%= file.url expires_in: 30 ,disposition: :inline %>" width="100%" height="750" style="border: none;"></iframe>
-        <div class="item">
-          <div class="content">
-            <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
-              <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
+          <%# file = file.preview(resize_to_limit: [800, 800], colourspace: "b-w").processed %>
+          <iframe  src="<%= file.url expires_in: 30 ,disposition: :inline %>" width="100%" height="750" style="border: none;"></iframe>
+          <div class="ui buttons">
+            <%= link_to rails_blob_path(file, disposition: "attachment"), class: "ui button" do %>
+              <i class="download icon"></i>Kaydet
             <% end %>
             <%= link_to  file , target: :_blank, class: "ui orange button" do %>
               <i class="folder open  icon"></i>Yeni sekmede aç
             <% end %>
-            <div class="description">
-                    <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
-            </div>
-          </div>
-        </div><!--item-->
-        <% else %>
-        <div class="item">
-          <div class="ui small image">
-            <%= image_tag file.preview(resize_to_limit: [100, 100]).processed if file.previewable? %>
-            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
-          </div>
-          <div class="content">
-            <div class="extra">
-              <%= link_to rails_blob_path(file, disposition: "attachment"), class: "header" do %>
-                <span class="ui teal button"> <i class="download icon"></i>Kaydet</span>
-              <% end %>
-              <%= link_to  file , target: :_blank, class: "ui orange button" do %><i class="folder open  icon"></i>Yeni sekmede aç<% end %>
-              </div>
-          </div>
-        </div><!--item-->
+              <%#= link_to "aç", ImageProcessing::Vips.source(file.url(expires_in: 30 ,disposition: :inline)).composite(watermark, mode: "over", gravity: "south-east", offset: [10, 10],).call() %>
+          </div><!--ui buttons-->
         <% end %>
-    </div>
       <% end %>
 
     <% else %>
       <%= render "no_documents" %>
     <% end %>
-    </div>
+  </div><!-- nine wide column -->
+  <div class="one wide column">
+    <%= t("add_to_collection") %>
+    <%= form_for :deneme, url: record_metadatum_path(record_metadatum), method: :post, class:" " do |f| %>
+        <%= f.select :collection_id, Collection.where(user: current_user) %>
+      <%= f.submit t(:save) %>
+    <% end %>
+  </div><!-- one wide column -->
+  
+  <div class="sixteen wide column">
+  
 
+    <h4 class="ui horizontal divider header">
+      <i class="bar chart icon"></i>
+        <%= "Other Attachments"%>
+    </h4>
+    <% record_metadatum.record_attachment.watermarked_images.each_with_index do |file, index| %>
+      <% if index > 1 %>
+        <div class="ui horizontal divided list">
+          <div class="item">
+            <%= image_tag file.preview(resize_to_limit: [150, 100]).processed if file.previewable? %>
+            <%#= ImageProcessing::Vips.valid_image?(file.url) %>
+            <div class="content">
+              <%= link_to rails_blob_path(file, disposition: "attachment"), class: "" do %>
+                <i class="download icon"></i>Kaydet
+              <% end %>
+              <%= link_to "Aç: #{file.filename}", file, target: :_blank , class:"header" %>
+            </div>
+          </div>
+        </div>
+
+        
+      <% end # if %>
+    <% end %>
+  </div>
 </div>

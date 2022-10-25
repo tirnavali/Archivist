@@ -3,7 +3,8 @@ tr:
   this_record_contains_of: "bu belgenin içerdiği"
   this_record_is_in: "bu belgenin bulunduğu"
   new_record_metadatum: "Yeni belge üstverisi"
-  editing_record_metadatum: "Belge üstverisi düzenleniyor"
+  edit_record_metadatum: "Belge Üstverisi Düzenlenle"
+  edit: "Düzenle"
   back_to_record_metadata: "Belgelere geri dön"
   record_metadata: "Belge Üstverileri"
   access_identifiers: "Erişim tanımlıyıcıları"
@@ -15,4 +16,6 @@ tr:
   more: "daha"
   no_documents: "Bu kayıda ait görüntü bulunmamaktadır."
   audit_info: "Kayıt Geçmişi"
+
+  record_attachment: "Kayıt Eki"
   
