@@ -192,10 +192,24 @@ def excel_to_application(fond_name, spreadsheet_path, row_range)
     puts rm.errors.full_messages
     # 
 
-    ## 13 special_numbers
-    # special_number_value = xlsx.sheet(0).cell(num,13)
-    # unless special_number_value.empty?
-    #   sn = SpecialNumber.new(value: special_number_value, number_type: NumberType.find_by_name("Dosya No"), record_metadatum_id: rm.id)
+    ## 13 dosya no
+    special_number_value = xlsx.sheet(0).cell(num,13)
+    unless special_number_value.nil? || special_number_value.to_s.empty? 
+      sn = SpecialNumber.new(value: special_number_value, number_type: NumberType.find_by_name("Dosya No"), record_metadatum_id: rm.id)
+      sn.save
+    end
+
+    # ## 14 karar no
+    # special_number_value = xlsx.sheet(0).cell(num,14)
+    # unless special_number_value.nil? || special_number_value.to_s.empty? 
+    #   sn = SpecialNumber.new(value: special_number_value, number_type: NumberType.find_by_name("Karar No"), record_metadatum_id: rm.id)
+    #   sn.save
+    # end
+
+    # ## 15 esas no
+    # special_number_value = xlsx.sheet(0).cell(num,15)
+    # unless special_number_value.nil? || special_number_value.to_s.empty? 
+    #   sn = SpecialNumber.new(value: special_number_value, number_type: NumberType.find_by_name("Esas No"), record_metadatum_id: rm.id)
     #   sn.save
     # end
     
@@ -204,17 +218,15 @@ def excel_to_application(fond_name, spreadsheet_path, row_range)
 end
 
 
-# initializer()
+initializer()
 
-# excel_to_application(fond_name="KOÇGİRİ", spreadsheet_path="db/kocgiri01.xlsx", row_range= 2..260)
+excel_to_application(fond_name="KOÇGİRİ", spreadsheet_path="db/kocgiri01.xlsx", row_range= 2..260)
 excel_to_application(fond_name="ÖZALP", spreadsheet_path="db/ozalp01.xlsx", row_range= 2..346)
-# excel_to_application(fond_name="KARAKÖPRÜ", spreadsheet_path="db/karakopru01.xlsx", row_range= 2..459)
-# excel_to_application(fond_name="MECLİSİ MEBUSAN KADÜK", spreadsheet_path="db/meclisi_mebusan_kaduk01.xlsx", row_range= 2..449)
-# excel_to_application(fond_name="MECLİSİ MEBUSAN MÜTEFERRİK", spreadsheet_path="db/meclisi_mebusan_muteferrik01.xlsx", row_range= 2..2230)
-# excel_to_application(fond_name="İSTANBUL İSTİKLAL MAHKEMESİ", spreadsheet_path="db/im_istanbul01.xlsx", row_range= 2..52)
-# excel_to_application(fond_name="MECLİSİ MEBUSAN ŞİKAYETNAME", spreadsheet_path="db/meclisi_mebusan_sikayetname01.xlsx", row_range= 2..1623)
-
-
+excel_to_application(fond_name="KARAKÖPRÜ", spreadsheet_path="db/karakopru01.xlsx", row_range= 2..459) # 459
+excel_to_application(fond_name="MECLİSİ MEBUSAN KADÜK", spreadsheet_path="db/meclisi_mebusan_kaduk01.xlsx", row_range= 2..449)
+excel_to_application(fond_name="MECLİSİ MEBUSAN MÜTEFERRİK", spreadsheet_path="db/meclisi_mebusan_muteferrik01.xlsx", row_range= 2..2230)
+excel_to_application(fond_name="İSTANBUL İSTİKLAL MAHKEMESİ", spreadsheet_path="db/im_istanbul01.xlsx", row_range= 2..52)
+excel_to_application(fond_name="MECLİSİ MEBUSAN ŞİKAYETNAME", spreadsheet_path="db/meclisi_mebusan_sikayetname01.xlsx", row_range= 2..1623)
 
 
 

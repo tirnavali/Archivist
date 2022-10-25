@@ -18,6 +18,10 @@ class RecordMetadatumPolicy < ApplicationPolicy
     attr_reader :user, :scope
   end
 
+  def search?
+    user.superadmin? || user.admin? || user.editor? || user.writer?
+  end
+
   def index?
     user.superadmin? || user.admin? || user.editor? || user.writer?
   end
