@@ -135,7 +135,7 @@
   </div> <!-- six wide column -->
 
   <div class="nine wide column">
-    <% unless record_metadatum.record_attachment.nil? || record_metadatum.record_attachment.watermarked_images.nil?  %>
+    <% if record_metadatum.record_attachment.present? && record_metadatum.try(:record_attachment).try(:watermarked_images).present?  %>
       <h4 class="ui horizontal divider header">
         <i class=" attachment  icon"></i>
          <%= t('record_attachment') %>

@@ -38,7 +38,7 @@
       <% end %>
     </td>
     <td class="right aligned">
-      <% if record_metadatum.record_attachment %> <i class="green check icon"></i> <% else %> <i class="red x icon"> <% end %>
+      <% if record_metadatum.record_attachment && record_metadatum.record_attachment.images.present?  %> <i class="green check icon"></i> <% else %> <i class="red x icon"> <% end %>
     </td>
     <td class="left aligned">
       <% if record_metadatum.user %>
