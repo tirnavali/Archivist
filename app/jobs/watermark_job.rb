@@ -49,7 +49,7 @@ class WatermarkJob < ApplicationJob
     ra.images.each_with_index do |image, i|
       filename = image.filename.to_s
         if image.content_type.include? "pdf"
-          watermark_file(file_url= image.url, stamp= ra.record_metadatum.place_number, export_path= "#{temp_dir_path}/#{i}.pdf")
+          watermark_file(file_url= image.url, stamp= "#{ra.record_metadatum.organization_code}_#{ra.record_metadatum.place_number}", export_path= "#{temp_dir_path}/#{i}.pdf")
           file = File.open("#{temp_dir_path}/#{i}.pdf")
           ra.watermarked_images.attach(
             io: file,

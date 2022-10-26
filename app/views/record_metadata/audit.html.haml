@@ -13,7 +13,10 @@
     - @record_metadatum.audits.descending.each do |audit|
       %tr
         %td=audit.version
-        %td="" || User.find(audit.user_id) 
+        -if audit.user_id.present? 
+          %td= User.find(audit.user_id)
+        -else
+          %td= "System"
         %td=audit.auditable_type
         %td=audit.action
         %td=audit.audited_changes
@@ -27,6 +30,7 @@
                 %p=  "#{item.join(" ==> ")}"
             - else 
               %b=  "#{item}"
+=link_to t("back"), record_metadatum_path(@record_metadatum)
 
       
             

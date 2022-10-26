@@ -52,8 +52,11 @@ class HomeController < ApplicationController
         with(:ending_date).between(search_param[:ending_date_from]..search_param[:ending_date_to]) 
       end
 
+      if (search_param.try(:[], :created_at_from).present? && search_param.try(:[], :created_at_to).present?) == true
+        with(:created_at).between("2022-10-25".."2022-10-26") 
+      end
       #with(:ending_date).between(params[:src][:ending_date_from]..params[:src][:ending_date_to]) if params.fetch(:src, {} ).fetch(:ending_date_from, false) && params.fetch(:src, {} ).fetch(:ending_date_to, false)
-      with(:created_at).between(search_param[:created_at_from]..search_param[:created_at_to]) if search_param.try(:[], :created_at_from).present? && search_param.try(:[], :created_at_to).present?
+      #with(:created_at).between(search_param[:created_at_from]..search_param[:created_at_to]) if search_param.try(:[], :created_at_from).present? && search_param.try(:[], :created_at_to).present?
       with(:updated_at).between(search_param[:updated_at_from]..search_param[:updated_at_to]) if search_param.try(:[], :updated_at_from).present? && search_param.try(:[], :updated_at_to).present?
 
       with :document_type_ids, search_param[:document_type_ids].filter_map {|val| val.to_i if val.length > 0  } if search_param.try(:[], :document_type_ids).present?

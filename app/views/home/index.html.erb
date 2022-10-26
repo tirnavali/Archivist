@@ -160,8 +160,8 @@
                     <p><%= t('subjects').capitalize %>: <%= metadata.subjects.join(", ") %></p>
                   </div>
                   <div class="extra">
-                    <%= t(:created_at) %>:
-                    <%= l metadata.created_at, format: :short  %> |
+                    <%= t(:starting_date) %>:
+                    <%= l metadata.starting_date, format: :short  %> |
                     <%= link_to t("show"), metadata %>| Koleksiyona ekle: 
                     <%= collection_form.check_box "record_metadatum_#{metadata.id}", {name: "record_metadatum_ids[]"}, 
                       metadata.id, nil %><%= turbo_frame_tag "record_metadatum_#{metadata.id}" %>
