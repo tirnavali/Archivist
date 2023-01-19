@@ -6,12 +6,14 @@
 <div class="ui celled grid">
   <div class="row"><!-- input field -->
     <div class="sixteen wide column">
-      <h1>Tüm fonlarda ve belgelerde arayın... <%= link_to "?", :search_clues, data: {turbo_frame: "search_clues"} %> </h1>
+      <h1>Tüm Arşiv fonlarında ve Belgelerde Ara <%= link_to "?", :search_clues, data: {turbo_frame: "search_clues"} %> </h1>
       <% unless params[:src].nil? %>
-        <div class="ui raised segment"><b>Yapılan sorgu:</b> <i><%=params[:query]%> 
-          <% params.each do |key, val| %>
-            <%= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
-          <% end %> 
+        <div class="ui raised segment">
+
+          <!--<b>Yapılan sorgu:</b>--> <i><%#= params[:query]%> 
+          <%# params.each do |key, val| %>
+            <%#= (val.present? && (!%w[ commit controller action].include? key  ) ) ?  "#{key} : #{val}" : nil %>
+          <%# end %> 
           </i>
           <p><b>Bulunan kayıt sayısı:</b> <%= @search.total %></p>
         </div>

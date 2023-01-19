@@ -14,25 +14,26 @@
   <% end %>
   </div>
   <div class="input">
-  <%= check_box_tag "only_ancestors" %>
+  <%#= check_box_tag "only_ancestors" %>
   </div>
 <% end %>
+<!-- 
 <p></p>
-<% unless params[:q].nil? %>
+<%# unless params[:q].nil? %>
   <div class="search-result-size"> <%= t(:founded_record_size) %>: 
     <span class="ui teal circular label">
-    <%= @q.result.size %></span> 
+    <%#= @q.result.size %></span> 
   </div>
-<% end %>
+<%# end %>
 
 <span class="ui teal circular label">
-    <%= @q.result.size %></span> 
-
+    <%#= @q.result.size %>
+</span> 
+--->
 <!-- added new -->
 <div id="fonds">
   <% unless @q.result.size == 0 %>
   
-    <%= paginate @fonds %>
     <div class="ui celled equal width grid">
       <div class="row">
       <div class="column">
@@ -51,9 +52,11 @@
           <div class="">
             <i class="big yellow folder icon"></i>
             <% if policy(:fond).edit? %>
+            <!-- 
             <span class="ui tiny basic   label">
-              <%= "%03d" % fond.id %>
+              <%#= "%03d" % fond.id %>
             </span>
+            -->
             <% end %>
             <b class="ui text black">
               <%= fond.name %>
@@ -67,6 +70,6 @@
       </div>
       <% end %>
     </div>
-  <%= paginate @fonds %>
+  <%= paginate @fonds %> Toplam <%= @q.result.size %> Fon
   <% end %>
 </div>

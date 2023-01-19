@@ -29,7 +29,7 @@
 <%= turbo_frame_tag "subjects"  do %>
 <div class="ui right aligned grid">
   <div class="left floated left aligned six wide column">
-  <%== pagy_semantic_nav(@pagy)%>
+  <%#== pagy_semantic_nav(@pagy)%>
   </div>
   
   <div class="right aligned six wide column">
@@ -60,6 +60,15 @@
     <tbody>  
       <%= render "subjects_table", class:"ui right floated pagination menu" %>
     </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="8">
+          <div class="segment">
+            <%== pagy_semantic_nav(@pagy)%>              
+          </div>
+        </th>
+      </tr>
+    </tfoot>
    </table>
 <% end %>
 </div>

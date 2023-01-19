@@ -1,35 +1,36 @@
 <h1><%= t('record_metadata') %></h1>
+<!-- 
 <div class="ui segment">
-Belgelerde ara
-<%= search_form_for(
-  @q,
-  url: search_record_metadata_path,
-  html: { method: :post},
-) do |f|%>
-<fieldset class="ui segment fields">
-  <%= f.combinator_select %>
-<%= f.grouping_fields do |g|%>
-      <%= g.condition_fields do |c| %>
-      <div class="field ">
-      <%= c.attribute_fields do |a| %>
-        <%=a.attribute_select associations: [:fond, :subjects, :organization, :people] %>
-      <% end %>
-      <%= c.predicate_select only: %i(cont not_cont eq not_eq blank null)%>
-      <%= c.value_fields do |v| %>
-        <%= v.text_field :value%>
-      <% end %>      
-      <a  id="remove-field" class="ui red tiny label" data-controller="search" data-action="search#remove"> 
-        <%= t('remove') %>
-      </a>
-    </div>
-  <% end %>
-<% end %>
-</fieldset>
+  Belgelerde ara
+    <%#= search_form_for(
+      @q,
+      url: search_record_metadata_path,
+      html: { method: :post},
+    ) do |f| %>
+    <fieldset class="ui segment fields">
+      <%#= f.combinator_select %>
+    <%#= f.grouping_fields do |g|%>
+          <%#= g.condition_fields do |c| %>
+          <div class="field ">
+          <%#= c.attribute_fields do |a| %>
+            <%#=a.attribute_select associations: [:fond, :subjects, :organization, :people] %>
+          <%# end %>
+          <%#= c.predicate_select only: %i(cont not_cont eq not_eq blank null)%>
+          <%#= c.value_fields do |v| %>
+            <%#= v.text_field :value%>
+          <%# end %>      
+          <a  id="remove-field" class="ui red tiny label" data-controller="search" data-action="search#remove">  
+            <%#= t('remove') %>
+          </a> 
+        </div>
+      <%# end %>
+    <%# end %>
+    </fieldset>
 
-  <a id="add-field" class="ui tiny button" data-controller="search" data-action="search#add"> <%= t('add') %></a>
-  <%= f.submit class: "ui tiny primary button"%>
-</div>
-<% end %>
+    <a id="add-field" class="ui tiny button" data-controller="search" data-action="search#add"> <%= t('add') %></a>
+    <%#= f.submit class: "ui tiny primary button"%>
+</div> -->
+<%# end %>
 <% if policy(@record_metadata).create?  %>
   <p>
     <%= link_to t("new_record_metadatum"), new_record_metadatum_path, class: "ui teal button small "%>
