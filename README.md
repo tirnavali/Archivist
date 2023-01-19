@@ -1,4 +1,4 @@
-# Archivist(Arşiv Yönetim Yazılımı)
+# MuHAFIZ(Arşiv Yönetim Yazılımı)
 
 # Configuration
 - This application use semantic css library for styling. So you must insall semantic.css file to 
