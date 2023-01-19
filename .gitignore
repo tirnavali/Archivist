@@ -37,6 +37,7 @@
 
 # Ignore semantic css file
 /app/assets/stylesheets/semantic.css
+/app/assets/stylesheets/_semantic.css
 
 
 /config/master.key
