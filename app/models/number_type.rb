@@ -1,6 +1,6 @@
 class NumberType < ApplicationRecord
   audited
-  
+  has_and_belongs_to_many :fonds
   def to_s
     self.name
   end

@@ -27,12 +27,14 @@ class FondsController < ApplicationController
   # GET /fonds/new
   def new
     @fond = Fond.new
+    @number_types = NumberType.all
     authorize @fond
   end
 
   # GET /fonds/1/edit
   def edit
     authorize @fond
+    @number_types = NumberType.all
   end
 
   # POST /fonds or /fonds.json
@@ -83,6 +85,6 @@ class FondsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def fond_params
-      params.require(:fond).permit(:name, :parent_id, :explanation)
+      params.require(:fond).permit(:name, :parent_id, :explanation, :code, number_type_ids:[])
     end
 end

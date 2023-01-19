@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_105750) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_090901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,7 +99,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_105750) do
     t.datetime "updated_at", null: false
     t.integer "depth", default: 0, null: false
     t.text "explanation"
+    t.string "code"
     t.index ["parent_id"], name: "index_fonds_on_parent_id"
+  end
+
+  create_table "fonds_number_types", id: false, force: :cascade do |t|
+    t.bigint "fond_id", null: false
+    t.bigint "number_type_id", null: false
   end
 
   create_table "languages", force: :cascade do |t|

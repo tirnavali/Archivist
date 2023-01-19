@@ -1,5 +1,8 @@
 # Archivist(Arşiv Yönetim Yazılımı)
 
+# Configuration
+- This application use semantic css library for styling. So you must insall semantic.css file to 
+    app/assets/stylesheets/semantic.css
 
 # Authorization Specifications
 - Superadmin will be set on when first user signs up

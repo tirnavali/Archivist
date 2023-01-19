@@ -12,7 +12,7 @@
   
   <div class="ui yellow segment">
     <h2 class=""><%=t('fond_name')%>:
-      <%= fond.name %>
+      <%= fond.name %> <span class="ui label"><%= fond.code %> </span>
     </h2>
     <% if fond.explanation %>
       <p class=""><%=t('explanation')%>:

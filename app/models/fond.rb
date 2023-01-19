@@ -13,6 +13,7 @@ class Fond < ApplicationRecord
   belongs_to :parent, class_name: "Fond", optional: true
   has_many :children, class_name: "Fond", foreign_key: "parent_id", dependent: :nullify
   has_many :record_metadata, dependent: :nullify
+  has_and_belongs_to_many :number_types
 
   validates :name, uniqueness: { case_sensitive: false }
   validates_presence_of :name

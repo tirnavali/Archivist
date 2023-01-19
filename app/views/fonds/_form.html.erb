@@ -1,11 +1,13 @@
 <%= simple_form_for @fond, html: { class: "ui form"} do |f| %>
   <%= f.input :name %>
+  <%= f.input :code %>
   <%= f.input :explanation %>
   <%= f.association :parent, 
     collection: Fond.order(:name),
     input_html: {include: "blank", class: 'ui fluid search dropdown selection' },
     wrapper_html: {"data-controller": "dropdown" } 
     %>
+  <%= f.association :number_types, collection: @number_types, as: :check_boxes %>
   <p>
   </p>
   <%= f.button :submit, class: "ui primary button" %>
