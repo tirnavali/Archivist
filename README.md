@@ -4,8 +4,15 @@ This software manage records in the context of FOND's.
 
 # Development process is continuing
 Actually i migrated the project on .net solution for my enterprise's needs.
-I will continue to develop of this open soruce project.
+I will continue to develop of this open source project.
 I  want to share a demo too soon inşaAllah.
+
+# System dependencies
+- Ruby version > 3
+- Rails version > 7
+- Redis
+- minio
+- postgresql or mssql for database
 
 # Authorization Specifications
 - Superadmin will be set on when first user signs up
@@ -36,12 +43,6 @@ I  want to share a demo too soon inşaAllah.
 | Vacation          | CRUD     | CRUD  | CRUD   | CRUD   |      |
 
 ---
-# System dependencies
-- Ruby version > 3
-- Rails version > 7
-- Redis
-- minio
-- postgresql or mssql for database
 
 #  Configuration 
 ## Configuration of minio
