@@ -1,5 +1,11 @@
 # Archivist(Arşiv Yönetim Yazılımı)
+This project developed for in house user needs. But it has support for searching with apache-solr. Sharing content with minIO cdn. Use active-record orm for database usage. Has audit configuraiton. User management specifications and has metadata management.
+This software manage records in the context of FOND's.
 
+# Development process is continuing
+Actually i migrated the project on .net solution for my enterprise's needs.
+I will continue to develop of this open soruce project.
+I  want to share a demo too soon inşaAllah.
 
 # Authorization Specifications
 - Superadmin will be set on when first user signs up
